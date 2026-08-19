@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SCHOOL_INFO } from "@/lib/data/site-content";
+import { cn } from "@/lib/utils";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -76,7 +77,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="fr" className={`${dmSans.variable} ${inter.variable}`}>
+    <html lang="fr" className={cn(dmSans.variable, inter.variable, "font-sans")}>
       <head>
         <script
           type="application/ld+json"
