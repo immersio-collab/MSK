@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Heart, Brain, Sun } from "lucide-react";
 import { WordPullUp } from "@/components/magicui/word-pull-up";
 import { FadeUp } from "@/components/magicui/fade-up";
+import { MethodSection } from "@/components/home/MethodSection";
 
 export const metadata: Metadata = {
   title: "Accueil | MSK Montessori School Casablanca",
@@ -122,8 +123,11 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Method Section */}
+      <MethodSection />
+
       {/* Other Sections Placeholder with Reduced Padding-X and Airy Design */}
-      {sections.map((section, idx) => (
+      {sections.filter(s => s.id !== "methode").map((section, idx) => (
         <section
           key={section.id}
           id={section.id}
@@ -134,7 +138,7 @@ export default function HomePage() {
           <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
             <div className={`rounded-3xl border-2 border-dashed p-12 md:p-16 text-center transition-all ${section.color}`}>
               <span className="text-xs font-bold uppercase tracking-widest block mb-2 opacity-80">
-                Section {idx + 2}
+                Section {idx + 3}
               </span>
               <h2 className="text-2xl md:text-3xl font-extrabold text-msk-night-900">
                 {section.title}
