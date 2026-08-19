@@ -44,16 +44,16 @@ export const Navbar: React.FC = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-[#FDFBF7]/92 backdrop-blur-md shadow-xs py-3.5 border-b border-msk-cream-200"
+          ? "bg-[#FDFBF7]/95 backdrop-blur-md shadow-xs py-4 border-b border-msk-cream-200"
           : "bg-transparent py-6 md:py-8"
       }`}
     >
-      <div className="container mx-auto px-6 md:px-12 max-w-7xl flex items-center justify-between">
-        {/* Brand Logo */}
+      <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between">
+        {/* Large, Friendly Brand Logo */}
         <BrandLogo />
 
-        {/* Minimal, Airy & Playful Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8 lg:gap-11">
+        {/* Minimal, Airy, Larger Navigation Links */}
+        <nav className="hidden md:flex items-center gap-8 lg:gap-12">
           {NAV_LINKS.map((link, lIdx) => {
             const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
             const isHovered = hoveredLink === link.label;
@@ -83,20 +83,20 @@ export const Navbar: React.FC = () => {
                 >
                   <button
                     onClick={() => setDropdownOpen((prev) => !prev)}
-                    className="relative flex items-center gap-1 text-[15px] font-semibold text-msk-night-900 hover:text-msk-coral-600 transition-colors py-1 group"
+                    className="relative flex items-center gap-1.5 text-base lg:text-[17px] font-semibold text-msk-night-900 hover:text-msk-coral-600 transition-colors py-1.5 group"
                   >
                     <span>{link.label}</span>
                     <ChevronDown
-                      className={`h-3.5 w-3.5 text-msk-night-700/60 transition-transform duration-200 ${
+                      className={`h-4 w-4 text-msk-night-700/60 transition-transform duration-200 ${
                         dropdownOpen ? "rotate-180 text-msk-coral-600" : "group-hover:text-msk-coral-600"
                       }`}
                     />
 
-                    {/* Playful squiggle line on active or hover */}
+                    {/* Playful squiggle underline */}
                     {(isActive || isHovered || dropdownOpen) && (
                       <motion.svg
                         layoutId="navSquiggle"
-                        className={`absolute -bottom-1.5 left-0 w-full h-2 ${squiggleColor}`}
+                        className={`absolute -bottom-1 left-0 w-full h-2.5 ${squiggleColor}`}
                         viewBox="0 0 50 6"
                         fill="none"
                         preserveAspectRatio="none"
@@ -104,7 +104,7 @@ export const Navbar: React.FC = () => {
                         <path
                           d="M1 3.5C8 1 15 6 22 3.5C29 1 36 6 43 3.5C46 2.5 48 3.5 49 3.5"
                           stroke="currentColor"
-                          strokeWidth="2.5"
+                          strokeWidth="2.8"
                           strokeLinecap="round"
                         />
                       </motion.svg>
@@ -119,15 +119,15 @@ export const Navbar: React.FC = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 6, scale: 0.98 }}
                         transition={{ duration: 0.16 }}
-                        className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-64 z-50"
+                        className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-72 z-50"
                       >
-                        <div className="rounded-3xl bg-white p-3 shadow-xl border border-msk-cream-200">
+                        <div className="rounded-3xl bg-white p-3.5 shadow-2xl border border-msk-cream-200">
                           {link.children.map((child, idx) => (
                             <Link
                               key={child.href}
                               href={child.href}
                               onClick={() => setDropdownOpen(false)}
-                              className="group flex items-center gap-3 px-3 py-2.5 rounded-2xl text-xs font-bold text-msk-night-900 hover:text-msk-coral-700 hover:bg-msk-cream-50 transition-colors"
+                              className="group flex items-center gap-3 px-3.5 py-3 rounded-2xl text-sm font-bold text-msk-night-900 hover:text-msk-coral-700 hover:bg-msk-cream-50 transition-colors"
                             >
                               <span className={`h-2.5 w-2.5 rounded-full ${
                                 idx === 0 ? "bg-msk-coral-500" :
@@ -151,15 +151,15 @@ export const Navbar: React.FC = () => {
                 href={link.href}
                 onMouseEnter={() => setHoveredLink(link.label)}
                 onMouseLeave={() => setHoveredLink(null)}
-                className="relative text-[15px] font-semibold text-msk-night-900 hover:text-msk-coral-600 transition-colors py-1 group"
+                className="relative text-base lg:text-[17px] font-semibold text-msk-night-900 hover:text-msk-coral-600 transition-colors py-1.5 group"
               >
                 <span>{link.label}</span>
 
-                {/* Playful squiggle line on active or hover */}
+                {/* Playful squiggle underline */}
                 {(isActive || isHovered) && (
                   <motion.svg
                     layoutId="navSquiggle"
-                    className={`absolute -bottom-1.5 left-0 w-full h-2 ${squiggleColor}`}
+                    className={`absolute -bottom-1 left-0 w-full h-2.5 ${squiggleColor}`}
                     viewBox="0 0 50 6"
                     fill="none"
                     preserveAspectRatio="none"
@@ -167,7 +167,7 @@ export const Navbar: React.FC = () => {
                     <path
                       d="M1 3.5C8 1 15 6 22 3.5C29 1 36 6 43 3.5C46 2.5 48 3.5 49 3.5"
                       stroke="currentColor"
-                      strokeWidth="2.5"
+                      strokeWidth="2.8"
                       strokeLinecap="round"
                     />
                   </motion.svg>
@@ -183,7 +183,7 @@ export const Navbar: React.FC = () => {
           className="md:hidden p-2 rounded-2xl text-msk-night-900 hover:bg-msk-cream-100 transition-colors"
           aria-label={isMobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
         >
-          {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {isMobileMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
         </button>
       </div>
 
@@ -195,26 +195,26 @@ export const Navbar: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden fixed inset-x-0 top-[70px] bg-[#FDFBF7]/98 backdrop-blur-xl border-b border-msk-cream-200 shadow-xl px-6 py-6"
+            className="md:hidden fixed inset-x-0 top-[76px] bg-[#FDFBF7]/98 backdrop-blur-xl border-b border-msk-cream-200 shadow-2xl px-8 py-8"
           >
-            <div className="space-y-4">
+            <div className="space-y-5">
               {NAV_LINKS.map((link) => (
                 <div key={link.label}>
                   <Link
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block text-base font-bold text-msk-night-900 hover:text-msk-coral-600 py-1"
+                    className="block text-xl font-bold text-msk-night-900 hover:text-msk-coral-600 py-1"
                   >
                     {link.label}
                   </Link>
                   {link.children && (
-                    <div className="pl-4 pt-2 space-y-2 border-l-2 border-msk-coral-200 ml-1">
+                    <div className="pl-4 pt-2 space-y-2.5 border-l-2 border-msk-coral-200 ml-1">
                       {link.children.map((child) => (
                         <Link
                           key={child.href}
                           href={child.href}
                           onClick={() => setIsMobileMenuOpen(false)}
-                          className="block text-xs font-semibold text-msk-night-700 hover:text-msk-coral-600 py-1"
+                          className="block text-sm font-semibold text-msk-night-700 hover:text-msk-coral-600 py-1"
                         >
                           {child.title}
                         </Link>
