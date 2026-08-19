@@ -1,15 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Inter } from "next/font/google";
+import { DM_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SCHOOL_INFO } from "@/lib/data/site-content";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-jakarta",
+  variable: "--font-dm-sans",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
 });
 
 const inter = Inter({
@@ -77,7 +76,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="fr" className={`${plusJakartaSans.variable} ${inter.variable}`}>
+    <html lang="fr" className={`${dmSans.variable} ${inter.variable}`}>
       <head>
         <script
           type="application/ld+json"

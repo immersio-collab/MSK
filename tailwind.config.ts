@@ -66,7 +66,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-jakarta)", "sans-serif"],
+        sans: ["var(--font-dm-sans)", "sans-serif"],
         body: ["var(--font-inter)", "sans-serif"],
       },
     },
