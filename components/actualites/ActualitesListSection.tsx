@@ -51,7 +51,7 @@ const dummyPosts: BlogPost[] = [
     category: "Thérapie",
     date: "28 Nov 2023",
     image: "https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&q=80&w=800",
-    color: "bg-msk-forest-500",
+    color: "bg-slate-600",
   },
   {
     id: "post-5",
@@ -86,7 +86,7 @@ export const ActualitesListSection: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="group bg-[#FAF8F5] rounded-3xl overflow-hidden border border-msk-forest-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full hover:-translate-y-2"
+              className="group bg-[#FAF8F5] rounded-3xl overflow-hidden border border-msk-cream-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full hover:-translate-y-2"
             >
               {/* Image Container */}
               <div className="relative h-56 overflow-hidden">
@@ -106,23 +106,23 @@ export const ActualitesListSection: React.FC = () => {
 
               {/* Content Container */}
               <div className="p-6 md:p-8 flex flex-col flex-grow">
-                <div className="flex items-center gap-2 text-sm text-msk-forest-400 font-medium mb-4">
+                <div className="flex items-center gap-2 text-sm text-slate-500 font-medium mb-4">
                   <Calendar className="w-4 h-4" />
                   <span>{post.date}</span>
                 </div>
                 
-                <h3 className="text-xl font-bold text-msk-forest-950 mb-3 leading-snug group-hover:text-msk-coral-500 transition-colors">
+                <h3 className="text-xl font-bold text-msk-night-900 mb-3 leading-snug group-hover:text-msk-coral-500 transition-colors">
                   <Link href={`/actualites/${post.id}`}>
                     {post.title}
                     <span className="absolute inset-0 z-0"></span>
                   </Link>
                 </h3>
                 
-                <p className="text-msk-forest-700/90 leading-relaxed mb-6 flex-grow">
+                <p className="text-msk-night-700/90 leading-relaxed mb-6 flex-grow">
                   {post.excerpt}
                 </p>
                 
-                <div className="mt-auto pt-4 border-t border-msk-forest-100/50 flex items-center text-msk-forest-950 font-bold group-hover:text-msk-coral-500 transition-colors">
+                <div className="mt-auto pt-4 border-t border-msk-cream-200/50 flex items-center text-msk-night-900 font-bold group-hover:text-msk-coral-500 transition-colors">
                   Lire l'article
                   <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                 </div>

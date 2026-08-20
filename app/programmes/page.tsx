@@ -1,4 +1,3 @@
-import React from "react";
 import type { Metadata } from "next";
 import { ProgrammesHeroSection } from "@/components/programmes/ProgrammesHeroSection";
 import { ProgrammesSelectorSection } from "@/components/programmes/ProgrammesSelectorSection";

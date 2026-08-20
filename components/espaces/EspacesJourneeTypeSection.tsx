@@ -40,11 +40,11 @@ export const EspacesJourneeTypeSection: React.FC = () => {
   };
 
   return (
-    <section id="journee-type" className="py-24 bg-msk-forest-950 relative overflow-hidden" ref={containerRef}>
+    <section id="journee-type" className="py-24 bg-msk-night-950 relative overflow-hidden" ref={containerRef}>
       {/* Decorative Background */}
       <motion.div 
         style={{ y }}
-        className="absolute top-0 right-0 w-[800px] h-[800px] bg-msk-forest-900/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"
+        className="absolute top-0 right-0 w-[800px] h-[800px] bg-msk-night-900/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"
       />
 
       <div className="container mx-auto px-4 relative z-10">
@@ -53,7 +53,7 @@ export const EspacesJourneeTypeSection: React.FC = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Une Journée Type chez MSK
             </h2>
-            <p className="text-lg text-msk-forest-200">
+            <p className="text-lg text-msk-cream-300">
               Un rythme pensé pour respecter la chronobiologie de l'enfant, alternant concentration, apprentissage et détente.
             </p>
           </div>
@@ -61,14 +61,14 @@ export const EspacesJourneeTypeSection: React.FC = () => {
           <div className="flex gap-4">
             <button 
               onClick={scrollLeft}
-              className="w-12 h-12 rounded-full border border-msk-forest-700 text-white flex items-center justify-center hover:bg-msk-forest-800 transition-colors"
+              className="w-12 h-12 rounded-full border border-msk-night-700 text-white flex items-center justify-center hover:bg-msk-night-800 transition-colors"
               aria-label="Défiler à gauche"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button 
               onClick={scrollRight}
-              className="w-12 h-12 rounded-full border border-msk-forest-700 text-white flex items-center justify-center hover:bg-msk-forest-800 transition-colors bg-msk-coral-500 border-none"
+              className="w-12 h-12 rounded-full border border-msk-night-700 text-white flex items-center justify-center hover:bg-msk-night-800 transition-colors bg-msk-coral-500 border-none"
               aria-label="Défiler à droite"
             >
               <ChevronRight className="w-6 h-6" />
@@ -78,7 +78,7 @@ export const EspacesJourneeTypeSection: React.FC = () => {
 
         <div className="relative">
           {/* The connecting line */}
-          <div className="absolute top-24 left-0 right-0 h-0.5 bg-msk-forest-800 hidden md:block"></div>
+          <div className="absolute top-24 left-0 right-0 h-0.5 bg-msk-night-800 hidden md:block"></div>
 
           <motion.div 
             ref={scrollRef}
@@ -105,9 +105,9 @@ export const EspacesJourneeTypeSection: React.FC = () => {
                 }}
               >
                 {/* Node on the line */}
-                <div className="hidden md:flex absolute top-20 left-6 w-4 h-4 rounded-full bg-msk-sun-400 border-4 border-msk-forest-950 z-10"></div>
+                <div className="hidden md:flex absolute top-20 left-6 w-4 h-4 rounded-full bg-msk-sun-400 border-4 border-msk-night-950 z-10"></div>
                 
-                <div className="bg-msk-forest-900 border border-msk-forest-800 rounded-3xl p-8 h-full transition-transform hover:-translate-y-2 hover:shadow-xl hover:shadow-msk-sun-500/10 group">
+                <div className="bg-msk-night-900 border border-msk-night-800 rounded-3xl p-8 h-full transition-transform hover:-translate-y-2 hover:shadow-xl hover:shadow-msk-sun-500/10 group">
                   <div className="text-4xl mb-6">{item.icon}</div>
                   
                   <div className="flex items-center gap-2 text-msk-sun-400 mb-3 font-bold">
@@ -119,7 +119,7 @@ export const EspacesJourneeTypeSection: React.FC = () => {
                     {item.title}
                   </h3>
                   
-                  <p className="text-msk-forest-300 text-sm leading-relaxed">
+                  <p className="text-msk-cream-300 text-sm leading-relaxed">
                     {item.description}
                   </p>
                 </div>

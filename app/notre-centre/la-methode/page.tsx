@@ -1,4 +1,3 @@
-import React from "react";
 import type { Metadata } from "next";
 import { MethodeHeroSection } from "@/components/methode/MethodeHeroSection";
 import { MethodeTimelineSection } from "@/components/methode/MethodeTimelineSection";

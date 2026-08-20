@@ -47,15 +47,15 @@ export const ContactFormSection: React.FC = () => {
       
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-msk-forest-950 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-msk-night-900 mb-4">
             Envoyez-nous un message
           </h2>
-          <p className="text-lg text-msk-forest-700/80 max-w-2xl mx-auto">
+          <p className="text-lg text-msk-night-700/80 max-w-2xl mx-auto">
             Remplissez ce formulaire et notre équipe vous recontactera dans les plus brefs délais.
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl shadow-xl border border-msk-forest-100 p-8 md:p-12 relative overflow-hidden">
+        <div className="bg-white rounded-3xl shadow-xl border border-msk-cream-200 p-8 md:p-12 relative overflow-hidden">
           {/* Subtle background glow */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-msk-sun-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
           
@@ -75,8 +75,8 @@ export const ContactFormSection: React.FC = () => {
                 >
                   <CheckCircle className="w-20 h-20 text-emerald-500 mb-6" />
                 </motion.div>
-                <h3 className="text-3xl font-bold text-msk-forest-950 mb-4">Message envoyé !</h3>
-                <p className="text-lg text-msk-slate-600">
+                <h3 className="text-3xl font-bold text-msk-night-900 mb-4">Message envoyé !</h3>
+                <p className="text-lg text-slate-600">
                   Nous vous remercions pour votre confiance. Notre équipe vous contactera très rapidement.
                 </p>
               </motion.div>
@@ -96,7 +96,7 @@ export const ContactFormSection: React.FC = () => {
                     <input 
                       type="text" 
                       id="fullName" 
-                      className={`peer w-full bg-[#FAF8F5] border-2 rounded-xl px-5 pt-8 pb-3 text-msk-forest-950 focus:outline-none focus:bg-white transition-all placeholder-transparent ${errors.fullName ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
+                      className={`peer w-full bg-[#FAF8F5] border-2 rounded-xl px-5 pt-8 pb-3 text-msk-night-900 focus:outline-none focus:bg-white transition-all placeholder-transparent ${errors.fullName ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
                       placeholder="Nom complet du parent"
                       {...register("fullName", { required: "Ce champ est requis" })}
                       onFocus={(e) => {
@@ -107,7 +107,7 @@ export const ContactFormSection: React.FC = () => {
                     />
                     <label 
                       htmlFor="fullName"
-                      className="absolute left-5 top-2.5 text-xs font-bold text-msk-forest-400 uppercase tracking-wide transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-5 peer-placeholder-shown:font-medium peer-placeholder-shown:normal-case peer-focus:top-2.5 peer-focus:text-xs peer-focus:font-bold peer-focus:uppercase peer-focus:text-msk-coral-500"
+                      className="absolute left-5 top-2.5 text-xs font-bold text-slate-500 uppercase tracking-wide transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-5 peer-placeholder-shown:font-medium peer-placeholder-shown:normal-case peer-focus:top-2.5 peer-focus:text-xs peer-focus:font-bold peer-focus:uppercase peer-focus:text-msk-coral-500"
                     >
                       Nom complet du parent
                     </label>
@@ -116,14 +116,14 @@ export const ContactFormSection: React.FC = () => {
 
                   {/* Phone */}
                   <motion.div className="relative flex" animate={errors.phone ? shakeAnimation : {}}>
-                    <div className="bg-msk-forest-50 border-2 border-transparent rounded-l-xl px-4 flex items-center justify-center font-bold text-msk-forest-600 border-r-0">
+                    <div className="bg-msk-cream-100 border-2 border-transparent rounded-l-xl px-4 flex items-center justify-center font-bold text-msk-night-700 border-r-0">
                       +212
                     </div>
                     <div className="relative flex-1">
                       <input 
                         type="tel" 
                         id="phone" 
-                        className={`peer w-full bg-[#FAF8F5] border-2 border-l-white rounded-r-xl px-5 pt-8 pb-3 text-msk-forest-950 focus:outline-none focus:bg-white transition-all placeholder-transparent ${errors.phone ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
+                        className={`peer w-full bg-[#FAF8F5] border-2 border-l-white rounded-r-xl px-5 pt-8 pb-3 text-msk-night-900 focus:outline-none focus:bg-white transition-all placeholder-transparent ${errors.phone ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
                         placeholder="Téléphone"
                         {...register("phone", { required: "Ce champ est requis" })}
                         onFocus={() => setFocusedField("phone")}
@@ -131,7 +131,7 @@ export const ContactFormSection: React.FC = () => {
                       />
                       <label 
                         htmlFor="phone"
-                        className="absolute left-5 top-2.5 text-xs font-bold text-msk-forest-400 uppercase tracking-wide transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-5 peer-placeholder-shown:font-medium peer-placeholder-shown:normal-case peer-focus:top-2.5 peer-focus:text-xs peer-focus:font-bold peer-focus:uppercase peer-focus:text-msk-coral-500"
+                        className="absolute left-5 top-2.5 text-xs font-bold text-slate-500 uppercase tracking-wide transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-5 peer-placeholder-shown:font-medium peer-placeholder-shown:normal-case peer-focus:top-2.5 peer-focus:text-xs peer-focus:font-bold peer-focus:uppercase peer-focus:text-msk-coral-500"
                       >
                         Téléphone
                       </label>
@@ -144,7 +144,7 @@ export const ContactFormSection: React.FC = () => {
                     <input 
                       type="email" 
                       id="email" 
-                      className={`peer w-full bg-[#FAF8F5] border-2 rounded-xl px-5 pt-8 pb-3 text-msk-forest-950 focus:outline-none focus:bg-white transition-all placeholder-transparent ${errors.email ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
+                      className={`peer w-full bg-[#FAF8F5] border-2 rounded-xl px-5 pt-8 pb-3 text-msk-night-900 focus:outline-none focus:bg-white transition-all placeholder-transparent ${errors.email ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
                       placeholder="Adresse email"
                       {...register("email", { 
                         required: "L'email est requis",
@@ -158,7 +158,7 @@ export const ContactFormSection: React.FC = () => {
                     />
                     <label 
                       htmlFor="email"
-                      className="absolute left-5 top-2.5 text-xs font-bold text-msk-forest-400 uppercase tracking-wide transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-5 peer-placeholder-shown:font-medium peer-placeholder-shown:normal-case peer-focus:top-2.5 peer-focus:text-xs peer-focus:font-bold peer-focus:uppercase peer-focus:text-msk-coral-500"
+                      className="absolute left-5 top-2.5 text-xs font-bold text-slate-500 uppercase tracking-wide transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-5 peer-placeholder-shown:font-medium peer-placeholder-shown:normal-case peer-focus:top-2.5 peer-focus:text-xs peer-focus:font-bold peer-focus:uppercase peer-focus:text-msk-coral-500"
                     >
                       Adresse email
                     </label>
@@ -169,7 +169,7 @@ export const ContactFormSection: React.FC = () => {
                   <motion.div className="relative" animate={errors.childAge ? shakeAnimation : {}}>
                     <select 
                       id="childAge" 
-                      className={`w-full bg-[#FAF8F5] border-2 rounded-xl px-5 pt-8 pb-3 text-msk-forest-950 focus:outline-none focus:bg-white transition-all appearance-none ${errors.childAge ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
+                      className={`w-full bg-[#FAF8F5] border-2 rounded-xl px-5 pt-8 pb-3 text-msk-night-900 focus:outline-none focus:bg-white transition-all appearance-none ${errors.childAge ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
                       {...register("childAge", { required: "Veuillez sélectionner l'âge" })}
                       onFocus={() => setFocusedField("childAge")}
                       onBlur={() => setFocusedField(null)}
@@ -186,12 +186,12 @@ export const ContactFormSection: React.FC = () => {
                     </select>
                     <label 
                       htmlFor="childAge"
-                      className={`absolute left-5 top-2.5 text-xs font-bold uppercase tracking-wide transition-all ${isFocused('childAge') ? 'text-msk-coral-500' : 'text-msk-forest-400'}`}
+                      className={`absolute left-5 top-2.5 text-xs font-bold uppercase tracking-wide transition-all ${isFocused('childAge') ? 'text-msk-coral-500' : 'text-slate-500'}`}
                     >
                       Âge concerné
                     </label>
                     <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <svg className="w-5 h-5 text-msk-forest-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                      <svg className="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                     </div>
                     {errors.childAge && <span className="absolute -bottom-5 left-2 text-xs text-red-500 font-medium">{errors.childAge.message}</span>}
                   </motion.div>
@@ -200,7 +200,7 @@ export const ContactFormSection: React.FC = () => {
                   <motion.div className="relative" animate={errors.subject ? shakeAnimation : {}}>
                     <select 
                       id="subject" 
-                      className={`w-full bg-[#FAF8F5] border-2 rounded-xl px-5 pt-8 pb-3 text-msk-forest-950 focus:outline-none focus:bg-white transition-all appearance-none ${errors.subject ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
+                      className={`w-full bg-[#FAF8F5] border-2 rounded-xl px-5 pt-8 pb-3 text-msk-night-900 focus:outline-none focus:bg-white transition-all appearance-none ${errors.subject ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
                       {...register("subject", { required: "Veuillez sélectionner un objet" })}
                       onFocus={() => setFocusedField("subject")}
                       onBlur={() => setFocusedField(null)}
@@ -214,12 +214,12 @@ export const ContactFormSection: React.FC = () => {
                     </select>
                     <label 
                       htmlFor="subject"
-                      className={`absolute left-5 top-2.5 text-xs font-bold uppercase tracking-wide transition-all ${isFocused('subject') ? 'text-msk-coral-500' : 'text-msk-forest-400'}`}
+                      className={`absolute left-5 top-2.5 text-xs font-bold uppercase tracking-wide transition-all ${isFocused('subject') ? 'text-msk-coral-500' : 'text-slate-500'}`}
                     >
                       Objet de la demande
                     </label>
                     <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <svg className="w-5 h-5 text-msk-forest-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                      <svg className="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                     </div>
                     {errors.subject && <span className="absolute -bottom-5 left-2 text-xs text-red-500 font-medium">{errors.subject.message}</span>}
                   </motion.div>
@@ -229,7 +229,7 @@ export const ContactFormSection: React.FC = () => {
                     <textarea 
                       id="message" 
                       rows={4}
-                      className={`peer w-full bg-[#FAF8F5] border-2 rounded-xl px-5 pt-8 pb-3 text-msk-forest-950 focus:outline-none focus:bg-white transition-all placeholder-transparent resize-none ${errors.message ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
+                      className={`peer w-full bg-[#FAF8F5] border-2 rounded-xl px-5 pt-8 pb-3 text-msk-night-900 focus:outline-none focus:bg-white transition-all placeholder-transparent resize-none ${errors.message ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
                       placeholder="Votre message"
                       {...register("message", { required: "Veuillez écrire un message" })}
                       onFocus={() => setFocusedField("message")}
@@ -237,7 +237,7 @@ export const ContactFormSection: React.FC = () => {
                     />
                     <label 
                       htmlFor="message"
-                      className="absolute left-5 top-2.5 text-xs font-bold text-msk-forest-400 uppercase tracking-wide transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-5 peer-placeholder-shown:font-medium peer-placeholder-shown:normal-case peer-focus:top-2.5 peer-focus:text-xs peer-focus:font-bold peer-focus:uppercase peer-focus:text-msk-coral-500"
+                      className="absolute left-5 top-2.5 text-xs font-bold text-slate-500 uppercase tracking-wide transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-5 peer-placeholder-shown:font-medium peer-placeholder-shown:normal-case peer-focus:top-2.5 peer-focus:text-xs peer-focus:font-bold peer-focus:uppercase peer-focus:text-msk-coral-500"
                     >
                       Votre message
                     </label>

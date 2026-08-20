@@ -77,7 +77,7 @@ const programs: ProgramData[] = [
     id: "adultes",
     title: "Adultes",
     age: "18+ ans",
-    color: "bg-msk-forest-600",
+    color: "bg-msk-night-700",
     description: "Des thérapies brèves, du coaching et des formations pour les adultes neuro-atypiques ou les parents souhaitant mieux accompagner leurs enfants.",
     objectives: [
       "Coaching professionnel pour profils atypiques",
@@ -110,7 +110,7 @@ export const ProgrammesSelectorSection: React.FC = () => {
               className={`relative px-6 py-4 md:py-3 rounded-2xl md:rounded-full text-base font-bold transition-all flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 ${
                 activeTab === prog.id 
                   ? "text-white shadow-md" 
-                  : "text-msk-forest-600 hover:bg-msk-forest-50 bg-[#FAF8F5]"
+                  : "text-msk-night-700 hover:bg-msk-cream-100 bg-[#FAF8F5]"
               }`}
             >
               {activeTab === prog.id && (
@@ -121,7 +121,7 @@ export const ProgrammesSelectorSection: React.FC = () => {
                 />
               )}
               <span className="relative z-10">{prog.title}</span>
-              <span className={`relative z-10 text-xs px-2 py-0.5 rounded-full ${activeTab === prog.id ? 'bg-white/20' : 'bg-msk-forest-100 text-msk-forest-500'}`}>
+              <span className={`relative z-10 text-xs px-2 py-0.5 rounded-full ${activeTab === prog.id ? 'bg-white/20' : 'bg-msk-cream-200 text-slate-600'}`}>
                 {prog.age}
               </span>
             </button>
@@ -129,7 +129,7 @@ export const ProgrammesSelectorSection: React.FC = () => {
         </div>
 
         {/* Content Area */}
-        <div className="bg-[#FAF8F5] rounded-3xl overflow-hidden shadow-xl border border-msk-forest-100 min-h-[500px]">
+        <div className="bg-[#FAF8F5] rounded-3xl overflow-hidden shadow-xl border border-msk-cream-200 min-h-[500px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeProgram.id}
@@ -144,18 +144,18 @@ export const ProgrammesSelectorSection: React.FC = () => {
                 <div>
                   <div className="flex items-center gap-3 mb-4">
                     <div className={`w-3 h-3 rounded-full ${activeProgram.color}`}></div>
-                    <h2 className="text-3xl font-bold text-msk-forest-950">{activeProgram.title}</h2>
-                    <span className="text-sm font-bold text-msk-forest-500 bg-white px-3 py-1 rounded-full border border-msk-forest-100 shadow-sm">
+                    <h2 className="text-3xl font-bold text-msk-night-900">{activeProgram.title}</h2>
+                    <span className="text-sm font-bold text-slate-600 bg-white px-3 py-1 rounded-full border border-msk-cream-200 shadow-sm">
                       {activeProgram.age}
                     </span>
                   </div>
                   
-                  <p className="text-lg text-msk-forest-700 mb-8 leading-relaxed">
+                  <p className="text-lg text-msk-night-700 mb-8 leading-relaxed">
                     {activeProgram.description}
                   </p>
 
                   <div className="mb-8">
-                    <h3 className="text-sm font-bold uppercase tracking-widest text-msk-forest-400 mb-4">Objectifs Principaux</h3>
+                    <h3 className="text-sm font-bold uppercase tracking-widest text-slate-500 mb-4">Objectifs Principaux</h3>
                     <ul className="space-y-3">
                       {activeProgram.objectives.map((obj, idx) => (
                         <motion.li 
@@ -166,26 +166,26 @@ export const ProgrammesSelectorSection: React.FC = () => {
                           className="flex items-start gap-3"
                         >
                           <CheckCircle2 className={`w-5 h-5 mt-0.5 shrink-0 ${activeProgram.color.replace('bg-', 'text-')}`} />
-                          <span className="text-msk-forest-800 font-medium">{obj}</span>
+                          <span className="text-msk-night-800 font-medium">{obj}</span>
                         </motion.li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8 p-6 bg-white rounded-2xl border border-msk-forest-100">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8 p-6 bg-white rounded-2xl border border-msk-cream-200">
                     <div>
-                      <h3 className="text-xs font-bold uppercase text-msk-forest-400 mb-2">Profils accompagnés</h3>
+                      <h3 className="text-xs font-bold uppercase text-slate-500 mb-2">Profils accompagnés</h3>
                       <div className="flex flex-wrap gap-1.5">
                         {activeProgram.conditions.map((cond, idx) => (
-                          <span key={idx} className="text-xs bg-msk-forest-50 text-msk-forest-700 px-2 py-1 rounded-md font-medium">
+                          <span key={idx} className="text-xs bg-msk-cream-100 text-msk-night-700 px-2 py-1 rounded-md font-medium">
                             {cond}
                           </span>
                         ))}
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-xs font-bold uppercase text-msk-forest-400 mb-2">Rythme</h3>
-                      <p className="text-sm font-medium text-msk-forest-800 leading-tight">
+                      <h3 className="text-xs font-bold uppercase text-slate-500 mb-2">Rythme</h3>
+                      <p className="text-sm font-medium text-msk-night-800 leading-tight">
                         {activeProgram.schedule}
                       </p>
                     </div>

@@ -1,5 +1,15 @@
 import type { Config } from "tailwindcss";
 
+/**
+ * Wraps a CSS-variable colour so Tailwind opacity modifiers (`bg-primary/90`,
+ * `ring-ring/50`, …) actually work. These variables hold complete `oklch()`
+ * colours, so Tailwind's `<alpha-value>` placeholder cannot be substituted into
+ * a channel list the usual way; `color-mix` applies the alpha instead. Without
+ * this, every `/<opacity>` modifier on a semantic colour is silently dropped.
+ */
+const alpha = (value: string) =>
+  `color-mix(in oklch, ${value} calc(<alpha-value> * 100%), transparent)`;
+
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,38 +19,38 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        border: "var(--border)",
-        input: "var(--input)",
-        ring: "var(--ring)",
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        border: alpha("var(--border)"),
+        input: alpha("var(--input)"),
+        ring: alpha("var(--ring)"),
+        background: alpha("var(--background)"),
+        foreground: alpha("var(--foreground)"),
         primary: {
-          DEFAULT: "var(--primary)",
-          foreground: "var(--primary-foreground)",
+          DEFAULT: alpha("var(--primary)"),
+          foreground: alpha("var(--primary-foreground)"),
         },
         secondary: {
-          DEFAULT: "var(--secondary)",
-          foreground: "var(--secondary-foreground)",
+          DEFAULT: alpha("var(--secondary)"),
+          foreground: alpha("var(--secondary-foreground)"),
         },
         destructive: {
-          DEFAULT: "var(--destructive)",
-          foreground: "var(--destructive-foreground)",
+          DEFAULT: alpha("var(--destructive)"),
+          foreground: alpha("var(--destructive-foreground)"),
         },
         muted: {
-          DEFAULT: "var(--muted)",
-          foreground: "var(--muted-foreground)",
+          DEFAULT: alpha("var(--muted)"),
+          foreground: alpha("var(--muted-foreground)"),
         },
         accent: {
-          DEFAULT: "var(--accent)",
-          foreground: "var(--accent-foreground)",
+          DEFAULT: alpha("var(--accent)"),
+          foreground: alpha("var(--accent-foreground)"),
         },
         popover: {
-          DEFAULT: "var(--popover)",
-          foreground: "var(--popover-foreground)",
+          DEFAULT: alpha("var(--popover)"),
+          foreground: alpha("var(--popover-foreground)"),
         },
         card: {
-          DEFAULT: "var(--card)",
-          foreground: "var(--card-foreground)",
+          DEFAULT: alpha("var(--card)"),
+          foreground: alpha("var(--card-foreground)"),
         },
         msk: {
           // #DF5B85 - Rose Corail Joyeux (Chaleur, Joie, Énergie douce)
@@ -101,6 +111,17 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-dm-sans)", "sans-serif"],
         body: ["var(--font-inter)", "sans-serif"],
+        heading: ["var(--font-jakarta)", "sans-serif"],
+      },
+      keyframes: {
+        blob: {
+          "0%, 100%": { transform: "translate(0px, 0px) scale(1)" },
+          "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+          "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+        },
+      },
+      animation: {
+        blob: "blob 7s infinite ease-in-out",
       },
     },
   },

@@ -1,4 +1,3 @@
-import React from "react";
 import type { Metadata } from "next";
 import { ActualitesHeroSection } from "@/components/actualites/ActualitesHeroSection";
 import { ActualitesListSection } from "@/components/actualites/ActualitesListSection";

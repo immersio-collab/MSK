@@ -45,13 +45,13 @@ export const ContactCardsSection: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className={`group flex flex-col items-center text-center p-8 rounded-3xl bg-white border border-msk-forest-100 transition-all duration-300 transform hover:-translate-y-2 ${card.glow}`}
+              className={`group flex flex-col items-center text-center p-8 rounded-3xl bg-white border border-msk-cream-200 transition-all duration-300 transform hover:-translate-y-2 ${card.glow}`}
             >
-              <div className={`w-16 h-16 mb-6 rounded-2xl bg-msk-forest-50 flex items-center justify-center transition-colors duration-300 ${card.color}`}>
+              <div className={`w-16 h-16 mb-6 rounded-2xl bg-msk-cream-100 flex items-center justify-center transition-colors duration-300 ${card.color}`}>
                 {card.icon}
               </div>
-              <h3 className="text-xl font-bold text-msk-forest-950 mb-2">{card.title}</h3>
-              <p className="text-msk-forest-700 font-medium">{card.value}</p>
+              <h3 className="text-xl font-bold text-msk-night-900 mb-2">{card.title}</h3>
+              <p className="text-msk-night-700 font-medium">{card.value}</p>
             </motion.a>
           ))}
         </div>

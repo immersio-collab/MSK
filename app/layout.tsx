@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, Inter } from "next/font/google";
+import { DM_Sans, Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -19,6 +19,14 @@ const inter = Inter({
   variable: "--font-inter",
   display: "swap",
   weight: ["300", "400", "500", "600", "700"],
+});
+
+// Headings reference var(--font-jakarta) in globals.css; it must actually be loaded.
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-jakarta",
+  display: "swap",
+  weight: ["500", "600", "700", "800"],
 });
 
 export const viewport: Viewport = {
@@ -79,7 +87,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="fr" className={cn(dmSans.variable, inter.variable, "font-sans")}>
+    <html lang="fr" className={cn(dmSans.variable, inter.variable, jakarta.variable, "font-sans")}>
       <head>
         <script
           type="application/ld+json"

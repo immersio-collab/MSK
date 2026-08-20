@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/programmes/adolescents",
     "/programmes/adultes",
     "/admissions",
+    "/actualites",
     "/contact",
   ];
 

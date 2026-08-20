@@ -10,10 +10,10 @@ export const EspacesTourVirtuelSection: React.FC = () => {
     <section id="tour-virtuel" className="relative z-10 w-full flex flex-col py-16 md:py-24 bg-[#FAF8F5]">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-msk-forest-950 tracking-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-msk-night-900 tracking-tight">
             Visitez notre école à distance
           </h2>
-          <p className="text-msk-forest-700/80 font-medium mt-4 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
+          <p className="text-msk-night-700/80 font-medium mt-4 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
             Découvrez l'intérieur de nos classes et installations. <br className="hidden sm:block" />
             Naviguez dans l'école comme si vous y étiez.
           </p>
@@ -41,7 +41,7 @@ export const EspacesTourVirtuelSection: React.FC = () => {
                 style={{ backgroundImage: "url('https://images.unsplash.com/photo-1538356111053-748a48e1acb8?auto=format&fit=crop&q=80&w=1600')" }}
                 onClick={() => setIsActivated(true)}
               >
-                <div className="absolute inset-0 bg-msk-forest-950/40 transition-colors group-hover:bg-msk-forest-950/30"></div>
+                <div className="absolute inset-0 bg-msk-night-950/40 transition-colors group-hover:bg-msk-night-950/30"></div>
                 
                 <div className="relative z-10 flex flex-col items-center">
                   <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 mb-4 transition-transform duration-300 group-hover:scale-110 shadow-lg">

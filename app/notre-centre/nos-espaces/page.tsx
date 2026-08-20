@@ -1,4 +1,3 @@
-import React from "react";
 import type { Metadata } from "next";
 import { EspacesHeroSection } from "@/components/espaces/EspacesHeroSection";
 import { EspacesTourVirtuelSection } from "@/components/espaces/EspacesTourVirtuelSection";

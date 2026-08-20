@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation, A11y, EffectCards } from "swiper/modules";
+import { Pagination, Navigation, A11y } from "swiper/modules";
 import { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";

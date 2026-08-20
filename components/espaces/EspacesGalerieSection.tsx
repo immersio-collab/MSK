@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import PhotoAlbum from "react-photo-album";
@@ -43,10 +42,10 @@ export const EspacesGalerieSection: React.FC = () => {
     <section id="galerie" className="py-24 bg-white relative">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-msk-forest-950 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-msk-night-900 mb-4">
             Galerie Immersive
           </h2>
-          <p className="text-lg text-msk-forest-700/80 max-w-2xl mx-auto">
+          <p className="text-lg text-msk-night-700/80 max-w-2xl mx-auto">
             Explorez nos différents espaces conçus spécifiquement pour répondre aux besoins de chaque enfant.
           </p>
         </div>
@@ -60,7 +59,7 @@ export const EspacesGalerieSection: React.FC = () => {
               className={`relative px-6 py-2.5 rounded-full text-sm font-bold transition-colors ${
                 activeTab === cat 
                   ? "text-white" 
-                  : "text-msk-forest-600 hover:bg-msk-forest-50"
+                  : "text-msk-night-700 hover:bg-msk-cream-100"
               }`}
             >
               {activeTab === cat && (

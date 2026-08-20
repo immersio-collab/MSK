@@ -1,4 +1,3 @@
-import React from "react";
 import type { Metadata } from "next";
 import { ContactHeroSection } from "@/components/contact/ContactHeroSection";
 import { ContactCardsSection } from "@/components/contact/ContactCardsSection";

@@ -1,7 +1,5 @@
-import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Heart } from "lucide-react";
 import { WordPullUp } from "@/components/magicui/word-pull-up";
 import { FadeUp } from "@/components/magicui/fade-up";
 import { MagneticButton } from "@/components/lightswind/magnetic-button";
@@ -41,7 +39,7 @@ export default function HomePage() {
             <div className="lg:col-span-6 space-y-6 md:space-y-8">
               {/* Badge de confiance */}
               <FadeUp delay={0.2}>
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-msk-coral-50/70 border border-msk-coral-100/50 rounded-full text-xs sm:text-sm font-bold text-msk-coral-600 shadow-sm backdrop-blur-xs select-none">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-msk-coral-50/70 border border-msk-coral-100/50 rounded-full text-xs sm:text-sm font-bold text-msk-coral-600 shadow-sm backdrop-blur-sm select-none">
                   <span className="flex h-2 w-2 rounded-full bg-msk-coral-500 animate-ping" />
                   <span className="flex h-2 w-2 -ml-4 rounded-full bg-msk-coral-600" />
                   <span>+200 familles accompagnées · 15 ans d'expérience · Casablanca</span>

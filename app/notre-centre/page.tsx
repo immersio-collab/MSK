@@ -1,4 +1,3 @@
-import React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,7 +8,7 @@ export const metadata: Metadata = {
 export default function NotreCentrePage() {
   const sections = [
     { id: "hero", title: "Présentation Générale — Notre Centre", color: "text-msk-coral-600 border-msk-coral-200 bg-msk-coral-50/40" },
-    { id: "mission", title: "Notre Mission & Nos Valeurs", color: "text-msk-gold-600 border-msk-gold-200 bg-msk-gold-50/40" },
+    { id: "mission", title: "Notre Mission & Nos Valeurs", color: "text-msk-sun-600 border-msk-sun-200 bg-msk-sun-50/40" },
     { id: "cta", title: "Prendre Rendez-vous / Bilan", color: "text-msk-blue-600 border-msk-blue-200 bg-msk-blue-50/40" },
   ];
 
@@ -20,7 +19,7 @@ export default function NotreCentrePage() {
           <span className="text-xs font-bold uppercase tracking-widest text-msk-coral-600">
             Page
           </span>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-msk-dark-900">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-msk-night-900">
             Notre Centre
           </h1>
         </div>
@@ -33,7 +32,7 @@ export default function NotreCentrePage() {
             <span className="text-xs font-bold uppercase tracking-widest block mb-2 opacity-80">
               Section {idx + 1}
             </span>
-            <h2 className="text-xl md:text-2xl font-bold text-msk-dark-900">
+            <h2 className="text-xl md:text-2xl font-bold text-msk-night-900">
               {section.title}
             </h2>
           </div>

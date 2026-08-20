@@ -63,7 +63,7 @@ const AudioPlayer = ({ src }: { src: string }) => {
   return (
     <button 
       onClick={togglePlay} 
-      className="flex items-center gap-2 px-3 py-1.5 bg-msk-night-50 hover:bg-msk-night-100 text-msk-night-800 rounded-full text-xs font-bold transition-colors shadow-sm border border-msk-night-100"
+      className="flex items-center gap-2 px-3 py-1.5 bg-msk-cream-100 hover:bg-msk-cream-200 text-msk-night-800 rounded-full text-xs font-bold transition-colors shadow-sm border border-msk-cream-200"
       aria-label="Écouter le témoignage"
     >
       {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export const EquipeHeroSection: React.FC = () => {
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-24 bg-[#FAF8F5] text-msk-forest-950 overflow-hidden">
+    <section className="relative pt-32 pb-20 md:pt-40 md:pb-24 bg-[#FAF8F5] text-msk-night-900 overflow-hidden">
       {/* Decorative patterns */}
       <div className="absolute inset-0 z-0 opacity-40">
         <div className="absolute top-20 left-10 w-72 h-72 bg-msk-coral-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
@@ -27,7 +27,7 @@ export const EquipeHeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8 leading-tight text-msk-forest-950"
+          className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8 leading-tight text-msk-night-900"
         >
           L'expertise et la bienveillance au service de <span className="text-transparent bg-clip-text bg-gradient-to-r from-msk-coral-500 to-msk-sun-500">votre enfant.</span>
         </motion.h1>
@@ -36,7 +36,7 @@ export const EquipeHeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg md:text-xl text-msk-forest-700 max-w-3xl mx-auto leading-relaxed"
+          className="text-lg md:text-xl text-msk-night-700 max-w-3xl mx-auto leading-relaxed"
         >
           Découvrez le parcours de notre fondatrice, une spécialiste passionnée et dévouée à l'épanouissement de chaque enfant à travers une approche globale et inclusive.
         </motion.p>

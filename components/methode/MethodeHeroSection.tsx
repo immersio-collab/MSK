@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
 import { FadeUp } from "@/components/magicui/fade-up";
 import { WordPullUp } from "@/components/magicui/word-pull-up";

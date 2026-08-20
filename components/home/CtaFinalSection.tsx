@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import { PhoneCall } from "lucide-react";
 import { FadeUp } from "@/components/magicui/fade-up";

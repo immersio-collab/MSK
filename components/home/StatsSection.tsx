@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import { motion, useInView, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 
 import CountUp from "react-countup";
 export const StatsSection = () => {

@@ -34,15 +34,15 @@ export const TroublesQuizSection: React.FC = () => {
     <section className="py-20 bg-[#FAF8F5]">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-msk-forest-950 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-msk-night-900 mb-4">
             Mon enfant a-t-il besoin de MSK ?
           </h2>
-          <p className="text-lg text-msk-forest-700/80">
+          <p className="text-lg text-msk-night-700/80">
             Faites ce petit test rapide de 3 questions pour savoir si notre approche pourrait aider votre enfant.
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-msk-forest-100 relative overflow-hidden min-h-[350px] flex flex-col justify-center">
+        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-msk-cream-200 relative overflow-hidden min-h-[350px] flex flex-col justify-center">
           {/* Progress bar */}
           <div className="absolute top-0 left-0 w-full h-2 bg-gray-100">
             <motion.div 
@@ -63,23 +63,23 @@ export const TroublesQuizSection: React.FC = () => {
                 transition={{ duration: 0.3 }}
                 className="text-center"
               >
-                <span className="text-sm font-bold text-msk-forest-500 mb-4 block">
+                <span className="text-sm font-bold text-slate-600 mb-4 block">
                   Question {currentStep + 1} / {questions.length}
                 </span>
-                <h3 className="text-2xl md:text-3xl font-bold text-msk-forest-900 mb-10">
+                <h3 className="text-2xl md:text-3xl font-bold text-msk-night-900 mb-10">
                   {questions[currentStep].text}
                 </h3>
                 
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
                   <button
                     onClick={() => handleAnswer(true)}
-                    className="px-8 py-4 rounded-xl bg-[#FAF8F5] border-2 border-msk-forest-200 hover:border-msk-coral-400 hover:bg-msk-coral-50 text-msk-forest-900 font-bold transition-all text-lg"
+                    className="px-8 py-4 rounded-xl bg-[#FAF8F5] border-2 border-msk-cream-300 hover:border-msk-coral-400 hover:bg-msk-coral-50 text-msk-night-900 font-bold transition-all text-lg"
                   >
                     Oui, tout à fait
                   </button>
                   <button
                     onClick={() => handleAnswer(false)}
-                    className="px-8 py-4 rounded-xl bg-[#FAF8F5] border-2 border-msk-forest-200 hover:border-msk-forest-300 hover:bg-gray-50 text-msk-forest-900 font-bold transition-all text-lg"
+                    className="px-8 py-4 rounded-xl bg-[#FAF8F5] border-2 border-msk-cream-300 hover:border-msk-cream-300 hover:bg-gray-50 text-msk-night-900 font-bold transition-all text-lg"
                   >
                     Non / Pas vraiment
                   </button>
@@ -96,19 +96,19 @@ export const TroublesQuizSection: React.FC = () => {
                 <div className="w-20 h-20 bg-msk-sun-100 text-msk-sun-600 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">
                   {hasPositiveAnswers ? "🌱" : "✨"}
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-msk-forest-900 mb-4">
+                <h3 className="text-2xl md:text-3xl font-bold text-msk-night-900 mb-4">
                   {hasPositiveAnswers 
                     ? "Votre enfant pourrait bénéficier d'un accompagnement MSK."
                     : "Chaque enfant est unique. Si vous avez le moindre doute, parlons-en."}
                 </h3>
-                <p className="text-lg text-msk-forest-700/80 mb-8 max-w-2xl mx-auto">
+                <p className="text-lg text-msk-night-700/80 mb-8 max-w-2xl mx-auto">
                   {hasPositiveAnswers 
                     ? "Les difficultés que vous observez sont exactement celles que nous accompagnons au quotidien. Ne restez pas seul(e) face à cette situation."
                     : "Même si ces signes ne sont pas évidents, une évaluation professionnelle peut parfois révéler des besoins spécifiques."}
                 </p>
                 <div className="flex justify-center">
                   <Link href="/contact">
-                    <MagneticButton className="bg-msk-forest-900 text-white px-8 py-4 rounded-full font-bold shadow-lg hover:bg-msk-forest-800 transition-colors">
+                    <MagneticButton className="bg-msk-night-900 text-white px-8 py-4 rounded-full font-bold shadow-lg hover:bg-msk-night-800 transition-colors">
                       Prendre RDV pour un bilan gratuit
                     </MagneticButton>
                   </Link>
@@ -118,7 +118,7 @@ export const TroublesQuizSection: React.FC = () => {
                     setCurrentStep(0);
                     setAnswers([]);
                   }}
-                  className="mt-6 text-sm text-msk-forest-500 hover:text-msk-coral-500 underline"
+                  className="mt-6 text-sm text-slate-600 hover:text-msk-coral-500 underline"
                 >
                   Refaire le quiz
                 </button>

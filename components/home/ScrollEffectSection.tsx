@@ -75,7 +75,7 @@ export const ScrollEffectSection = () => {
           className="relative box-border flex h-[calc(100vh-80px)] items-center justify-center gap-[2vw] overflow-hidden bg-[#FDFBF7] p-[2vw]"
         >
           <div
-            className="font-geist w-full max-w-5xl text-center text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-msk-night-900 flex flex-wrap justify-center gap-y-2 md:gap-y-4"
+            className="w-full max-w-5xl text-center text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-msk-night-900 flex flex-wrap justify-center gap-y-2 md:gap-y-4"
             style={{
               perspective: "500px",
             }}

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Accordion as AccordionPrimitive } from 'radix-ui';
-import { motion, AnimatePresence, type HTMLMotionProps } from 'motion/react';
+import { motion, AnimatePresence, type HTMLMotionProps } from 'framer-motion';
 
 import { useControlledState } from '@/hooks/use-controlled-state';
 import { getStrictContext } from '@/lib/get-strict-context';

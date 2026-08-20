@@ -31,7 +31,7 @@ const CustomTrigger = React.forwardRef<HTMLButtonElement, React.ComponentProps<t
           {children}
           <div
             className={cn(
-              "flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-msk-cream-100 text-msk-night-400 transition-transform duration-300",
+              "flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-msk-cream-100 text-msk-night-700 transition-transform duration-300",
               isOpen && "rotate-180 bg-msk-coral-100 text-msk-coral-600"
             )}
           >

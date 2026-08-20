@@ -2,11 +2,10 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 export const EspacesHeroSection: React.FC = () => {
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 bg-[#FAF8F5] text-msk-forest-950 overflow-hidden min-h-[70vh] flex items-center">
+    <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 bg-[#FAF8F5] text-msk-night-900 overflow-hidden min-h-[70vh] flex items-center">
       {/* Decorative patterns instead of dark image */}
       <div className="absolute inset-0 z-0 opacity-40">
         <div className="absolute top-20 left-10 w-72 h-72 bg-msk-coral-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
@@ -28,7 +27,7 @@ export const EspacesHeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-8 leading-tight text-msk-forest-950"
+          className="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-8 leading-tight text-msk-night-900"
         >
           Un environnement pensé pour <span className="text-transparent bg-clip-text bg-gradient-to-r from-msk-coral-500 to-msk-sun-500">l'épanouissement</span>
         </motion.h1>
@@ -37,7 +36,7 @@ export const EspacesHeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg md:text-xl text-msk-forest-700 max-w-3xl mx-auto leading-relaxed"
+          className="text-lg md:text-xl text-msk-night-700 max-w-3xl mx-auto leading-relaxed"
         >
           Classes Montessori lumineuses, salle Neuro-Gym équipée, espaces sensoriels apaisants... Plongez au cœur de notre école et découvrez où votre enfant grandira chaque jour.
         </motion.p>
@@ -51,7 +50,7 @@ export const EspacesHeroSection: React.FC = () => {
           <a href="#tour-virtuel" className="px-8 py-4 bg-msk-coral-500 hover:bg-msk-coral-600 text-white font-bold rounded-full transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
             Lancer le Tour 360°
           </a>
-          <a href="#galerie" className="px-8 py-4 bg-white hover:bg-gray-50 text-msk-forest-950 border border-msk-forest-200 font-bold rounded-full transition-all shadow-sm hover:shadow">
+          <a href="#galerie" className="px-8 py-4 bg-white hover:bg-gray-50 text-msk-night-900 border border-msk-cream-300 font-bold rounded-full transition-all shadow-sm hover:shadow">
             Voir la Galerie
           </a>
         </motion.div>

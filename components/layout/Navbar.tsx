@@ -195,7 +195,7 @@ export const Navbar: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden fixed inset-x-0 top-[76px] bg-[#FDFBF7]/98 backdrop-blur-xl border-b border-msk-cream-200 shadow-2xl px-8 py-8"
+            className="md:hidden fixed inset-x-0 top-[76px] bg-[#FDFBF7]/95 backdrop-blur-xl border-b border-msk-cream-200 shadow-2xl px-8 py-8"
           >
             <div className="space-y-5">
               {NAV_LINKS.map((link) => (

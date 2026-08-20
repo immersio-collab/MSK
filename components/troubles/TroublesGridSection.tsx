@@ -66,10 +66,10 @@ export const TroublesGridSection: React.FC = () => {
     <section className="py-20 bg-white" id="troubles">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-msk-forest-950 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-msk-night-900 mb-4">
             Les troubles que nous accompagnons
           </h2>
-          <p className="text-lg text-msk-forest-700/80 max-w-2xl mx-auto">
+          <p className="text-lg text-msk-night-700/80 max-w-2xl mx-auto">
             Survolez chaque carte pour découvrir comment l&apos;approche MSK apporte une solution concrète à chaque difficulté.
           </p>
         </div>
@@ -95,12 +95,12 @@ export const TroublesGridSection: React.FC = () => {
               >
                 {/* Front Face */}
                 <div 
-                  className="absolute inset-0 w-full h-full flex flex-col items-center justify-center p-6 bg-[#FAF8F5] border border-msk-forest-100 rounded-2xl text-center"
+                  className="absolute inset-0 w-full h-full flex flex-col items-center justify-center p-6 bg-[#FAF8F5] border border-msk-cream-200 rounded-2xl text-center"
                   style={{ backfaceVisibility: "hidden" }}
                 >
                   <span className="text-5xl mb-4">{item.icon}</span>
-                  <h3 className="text-xl font-bold text-msk-forest-900 mb-2">{item.title}</h3>
-                  <p className="text-sm text-msk-forest-700/80">{item.description}</p>
+                  <h3 className="text-xl font-bold text-msk-night-900 mb-2">{item.title}</h3>
+                  <p className="text-sm text-msk-night-700/80">{item.description}</p>
                 </div>
 
                 {/* Back Face */}

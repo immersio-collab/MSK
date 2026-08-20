@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export const ActualitesHeroSection: React.FC = () => {
   return (
-    <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 bg-[#FAF8F5] text-msk-forest-950 overflow-hidden">
+    <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 bg-[#FAF8F5] text-msk-night-900 overflow-hidden">
       {/* Decorative patterns */}
       <div className="absolute inset-0 z-0 opacity-40">
         <div className="absolute top-20 left-10 w-72 h-72 bg-msk-coral-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
@@ -27,7 +27,7 @@ export const ActualitesHeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-8 leading-tight text-msk-forest-950"
+          className="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-8 leading-tight text-msk-night-900"
         >
           Ressources, conseils et <span className="text-transparent bg-clip-text bg-gradient-to-r from-msk-coral-500 to-msk-sun-500">vie du centre.</span>
         </motion.h1>
@@ -36,7 +36,7 @@ export const ActualitesHeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg md:text-xl text-msk-forest-700 max-w-3xl mx-auto leading-relaxed"
+          className="text-lg md:text-xl text-msk-night-700 max-w-3xl mx-auto leading-relaxed"
         >
           Découvrez nos derniers articles éducatifs, les événements à venir, et nos conseils pour accompagner au mieux le développement de votre enfant.
         </motion.p>
