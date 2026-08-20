@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { MagneticButton } from "@/components/lightswind/magnetic-button";
+import { MagneticButton } from "@/components/motion/MagneticButton";
 
 type Question = {
   id: number;

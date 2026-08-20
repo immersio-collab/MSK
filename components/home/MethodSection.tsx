@@ -2,9 +2,9 @@
 
 import React from "react";
 import Link from "next/link";
-import { FadeUp } from "@/components/magicui/fade-up";
-import { MethodHoverExpand, MethodStep } from "@/components/ui/skiper52";
-import { MagneticButton } from "@/components/lightswind/magnetic-button";
+import { FadeUp } from "@/components/motion/FadeUp";
+import { MethodHoverExpand, MethodStep } from "@/components/home/MethodHoverExpand";
+import { MagneticButton } from "@/components/motion/MagneticButton";
 
 const METHOD_STEPS: MethodStep[] = [
   {

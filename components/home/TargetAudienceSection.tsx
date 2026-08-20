@@ -10,7 +10,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { ArrowRight, ArrowLeft } from "lucide-react";
-import { FadeUp } from "@/components/magicui/fade-up";
+import { FadeUp } from "@/components/motion/FadeUp";
 
 const PROFILES = [
   {

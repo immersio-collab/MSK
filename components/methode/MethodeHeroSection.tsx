@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FadeUp } from "@/components/magicui/fade-up";
-import { WordPullUp } from "@/components/magicui/word-pull-up";
+import { FadeUp } from "@/components/motion/FadeUp";
+import { WordPullUp } from "@/components/motion/WordPullUp";
 
 export const MethodeHeroSection = () => {
   return (

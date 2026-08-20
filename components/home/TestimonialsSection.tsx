@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/effect-cards";
 import "swiper/css/pagination";
 import { Star, Quote, Play, Pause } from "lucide-react";
-import { FadeUp } from "@/components/magicui/fade-up";
+import { FadeUp } from "@/components/motion/FadeUp";
 
 const TESTIMONIALS = [
   {

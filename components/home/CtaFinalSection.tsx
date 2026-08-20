@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { PhoneCall } from "lucide-react";
-import { FadeUp } from "@/components/magicui/fade-up";
-import { MagneticButton } from "@/components/lightswind/magnetic-button";
+import { FadeUp } from "@/components/motion/FadeUp";
+import { MagneticButton } from "@/components/motion/MagneticButton";
 interface CtaFinalSectionProps {
   title?: string;
   subtitle?: string;

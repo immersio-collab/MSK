@@ -2,7 +2,7 @@
 
 import React from "react";
 import { PARENT_CONCERNS_FAQ } from "@/lib/data/site-content";
-import { FadeUp } from "@/components/magicui/fade-up";
+import { FadeUp } from "@/components/motion/FadeUp";
 import { ChevronDown, MessageCircleQuestion } from "lucide-react";
 import {
   Accordion,

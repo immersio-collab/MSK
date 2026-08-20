@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Pagination, Autoplay } from "swiper/modules";
 import { Play, X, Maximize2 } from "lucide-react";
-import { FadeUp } from "@/components/magicui/fade-up";
+import { FadeUp } from "@/components/motion/FadeUp";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
