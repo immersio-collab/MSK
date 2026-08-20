@@ -46,21 +46,23 @@ export const HeroSection: React.FC = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-msk-forest-900 tracking-tight leading-[1.15]"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-extrabold text-[#18202F] tracking-tight leading-[1.1] max-w-2xl"
             >
-              L&apos;école où chaque enfant trouve son{" "}
-              <span className="relative inline-block text-msk-forest-700">
-                propre chemin
+              L&apos;école où chaque<br />
+              enfant{" "}
+              <span className="relative inline-block text-[#BB546C]">
+                s&apos;éveille
                 <svg
                   aria-hidden="true"
-                  className="absolute -bottom-1 left-0 w-full h-2.5 text-msk-terracotta-400 opacity-80"
-                  viewBox="0 0 100 20"
+                  className="absolute -bottom-1 left-0 w-full h-2 text-[#F2D086]"
+                  viewBox="0 0 100 10"
                   preserveAspectRatio="none"
                 >
-                  <path d="M0,10 Q50,0 100,10" stroke="currentColor" strokeWidth="4" fill="none" />
+                  <path d="M0,5 Q50,4 100,5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none" />
                 </svg>
               </span>{" "}
-              d&apos;apprentissage.
+              à<br />
+              son propre rythme.
             </motion.h1>
 
             {/* Core Motto Callout Box */}

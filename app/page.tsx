@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Heart, Brain, Sun } from "lucide-react";
+import { Heart } from "lucide-react";
 import { WordPullUp } from "@/components/magicui/word-pull-up";
 import { FadeUp } from "@/components/magicui/fade-up";
 import { MethodSection } from "@/components/home/MethodSection";
@@ -58,34 +58,23 @@ export default function HomePage() {
             {/* Right Column: Joyful, Magical 3D-Like Miniature World Placeholder */}
             <div className="lg:col-span-6 relative">
               <FadeUp delay={0.3} duration={0.8} y={20}>
-                <div className="relative rounded-3xl bg-gradient-to-br from-msk-cream-100 via-white to-msk-blue-50/50 p-8 sm:p-12 border border-msk-cream-300 shadow-xl overflow-hidden min-h-[380px] sm:min-h-[440px] flex items-center justify-center">
+                <div className="relative rounded-3xl bg-gradient-to-br from-msk-cream-100 via-white to-msk-blue-50/50 sm:p-12 border border-msk-cream-300 shadow-xl overflow-hidden min-h-[380px] sm:min-h-[440px] flex items-center justify-center">
                   {/* Soft ambient background circles */}
                   <div className="absolute top-6 right-6 w-36 h-36 rounded-full bg-msk-sun-300/30 blur-2xl pointer-events-none" />
                   <div className="absolute bottom-6 left-6 w-36 h-36 rounded-full bg-msk-coral-300/30 blur-2xl pointer-events-none" />
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full bg-msk-blue-200/40 blur-3xl pointer-events-none" />
 
-                  {/* Playful School Visual Composition */}
-                  <div className="relative z-10 text-center space-y-4 max-w-sm">
-                    <div className="inline-flex items-center justify-center gap-3 p-4 rounded-3xl bg-white shadow-md border border-msk-cream-200">
-                      <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-msk-coral-100 text-msk-coral-600">
-                        <Heart className="h-6 w-6" />
-                      </span>
-                      <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-msk-sun-100 text-msk-sun-700">
-                        <Sun className="h-6 w-6" />
-                      </span>
-                      <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-msk-blue-100 text-msk-blue-600">
-                        <Brain className="h-6 w-6" />
-                      </span>
-                    </div>
-
-                    <div className="space-y-1 pt-2">
-                      <h3 className="text-xl font-extrabold text-msk-night-900">
-                        Un univers pensé pour l&apos;enfant
-                      </h3>
-                      <p className="text-sm text-slate-500">
-                        Observation • Bienveillance • Mouvement
-                      </p>
-                    </div>
+                  {/* 3D Character Video */}
+                  <div className="relative z-10 w-full max-w-sm flex items-center justify-center">
+                    <video 
+                      autoPlay 
+                      loop 
+                      muted 
+                      playsInline 
+                      className="w-full h-auto object-contain scale-110 drop-shadow-2xl pointer-events-none"
+                    >
+                      <source src="/kling_character_transparent.webm" type="video/webm" />
+                    </video>
                   </div>
                 </div>
               </FadeUp>
