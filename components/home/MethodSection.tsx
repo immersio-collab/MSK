@@ -1,8 +1,10 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { FadeUp } from "@/components/magicui/fade-up";
 import { MethodHoverExpand, MethodStep } from "@/components/ui/skiper52";
+import { MagneticButton } from "@/components/lightswind/magnetic-button";
 
 const METHOD_STEPS: MethodStep[] = [
   {
@@ -87,6 +89,20 @@ export const MethodSection: React.FC = () => {
         {/* Skiper52 Hover Expand */}
         <FadeUp delay={0.25} duration={0.5}>
           <MethodHoverExpand steps={METHOD_STEPS} />
+        </FadeUp>
+
+        {/* CTA Button */}
+        <FadeUp delay={0.4} duration={0.5}>
+          <div className="mt-12 md:mt-16 flex justify-center">
+            <Link href="/notre-centre/la-methode">
+              <MagneticButton
+                className="bg-msk-night-900 hover:bg-msk-night-800 text-white font-bold text-sm tracking-wider uppercase rounded-2xl shadow-lg shadow-msk-night-900/20 border-0 px-8 py-4"
+                size="lg"
+              >
+                En savoir plus sur notre méthode
+              </MagneticButton>
+            </Link>
+          </div>
         </FadeUp>
       </div>
     </section>

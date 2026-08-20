@@ -138,6 +138,26 @@ export const PARENT_CONCERNS_FAQ = [
     question: "Quelle est la différence entre une école classique et la méthode MSK ?",
     answer: "Dans une école classique, c'est l'enfant qui doit se plier à un cadre uniforme. Chez MSK, c'est le cadre qui s'adapte à l'enfant. Nous combinons la pédagogie Montessori avec la neuro-gym et des thérapies intégrées.",
   },
+  {
+    question: "À quel âge puis-je inscrire mon enfant ?",
+    answer: "Nous accueillons les enfants dès 2 ans dans notre section Petite Enfance, et accompagnons les élèves tout au long du primaire et jusqu'à l'adolescence. Nous proposons également des séances ciblées pour les adultes.",
+  },
+  {
+    question: "Combien coûte l'accompagnement ? Y a-t-il des facilités de paiement ?",
+    answer: "Chaque parcours étant entièrement sur-mesure (scolarité, thérapies, neuro-gym), les tarifs varient selon les besoins spécifiques de votre enfant. Nous proposons des facilités de paiement pour soutenir les familles dans cet accompagnement.",
+  },
+  {
+    question: "Mon enfant peut-il réintégrer une école classique après MSK ?",
+    answer: "C'est l'un de nos objectifs principaux. Notre méthode est conçue pour stabiliser les apprentissages, pallier les difficultés et restaurer la confiance, afin de permettre une réinsertion scolaire classique réussie dès que l'enfant est prêt.",
+  },
+  {
+    question: "Proposez-vous un suivi pendant les vacances ?",
+    answer: "Oui, nous organisons régulièrement des stages ludiques et des sessions de renforcement cognitif pendant les vacances scolaires pour maintenir les acquis et assurer une continuité sécurisante pour l'enfant.",
+  },
+  {
+    question: "Y a-t-il un bilan d'évaluation avant l'inscription ?",
+    answer: "Tout à fait. La première étape de notre méthode est \"L'observation bienveillante\". Un bilan initial avec notre équipe pluridisciplinaire est indispensable pour comprendre finement le profil de l'enfant et concevoir son programme sur-mesure.",
+  },
 ];
 
 export const TESTIMONIALS = [

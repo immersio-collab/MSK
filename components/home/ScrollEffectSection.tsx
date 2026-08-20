@@ -55,7 +55,7 @@ export const ScrollEffectSection = () => {
     offset: ["start end", "end start"]
   });
 
-  const text = "découvrez msk montessori school";
+  const text = "Chaque enfant a son rythme. Nous lui créons son chemin.";
   const words = text.split(" ");
   const characters = text.split("");
   const centerIndex = Math.floor(characters.length / 2);
