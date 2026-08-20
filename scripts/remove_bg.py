@@ -4,8 +4,12 @@ import imageio
 from rembg import remove, new_session
 import sys
 
-input_path = "kling_20260820_VIDEO_character__4454_0.mp4"
-output_path = "public/kling_character_transparent.webm"
+if len(sys.argv) > 2:
+    input_path = sys.argv[1]
+    output_path = sys.argv[2]
+else:
+    input_path = "0820.mp4"
+    output_path = "public/0820_transparent.webm"
 
 print("Initializing rembg session...")
 session = new_session('u2net')

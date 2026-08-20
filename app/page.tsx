@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Heart } from "lucide-react";
 import { WordPullUp } from "@/components/magicui/word-pull-up";
 import { FadeUp } from "@/components/magicui/fade-up";
+import { MagneticButton } from "@/components/lightswind/magnetic-button";
 import { MethodSection } from "@/components/home/MethodSection";
 import { ParentFAQSection } from "@/components/home/ParentFAQSection";
 import { ScrollStrokePath } from "@/components/ui/ScrollStrokePath";
@@ -49,37 +50,31 @@ export default function HomePage() {
 
               <FadeUp delay={0.6}>
                 <div className="pt-2">
-                  <Link
-                    href="/notre-approche"
-                    className="inline-flex items-center justify-center rounded-2xl bg-msk-coral-500 hover:bg-msk-coral-600 text-white font-bold text-sm tracking-wider uppercase px-9 py-4 shadow-lg shadow-msk-coral-500/25 transition-all hover:scale-105 active:scale-95"
-                  >
-                    DÉCOUVRIR
+                  <Link href="/notre-approche">
+                    <MagneticButton
+                      className="bg-msk-coral-500 hover:bg-msk-coral-600 text-white font-bold text-sm tracking-wider uppercase rounded-2xl shadow-lg shadow-msk-coral-500/25 border-0"
+                      size="lg"
+                    >
+                      DÉCOUVRIR
+                    </MagneticButton>
                   </Link>
                 </div>
               </FadeUp>
             </div>
 
-            {/* Right Column: Joyful, Magical 3D-Like Miniature World Placeholder */}
-            <div className="lg:col-span-6 relative">
+            {/* Right Column: 3D Character Video */}
+            <div className="lg:col-span-6 relative flex items-center justify-center">
               <FadeUp delay={0.3} duration={0.8} y={20}>
-                <div className="relative rounded-3xl bg-gradient-to-br from-msk-cream-100 via-white to-msk-blue-50/50 sm:p-12 border border-msk-cream-300 shadow-xl overflow-hidden min-h-[380px] sm:min-h-[440px] flex items-center justify-center">
-                  {/* Soft ambient background circles */}
-                  <div className="absolute top-6 right-6 w-36 h-36 rounded-full bg-msk-sun-300/30 blur-2xl pointer-events-none" />
-                  <div className="absolute bottom-6 left-6 w-36 h-36 rounded-full bg-msk-coral-300/30 blur-2xl pointer-events-none" />
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full bg-msk-blue-200/40 blur-3xl pointer-events-none" />
-
-                  {/* 3D Character Video */}
-                  <div className="relative z-10 w-full max-w-sm flex items-center justify-center">
-                    <video 
-                      autoPlay 
-                      loop 
-                      muted 
-                      playsInline 
-                      className="w-full h-auto object-contain scale-110 drop-shadow-2xl pointer-events-none"
-                    >
-                      <source src="/kling_character_transparent.webm" type="video/webm" />
-                    </video>
-                  </div>
+                <div className="relative z-10 w-full max-w-lg lg:max-w-2xl flex items-center justify-center">
+                  <video 
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline 
+                    className="w-full h-auto object-contain scale-110 sm:scale-125 lg:scale-150 drop-shadow-2xl pointer-events-none"
+                  >
+                    <source src="/0820_transparent.webm" type="video/webm" />
+                  </video>
                 </div>
               </FadeUp>
             </div>

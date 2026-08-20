@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, Camera, ArrowRight, Eye, X } from "lucide-react";
+import { MagneticButton } from "@/components/lightswind/magnetic-button";
 
 interface GalleryItem {
   id: number;
@@ -72,12 +73,14 @@ export const GalleryPreview: React.FC = () => {
             </p>
           </div>
 
-          <Link
-            href="/vie-scolaire"
-            className="inline-flex items-center gap-2 rounded-full border-2 border-msk-forest-700 px-6 py-3 text-sm font-bold text-msk-forest-800 hover:bg-msk-forest-700 hover:text-white transition-all shrink-0"
-          >
-            <span>Découvrir la vie scolaire</span>
-            <ArrowRight className="h-4 w-4" />
+          <Link href="/vie-scolaire" className="shrink-0">
+            <MagneticButton 
+              variant="outline"
+              className="border-2 border-msk-forest-700 text-msk-forest-800 hover:bg-msk-forest-700 hover:text-white font-bold"
+            >
+              <span>Découvrir la vie scolaire</span>
+              <ArrowRight className="h-4 w-4" />
+            </MagneticButton>
           </Link>
         </div>
 

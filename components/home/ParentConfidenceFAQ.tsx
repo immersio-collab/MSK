@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { MagneticButton } from "@/components/lightswind/magnetic-button";
 import {
   ChevronDown,
   HelpCircle,
@@ -101,12 +102,13 @@ export const ParentConfidenceFAQ: React.FC = () => {
               Notre équipe pédagogique et nos spécialistes sont à votre écoute pour une première consultation sans engagement.
             </p>
           </div>
-          <Link
-            href="/contact"
-            className="whitespace-nowrap inline-flex items-center gap-2 rounded-full bg-msk-forest-700 hover:bg-msk-forest-800 text-white font-bold px-6 py-3 text-xs md:text-sm shadow-md transition-all shrink-0"
-          >
-            <PhoneCall className="h-4 w-4 text-msk-amber-400" />
-            <span>Contacter notre équipe</span>
+          <Link href="/contact" className="shrink-0">
+            <MagneticButton 
+              className="bg-msk-forest-700 hover:bg-msk-forest-800 text-white font-bold text-xs md:text-sm shadow-md"
+            >
+              <PhoneCall className="h-4 w-4 text-msk-amber-400" />
+              <span>Contacter notre équipe</span>
+            </MagneticButton>
           </Link>
         </div>
 
