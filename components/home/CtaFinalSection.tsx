@@ -5,8 +5,17 @@ import Link from "next/link";
 import { PhoneCall } from "lucide-react";
 import { FadeUp } from "@/components/magicui/fade-up";
 import { MagneticButton } from "@/components/lightswind/magnetic-button";
+interface CtaFinalSectionProps {
+  title?: string;
+  subtitle?: string;
+  buttonText?: string;
+}
 
-export const CtaFinalSection = () => {
+export const CtaFinalSection = ({
+  title = "Votre enfant mérite un accompagnement qui lui ressemble.",
+  subtitle = "Prenez rendez-vous pour un bilan d'évaluation gratuit et sans engagement.",
+  buttonText = "Réserver un bilan gratuit"
+}: CtaFinalSectionProps) => {
   return (
     <section id="cta-contact" className="relative w-full py-24 md:py-32 overflow-hidden bg-gradient-to-br from-msk-coral-500 to-msk-sun-400">
       {/* Background Decor */}
@@ -17,13 +26,13 @@ export const CtaFinalSection = () => {
       <div className="w-full max-w-4xl mx-auto px-6 sm:px-10 text-center relative z-10 flex flex-col items-center">
         <FadeUp>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight mb-6 drop-shadow-md">
-            Votre enfant mérite un accompagnement qui lui ressemble.
+            {title}
           </h2>
         </FadeUp>
         
         <FadeUp delay={0.1}>
           <p className="text-xl md:text-2xl text-white/90 font-medium mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-sm">
-            Prenez rendez-vous pour un bilan d&apos;évaluation gratuit et sans engagement.
+            {subtitle}
           </p>
         </FadeUp>
         
@@ -34,7 +43,7 @@ export const CtaFinalSection = () => {
               className="w-full sm:w-auto bg-white hover:bg-slate-50 text-msk-coral-600 font-bold text-sm tracking-wider uppercase rounded-2xl shadow-xl shadow-black/10 border-0"
               size="lg"
             >
-              Réserver un bilan gratuit
+              {buttonText}
             </MagneticButton>
           </Link>
 
