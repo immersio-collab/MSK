@@ -1,45 +1,29 @@
 import React from "react";
 import type { Metadata } from "next";
+import { EquipeHeroSection } from "@/components/equipe/EquipeHeroSection";
+import { EquipeGridSection } from "@/components/equipe/EquipeGridSection";
+import { EquipePhilosophieSection } from "@/components/equipe/EquipePhilosophieSection";
+import { CtaFinalSection } from "@/components/home/CtaFinalSection";
 
 export const metadata: Metadata = {
-  title: "L'Équipe Pluridisciplinaire | MSK Montessori School Casablanca",
-  description: "Découvrez notre équipe de spécialistes à Casablanca : éducateurs Montessori, orthophonistes, psychomotriciens.",
+  title: "La Fondatrice | MSK Montessori School Casablanca",
+  description: "Découvrez le profil de Khadija Elabaya, fondatrice de MSK Thérapie et spécialiste en éducation inclusive.",
 };
 
 export default function EquipePage() {
-  const sections = [
-    { id: "hero", title: "Présentation Générale — Notre Équipe" },
-    { id: "membres", title: "Les Spécialistes MSK" },
-    { id: "philosophie", title: "Notre Philosophie d'Accompagnement" },
-    { id: "cta", title: "Rejoindre l'Équipe / Nous Contacter" },
-  ];
-
   return (
-    <div className="flex flex-col min-h-screen pt-28 pb-20 bg-[#FAF8F5]">
-      <div className="container mx-auto px-4 md:px-6 max-w-5xl space-y-10">
-        <div className="text-center space-y-2">
-          <span className="text-xs font-bold uppercase tracking-widest text-msk-forest-600">
-            Page
-          </span>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-msk-forest-950">
-            L'Équipe Pluridisciplinaire
-          </h1>
-        </div>
-
-        {sections.map((section, idx) => (
-          <div
-            key={section.id}
-            className="rounded-2xl border-2 border-dashed border-msk-forest-200/80 p-12 text-center bg-white"
-          >
-            <span className="text-xs font-bold uppercase tracking-widest text-msk-forest-600 block mb-2">
-              Section {idx + 1}
-            </span>
-            <h2 className="text-xl md:text-2xl font-bold text-msk-forest-950">
-              {section.title}
-            </h2>
-          </div>
-        ))}
-      </div>
+    <div className="flex flex-col min-h-screen">
+      <EquipeHeroSection />
+      
+      <EquipeGridSection />
+      
+      <EquipePhilosophieSection />
+      
+      <CtaFinalSection 
+        title="Venez rencontrer Khadija."
+        subtitle="Nous vous accueillons avec plaisir pour discuter de l'avenir de votre enfant."
+        buttonText="Réserver une visite"
+      />
     </div>
   );
 }
