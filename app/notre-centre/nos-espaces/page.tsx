@@ -2,16 +2,17 @@ import React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Vie Scolaire & Activités | MSK Casablanca",
-  description: "Quotidien, activités et équipe pluridisciplinaire chez MSK.",
+  title: "Nos Espaces & Tour Virtuel | MSK Montessori School Casablanca",
+  description: "Visitez nos locaux à Casablanca : classes Montessori adaptées, salle Neuro-Gym, espaces de motricité.",
 };
 
-export default function VieScolairePage() {
+export default function NosEspacesPage() {
   const sections = [
-    { id: "hero", title: "Vie Scolaire & Activités — Introduction" },
-    { id: "quotidien", title: "Une Journée Type au Centre" },
-    { id: "equipe", title: "L'Équipe Pluridisciplinaire" },
-    { id: "cta", title: "Visite de l'Établissement" },
+    { id: "hero", title: "Nos Espaces — Introduction" },
+    { id: "tour-virtuel", title: "Visite Virtuelle 360°" },
+    { id: "galerie", title: "Galerie Photos des Installations" },
+    { id: "journee-type", title: "Une Journée Type chez MSK" },
+    { id: "cta", title: "Planifier une Visite Physique" },
   ];
 
   return (
@@ -22,7 +23,7 @@ export default function VieScolairePage() {
             Page
           </span>
           <h1 className="text-3xl md:text-5xl font-extrabold text-msk-forest-950">
-            Vie Scolaire & Activités
+            Nos Espaces & Installations
           </h1>
         </div>
 

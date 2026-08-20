@@ -5,22 +5,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const routes = [
     "",
-    "/notre-approche",
-    "/notre-approche/la-methode",
-    "/notre-approche/montessori-education-inclusive",
-    "/notre-approche/reeducation-neuro-gym",
-    "/notre-approche/troubles-accompagnes",
+    "/notre-centre",
+    "/notre-centre/la-methode",
+    "/notre-centre/troubles-accompagnes",
+    "/notre-centre/equipe",
+    "/notre-centre/nos-espaces",
     "/programmes",
     "/programmes/petite-enfance",
     "/programmes/primaire",
     "/programmes/adolescents",
     "/programmes/adultes",
-    "/vie-scolaire",
     "/admissions",
-    "/actualites",
-    "/actualites/comprendre-le-tdah-sans-stigmatiser-a-l-ecole",
-    "/actualites/pourquoi-la-neuro-gym-revolutionne-les-apprentissages",
-    "/actualites/admissions-sans-code-massar-ce-que-les-parents-doivent-savoir",
     "/contact",
   ];
 
@@ -28,6 +23,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: route === "" ? "weekly" : "monthly",
-    priority: route === "" ? 1.0 : route.startsWith("/notre-approche") || route.startsWith("/programmes") ? 0.8 : 0.6,
+    priority: route === "" ? 1.0 : route.startsWith("/notre-centre") || route.startsWith("/programmes") ? 0.8 : 0.6,
   }));
 }

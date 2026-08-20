@@ -11,6 +11,9 @@ export default function ContactPage() {
     { id: "hero", title: "Contact & Rendez-vous — En-tête" },
     { id: "coordonnees", title: "Coordonnées & Horaires (Casablanca)" },
     { id: "formulaire", title: "Formulaire de Contact & Demande de Bilan" },
+    { id: "admissions-process", title: "Procédure d'Admission & Inscriptions (4 étapes)" },
+    { id: "admissions-massar", title: "Admission sans Code Massar" },
+    { id: "admissions-docs", title: "Pièces à Fournir pour l'Inscription" },
     { id: "acces-plan", title: "Plan d'Accès & Localisation" },
   ];
 

@@ -87,14 +87,14 @@ export const NeuroGymSection: React.FC = () => {
 
             <div className="pt-4 flex flex-col sm:flex-row items-center gap-4">
               <Link
-                href="/notre-approche/reeducation-neuro-gym"
+                href="/notre-centre/la-methode"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-msk-amber-400 hover:bg-msk-amber-500 text-msk-forest-950 font-bold px-7 py-3.5 text-sm shadow-lg transition-all"
               >
                 <span>Découvrir le Pôle Neuro-Gym</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                href="/notre-approche/troubles-accompagnes"
+                href="/notre-centre/troubles-accompagnes"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-white/20 hover:bg-white/10 text-white font-semibold px-6 py-3.5 text-sm transition-all"
               >
                 <span>Troubles accompagnés (TDAH, DYS)</span>

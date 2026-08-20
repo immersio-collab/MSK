@@ -2,15 +2,16 @@ import React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Montessori & Éducation Inclusive | MSK Casablanca",
-  description: "Montessori et éducation inclusive à MSK Casablanca.",
+  title: "L'Équipe Pluridisciplinaire | MSK Montessori School Casablanca",
+  description: "Découvrez notre équipe de spécialistes à Casablanca : éducateurs Montessori, orthophonistes, psychomotriciens.",
 };
 
-export default function MontessoriEducationInclusivePage() {
+export default function EquipePage() {
   const sections = [
-    { id: "hero", title: "Montessori & Éducation Inclusive — Introduction" },
-    { id: "principes", title: "Principes Pédagogiques & Adaptations" },
-    { id: "cta", title: "Visite & Contact" },
+    { id: "hero", title: "Présentation Générale — Notre Équipe" },
+    { id: "membres", title: "Les Spécialistes MSK" },
+    { id: "philosophie", title: "Notre Philosophie d'Accompagnement" },
+    { id: "cta", title: "Rejoindre l'Équipe / Nous Contacter" },
   ];
 
   return (
@@ -21,7 +22,7 @@ export default function MontessoriEducationInclusivePage() {
             Page
           </span>
           <h1 className="text-3xl md:text-5xl font-extrabold text-msk-forest-950">
-            Montessori & Éducation Inclusive
+            L'Équipe Pluridisciplinaire
           </h1>
         </div>
 

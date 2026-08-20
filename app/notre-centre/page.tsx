@@ -2,15 +2,15 @@ import React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Notre Approche | MSK Montessori School Casablanca",
-  description: "Notre approche pédagogique et réadaptation chez MSK Montessori School.",
+  title: "Notre Centre | MSK Montessori School Casablanca",
+  description: "Présentation de notre centre thérapeutique et éducatif MSK à Casablanca.",
 };
 
-export default function NotreApprochePage() {
+export default function NotreCentrePage() {
   const sections = [
-    { id: "hero", title: "Présentation Générale — Notre Approche", color: "text-msk-coral-600 border-msk-coral-200 bg-msk-coral-50/40" },
-    { id: "piliers", title: "Les 4 Piliers Fondateurs", color: "text-msk-gold-600 border-msk-gold-200 bg-msk-gold-50/40" },
-    { id: "cta", title: "Contact & Orientation", color: "text-msk-blue-600 border-msk-blue-200 bg-msk-blue-50/40" },
+    { id: "hero", title: "Présentation Générale — Notre Centre", color: "text-msk-coral-600 border-msk-coral-200 bg-msk-coral-50/40" },
+    { id: "mission", title: "Notre Mission & Nos Valeurs", color: "text-msk-gold-600 border-msk-gold-200 bg-msk-gold-50/40" },
+    { id: "cta", title: "Prendre Rendez-vous / Bilan", color: "text-msk-blue-600 border-msk-blue-200 bg-msk-blue-50/40" },
   ];
 
   return (
@@ -21,7 +21,7 @@ export default function NotreApprochePage() {
             Page
           </span>
           <h1 className="text-3xl md:text-5xl font-extrabold text-msk-dark-900">
-            Notre Approche
+            Notre Centre
           </h1>
         </div>
 

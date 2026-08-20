@@ -112,7 +112,7 @@ export const HeroSection: React.FC = () => {
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                href="/notre-approche/la-methode"
+                href="/notre-centre/la-methode"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border-2 border-msk-forest-200 hover:border-msk-forest-400 bg-white/80 px-6 py-3.5 text-sm md:text-base font-bold text-msk-forest-800 transition-all hover:bg-msk-forest-50"
               >
                 <Compass className="h-4 w-4 text-msk-forest-600" />

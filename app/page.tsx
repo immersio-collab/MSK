@@ -54,7 +54,7 @@ export default function HomePage() {
 
               <FadeUp delay={0.6}>
                 <div className="pt-2">
-                  <Link href="/notre-approche">
+                  <Link href="/notre-centre">
                     <MagneticButton
                       className="bg-msk-coral-500 hover:bg-msk-coral-600 text-white font-bold text-sm tracking-wider uppercase rounded-2xl shadow-lg shadow-msk-coral-500/25 border-0"
                       size="lg"

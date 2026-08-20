@@ -32,13 +32,13 @@ export const Footer: React.FC = () => {
               </span>
               <ul className="space-y-2.5">
                 <li>
-                  <Link href="/notre-approche" className="text-base font-medium text-slate-200 hover:text-msk-coral-300 transition-colors">
-                    Notre approche
+                  <Link href="/notre-centre" className="text-base font-medium text-slate-200 hover:text-msk-coral-300 transition-colors">
+                    Notre centre
                   </Link>
                 </li>
                 <li>
-                  <Link href="/vie-scolaire" className="text-base font-medium text-slate-200 hover:text-msk-coral-300 transition-colors">
-                    Vie scolaire
+                  <Link href="/notre-centre/nos-espaces" className="text-base font-medium text-slate-200 hover:text-msk-coral-300 transition-colors">
+                    Nos espaces
                   </Link>
                 </li>
                 <li>

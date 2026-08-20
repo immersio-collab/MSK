@@ -2,15 +2,16 @@ import React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Rééducation & Neuro-Gym | MSK Casablanca",
-  description: "Pôle Neuro-Gym et rééducation à MSK Casablanca.",
+  title: "Troubles Accompagnés | MSK Montessori School Casablanca",
+  description: "Accompagnement des troubles d'apprentissage, du langage, du comportement (TDAH, DYS, TSA...) à Casablanca.",
 };
 
-export default function ReeducationNeuroGymPage() {
+export default function TroublesAccompagnesPage() {
   const sections = [
-    { id: "hero", title: "Pôle Rééducation & Neuro-Gym — Introduction" },
-    { id: "axes", title: "Axes d'Intervention (Motricité, Réflexes, Attention)" },
-    { id: "cta", title: "Demande de Bilan Moteur" },
+    { id: "hero", title: "Présentation Générale — Troubles Accompagnés" },
+    { id: "liste", title: "Les Troubles que nous Accompagnons" },
+    { id: "quiz", title: "Quiz : Mon enfant a-t-il besoin de MSK ?" },
+    { id: "cta", title: "Orientation & Consultation" },
   ];
 
   return (
@@ -21,7 +22,7 @@ export default function ReeducationNeuroGymPage() {
             Page
           </span>
           <h1 className="text-3xl md:text-5xl font-extrabold text-msk-forest-950">
-            Rééducation & Neuro-Gym
+            Troubles Accompagnés
           </h1>
         </div>
 

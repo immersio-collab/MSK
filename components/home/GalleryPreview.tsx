@@ -73,12 +73,12 @@ export const GalleryPreview: React.FC = () => {
             </p>
           </div>
 
-          <Link href="/vie-scolaire" className="shrink-0">
+          <Link href="/notre-centre/nos-espaces" className="shrink-0">
             <MagneticButton 
               variant="outline"
               className="border-2 border-msk-forest-700 text-msk-forest-800 hover:bg-msk-forest-700 hover:text-white font-bold"
             >
-              <span>Découvrir la vie scolaire</span>
+              <span>Découvrir nos espaces</span>
               <ArrowRight className="h-4 w-4" />
             </MagneticButton>
           </Link>

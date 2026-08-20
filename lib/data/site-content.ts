@@ -9,31 +9,31 @@ export interface NavItem {
 }
 
 export const NAV_LINKS: NavItem[] = [
+  { label: "Accueil", href: "/" },
   {
-    label: "Notre approche",
-    href: "/notre-approche",
+    label: "Notre centre",
+    href: "/notre-centre",
     children: [
       {
         title: "La Méthode MSK",
-        href: "/notre-approche/la-methode",
-      },
-      {
-        title: "Montessori & Inclusion",
-        href: "/notre-approche/montessori-education-inclusive",
-      },
-      {
-        title: "Neuro-Gym & Réadaptation",
-        href: "/notre-approche/reeducation-neuro-gym",
+        href: "/notre-centre/la-methode",
       },
       {
         title: "Troubles accompagnés",
-        href: "/notre-approche/troubles-accompagnes",
+        href: "/notre-centre/troubles-accompagnes",
+      },
+      {
+        title: "L'Équipe pluridisciplinaire",
+        href: "/notre-centre/equipe",
+      },
+      {
+        title: "Nos Espaces (Tour Virtuel)",
+        href: "/notre-centre/nos-espaces",
       },
     ],
   },
   { label: "Programmes", href: "/programmes" },
-  { label: "Vie scolaire", href: "/vie-scolaire" },
-  { label: "Admissions", href: "/admissions" },
+  { label: "Actualités", href: "/actualites" },
   { label: "Contact", href: "/contact" },
 ];
 
