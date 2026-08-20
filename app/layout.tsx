@@ -3,6 +3,8 @@ import { DM_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import WhatsAppFloatingButton from "@/components/common/WhatsAppFloatingButton";
+import ScrollProgressBar from "@/components/common/ScrollProgressBar";
 import { SCHOOL_INFO } from "@/lib/data/site-content";
 import { cn } from "@/lib/utils";
 
@@ -85,9 +87,11 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-[#FDFBF7] text-[#223242] antialiased selection:bg-msk-coral-100 selection:text-msk-coral-900">
+        <ScrollProgressBar />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <WhatsAppFloatingButton />
       </body>
     </html>
   );

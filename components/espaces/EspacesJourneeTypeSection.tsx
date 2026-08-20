@@ -76,20 +76,33 @@ export const EspacesJourneeTypeSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Horizontal Scroll Container */}
         <div className="relative">
           {/* The connecting line */}
           <div className="absolute top-24 left-0 right-0 h-0.5 bg-msk-forest-800 hidden md:block"></div>
 
-          <div 
+          <motion.div 
             ref={scrollRef}
             className="flex overflow-x-auto gap-6 pb-12 pt-4 snap-x snap-mandatory hide-scrollbar"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: { staggerChildren: 0.1 }
+              }
+            }}
           >
             {schedule.map((item, idx) => (
-              <div 
+              <motion.div 
                 key={idx} 
                 className="flex-none w-[280px] md:w-[320px] snap-center relative"
+                variants={{
+                  hidden: { opacity: 0, y: 50 },
+                  visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
+                }}
               >
                 {/* Node on the line */}
                 <div className="hidden md:flex absolute top-20 left-6 w-4 h-4 rounded-full bg-msk-sun-400 border-4 border-msk-forest-950 z-10"></div>
@@ -110,9 +123,9 @@ export const EspacesJourneeTypeSection: React.FC = () => {
                     {item.description}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
       

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import {
   Sparkles,
   ArrowRight,
@@ -51,63 +51,103 @@ export const ProgramsSection: React.FC = () => {
         </div>
 
         {/* 4 Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 perspective-1000">
           {PROGRAMS.map((prog, idx) => (
-            <motion.div
-              key={prog.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1, duration: 0.5 }}
-              className="group flex flex-col justify-between rounded-3xl bg-[#FAF8F5] p-7 border border-msk-forest-100 shadow-sm hover:shadow-xl hover:border-msk-forest-300 hover:-translate-y-1.5 transition-all duration-300"
-            >
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="p-3 rounded-2xl bg-white shadow-xs">
-                    {programIcons[prog.id]}
-                  </div>
-                  <span className={`text-xs font-bold px-3 py-1 rounded-full ${prog.badgeBg}`}>
-                    {prog.age}
-                  </span>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-extrabold text-msk-forest-950 group-hover:text-msk-forest-700 transition-colors">
-                    {prog.title}
-                  </h3>
-                  <p className="text-xs font-semibold text-msk-terracotta-600 mt-1">
-                    {prog.subtitle}
-                  </p>
-                </div>
-
-                <p className="text-xs text-msk-slate-600 leading-relaxed">
-                  {prog.description}
-                </p>
-
-                <div className="pt-2 border-t border-msk-forest-100/70 space-y-2">
-                  {prog.features.slice(0, 3).map((feat, fIdx) => (
-                    <div key={fIdx} className="flex items-start gap-2 text-xs text-msk-slate-700">
-                      <CheckCircle className="h-3.5 w-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                      <span className="leading-snug">{feat}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="pt-6 mt-4">
-                <Link
-                  href={prog.href}
-                  className="flex items-center justify-between w-full py-2.5 px-4 rounded-xl bg-white group-hover:bg-msk-forest-700 group-hover:text-white text-xs font-bold text-msk-forest-900 border border-msk-forest-100 transition-all shadow-xs"
-                >
-                  <span>En savoir plus</span>
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </div>
-            </motion.div>
+            <ProgramCard key={prog.id} prog={prog} idx={idx} />
           ))}
         </div>
 
       </div>
     </section>
+  );
+};
+
+function ProgramCard({ prog, idx }: { prog: any; idx: number }) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  
+  const mouseXSpring = useSpring(x);
+  const mouseYSpring = useSpring(y);
+  
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: idx * 0.1, duration: 0.5 }}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="group flex flex-col justify-between rounded-3xl bg-[#FAF8F5] p-7 border border-msk-forest-100 shadow-sm hover:shadow-2xl hover:shadow-msk-coral-200/50 hover:border-msk-coral-300 transition-all duration-300 relative"
+    >
+      <div className="space-y-4" style={{ transform: "translateZ(30px)" }}>
+        <div className="flex items-center justify-between">
+          <div className="p-3 rounded-2xl bg-white shadow-xs">
+            {programIcons[prog.id]}
+          </div>
+          <span className={`text-xs font-bold px-3 py-1 rounded-full ${prog.badgeBg}`}>
+            {prog.age}
+          </span>
+        </div>
+
+        <div>
+          <h3 className="text-xl font-extrabold text-msk-forest-950 group-hover:text-msk-forest-700 transition-colors">
+            {prog.title}
+          </h3>
+          <p className="text-xs font-semibold text-msk-terracotta-600 mt-1">
+            {prog.subtitle}
+          </p>
+        </div>
+
+        <p className="text-xs text-msk-slate-600 leading-relaxed">
+          {prog.description}
+        </p>
+
+        <div className="pt-2 border-t border-msk-forest-100/70 space-y-2">
+          {prog.features.slice(0, 3).map((feat: string, fIdx: number) => (
+            <div key={fIdx} className="flex items-start gap-2 text-xs text-msk-slate-700">
+              <CheckCircle className="h-3.5 w-3.5 text-emerald-600 shrink-0 mt-0.5" />
+              <span className="leading-snug">{feat}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="pt-6 mt-4" style={{ transform: "translateZ(40px)" }}>
+        <Link
+          href={prog.href}
+          className="flex items-center justify-between w-full py-2.5 px-4 rounded-xl bg-white group-hover:bg-msk-forest-700 group-hover:text-white text-xs font-bold text-msk-forest-900 border border-msk-forest-100 transition-all shadow-xs"
+        >
+          <span>En savoir plus</span>
+          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+        </Link>
+      </div>
+    </motion.div>
   );
 };

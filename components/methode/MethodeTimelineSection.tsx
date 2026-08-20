@@ -154,20 +154,39 @@ export const MethodeTimelineSection = () => {
     <section className="relative w-full py-24 md:py-40 bg-white overflow-hidden" ref={containerRef}>
       <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 relative">
         
-        {/* Background Vertical Line (Desktop) */}
-        <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-1.5 -translate-x-1/2 bg-slate-100 rounded-full">
-          {/* Animated Fill Line */}
-          <motion.div 
-            className="absolute top-0 left-0 w-full bg-gradient-to-b from-msk-blue-500 via-msk-coral-500 to-msk-sun-500 rounded-full"
-            style={{ height: lineHeight }}
-          />
+        {/* Background Vertical SVG Path (Desktop) */}
+        <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-24 -translate-x-1/2 z-0">
+          <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 1000">
+            <path
+              d="M 50 0 C 80 200, 20 400, 50 600 C 80 800, 20 900, 50 1000"
+              fill="transparent"
+              stroke="#F1F5F9"
+              strokeWidth="4"
+              vectorEffect="non-scaling-stroke"
+            />
+            <motion.path
+              d="M 50 0 C 80 200, 20 400, 50 600 C 80 800, 20 900, 50 1000"
+              fill="transparent"
+              stroke="url(#gradient)"
+              strokeWidth="4"
+              vectorEffect="non-scaling-stroke"
+              style={{ pathLength: scrollYProgress }}
+            />
+            <defs>
+              <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#3b82f6" />
+                <stop offset="50%" stopColor="#f43f5e" />
+                <stop offset="100%" stopColor="#eab308" />
+              </linearGradient>
+            </defs>
+          </svg>
         </div>
 
-        {/* Background Vertical Line (Mobile) */}
+        {/* Background Vertical Line (Mobile - keeping it straight for simplicity) */}
         <div className="block md:hidden absolute left-11 top-0 bottom-0 w-1 bg-slate-100 rounded-full z-0">
            <motion.div 
             className="absolute top-0 left-0 w-full bg-gradient-to-b from-msk-blue-500 via-msk-coral-500 to-msk-sun-500 rounded-full"
-            style={{ height: lineHeight }}
+            style={{ scaleY: scrollYProgress, transformOrigin: "top" }}
           />
         </div>
 

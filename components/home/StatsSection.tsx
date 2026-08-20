@@ -3,39 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { motion, useInView, useSpring } from "framer-motion";
 
-interface AnimatedNumberProps {
-  value: number;
-  suffix?: string;
-  className?: string;
-}
-
-const AnimatedNumber: React.FC<AnimatedNumberProps> = ({ value, suffix = "", className = "" }) => {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-50px" });
-  
-  const springValue = useSpring(0, {
-    stiffness: 50,
-    damping: 20,
-    mass: 1,
-  });
-
-  useEffect(() => {
-    if (inView) {
-      springValue.set(value);
-    }
-  }, [inView, springValue, value]);
-
-  useEffect(() => {
-    return springValue.on("change", (latest) => {
-      if (ref.current) {
-        ref.current.textContent = Intl.NumberFormat("fr-FR").format(Math.round(latest)) + suffix;
-      }
-    });
-  }, [springValue, suffix]);
-
-  return <span ref={ref} className={className}>0{suffix}</span>;
-};
-
+import CountUp from "react-countup";
 export const StatsSection = () => {
   const stats = [
     { value: 10, suffix: "+", label: "Années d'expérience", color: "text-msk-coral-500", bg: "bg-msk-coral-50" },
@@ -58,7 +26,8 @@ export const StatsSection = () => {
               className={`flex flex-col items-center justify-center text-center p-6 sm:p-8 rounded-[2rem] ${stat.bg} shadow-sm border border-white/60`}
             >
               <h3 className={`text-5xl sm:text-6xl md:text-7xl font-black tracking-tighter ${stat.color} mb-3 drop-shadow-sm`}>
-                <AnimatedNumber value={stat.value} suffix={stat.suffix} />
+                <CountUp end={stat.value} duration={2.5} separator=" " enableScrollSpy scrollSpyOnce />
+                {stat.suffix}
               </h3>
               <p className="text-sm sm:text-base font-bold text-slate-700 leading-snug">
                 {stat.label}
