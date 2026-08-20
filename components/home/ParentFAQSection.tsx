@@ -46,7 +46,7 @@ CustomTrigger.displayName = "CustomTrigger";
 
 export const ParentFAQSection: React.FC = () => {
   return (
-    <section id="faq-parents" className="py-20 md:py-32 bg-[#FDFBF7] relative overflow-hidden">
+    <section id="faq-parents" className="py-20 md:py-32 relative z-10 overflow-hidden">
       {/* Background Shapes */}
       <div className="absolute top-20 right-0 w-[400px] h-[400px] bg-msk-coral-50/60 rounded-full blur-3xl translate-x-1/2 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-msk-blue-50/60 rounded-full blur-3xl -translate-x-1/2 translate-y-1/3 pointer-events-none" />

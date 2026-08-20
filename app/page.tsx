@@ -6,6 +6,7 @@ import { WordPullUp } from "@/components/magicui/word-pull-up";
 import { FadeUp } from "@/components/magicui/fade-up";
 import { MethodSection } from "@/components/home/MethodSection";
 import { ParentFAQSection } from "@/components/home/ParentFAQSection";
+import { ScrollStrokePath } from "@/components/ui/ScrollStrokePath";
 
 export const metadata: Metadata = {
   title: "Accueil | MSK Montessori School Casablanca",
@@ -24,9 +25,12 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#FDFBF7]">
+    <div className="relative flex flex-col min-h-screen bg-[#FDFBF7] overflow-hidden">
+      {/* Interactive Background Scroll Stroke flowing from Hero down to Footer */}
+      <ScrollStrokePath />
+
       {/* Hero Section */}
-      <section className="relative pt-[100px] sm:pt-[120px] pb-16 md:pb-24 min-h-[100dvh] flex flex-col justify-center overflow-hidden">
+      <section className="relative z-10 pt-[100px] sm:pt-[120px] pb-16 md:pb-24 min-h-[100dvh] flex flex-col justify-center">
         <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
@@ -85,7 +89,7 @@ export default function HomePage() {
       </section>
 
       {/* 2nd Section — Virtual 3D Tour */}
-      <section className="relative w-full min-h-[100dvh] flex flex-col bg-[#FDFBF7] py-16 md:py-24 border-b border-msk-cream-200">
+      <section className="relative z-10 w-full min-h-[100dvh] flex flex-col py-16 md:py-24 border-b border-msk-cream-200/60">
         <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 flex flex-col h-full flex-1">
           {/* Section Title */}
           <div className="text-center mb-8 md:mb-12">
@@ -121,12 +125,12 @@ export default function HomePage() {
         <section
           key={section.id}
           id={section.id}
-          className={`py-16 md:py-24 border-b border-msk-cream-200 ${
-            idx % 2 === 0 ? "bg-white" : "bg-[#FDFBF7]"
+          className={`py-16 md:py-24 relative z-10 border-b border-msk-cream-200/60 ${
+            idx % 2 === 0 ? "bg-white/40 backdrop-blur-[2px]" : "bg-transparent"
           }`}
         >
           <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
-            <div className={`rounded-3xl border-2 border-dashed p-12 md:p-16 text-center transition-all ${section.color}`}>
+            <div className={`rounded-3xl border-2 border-dashed p-12 md:p-16 text-center transition-all bg-white/70 shadow-sm ${section.color}`}>
               <span className="text-xs font-bold uppercase tracking-widest block mb-2 opacity-80">
                 Section {idx + 4}
               </span>

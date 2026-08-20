@@ -28,7 +28,7 @@ const getColorThemes = (index: number) => {
 
 export const MethodSection: React.FC = () => {
   return (
-    <section id="methode" className="py-20 md:py-32 bg-white relative overflow-hidden">
+    <section id="methode" className="py-20 md:py-32 relative z-10 overflow-hidden border-b border-msk-cream-200/60">
       {/* Soft Background Decor */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-msk-sun-50/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-msk-coral-50/50 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3 pointer-events-none" />
