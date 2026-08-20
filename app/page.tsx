@@ -9,6 +9,7 @@ import { MethodSection } from "@/components/home/MethodSection";
 import { ParentFAQSection } from "@/components/home/ParentFAQSection";
 import { ScrollStrokePath } from "@/components/ui/ScrollStrokePath";
 
+
 export const metadata: Metadata = {
   title: "Accueil | MSK Montessori School Casablanca",
   description: "MSK Montessori School - École Inclusive & Réadaptation à Casablanca.",
@@ -31,15 +32,16 @@ export default function HomePage() {
       <ScrollStrokePath />
 
       {/* Hero Section */}
-      <section className="relative z-10 pt-[100px] sm:pt-[120px] pb-16 md:pb-24 min-h-[100dvh] flex flex-col justify-center">
-        <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 py-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <section className="relative z-10 pt-20 lg:pt-24 pb-12 lg:pb-16 min-h-[85vh] lg:min-h-[90vh] flex flex-col justify-center overflow-hidden">
+
+        <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 py-6 lg:py-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             
             {/* Left Column */}
             <div className="lg:col-span-6 space-y-6 md:space-y-8">
               <WordPullUp 
                 text="L'école où chaque enfant s'éveille."
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-[68px] font-black text-msk-night-900 tracking-tight leading-[1.08] text-left"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-[56px] xl:text-[60px] font-black text-msk-night-900 tracking-tight leading-[1.1] text-left"
               />
 
               <FadeUp delay={0.4}>
@@ -65,13 +67,13 @@ export default function HomePage() {
             {/* Right Column: 3D Character Video */}
             <div className="lg:col-span-6 relative flex items-center justify-center">
               <FadeUp delay={0.3} duration={0.8} y={20}>
-                <div className="relative z-10 w-full max-w-lg lg:max-w-2xl flex items-center justify-center">
+                <div className="relative z-10 w-full max-w-[280px] sm:max-w-[360px] lg:max-w-[420px] flex items-center justify-center mx-auto">
                   <video 
                     autoPlay 
                     loop 
                     muted 
                     playsInline 
-                    className="w-full h-auto object-contain scale-110 sm:scale-125 lg:scale-150 drop-shadow-2xl pointer-events-none"
+                    className="w-full h-auto object-contain drop-shadow-xl pointer-events-none"
                   >
                     <source src="/0820_transparent.webm" type="video/webm" />
                   </video>

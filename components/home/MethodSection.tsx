@@ -1,92 +1,93 @@
 "use client";
 
 import React from "react";
-import { METHOD_STEPS } from "@/lib/data/site-content";
 import { FadeUp } from "@/components/magicui/fade-up";
-import { Eye, Brain, Sliders, Zap, Users, GraduationCap } from "lucide-react";
+import { MethodHoverExpand, MethodStep } from "@/components/ui/skiper52";
 
-const getIcon = (iconName: string) => {
-  switch (iconName) {
-    case "Eye": return <Eye className="h-7 w-7" />;
-    case "Brain": return <Brain className="h-7 w-7" />;
-    case "Sliders": return <Sliders className="h-7 w-7" />;
-    case "Zap": return <Zap className="h-7 w-7" />;
-    case "Users": return <Users className="h-7 w-7" />;
-    case "GraduationCap": return <GraduationCap className="h-7 w-7" />;
-    default: return <Eye className="h-7 w-7" />;
-  }
-};
-
-const getColorThemes = (index: number) => {
-  const themes = [
-    "bg-msk-coral-50 text-msk-coral-600 border-msk-coral-200",
-    "bg-msk-sun-50 text-msk-sun-600 border-msk-sun-200",
-    "bg-msk-blue-50 text-msk-blue-600 border-msk-blue-200",
-  ];
-  return themes[index % themes.length];
-};
+const METHOD_STEPS: MethodStep[] = [
+  {
+    number: "01",
+    step: "Observer",
+    title: "L'observation bienveillante",
+    description:
+      "Identifier avec précision les forces, le profil sensoriel et le style d'apprentissage sans jugement ni étiquette.",
+    image:
+      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    number: "02",
+    step: "Comprendre",
+    title: "L'analyse pluridisciplinaire",
+    description:
+      "Croiser les regards des éducateurs, psychomotriciens, orthophonistes et de la famille pour cibler les besoins.",
+    image:
+      "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    number: "03",
+    step: "Adapter",
+    title: "L'environnement sur-mesure",
+    description:
+      "Ajuster le matériel sensoriel Montessori, les rythmes et les supports pédagogiques au profil unique de l'enfant.",
+    image:
+      "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    number: "04",
+    step: "Rééduquer",
+    title: "La Neuro-Gym & la remédiation",
+    description:
+      "Stimuler les connexions neuro-motrices, réguler l'attention et libérer le potentiel cognitif de l'apprenant.",
+    image:
+      "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    number: "05",
+    step: "Accompagner",
+    title: "Le lien continu avec la famille",
+    description:
+      "Un dialogue transparent et des bilans réguliers pour co-construire chaque progrès au quotidien.",
+    image:
+      "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    number: "06",
+    step: "Insérer",
+    title: "L'insertion scolaire et sociale",
+    description:
+      "Développer l'autonomie et la confiance en soi pour une intégration sereine et pérenne.",
+    image:
+      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80",
+  },
+];
 
 export const MethodSection: React.FC = () => {
   return (
-    <section id="methode" className="py-20 md:py-32 relative z-10 overflow-hidden border-b border-msk-cream-200/60">
-      {/* Soft Background Decor */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-msk-sun-50/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-msk-coral-50/50 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3 pointer-events-none" />
-
-      <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
+    <section id="methode" className="py-20 md:py-28 relative z-10 bg-[#FAF8F5]">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
           <FadeUp>
-            <span className="inline-flex items-center justify-center rounded-full bg-msk-blue-100 text-msk-blue-700 px-4 py-1.5 text-sm font-bold uppercase tracking-widest mb-6">
-              Notre Pédagogie
-            </span>
+            <p className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">
+              Notre pédagogie
+            </p>
           </FadeUp>
           <FadeUp delay={0.1}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-msk-night-900 tracking-tight leading-tight mb-6">
-              La Méthode en 6 Étapes
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-4">
+              La méthode en 6 étapes
             </h2>
           </FadeUp>
           <FadeUp delay={0.2}>
-            <p className="text-lg md:text-xl text-slate-600 font-medium leading-relaxed">
-              Un cheminement bienveillant et structuré pour accompagner l&apos;enfant 
-              de ses premiers blocages jusqu&apos;à son insertion réussie.
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
+              Un cheminement structuré pour accompagner l&apos;enfant de ses premiers blocages jusqu&apos;à son autonomie.
             </p>
           </FadeUp>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-          {METHOD_STEPS.map((step, idx) => {
-            const theme = getColorThemes(idx);
-            return (
-              <FadeUp key={step.number} delay={0.1 * idx} y={30} duration={0.6}>
-                <div className={`relative h-full flex flex-col p-8 rounded-[2rem] border-2 bg-white shadow-xl shadow-slate-200/40 transition-transform duration-300 hover:-translate-y-2 group overflow-hidden ${theme.split(" ")[2]}`}>
-                  
-                  {/* Watermark Number */}
-                  <span className={`absolute -right-4 -bottom-4 text-[120px] font-black opacity-[0.04] pointer-events-none ${theme.split(" ")[1]}`}>
-                    {step.number}
-                  </span>
-
-                  <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 ${theme.split(" ")[0]} ${theme.split(" ")[1]}`}>
-                    {getIcon(step.icon)}
-                  </div>
-                  
-                  <div className="flex items-baseline gap-3 mb-4">
-                    <span className={`text-sm font-black uppercase tracking-widest ${theme.split(" ")[1]}`}>
-                      Étape {step.number}
-                    </span>
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold text-msk-night-900 mb-4 leading-snug">
-                    {step.title}
-                  </h3>
-                  
-                  <p className="text-slate-600 font-medium leading-relaxed flex-1">
-                    {step.description}
-                  </p>
-                </div>
-              </FadeUp>
-            );
-          })}
-        </div>
+        {/* Skiper52 Hover Expand */}
+        <FadeUp delay={0.25} duration={0.5}>
+          <MethodHoverExpand steps={METHOD_STEPS} />
+        </FadeUp>
       </div>
     </section>
   );
