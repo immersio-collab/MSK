@@ -42,11 +42,11 @@ export const TroublesQuizSection: React.FC = () => {
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-msk-cream-200 relative overflow-hidden min-h-[350px] flex flex-col justify-center">
+        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xs border border-msk-cream-200 relative overflow-hidden min-h-[350px] flex flex-col justify-center">
           {/* Progress bar */}
           <div className="absolute top-0 left-0 w-full h-2 bg-gray-100">
             <motion.div 
-              className="h-full bg-gradient-to-r from-msk-coral-500 to-msk-sun-500"
+              className="h-full bg-linear-to-r from-msk-coral-500 to-msk-sun-500"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.3 }}

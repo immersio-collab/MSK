@@ -102,7 +102,7 @@ export function MagneticButton({
         animate={{ scale: isHovered ? 1.04 : 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
         className={cn(
-          "relative inline-flex items-center justify-center font-semibold tracking-tight transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring overflow-hidden",
+          "relative inline-flex items-center justify-center font-semibold tracking-tight transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring overflow-hidden",
           variants[variant],
           sizes[size],
           className

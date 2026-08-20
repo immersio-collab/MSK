@@ -22,9 +22,9 @@ export const StatsSection = () => {
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.1, type: "spring", stiffness: 100 }}
-              className={`flex flex-col items-center justify-center text-center p-6 sm:p-8 rounded-[2rem] ${stat.bg} shadow-sm border border-white/60`}
+              className={`flex flex-col items-center justify-center text-center p-6 sm:p-8 rounded-4xl ${stat.bg} shadow-xs border border-white/60`}
             >
-              <h3 className={`text-5xl sm:text-6xl md:text-7xl font-black tracking-tighter ${stat.color} mb-3 drop-shadow-sm`}>
+              <h3 className={`text-5xl sm:text-6xl md:text-7xl font-black tracking-tighter ${stat.color} mb-3 drop-shadow-xs`}>
                 <CountUp end={stat.value} duration={2.5} separator=" " enableScrollSpy scrollSpyOnce />
                 {stat.suffix}
               </h3>

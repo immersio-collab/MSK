@@ -145,7 +145,7 @@ export const ProgrammesSelectorSection: React.FC = () => {
                   <div className="flex items-center gap-3 mb-4">
                     <div className={`w-3 h-3 rounded-full ${activeProgram.color}`}></div>
                     <h2 className="text-3xl font-bold text-msk-night-900">{activeProgram.title}</h2>
-                    <span className="text-sm font-bold text-slate-600 bg-white px-3 py-1 rounded-full border border-msk-cream-200 shadow-sm">
+                    <span className="text-sm font-bold text-slate-600 bg-white px-3 py-1 rounded-full border border-msk-cream-200 shadow-xs">
                       {activeProgram.age}
                     </span>
                   </div>

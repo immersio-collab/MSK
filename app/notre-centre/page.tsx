@@ -13,7 +13,7 @@ export default function NotreCentrePage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen pt-28 pb-20 bg-[#FDFBF7]">
+    <div className="flex flex-col min-h-screen pt-28 pb-20 bg-msk-cream-50">
       <div className="container mx-auto px-6 md:px-12 max-w-5xl space-y-10">
         <div className="text-center space-y-2">
           <span className="text-xs font-bold uppercase tracking-widest text-msk-coral-600">

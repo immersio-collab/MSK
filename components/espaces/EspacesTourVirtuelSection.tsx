@@ -20,8 +20,8 @@ export const EspacesTourVirtuelSection: React.FC = () => {
         </div>
         
         {/* Virtual Tour Container with Gradient Border */}
-        <div className="w-full rounded-[2rem] p-1.5 bg-gradient-to-tr from-msk-coral-400 via-msk-sun-400 to-msk-blue-400 shadow-2xl shadow-msk-sun-500/15">
-          <div className="w-full relative rounded-[1.6rem] overflow-hidden bg-[#FDFBF7] min-h-[500px] flex items-center justify-center">
+        <div className="w-full rounded-4xl p-1.5 bg-linear-to-tr from-msk-coral-400 via-msk-sun-400 to-msk-blue-400 shadow-2xl shadow-msk-sun-500/15">
+          <div className="w-full relative rounded-[1.6rem] overflow-hidden bg-msk-cream-50 min-h-[500px] flex items-center justify-center">
             
             {isActivated ? (
               // Replace this iframe src with actual Matterport / Google Street View link

@@ -29,7 +29,7 @@ export const EspacesHeroSection: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-8 leading-tight text-msk-night-900"
         >
-          Un environnement pensé pour <span className="text-transparent bg-clip-text bg-gradient-to-r from-msk-coral-500 to-msk-sun-500">l'épanouissement</span>
+          Un environnement pensé pour <span className="text-transparent bg-clip-text bg-linear-to-r from-msk-coral-500 to-msk-sun-500">l'épanouissement</span>
         </motion.h1>
         
         <motion.p
@@ -50,7 +50,7 @@ export const EspacesHeroSection: React.FC = () => {
           <a href="#tour-virtuel" className="px-8 py-4 bg-msk-coral-500 hover:bg-msk-coral-600 text-white font-bold rounded-full transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
             Lancer le Tour 360°
           </a>
-          <a href="#galerie" className="px-8 py-4 bg-white hover:bg-gray-50 text-msk-night-900 border border-msk-cream-300 font-bold rounded-full transition-all shadow-sm hover:shadow">
+          <a href="#galerie" className="px-8 py-4 bg-white hover:bg-gray-50 text-msk-night-900 border border-msk-cream-300 font-bold rounded-full transition-all shadow-xs hover:shadow-sm">
             Voir la Galerie
           </a>
         </motion.div>

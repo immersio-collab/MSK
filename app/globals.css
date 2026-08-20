@@ -1,6 +1,173 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-msk-coral-50: #fdf4f7;
+  --color-msk-coral-100: #fbe8ee;
+  --color-msk-coral-200: #f8d1dd;
+  --color-msk-coral-300: #f1a4bc;
+  --color-msk-coral-400: #e8789c;
+  --color-msk-coral-500: #df5b85;
+  --color-msk-coral-600: #c73d68;
+  --color-msk-coral-700: #a72b51;
+  --color-msk-coral-800: #8b2443;
+  --color-msk-coral-900: #5c172c;
+
+  --color-msk-sun-50: #fef9ee;
+  --color-msk-sun-100: #fdf2d7;
+  --color-msk-sun-200: #fce4aa;
+  --color-msk-sun-300: #f9d277;
+  --color-msk-sun-400: #f7c250;
+  --color-msk-sun-500: #f5b738;
+  --color-msk-sun-600: #d9991e;
+  --color-msk-sun-700: #b07514;
+  --color-msk-sun-800: #8f5c12;
+  --color-msk-sun-900: #5a380a;
+
+  --color-msk-blue-50: #f1f7fc;
+  --color-msk-blue-100: #e1eff9;
+  --color-msk-blue-200: #c4e1f4;
+  --color-msk-blue-300: #9bcbec;
+  --color-msk-blue-400: #7cbce5;
+  --color-msk-blue-500: #6aaee0;
+  --color-msk-blue-600: #4a92c9;
+  --color-msk-blue-700: #3574a5;
+  --color-msk-blue-800: #2a5c84;
+  --color-msk-blue-900: #18283e;
+
+  --color-msk-cream-50: #fdfbf7;
+  --color-msk-cream-100: #f9f6ee;
+  --color-msk-cream-200: #f1ebe0;
+  --color-msk-cream-300: #e6ddcf;
+
+  --color-msk-night-700: #263952;
+  --color-msk-night-800: #1d2d42;
+  --color-msk-night-900: #152233;
+  --color-msk-night-950: #0e1724;
+
+  --font-sans: var(--font-dm-sans), sans-serif;
+  --font-body: var(--font-inter), sans-serif;
+  --font-heading: var(--font-jakarta), sans-serif;
+
+  --animate-blob: blob 7s infinite ease-in-out;
+
+  @keyframes blob {
+    0%,
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility animation-delay-2000 {
+  /* Staggering for the decorative `animate-blob` hero shapes. */
+  animation-delay: 2s;
+}
+
+@utility animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+@utility perspective-1000 {
+  /* Tailwind v3 has no perspective utility (added in v4). */
+  perspective: 1000px;
+}
+
+@utility hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility glass-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(241, 235, 224, 0.9);
+}
+
+@utility glass-nav {
+  background: rgba(253, 251, 247, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(241, 235, 224, 0.8);
+}
+
+@utility gradient-hero-bg {
+  background:
+    radial-gradient(
+      circle at 12% 18%,
+      rgba(223, 91, 133, 0.12) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 88% 75%,
+      rgba(186, 162, 77, 0.14) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 50% 40%,
+      rgba(106, 174, 224, 0.15) 0%,
+      transparent 50%
+    ),
+    #fdfbf7;
+}
 
 @layer base {
   :root {
@@ -113,54 +280,6 @@
   }
   body {
     @apply bg-background text-foreground;
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  /* Staggering for the decorative `animate-blob` hero shapes. */
-  .animation-delay-2000 {
-    animation-delay: 2s;
-  }
-  .animation-delay-4000 {
-    animation-delay: 4s;
-  }
-
-  /* Tailwind v3 has no perspective utility (added in v4). */
-  .perspective-1000 {
-    perspective: 1000px;
-  }
-
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .glass-card {
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(241, 235, 224, 0.9);
-  }
-
-  .glass-nav {
-    background: rgba(253, 251, 247, 0.9);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(241, 235, 224, 0.8);
-  }
-
-  .gradient-hero-bg {
-    background: radial-gradient(circle at 12% 18%, rgba(223, 91, 133, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 88% 75%, rgba(186, 162, 77, 0.14) 0%, transparent 40%),
-                radial-gradient(circle at 50% 40%, rgba(106, 174, 224, 0.15) 0%, transparent 50%),
-                #FDFBF7;
   }
 }
 

@@ -30,7 +30,7 @@ const TESTIMONIALS = [
     tag: "Petite Enfance",
     tagColor: "bg-msk-coral-100 text-msk-coral-700",
     avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80",
-    bgColor: "bg-[#FDFBF7]",
+    bgColor: "bg-msk-cream-50",
     audioSrc: "/audio/temoignage-2.mp3",
   },
   {
@@ -63,7 +63,7 @@ const AudioPlayer = ({ src }: { src: string }) => {
   return (
     <button 
       onClick={togglePlay} 
-      className="flex items-center gap-2 px-3 py-1.5 bg-msk-cream-100 hover:bg-msk-cream-200 text-msk-night-800 rounded-full text-xs font-bold transition-colors shadow-sm border border-msk-cream-200"
+      className="flex items-center gap-2 px-3 py-1.5 bg-msk-cream-100 hover:bg-msk-cream-200 text-msk-night-800 rounded-full text-xs font-bold transition-colors shadow-xs border border-msk-cream-200"
       aria-label="Écouter le témoignage"
     >
       {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -75,7 +75,7 @@ const AudioPlayer = ({ src }: { src: string }) => {
 
 export const TestimonialsSection = () => {
   return (
-    <section id="temoignages" className="py-20 md:py-32 relative z-10 bg-gradient-to-b from-[#FDFBF7] to-msk-coral-50/30 overflow-hidden">
+    <section id="temoignages" className="py-20 md:py-32 relative z-10 bg-linear-to-b from-[#FDFBF7] to-msk-coral-50/30 overflow-hidden">
       {/* Decorative Blob */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-msk-sun-200/20 blur-3xl rounded-full pointer-events-none" />
 
@@ -121,7 +121,7 @@ export const TestimonialsSection = () => {
             >
               {TESTIMONIALS.map((testimonial) => (
                 <SwiperSlide key={testimonial.id}>
-                  <div className={`relative flex flex-col p-8 sm:p-10 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 ${testimonial.bgColor} h-full min-h-[380px]`}>
+                  <div className={`relative flex flex-col p-8 sm:p-10 rounded-4xl shadow-xl shadow-slate-200/50 border border-slate-100 ${testimonial.bgColor} h-full min-h-[380px]`}>
                     
                     {/* Quotes Icon */}
                     <div className="absolute top-8 right-8 text-msk-coral-100/60 pointer-events-none">

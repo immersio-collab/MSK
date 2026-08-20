@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
 
   return (
-    <div className="relative flex flex-col min-h-screen bg-[#FDFBF7] overflow-hidden">
+    <div className="relative flex flex-col min-h-screen bg-msk-cream-50 overflow-hidden">
       {/* Interactive Background Scroll Stroke flowing from Hero down to Footer */}
       {/* <ScrollStrokePath /> */}
 
@@ -39,7 +39,7 @@ export default function HomePage() {
             <div className="lg:col-span-6 space-y-6 md:space-y-8">
               {/* Badge de confiance */}
               <FadeUp delay={0.2}>
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-msk-coral-50/70 border border-msk-coral-100/50 rounded-full text-xs sm:text-sm font-bold text-msk-coral-600 shadow-sm backdrop-blur-sm select-none">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-msk-coral-50/70 border border-msk-coral-100/50 rounded-full text-xs sm:text-sm font-bold text-msk-coral-600 shadow-xs backdrop-blur-xs select-none">
                   <span className="flex h-2 w-2 rounded-full bg-msk-coral-500 animate-ping" />
                   <span className="flex h-2 w-2 -ml-4 rounded-full bg-msk-coral-600" />
                   <span>+200 familles accompagnées · 15 ans d'expérience · Casablanca</span>

@@ -40,7 +40,7 @@ export const ContactMapSection: React.FC = () => {
             <div className="space-y-6">
               {infos.map((info, idx) => (
                 <div key={idx} className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-white border border-msk-cream-200 flex items-center justify-center shrink-0 shadow-sm">
+                  <div className="w-12 h-12 rounded-xl bg-white border border-msk-cream-200 flex items-center justify-center shrink-0 shadow-xs">
                     {info.icon}
                   </div>
                   <div>

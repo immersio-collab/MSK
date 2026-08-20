@@ -96,7 +96,7 @@ export const ContactFormSection: React.FC = () => {
                     <input 
                       type="text" 
                       id="fullName" 
-                      className={`peer w-full bg-[#FAF8F5] border-2 rounded-xl px-5 pt-8 pb-3 text-msk-night-900 focus:outline-none focus:bg-white transition-all placeholder-transparent ${errors.fullName ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
+                      className={`peer w-full bg-[#FAF8F5] border-2 rounded-xl px-5 pt-8 pb-3 text-msk-night-900 focus:outline-hidden focus:bg-white transition-all placeholder-transparent ${errors.fullName ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
                       placeholder="Nom complet du parent"
                       {...register("fullName", { required: "Ce champ est requis" })}
                       onFocus={(e) => {
@@ -123,7 +123,7 @@ export const ContactFormSection: React.FC = () => {
                       <input 
                         type="tel" 
                         id="phone" 
-                        className={`peer w-full bg-[#FAF8F5] border-2 border-l-white rounded-r-xl px-5 pt-8 pb-3 text-msk-night-900 focus:outline-none focus:bg-white transition-all placeholder-transparent ${errors.phone ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
+                        className={`peer w-full bg-[#FAF8F5] border-2 border-l-white rounded-r-xl px-5 pt-8 pb-3 text-msk-night-900 focus:outline-hidden focus:bg-white transition-all placeholder-transparent ${errors.phone ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
                         placeholder="Téléphone"
                         {...register("phone", { required: "Ce champ est requis" })}
                         onFocus={() => setFocusedField("phone")}
@@ -144,7 +144,7 @@ export const ContactFormSection: React.FC = () => {
                     <input 
                       type="email" 
                       id="email" 
-                      className={`peer w-full bg-[#FAF8F5] border-2 rounded-xl px-5 pt-8 pb-3 text-msk-night-900 focus:outline-none focus:bg-white transition-all placeholder-transparent ${errors.email ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
+                      className={`peer w-full bg-[#FAF8F5] border-2 rounded-xl px-5 pt-8 pb-3 text-msk-night-900 focus:outline-hidden focus:bg-white transition-all placeholder-transparent ${errors.email ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
                       placeholder="Adresse email"
                       {...register("email", { 
                         required: "L'email est requis",
@@ -169,7 +169,7 @@ export const ContactFormSection: React.FC = () => {
                   <motion.div className="relative" animate={errors.childAge ? shakeAnimation : {}}>
                     <select 
                       id="childAge" 
-                      className={`w-full bg-[#FAF8F5] border-2 rounded-xl px-5 pt-8 pb-3 text-msk-night-900 focus:outline-none focus:bg-white transition-all appearance-none ${errors.childAge ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
+                      className={`w-full bg-[#FAF8F5] border-2 rounded-xl px-5 pt-8 pb-3 text-msk-night-900 focus:outline-hidden focus:bg-white transition-all appearance-none ${errors.childAge ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
                       {...register("childAge", { required: "Veuillez sélectionner l'âge" })}
                       onFocus={() => setFocusedField("childAge")}
                       onBlur={() => setFocusedField(null)}
@@ -200,7 +200,7 @@ export const ContactFormSection: React.FC = () => {
                   <motion.div className="relative" animate={errors.subject ? shakeAnimation : {}}>
                     <select 
                       id="subject" 
-                      className={`w-full bg-[#FAF8F5] border-2 rounded-xl px-5 pt-8 pb-3 text-msk-night-900 focus:outline-none focus:bg-white transition-all appearance-none ${errors.subject ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
+                      className={`w-full bg-[#FAF8F5] border-2 rounded-xl px-5 pt-8 pb-3 text-msk-night-900 focus:outline-hidden focus:bg-white transition-all appearance-none ${errors.subject ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
                       {...register("subject", { required: "Veuillez sélectionner un objet" })}
                       onFocus={() => setFocusedField("subject")}
                       onBlur={() => setFocusedField(null)}
@@ -229,7 +229,7 @@ export const ContactFormSection: React.FC = () => {
                     <textarea 
                       id="message" 
                       rows={4}
-                      className={`peer w-full bg-[#FAF8F5] border-2 rounded-xl px-5 pt-8 pb-3 text-msk-night-900 focus:outline-none focus:bg-white transition-all placeholder-transparent resize-none ${errors.message ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
+                      className={`peer w-full bg-[#FAF8F5] border-2 rounded-xl px-5 pt-8 pb-3 text-msk-night-900 focus:outline-hidden focus:bg-white transition-all placeholder-transparent resize-none ${errors.message ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-msk-coral-400"}`}
                       placeholder="Votre message"
                       {...register("message", { required: "Veuillez écrire un message" })}
                       onFocus={() => setFocusedField("message")}

@@ -16,7 +16,7 @@ export const CtaFinalSection = ({
   buttonText = "Réserver un bilan gratuit"
 }: CtaFinalSectionProps) => {
   return (
-    <section id="cta-contact" className="relative w-full py-24 md:py-32 overflow-hidden bg-gradient-to-br from-msk-coral-500 to-msk-sun-400">
+    <section id="cta-contact" className="relative w-full py-24 md:py-32 overflow-hidden bg-linear-to-br from-msk-coral-500 to-msk-sun-400">
       {/* Background Decor */}
       <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] pointer-events-none mix-blend-overlay"></div>
       <div className="absolute -top-40 -right-40 w-96 h-96 bg-white/20 blur-3xl rounded-full pointer-events-none"></div>
@@ -30,7 +30,7 @@ export const CtaFinalSection = ({
         </FadeUp>
         
         <FadeUp delay={0.1}>
-          <p className="text-xl md:text-2xl text-white/90 font-medium mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-sm">
+          <p className="text-xl md:text-2xl text-white/90 font-medium mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-xs">
             {subtitle}
           </p>
         </FadeUp>

@@ -22,7 +22,7 @@ const CustomTrigger = React.forwardRef<HTMLButtonElement, React.ComponentProps<t
         <AccordionTrigger
           ref={ref}
           className={cn(
-            "flex flex-1 items-center justify-between py-6 text-left font-bold transition-all hover:text-msk-coral-600 outline-none text-lg md:text-xl",
+            "flex flex-1 items-center justify-between py-6 text-left font-bold transition-all hover:text-msk-coral-600 outline-hidden text-lg md:text-xl",
             isOpen ? "text-msk-coral-600" : "text-msk-night-800",
             className
           )}
@@ -54,7 +54,7 @@ export const ParentFAQSection: React.FC = () => {
       <div className="w-full max-w-[1000px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
         <div className="text-center mb-16 md:mb-20">
           <FadeUp>
-            <div className="inline-flex items-center justify-center gap-2 rounded-full bg-msk-coral-100 text-msk-coral-700 px-5 py-2 text-sm font-bold uppercase tracking-widest mb-6 shadow-sm border border-msk-coral-200">
+            <div className="inline-flex items-center justify-center gap-2 rounded-full bg-msk-coral-100 text-msk-coral-700 px-5 py-2 text-sm font-bold uppercase tracking-widest mb-6 shadow-xs border border-msk-coral-200">
               <MessageCircleQuestion className="h-4 w-4" />
               <span>Vos Questions, Nos Réponses</span>
             </div>
@@ -73,7 +73,7 @@ export const ParentFAQSection: React.FC = () => {
         </div>
 
         <FadeUp delay={0.3} y={30} duration={0.8}>
-          <div className="bg-white rounded-[2rem] p-6 md:p-10 shadow-2xl shadow-slate-200/50 border border-msk-cream-200">
+          <div className="bg-white rounded-4xl p-6 md:p-10 shadow-2xl shadow-slate-200/50 border border-msk-cream-200">
             <Accordion type="single" collapsible className="w-full">
               {PARENT_CONCERNS_FAQ.map((faq, idx) => (
                 <AccordionItem

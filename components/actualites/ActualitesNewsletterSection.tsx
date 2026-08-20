@@ -15,7 +15,7 @@ export const ActualitesNewsletterSection: React.FC = () => {
 
           {/* Icon */}
           <div className="relative z-10 shrink-0">
-            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-msk-coral-100 to-msk-sun-100 flex items-center justify-center shadow-inner">
+            <div className="w-24 h-24 rounded-full bg-linear-to-br from-msk-coral-100 to-msk-sun-100 flex items-center justify-center shadow-inner">
               <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-md">
                 <BookOpen className="w-8 h-8 text-msk-coral-500" />
               </div>
@@ -23,7 +23,7 @@ export const ActualitesNewsletterSection: React.FC = () => {
           </div>
 
           {/* Content & Form */}
-          <div className="relative z-10 flex-grow">
+          <div className="relative z-10 grow">
             <h2 className="text-2xl md:text-3xl font-bold text-msk-night-900 mb-3">
               Recevez nos ressources éducatives
             </h2>
@@ -35,7 +35,7 @@ export const ActualitesNewsletterSection: React.FC = () => {
               <input 
                 type="email" 
                 placeholder="Votre adresse email" 
-                className="flex-grow bg-[#FAF8F5] border-2 border-transparent rounded-xl px-5 py-4 text-msk-night-900 focus:outline-none focus:border-msk-coral-400 focus:bg-white transition-all"
+                className="grow bg-[#FAF8F5] border-2 border-transparent rounded-xl px-5 py-4 text-msk-night-900 focus:outline-hidden focus:border-msk-coral-400 focus:bg-white transition-all"
                 required
               />
               <button 

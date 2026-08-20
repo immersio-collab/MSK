@@ -37,7 +37,7 @@ export const ProgrammesTableSection: React.FC = () => {
         </div>
 
         <div className="overflow-x-auto pb-8 -mx-4 px-4 sm:mx-0 sm:px-0 hide-scrollbar">
-          <div className="min-w-[800px] w-full border border-msk-cream-200 rounded-2xl overflow-hidden bg-white shadow-sm">
+          <div className="min-w-[800px] w-full border border-msk-cream-200 rounded-2xl overflow-hidden bg-white shadow-xs">
             {/* Header Row */}
             <div className="grid grid-cols-5 border-b border-msk-cream-200 bg-[#FAF8F5]">
               {columns.map((col, idx) => (
@@ -75,7 +75,7 @@ export const ProgrammesTableSection: React.FC = () => {
                       onMouseLeave={() => setHoveredCol(null)}
                     >
                       {val === true ? (
-                        <div className={`w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center border border-msk-cream-200 ${columns[colIdx].color}`}>
+                        <div className={`w-8 h-8 rounded-full bg-white shadow-xs flex items-center justify-center border border-msk-cream-200 ${columns[colIdx].color}`}>
                           <Check className="w-5 h-5" />
                         </div>
                       ) : val === "—" ? (

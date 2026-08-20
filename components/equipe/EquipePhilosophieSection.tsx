@@ -55,12 +55,12 @@ export const EquipePhilosophieSection: React.FC = () => {
               <div className="absolute inset-0 bg-msk-night-950/30 flex items-center justify-center transition-colors group-hover:bg-msk-night-950/40">
                 {/* Play button UI */}
                 <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 transition-transform duration-300 group-hover:scale-110">
-                  <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-white border-b-[10px] border-b-transparent ml-2"></div>
+                  <div className="w-0 h-0 border-t-10 border-t-transparent border-l-16 border-l-white border-b-10 border-b-transparent ml-2"></div>
                 </div>
               </div>
               
               {/* Optional: label indicating video */}
-              <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-full text-xs font-bold text-msk-night-900 shadow-sm">
+              <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full text-xs font-bold text-msk-night-900 shadow-xs">
                 ▶ Présentation de l'équipe (0:45)
               </div>
             </div>

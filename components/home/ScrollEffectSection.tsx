@@ -69,10 +69,10 @@ export const ScrollEffectSection = () => {
 
   return (
     <ReactLenis root>
-      <div className="w-full bg-[#FDFBF7]">
+      <div className="w-full bg-msk-cream-50">
         <div
           ref={targetRef}
-          className="relative box-border flex h-[calc(100vh-80px)] items-center justify-center gap-[2vw] overflow-hidden bg-[#FDFBF7] p-[2vw]"
+          className="relative box-border flex h-[calc(100vh-80px)] items-center justify-center gap-[2vw] overflow-hidden bg-msk-cream-50 p-[2vw]"
         >
           <div
             className="w-full max-w-5xl text-center text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-msk-night-900 flex flex-wrap justify-center gap-y-2 md:gap-y-4"

@@ -94,7 +94,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-[#FDFBF7] text-[#223242] antialiased selection:bg-msk-coral-100 selection:text-msk-coral-900">
+      <body className="min-h-screen flex flex-col bg-msk-cream-50 text-[#223242] antialiased selection:bg-msk-coral-100 selection:text-msk-coral-900">
         <ScrollProgressBar />
         <Navbar />
         <main className="flex-1">{children}</main>

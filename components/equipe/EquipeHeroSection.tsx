@@ -29,7 +29,7 @@ export const EquipeHeroSection: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8 leading-tight text-msk-night-900"
         >
-          L'expertise et la bienveillance au service de <span className="text-transparent bg-clip-text bg-gradient-to-r from-msk-coral-500 to-msk-sun-500">votre enfant.</span>
+          L'expertise et la bienveillance au service de <span className="text-transparent bg-clip-text bg-linear-to-r from-msk-coral-500 to-msk-sun-500">votre enfant.</span>
         </motion.h1>
         
         <motion.p

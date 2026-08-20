@@ -105,7 +105,7 @@ export const TroublesGridSection: React.FC = () => {
 
                 {/* Back Face */}
                 <div 
-                  className="absolute inset-0 w-full h-full flex flex-col items-center justify-center p-6 bg-gradient-to-br from-msk-coral-500 to-msk-sun-500 rounded-2xl text-center text-white"
+                  className="absolute inset-0 w-full h-full flex flex-col items-center justify-center p-6 bg-linear-to-br from-msk-coral-500 to-msk-sun-500 rounded-2xl text-center text-white"
                   style={{ 
                     backfaceVisibility: "hidden",
                     transform: "rotateY(180deg)" 

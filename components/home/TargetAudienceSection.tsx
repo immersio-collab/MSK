@@ -119,12 +119,12 @@ export const TargetAudienceSection = () => {
               1024: { slidesPerView: 3.2, spaceBetween: 32 },
               1280: { slidesPerView: 4, spaceBetween: 32 },
             }}
-            className="w-full pb-16 !overflow-visible"
+            className="w-full pb-16 overflow-visible!"
           >
             {PROFILES.map((profile, index) => (
               <SwiperSlide key={profile.id} className="h-auto">
                 <Link href={profile.link} className="group block h-full">
-                  <div className={`h-full flex flex-col rounded-3xl bg-gradient-to-b ${profile.gradient} p-1 shadow-sm transition-all duration-300 transform group-hover:-translate-y-2 group-hover:shadow-2xl ${profile.glow}`}>
+                  <div className={`h-full flex flex-col rounded-3xl bg-linear-to-b ${profile.gradient} p-1 shadow-xs transition-all duration-300 transform group-hover:-translate-y-2 group-hover:shadow-2xl ${profile.glow}`}>
                     <div className="h-full flex flex-col rounded-[1.4rem] bg-white overflow-hidden">
                       {/* Image Top */}
                       <div className="relative h-48 sm:h-56 w-full overflow-hidden">
@@ -137,7 +137,7 @@ export const TargetAudienceSection = () => {
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
                         <div className="absolute top-4 left-4 z-20">
-                          <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold ${profile.badge} backdrop-blur-sm shadow-sm`}>
+                          <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold ${profile.badge} backdrop-blur-xs shadow-xs`}>
                             {profile.title}
                           </span>
                         </div>

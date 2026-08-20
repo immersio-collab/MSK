@@ -44,7 +44,7 @@ export const Navbar: React.FC = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-[#FDFBF7]/95 backdrop-blur-md shadow-xs py-2 md:py-3 border-b border-msk-cream-200"
+          ? "bg-msk-cream-50/95 backdrop-blur-md shadow-2xs py-2 md:py-3 border-b border-msk-cream-200"
           : "bg-transparent py-3 md:py-4"
       }`}
     >
@@ -195,7 +195,7 @@ export const Navbar: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden fixed inset-x-0 top-[76px] bg-[#FDFBF7]/95 backdrop-blur-xl border-b border-msk-cream-200 shadow-2xl px-8 py-8"
+            className="md:hidden fixed inset-x-0 top-[76px] bg-msk-cream-50/95 backdrop-blur-xl border-b border-msk-cream-200 shadow-2xl px-8 py-8"
           >
             <div className="space-y-5">
               {NAV_LINKS.map((link) => (

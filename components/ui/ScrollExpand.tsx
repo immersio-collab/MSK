@@ -41,7 +41,7 @@ export default function ScrollExpand({
   const y = useTransform(scrollYProgress, [0.3, 0.5], [50, 0]);
 
   return (
-    <div ref={containerRef} className="relative flex flex-col items-center justify-center w-full h-[100vh] overflow-hidden bg-[#FDFBF7]">
+    <div ref={containerRef} className="relative flex flex-col items-center justify-center w-full h-screen overflow-hidden bg-msk-cream-50">
       {/* Optional Title/Hint */}
       {(title || scrollHint) && (
         <div className="absolute top-12 left-1/2 -translate-x-1/2 z-20 text-center">

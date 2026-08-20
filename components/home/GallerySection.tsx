@@ -40,11 +40,11 @@ const VIDEOS = [
 
 // Dummy Photo Data for Masonry
 const PHOTOS = [
-  { id: 1, src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80", alt: "Classe Primaire MSK", aspect: "aspect-[4/3]" },
-  { id: 2, src: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80", alt: "Matériel Montessori", aspect: "aspect-[3/4]" },
-  { id: 3, src: "https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?auto=format&fit=crop&w=800&q=80", alt: "Salle de rééducation", aspect: "aspect-[4/5]" },
+  { id: 1, src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80", alt: "Classe Primaire MSK", aspect: "aspect-4/3" },
+  { id: 2, src: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80", alt: "Matériel Montessori", aspect: "aspect-3/4" },
+  { id: 3, src: "https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?auto=format&fit=crop&w=800&q=80", alt: "Salle de rééducation", aspect: "aspect-4/5" },
   { id: 4, src: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80", alt: "Neuro-Gym", aspect: "aspect-square" },
-  { id: 5, src: "https://images.unsplash.com/photo-1536640712-4d4c36ef0e47?auto=format&fit=crop&w=800&q=80", alt: "Espace détente", aspect: "aspect-[3/4]" },
+  { id: 5, src: "https://images.unsplash.com/photo-1536640712-4d4c36ef0e47?auto=format&fit=crop&w=800&q=80", alt: "Espace détente", aspect: "aspect-3/4" },
   { id: 6, src: "https://images.unsplash.com/photo-1564424224827-cd24b8915874?auto=format&fit=crop&w=800&q=80", alt: "Travail en petit groupe", aspect: "aspect-video" },
   { id: 7, src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80", alt: "Intervention orthophoniste", aspect: "aspect-square" },
 ];
@@ -107,11 +107,11 @@ export const GallerySection = () => {
               1024: { slidesPerView: 3.5, spaceBetween: 24 },
             }}
             modules={[FreeMode, Pagination, Autoplay]}
-            className="w-full !overflow-visible"
+            className="w-full overflow-visible!"
           >
             {VIDEOS.map((video) => (
               <SwiperSlide key={video.id}>
-                <div className="group relative aspect-[9/16] rounded-3xl overflow-hidden cursor-pointer shadow-md bg-slate-100">
+                <div className="group relative aspect-9/16 rounded-3xl overflow-hidden cursor-pointer shadow-md bg-slate-100">
                   <Image src={video.thumbnail} alt={video.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
                   
                   {/* Play Button Overlay */}
@@ -122,7 +122,7 @@ export const GallerySection = () => {
                   </div>
                   
                   {/* Title Overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-msk-night-900/80 to-transparent">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-linear-to-t from-msk-night-900/80 to-transparent">
                     <p className="text-white font-bold text-lg leading-tight">{video.title}</p>
                   </div>
                 </div>
@@ -154,7 +154,7 @@ export const GallerySection = () => {
                 />
                 <div className="absolute inset-0 bg-msk-night-900/0 group-hover:bg-msk-night-900/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                   <Maximize2 className="w-8 h-8 text-white mb-4" />
-                  <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-msk-night-900/90 to-transparent translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  <div className="absolute bottom-0 left-0 right-0 p-5 bg-linear-to-t from-msk-night-900/90 to-transparent translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                     <p className="text-white font-bold text-sm tracking-wide">{photo.alt}</p>
                   </div>
                 </div>
@@ -166,13 +166,13 @@ export const GallerySection = () => {
 
       {/* Lightbox */}
       <div 
-        className={`fixed inset-0 z-[100] bg-msk-night-950/95 backdrop-blur-xl transition-all duration-300 flex flex-col items-center justify-center ${
+        className={`fixed inset-0 z-100 bg-msk-night-950/95 backdrop-blur-xl transition-all duration-300 flex flex-col items-center justify-center ${
           lightboxOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
         onClick={closeLightbox}
       >
         <button 
-          className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-[110]"
+          className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-110"
           onClick={(e) => { e.stopPropagation(); closeLightbox(); }}
         >
           <X className="w-6 h-6" />

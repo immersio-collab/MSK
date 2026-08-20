@@ -99,7 +99,7 @@ const TimelineStep = ({ step, index }: { step: any; index: number }) => {
         >
           {/* Mobile Node (visible only on mobile) */}
           <div className="flex md:hidden items-center gap-4 mb-4">
-            <div className={`w-10 h-10 rounded-full border-2 border-white shadow-sm flex items-center justify-center text-white font-bold text-sm ${step.color}`}>
+            <div className={`w-10 h-10 rounded-full border-2 border-white shadow-xs flex items-center justify-center text-white font-bold text-sm ${step.color}`}>
               {step.id}
             </div>
             <span className={`text-sm font-bold uppercase tracking-widest ${step.textColor}`}>
@@ -121,7 +121,7 @@ const TimelineStep = ({ step, index }: { step: any; index: number }) => {
 
         {/* Image */}
         <motion.div 
-          className="w-full md:w-1/2 relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl"
+          className="w-full md:w-1/2 relative aspect-4/3 rounded-3xl overflow-hidden shadow-2xl"
           initial={{ opacity: 0, scale: 0.9, x: isEven ? 50 : -50 }}
           animate={isInView ? { opacity: 1, scale: 1, x: 0 } : { opacity: 0, scale: 0.9, x: isEven ? 50 : -50 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
@@ -185,7 +185,7 @@ export const MethodeTimelineSection = () => {
         {/* Background Vertical Line (Mobile - keeping it straight for simplicity) */}
         <div className="block md:hidden absolute left-11 top-0 bottom-0 w-1 bg-slate-100 rounded-full z-0">
            <motion.div 
-            className="absolute top-0 left-0 w-full bg-gradient-to-b from-msk-blue-500 via-msk-coral-500 to-msk-sun-500 rounded-full"
+            className="absolute top-0 left-0 w-full bg-linear-to-b from-msk-blue-500 via-msk-coral-500 to-msk-sun-500 rounded-full"
             style={{ scaleY: scrollYProgress, transformOrigin: "top" }}
           />
         </div>

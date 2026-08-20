@@ -63,8 +63,8 @@ export const MethodHoverExpand: React.FC<MethodHoverExpandProps> = ({
                 className={cn(
                   "absolute inset-0 transition-opacity duration-300",
                   isActive
-                    ? "bg-gradient-to-t from-black/90 via-black/40 to-black/20"
-                    : "bg-gradient-to-t from-black/80 via-black/30 to-black/30 group-hover:from-black/70"
+                    ? "bg-linear-to-t from-black/90 via-black/40 to-black/20"
+                    : "bg-linear-to-t from-black/80 via-black/30 to-black/30 group-hover:from-black/70"
                 )}
               />
 
@@ -146,7 +146,7 @@ export const MethodHoverExpand: React.FC<MethodHoverExpandProps> = ({
                 className={cn(
                   "absolute inset-0",
                   isActive
-                    ? "bg-gradient-to-t from-black/90 via-black/50 to-black/30"
+                    ? "bg-linear-to-t from-black/90 via-black/50 to-black/30"
                     : "bg-black/60"
                 )}
               />

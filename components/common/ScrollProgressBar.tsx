@@ -12,7 +12,7 @@ export default function ScrollProgressBar() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-msk-coral-500 via-msk-sun-400 to-msk-coral-500 origin-left z-[100]"
+      className="fixed top-0 left-0 right-0 h-1 bg-linear-to-r from-msk-coral-500 via-msk-sun-400 to-msk-coral-500 origin-left z-100"
       style={{ scaleX }}
     />
   );

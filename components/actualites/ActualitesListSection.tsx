@@ -86,7 +86,7 @@ export const ActualitesListSection: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="group bg-[#FAF8F5] rounded-3xl overflow-hidden border border-msk-cream-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full hover:-translate-y-2"
+              className="group bg-[#FAF8F5] rounded-3xl overflow-hidden border border-msk-cream-200 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col h-full hover:-translate-y-2"
             >
               {/* Image Container */}
               <div className="relative h-56 overflow-hidden">
@@ -97,7 +97,7 @@ export const ActualitesListSection: React.FC = () => {
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute top-4 left-4 z-10 flex gap-2">
-                  <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-white shadow-sm ${post.color}`}>
+                  <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-white shadow-xs ${post.color}`}>
                     <Tag className="w-3.5 h-3.5" />
                     {post.category}
                   </span>
@@ -105,7 +105,7 @@ export const ActualitesListSection: React.FC = () => {
               </div>
 
               {/* Content Container */}
-              <div className="p-6 md:p-8 flex flex-col flex-grow">
+              <div className="p-6 md:p-8 flex flex-col grow">
                 <div className="flex items-center gap-2 text-sm text-slate-500 font-medium mb-4">
                   <Calendar className="w-4 h-4" />
                   <span>{post.date}</span>
@@ -118,7 +118,7 @@ export const ActualitesListSection: React.FC = () => {
                   </Link>
                 </h3>
                 
-                <p className="text-msk-night-700/90 leading-relaxed mb-6 flex-grow">
+                <p className="text-msk-night-700/90 leading-relaxed mb-6 grow">
                   {post.excerpt}
                 </p>
                 

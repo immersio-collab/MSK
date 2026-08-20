@@ -27,7 +27,7 @@ export const TroublesHeroSection: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-msk-night-900 mb-6 leading-tight"
         >
-          Nous comprenons ce que <span className="text-transparent bg-clip-text bg-gradient-to-r from-msk-coral-500 to-msk-sun-500">traverse votre enfant.</span>
+          Nous comprenons ce que <span className="text-transparent bg-clip-text bg-linear-to-r from-msk-coral-500 to-msk-sun-500">traverse votre enfant.</span>
         </motion.h1>
         
         <motion.p

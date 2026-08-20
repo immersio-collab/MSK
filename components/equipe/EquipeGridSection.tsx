@@ -16,7 +16,7 @@ export const EquipeGridSection: React.FC = () => {
               fill
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-msk-night-950/60 to-transparent md:hidden"></div>
+            <div className="absolute inset-0 bg-linear-to-t from-msk-night-950/60 to-transparent md:hidden"></div>
             <div className="absolute bottom-6 left-6 md:hidden">
               <h3 className="text-3xl font-bold text-white">Khadija Elabaya</h3>
               <p className="text-msk-sun-400 font-medium">Fondatrice & Directrice</p>

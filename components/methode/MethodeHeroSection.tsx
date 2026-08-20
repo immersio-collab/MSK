@@ -6,10 +6,10 @@ import { WordPullUp } from "@/components/magicui/word-pull-up";
 
 export const MethodeHeroSection = () => {
   return (
-    <section className="relative w-full pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden bg-[#FDFBF7]">
+    <section className="relative w-full pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden bg-msk-cream-50">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] pointer-events-none mix-blend-overlay"></div>
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-msk-blue-50/50 to-transparent pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-linear-to-l from-msk-blue-50/50 to-transparent pointer-events-none"></div>
 
       <div className="w-full max-w-6xl mx-auto px-6 sm:px-10 relative z-10 flex flex-col items-center text-center">
         <FadeUp>
