@@ -53,7 +53,7 @@ export const PARENT_CONCERNS_FAQ = [
   },
   {
     question: "À quel âge puis-je inscrire mon enfant ?",
-    answer: "Nous accueillons les enfants dès 2 ans dans notre section Petite Enfance, et accompagnons les élèves tout au long du primaire et jusqu'à l'adolescence. Nous proposons également des séances ciblées pour les adultes.",
+    answer: "Nous accueillons les enfants dès 2 ans dans notre section Maternelle, et accompagnons les élèves tout au long de leur scolarité primaire.",
   },
   {
     question: "Combien coûte l'accompagnement ? Y a-t-il des facilités de paiement ?",

@@ -36,7 +36,7 @@ export const TroublesHeroSection: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-lg md:text-xl text-msk-night-700/80 max-w-3xl mx-auto leading-relaxed"
         >
-          MSK accompagne les enfants et adolescents avec des difficultés d'apprentissage, de langage, de comportement et de développement. Un cadre bienveillant, une méthode adaptée et une équipe dévouée.
+          MSK accompagne les enfants de la maternelle et du primaire avec des difficultés d'apprentissage, de langage, de comportement et de développement. Un cadre bienveillant, une méthode adaptée et une équipe dévouée.
         </motion.p>
       </div>
     </section>

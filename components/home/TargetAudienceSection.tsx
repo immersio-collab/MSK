@@ -14,12 +14,12 @@ import { FadeUp } from "@/components/motion/FadeUp";
 
 const PROFILES = [
   {
-    id: "petite-enfance",
-    title: "Petite Enfance (2-5 ans)",
+    id: "maternelle",
+    title: "Maternelle (2-5 ans)",
     quote: "« Mon enfant ne parle pas encore comme les autres »",
     description: "Retard de langage, difficultés de socialisation, éveil sensoriel. Nous l'accueillons avec douceur.",
-    link: "/programmes/petite-enfance",
-    image: "https://images.unsplash.com/photo-1544640808-32cb961a89c3?auto=format&fit=crop&w=800&q=80",
+    link: "/programmes",
+    image: "/maternelle1.jpg",
     gradient: "from-msk-coral-100 to-msk-coral-50",
     glow: "group-hover:shadow-msk-coral-500/25",
     textHover: "group-hover:text-msk-coral-600",
@@ -30,36 +30,12 @@ const PROFILES = [
     title: "Primaire (6-11 ans)",
     quote: "« L'école classique ne lui convient plus »",
     description: "TDAH, dyslexie, dyscalculie, rejet scolaire. Nous reconstruisons sa confiance pas à pas.",
-    link: "/programmes/primaire",
-    image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80",
+    link: "/programmes",
+    image: "/primaire1.webp",
     gradient: "from-msk-sun-100 to-msk-sun-50",
     glow: "group-hover:shadow-msk-sun-500/25",
     textHover: "group-hover:text-msk-sun-600",
     badge: "bg-msk-sun-100 text-msk-sun-700",
-  },
-  {
-    id: "adolescents",
-    title: "Adolescents (12+ ans)",
-    quote: "« Il décroche, il se renferme »",
-    description: "Troubles du comportement, échec scolaire, perte d'estime. Nous lui redonnons un cap et une motivation.",
-    link: "/programmes/adolescents",
-    image: "https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=800&q=80",
-    gradient: "from-msk-blue-100 to-msk-blue-50",
-    glow: "group-hover:shadow-msk-blue-500/25",
-    textHover: "group-hover:text-msk-blue-600",
-    badge: "bg-msk-blue-100 text-msk-blue-700",
-  },
-  {
-    id: "adultes",
-    title: "Adultes",
-    quote: "« Je veux améliorer mes fonctions cognitives »",
-    description: "Neuro-Gym, gestion de l'attention, stratégies d'organisation et rééducation pour adultes.",
-    link: "/programmes/adultes",
-    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80",
-    gradient: "from-emerald-100 to-emerald-50",
-    glow: "group-hover:shadow-emerald-500/25",
-    textHover: "group-hover:text-emerald-600",
-    badge: "bg-emerald-100 text-emerald-700",
   },
 ];
 
@@ -115,9 +91,9 @@ export const TargetAudienceSection = () => {
             spaceBetween={24}
             slidesPerView={1.1}
             breakpoints={{
-              640: { slidesPerView: 2.2, spaceBetween: 24 },
-              1024: { slidesPerView: 3.2, spaceBetween: 32 },
-              1280: { slidesPerView: 4, spaceBetween: 32 },
+              640: { slidesPerView: 2, spaceBetween: 24 },
+              1024: { slidesPerView: 2, spaceBetween: 32 },
+              1280: { slidesPerView: 2, spaceBetween: 32 },
             }}
             className="w-full pb-16 overflow-visible!"
           >

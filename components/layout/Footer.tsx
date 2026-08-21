@@ -55,18 +55,13 @@ export const Footer: React.FC = () => {
               </span>
               <ul className="space-y-2.5">
                 <li>
-                  <Link href="/programmes/petite-enfance" className="text-base font-medium text-slate-200 hover:text-msk-sun-300 transition-colors">
-                    Petite enfance
+                  <Link href="/programmes" className="text-base font-medium text-slate-200 hover:text-msk-sun-300 transition-colors">
+                    Maternelle
                   </Link>
                 </li>
                 <li>
-                  <Link href="/programmes/primaire" className="text-base font-medium text-slate-200 hover:text-msk-sun-300 transition-colors">
+                  <Link href="/programmes" className="text-base font-medium text-slate-200 hover:text-msk-sun-300 transition-colors">
                     Primaire
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/programmes/adolescents" className="text-base font-medium text-slate-200 hover:text-msk-sun-300 transition-colors">
-                    Adolescents
                   </Link>
                 </li>
               </ul>
