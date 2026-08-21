@@ -25,10 +25,12 @@ interface Step {
 /**
  * Copy is unchanged from the previous timeline; only the presentation differs.
  *
- * Card fills are chosen from what each Lottie mark actually contains, measured
- * by painted area: marks built mainly from black (03, 06) need a light card or
- * they disappear; marks built from yellow, cream and red (01, 02, 04, 05) need
- * a dark one. Getting this backwards is what put card 06's red at 1.28:1.
+ * Fills follow the kinetic band's palette — saturated coral, blue and sun
+ * rather than neutrals — but each one is still picked around what its Lottie
+ * mark is painted from, measured by area. Marks built mainly from black (03,
+ * 06) need a light card or they vanish; marks built from yellow, cream and red
+ * need a saturated or deep one. Getting that backwards is what put card 06's
+ * red at 1.28:1.
  */
 const STEPS: Step[] = [
   {
@@ -36,8 +38,8 @@ const STEPS: Step[] = [
     title: "Observer",
     description:
       "Avant toute chose, nous observons. Pas de tests standardisés froids. Nos éducateurs passent du temps avec votre enfant dans un environnement naturel pour identifier ses forces, ses sensibilités sensorielles et son style d'apprentissage unique.",
-    card: "bg-msk-night-950",
-    titleTone: "text-msk-sun-400",
+    card: "bg-msk-coral-700",
+    titleTone: "text-msk-sun-300",
     bodyTone: "text-msk-cream-100",
     stage: "bg-msk-cream-100",
     lottie: "/methode/lottie/card1.json",
@@ -47,7 +49,7 @@ const STEPS: Step[] = [
     title: "Comprendre",
     description:
       "Notre équipe pluridisciplinaire — éducateurs Montessori, psychomotriciens, orthophonistes — croise ses observations avec votre témoignage de parent. Ensemble, nous construisons un portrait complet et bienveillant de votre enfant.",
-    card: "bg-msk-blue-900",
+    card: "bg-msk-blue-800",
     titleTone: "text-msk-sun-300",
     bodyTone: "text-white",
     stage: "bg-msk-blue-50",
@@ -58,10 +60,13 @@ const STEPS: Step[] = [
     title: "Adapter",
     description:
       "L'environnement, le matériel, le rythme : tout est ajusté. Le matériel sensoriel Montessori est personnalisé, les séances sont calibrées, les supports pédagogiques sont conçus sur-mesure.",
-    // Light: this mark is 4M px² of black.
-    card: "bg-msk-cream-100",
-    titleTone: "text-msk-coral-700",
-    bodyTone: "text-msk-night-800",
+    // Dark: this mark is yellow and red. An earlier area measurement read it
+    // as black-dominant, but that black path's bbox (4M px²) is far larger than
+    // the whole visible artwork (810x604) — it is an invisible backdrop, not
+    // paint. Yellow and red need a dark field.
+    card: "bg-msk-night-950",
+    titleTone: "text-msk-sun-300",
+    bodyTone: "text-msk-cream-100",
     stage: "bg-msk-cream-200",
     lottie: "/methode/lottie/card3.json",
   },
@@ -81,8 +86,8 @@ const STEPS: Step[] = [
     title: "Accompagner",
     description:
       "Vous n'êtes jamais seuls. Des bilans réguliers, un dialogue transparent, une équipe disponible. Nous co-construisons chaque progrès avec vous, au quotidien.",
-    card: "bg-msk-night-800",
-    titleTone: "text-msk-sun-300",
+    card: "bg-msk-blue-900",
+    titleTone: "text-msk-sun-400",
     bodyTone: "text-msk-cream-100",
     stage: "bg-msk-cream-100",
     lottie: "/methode/lottie/card5.json",
@@ -92,10 +97,10 @@ const STEPS: Step[] = [
     title: "Insérer",
     description:
       "L'objectif final : l'autonomie. Que ce soit l'intégration dans une école classique, une formation professionnelle ou simplement la confiance en soi — nous préparons votre enfant à voler de ses propres ailes.",
-    // Light: this mark is black-dominant too.
-    card: "bg-msk-cream-200",
-    titleTone: "text-msk-blue-800",
-    bodyTone: "text-msk-night-800",
+    // Light: this mark really is black-dominant (verified against its art bounds).
+    card: "bg-msk-blue-200",
+    titleTone: "text-msk-coral-700",
+    bodyTone: "text-msk-night-900",
     stage: "bg-msk-sun-50",
     lottie: "/methode/lottie/card6.json",
   },
@@ -209,7 +214,7 @@ export const MethodeStepsSection = () => {
             <span className="mt-2 block">/ {STEPS.length} étapes</span>
           </div>
 
-          <div className="relative h-[30rem] w-[27rem]">
+          <div className="relative h-[32rem] w-[28rem]">
             {STEPS.map((step, index) => (
               <div
                 key={step.id}
@@ -223,7 +228,7 @@ export const MethodeStepsSection = () => {
                   ref={(node) => {
                     tiltRefs.current[index] = node;
                   }}
-                  className={`flex h-full w-full flex-col items-center justify-between rounded-[1.75rem] p-9 text-center shadow-2xl ${step.card}`}
+                  className={`flex h-full w-full flex-col items-center justify-between rounded-[1.75rem] p-8 text-center shadow-2xl ${step.card}`}
                 >
                   <div>
                     {/* Body tone, not titleTone: at 14px this is normal-size
@@ -241,7 +246,7 @@ export const MethodeStepsSection = () => {
                     </h3>
                   </div>
 
-                  <MethodeLottie src={step.lottie} className="h-24 w-24" />
+                  <MethodeLottie src={step.lottie} className="h-44 w-44" />
 
                   <p
                     className={`text-[0.95rem] font-medium leading-snug ${step.bodyTone}`}
@@ -276,7 +281,7 @@ export const MethodeStepsSection = () => {
                 </h3>
               </div>
 
-              <MethodeLottie src={step.lottie} className="h-24 w-24" />
+              <MethodeLottie src={step.lottie} className="h-32 w-32" />
 
               <p
                 className={`text-[0.95rem] font-medium leading-snug ${step.bodyTone}`}

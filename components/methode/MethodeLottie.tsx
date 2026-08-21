@@ -15,14 +15,20 @@ import type { AnimationItem } from "lottie-web";
  * container's tone the way the inline SVG components do — pick card fills that
  * sit behind them rather than expecting them to adapt.
  */
+/** Frames sampled when measuring the artwork's travelled bounds. */
+const SAMPLES = 12;
+
 export const MethodeLottie = ({
   src,
   className,
   loop = true,
+  fit = true,
 }: {
   src: string;
   className?: string;
   loop?: boolean;
+  /** Crop the viewBox to the artwork so marks fill their box consistently. */
+  fit?: boolean;
 }) => {
   const host = useRef<HTMLDivElement | null>(null);
   const anim = useRef<AnimationItem | null>(null);
@@ -45,6 +51,51 @@ export const MethodeLottie = ({
         path: src,
       });
 
+      // Crop the viewBox to the artwork.
+      //
+      // These files are exported on whatever canvas the comp happened to use,
+      // and the art does not fill it consistently — card3 occupies 40% of its
+      // 2018px canvas while card5 occupies 93% of a 1080px one. Rendered into
+      // identical boxes that makes some marks look half the size of others.
+      //
+      // The bounds are sampled across the timeline and unioned, not taken from
+      // a single frame: these animations move, and cropping to frame 0 would
+      // clip whatever travels outside it later.
+      anim.current.addEventListener("DOMLoaded", () => {
+        if (!fit || !anim.current || !host.current) return;
+        const svg = host.current.querySelector("svg");
+        if (!svg) return;
+
+        const total = anim.current.totalFrames;
+        let x0 = Infinity;
+        let y0 = Infinity;
+        let x1 = -Infinity;
+        let y1 = -Infinity;
+
+        for (let i = 0; i <= SAMPLES; i += 1) {
+          anim.current.goToAndStop((total * i) / SAMPLES, true);
+          try {
+            const b = svg.getBBox();
+            if (!b.width || !b.height) continue;
+            x0 = Math.min(x0, b.x);
+            y0 = Math.min(y0, b.y);
+            x1 = Math.max(x1, b.x + b.width);
+            y1 = Math.max(y1, b.y + b.height);
+          } catch {
+            return;
+          }
+        }
+        anim.current.goToAndStop(0, true);
+
+        if (!Number.isFinite(x0) || x1 <= x0 || y1 <= y0) return;
+        const pad = Math.max(x1 - x0, y1 - y0) * 0.04;
+        svg.setAttribute(
+          "viewBox",
+          `${x0 - pad} ${y0 - pad} ${x1 - x0 + pad * 2} ${y1 - y0 + pad * 2}`,
+        );
+        svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+      });
+
       // Only run while on screen. Compositor-driven, so it works under Lenis.
       observer = new IntersectionObserver(
         (entries) => {
@@ -64,7 +115,7 @@ export const MethodeLottie = ({
       anim.current?.destroy();
       anim.current = null;
     };
-  }, [src, loop]);
+  }, [src, loop, fit]);
 
   return <div ref={host} aria-hidden className={className} />;
 };
