@@ -21,6 +21,11 @@ npm run lint     # next lint
 npx tsc --noEmit --incremental false   # typecheck without writing tsbuildinfo
 ```
 
+### Execution Rules
+
+- **No automatic `npm run build`**: The AI assistant must NEVER run `npm run build` automatically without explicit permission from the user. Running the build command overwrites files in `.next/` and breaks the active dev server, causing `ENOENT` errors for the developer. Only suggest running it when it is strictly necessary (e.g. final verification of a complex feature).
+
+
 ## Definition of done
 
 Do not report work complete until all four pass:

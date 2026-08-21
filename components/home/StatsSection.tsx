@@ -1,9 +1,16 @@
 "use client";
 
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 import CountUp from "react-countup";
 export const StatsSection = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const stats = [
     { value: 10, suffix: "+", label: "Années d'expérience", color: "text-msk-coral-500", bg: "bg-msk-coral-50" },
     { value: 40, suffix: "+", label: "Familles accompagnées", color: "text-msk-sun-500", bg: "bg-msk-sun-50" },
@@ -25,7 +32,11 @@ export const StatsSection = () => {
               className={`flex flex-col items-center justify-center text-center p-6 sm:p-8 rounded-4xl ${stat.bg} shadow-xs border border-white/60`}
             >
               <h3 className={`text-5xl sm:text-6xl md:text-7xl font-black tracking-tighter ${stat.color} mb-3 drop-shadow-xs`}>
-                <CountUp end={stat.value} duration={2.5} separator=" " enableScrollSpy scrollSpyOnce />
+                {mounted ? (
+                  <CountUp end={stat.value} duration={2.5} separator=" " enableScrollSpy scrollSpyOnce />
+                ) : (
+                  <span>0</span>
+                )}
                 {stat.suffix}
               </h3>
               <p className="text-sm sm:text-base font-bold text-slate-700 leading-snug">
