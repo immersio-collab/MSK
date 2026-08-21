@@ -1,118 +1,63 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { FadeUp } from "@/components/motion/FadeUp";
-import { WordPullUp } from "@/components/motion/WordPullUp";
+import { ChevronDown } from "lucide-react";
 
+import { MethodeAssetSlot } from "@/components/methode/MethodeAssetSlot";
+import { FadeUp } from "@/components/motion/FadeUp";
+
+/**
+ * Bold colour band with the scene artwork, and the page's title card overlapping
+ * its lower edge — the reference's hero arrangement. The band is cut on a slant
+ * so the card sits on a diagonal rather than a straight horizon.
+ */
 export const MethodeHeroSection = () => {
   return (
-    <section className="relative w-full pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden bg-msk-cream-50">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] pointer-events-none mix-blend-overlay"></div>
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-linear-to-l from-msk-blue-50/50 to-transparent pointer-events-none"></div>
+    <section className="relative w-full bg-msk-cream-100 pb-24 pt-24 md:pb-32">
+      {/* Colour band. `clip-path` gives the angled base; it is decorative only. */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-[58%] bg-msk-sun-400"
+        style={{ clipPath: "polygon(0 0, 100% 0, 100% 72%, 0 100%)" }}
+      />
 
-      <div className="w-full max-w-6xl mx-auto px-6 sm:px-10 relative z-10 flex flex-col items-center text-center">
-        <FadeUp>
-          <span className="inline-block py-1.5 px-4 mb-6 rounded-full bg-msk-blue-100 text-msk-blue-700 font-bold text-sm tracking-widest uppercase">
-            Notre Approche
-          </span>
-        </FadeUp>
+      {/* Soft cloud shapes, as in the reference. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <div className="absolute left-[6%] top-[46%] h-16 w-40 rounded-full bg-white/80 blur-[1px]" />
+        <div className="absolute right-[8%] top-[30%] h-20 w-52 rounded-full bg-white/70 blur-[1px]" />
+      </div>
 
-        <WordPullUp
-          text="Une méthode en 6 étapes, pensée pour votre enfant"
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-msk-night-900 tracking-tight leading-tight mb-8 max-w-5xl"
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 sm:px-10">
+        <MethodeAssetSlot
+          label="Illustration héro"
+          hint="Scène vectorielle plate — enfant, formes, nuages · ~900×420"
+          tone="bg-msk-sun-300/60 text-msk-night-900"
+          className="mx-auto h-56 w-full max-w-3xl md:h-72"
         />
 
-        <FadeUp delay={0.2}>
-          <p className="text-xl md:text-2xl text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed">
-            De l&apos;observation initiale à l&apos;insertion scolaire réussie : un chemin structuré, humain et scientifique.
-          </p>
-        </FadeUp>
+        {/* Title card, overlapping the band's lower edge. */}
+        <FadeUp delay={0.1}>
+          <div className="mx-auto mt-10 max-w-2xl rounded-[1.75rem] bg-msk-coral-600 px-8 py-10 text-center shadow-2xl md:px-12">
+            <h1 className="font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-msk-sun-200 sm:text-5xl md:text-6xl">
+              Une méthode en 6 étapes, pensée pour votre enfant
+            </h1>
 
-        {/* Animated SVG Path with 6 Glowing Points */}
-        <FadeUp delay={0.4} className="w-full max-w-4xl mx-auto mt-20 relative h-[150px] sm:h-[200px] hidden sm:block">
-          <svg viewBox="0 0 1000 200" className="w-full h-full overflow-visible" preserveAspectRatio="none">
-            {/* Background path (faint) */}
-            <path
-              d="M 50,100 C 250,-50 400,250 600,100 C 750,0 850,200 950,100"
-              fill="none"
-              stroke="#E2E8F0"
-              strokeWidth="4"
-              strokeLinecap="round"
-            />
-            {/* Animated path */}
-            <motion.path
-              d="M 50,100 C 250,-50 400,250 600,100 C 750,0 850,200 950,100"
-              fill="none"
-              stroke="url(#gradient-path)"
-              strokeWidth="6"
-              strokeLinecap="round"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 2.5, ease: "easeInOut", delay: 0.5 }}
-            />
+            <span className="mt-6 inline-block rounded-full bg-white px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-coral-700">
+              Notre Approche
+            </span>
 
-            {/* Definitions for gradient */}
-            <defs>
-              <linearGradient id="gradient-path" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#3B82F6" /> {/* msk-blue */}
-                <stop offset="50%" stopColor="#F43F5E" /> {/* msk-coral */}
-                <stop offset="100%" stopColor="#F59E0B" /> {/* msk-sun */}
-              </linearGradient>
-            </defs>
+            <p className="mx-auto mt-6 max-w-md text-base font-medium leading-snug text-white md:text-lg">
+              De l&apos;observation initiale à l&apos;insertion scolaire réussie :
+              un chemin structuré, humain et scientifique.
+            </p>
 
-            {/* 6 Glowing Points */}
-            {[
-              { cx: 50, cy: 100, delay: 0.5, label: "Observer" },
-              { cx: 215, cy: 45, delay: 0.9, label: "Comprendre" },
-              { cx: 405, cy: 145, delay: 1.3, label: "Adapter" },
-              { cx: 595, cy: 100, delay: 1.7, label: "Rééduquer" },
-              { cx: 775, cy: 95, delay: 2.1, label: "Accompagner" },
-              { cx: 950, cy: 100, delay: 2.5, label: "Insérer" },
-            ].map((point, index) => (
-              <g key={index}>
-                <motion.circle
-                  cx={point.cx}
-                  cy={point.cy}
-                  r="8"
-                  fill="#FFF"
-                  stroke={index < 2 ? "#3B82F6" : index < 4 ? "#F43F5E" : "#F59E0B"}
-                  strokeWidth="4"
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: point.delay, type: "spring" }}
-                />
-                <motion.circle
-                  cx={point.cx}
-                  cy={point.cy}
-                  r="16"
-                  fill="none"
-                  stroke={index < 2 ? "#3B82F6" : index < 4 ? "#F43F5E" : "#F59E0B"}
-                  strokeWidth="2"
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1.5, opacity: 0 }}
-                  transition={{
-                    duration: 1.5,
-                    delay: point.delay,
-                    repeat: Infinity,
-                    ease: "easeOut",
-                  }}
-                />
-                <motion.text
-                  x={point.cx}
-                  y={point.cy + 30}
-                  textAnchor="middle"
-                  fill="#475569"
-                  className="text-xs font-bold uppercase tracking-wider"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: point.delay + 0.2 }}
-                >
-                  {point.label}
-                </motion.text>
-              </g>
-            ))}
-          </svg>
+            <a
+              href="#etapes"
+              aria-label="Aller aux six étapes"
+              className="mx-auto mt-8 flex h-11 w-11 items-center justify-center rounded-full border-2 border-white/70 text-white transition-colors hover:bg-white hover:text-msk-coral-700"
+            >
+              <ChevronDown className="h-5 w-5" aria-hidden />
+            </a>
+          </div>
         </FadeUp>
       </div>
     </section>

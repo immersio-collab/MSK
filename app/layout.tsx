@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { DM_Sans, Fredoka, Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -27,6 +27,15 @@ const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
   display: "swap",
   weight: ["500", "600", "700", "800"],
+});
+
+// Rounded display face for the oversized all-caps titles on /notre-centre/la-methode.
+// Exposed to Tailwind as `font-display` via --font-display in globals.css.
+const fredoka = Fredoka({
+  subsets: ["latin"],
+  variable: "--font-fredoka",
+  display: "swap",
+  weight: ["500", "600", "700"],
 });
 
 export const viewport: Viewport = {
@@ -87,7 +96,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="fr" className={cn(dmSans.variable, inter.variable, jakarta.variable, "font-sans")}>
+    <html lang="fr" className={cn(dmSans.variable, inter.variable, jakarta.variable, fredoka.variable, "font-sans")}>
       <head>
         <script
           type="application/ld+json"
