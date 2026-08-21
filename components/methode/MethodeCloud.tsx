@@ -46,8 +46,10 @@ interface MethodeCloudProps {
   motion?: "parallax" | "float" | "rise";
   /** `float` only: seconds for one full crossing. Lower is faster. */
   speed?: number;
-  /** `float` only: 0-1 starting point in the loop, to spread clouds apart. */
+  /** 0-1 starting point in the cycle, to spread clouds apart. */
   phase?: number;
+  /** `rise` only: full bottom-to-top passes across the scope. One per card. */
+  cycles?: number;
 }
 
 export const MethodeCloud = ({
@@ -59,6 +61,7 @@ export const MethodeCloud = ({
   motion = "parallax",
   speed = 46,
   phase = 0,
+  cycles = 1,
 }: MethodeCloudProps) => {
   const ref = useRef<SVGSVGElement | null>(null);
 
@@ -132,23 +135,41 @@ export const MethodeCloud = ({
       }
 
       if (motion === "rise") {
-        // Bottom to top across the owning section, scrubbed — so in the deck
-        // the clouds climb as the cards advance.
-        const scope = el.closest("section");
-        gsap.fromTo(
-          el,
-          { yPercent: weight * 150 + offset * 150 },
-          {
-            yPercent: -weight * 150 + offset * 150,
-            ease: "none",
-            scrollTrigger: {
-              trigger: scope ?? el,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
-            },
+        // One full bottom-to-top pass per card, then round again from below.
+        //
+        // Driven off a wrapped progress rather than a plain fromTo: the deck's
+        // own trigger runs 0-1 across the whole column, so multiplying by
+        // `cycles` and taking the remainder gives each card its own pass.
+        //
+        // Travel is measured against the viewport, not yPercent. yPercent is a
+        // share of the element's own height, so at these sizes a cloud would
+        // shift about 70px — nowhere near "all the way up", and the wrap would
+        // land mid-frame in plain sight. Spanning the frame plus twice the
+        // cloud height puts both ends safely off-screen, so the reset is
+        // invisible.
+        const scope =
+          el.closest<HTMLElement>("[data-cloud-scope]") ?? el.closest("section");
+        // Frame + twice the cloud + a margin. Without the margin the extremes
+        // sit exactly flush with the frame edges — measured at 1px of
+        // clearance — which leaves no room for the element's base offset to be
+        // slightly off centre, and the reset shows as a flicker at the rim.
+        const WRAP_MARGIN = 120;
+        const span = () =>
+          window.innerHeight +
+          el.getBoundingClientRect().height * 2 +
+          WRAP_MARGIN;
+
+        ScrollTrigger.create({
+          trigger: scope ?? el,
+          start: "top top",
+          end: "bottom center",
+          scrub: true,
+          onUpdate: (self) => {
+            const local = (((self.progress * cycles + phase) % 1) + 1) % 1;
+            const s = span();
+            gsap.set(el, { y: s / 2 - local * s });
           },
-        );
+        });
         return;
       }
 
@@ -170,7 +191,7 @@ export const MethodeCloud = ({
     }, el);
 
     return () => ctx.revert();
-  }, [weight, offset, delay, motion, speed, phase]);
+  }, [weight, offset, delay, motion, speed, phase, cycles]);
 
   const { viewBox, d } = SHAPES[shape];
 
