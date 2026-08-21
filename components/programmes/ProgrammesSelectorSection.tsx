@@ -6,7 +6,7 @@ import { CheckCircle2, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-type ProgramId = "petite-enfance" | "primaire" | "adolescents" | "adultes";
+type ProgramId = "maternelle" | "primaire";
 
 interface ProgramData {
   id: ProgramId;
@@ -23,8 +23,8 @@ interface ProgramData {
 
 const programs: ProgramData[] = [
   {
-    id: "petite-enfance",
-    title: "Petite Enfance",
+    id: "maternelle",
+    title: "Maternelle",
     age: "2-5 ans",
     color: "bg-msk-coral-500",
     description: "Un environnement préparé pour favoriser l'éveil sensoriel, le langage et l'autonomie des tout-petits. Nous respectons le rythme de chaque enfant pour construire des fondations solides.",
@@ -36,8 +36,8 @@ const programs: ProgramData[] = [
     ],
     conditions: ["Retard de langage", "Troubles du spectre autistique (léger)", "Hyperactivité précoce"],
     schedule: "Matinées structurées (Montessori) / Après-midis sieste et jeux libres",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1000",
-    link: "/programmes/petite-enfance"
+    image: "/maternelle1.jpg",
+    link: "/programmes/maternelle"
   },
   {
     id: "primaire",
@@ -53,47 +53,13 @@ const programs: ProgramData[] = [
     ],
     conditions: ["TDAH", "Dyslexie, Dysorthographie", "Dyspraxie", "Dyscalculie"],
     schedule: "Apprentissages cognitifs (matin) / Ateliers thérapeutiques et créatifs (après-midi)",
-    image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1000",
+    image: "/primaire1.webp",
     link: "/programmes/primaire"
-  },
-  {
-    id: "adolescents",
-    title: "Adolescents",
-    age: "12-17 ans",
-    color: "bg-msk-blue-500",
-    description: "Un accompagnement axé sur l'orientation, les méthodes de travail et le bien-être psychologique pour traverser sereinement les années collège et lycée.",
-    objectives: [
-      "Méthodologie d'apprentissage (apprendre à apprendre)",
-      "Gestion du stress et de l'anxiété scolaire",
-      "Accompagnement à l'orientation professionnelle",
-      "Développement de l'autonomie et de la responsabilisation"
-    ],
-    conditions: ["TDAH", "Phobie scolaire", "Troubles de l'attention", "Haut Potentiel Intellectuel (HPI)"],
-    schedule: "Soutien scolaire / Ateliers de méthodologie / Séances psy",
-    image: "https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&q=80&w=1000",
-    link: "/programmes/adolescents"
-  },
-  {
-    id: "adultes",
-    title: "Adultes",
-    age: "18+ ans",
-    color: "bg-msk-night-700",
-    description: "Des thérapies brèves, du coaching et des formations pour les adultes neuro-atypiques ou les parents souhaitant mieux accompagner leurs enfants.",
-    objectives: [
-      "Coaching professionnel pour profils atypiques",
-      "Soutien psychologique et gestion émotionnelle",
-      "Guidance parentale et ateliers éducatifs",
-      "Bilan de compétences et réorientation"
-    ],
-    conditions: ["TDAH Adulte", "Burnout", "Difficultés relationnelles", "Parents d'enfants neuro-atypiques"],
-    schedule: "Sur rendez-vous (Consultations individuelles ou groupes de parole)",
-    image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=1000",
-    link: "/programmes/adultes"
   }
 ];
 
 export const ProgrammesSelectorSection: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<ProgramId>("petite-enfance");
+  const [activeTab, setActiveTab] = useState<ProgramId>("maternelle");
 
   const activeProgram = programs.find(p => p.id === activeTab)!;
 
@@ -192,15 +158,7 @@ export const ProgrammesSelectorSection: React.FC = () => {
                   </div>
                 </div>
 
-                <div>
-                  <Link 
-                    href={activeProgram.link}
-                    className={`inline-flex items-center justify-center gap-2 px-8 py-4 ${activeProgram.color} text-white font-bold rounded-xl transition-transform hover:-translate-y-1 shadow-lg group`}
-                  >
-                    Découvrir ce programme
-                    <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </div>
+
               </div>
 
               {/* Right: Image */}
