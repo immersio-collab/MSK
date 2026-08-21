@@ -80,15 +80,6 @@
   --animate-blob: blob 7s infinite ease-in-out;
   --animate-marquee: marquee 38s linear infinite;
 
-  /* Step-card motif. The two plates counter-rotate; MethodeCardMotif sets
-     `transform-box: fill-box` inline so each pivots on its own centre. */
-  --animate-motif-spin: motif-spin 32s linear infinite;
-
-  @keyframes motif-spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
 
 
   @keyframes marquee {

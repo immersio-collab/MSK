@@ -1,10 +1,12 @@
 "use client";
 
-import Script from "next/script";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { MethodeCardLottie } from "@/components/methode/MethodeCardLottie";
-import { MethodeCardMotif } from "@/components/methode/MethodeCardMotif";
-import { useScrollStepIndex } from "@/hooks/use-scroll-step-index";
+import { MethodeLottie } from "@/components/methode/MethodeLottie";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Step {
   id: string;
@@ -16,18 +18,17 @@ interface Step {
   bodyTone: string;
   /** Fill of the section behind the deck while this card is in front. */
   stage: string;
-  /** When set, this card's mark is a Lottie instead of the inline SVG motif. */
-  lottie?: string;
+  /** Animated mark for this card, from public/methode/lottie. */
+  lottie: string;
 }
-
-/** Loaded once for the whole section, not per card. */
-const DOTLOTTIE_PLAYER =
-  "https://unpkg.com/@lottiefiles/dotlottie-wc@0.7.1/dist/dotlottie-wc.js";
 
 /**
  * Copy is unchanged from the previous timeline; only the presentation differs.
- * Each card pairs a bold fill with a contrasting title, the way the reference
- * alternates its service cards.
+ *
+ * Card fills are chosen from what each Lottie mark actually contains, measured
+ * by painted area: marks built mainly from black (03, 06) need a light card or
+ * they disappear; marks built from yellow, cream and red (01, 02, 04, 05) need
+ * a dark one. Getting this backwards is what put card 06's red at 1.28:1.
  */
 const STEPS: Step[] = [
   {
@@ -35,66 +36,68 @@ const STEPS: Step[] = [
     title: "Observer",
     description:
       "Avant toute chose, nous observons. Pas de tests standardisés froids. Nos éducateurs passent du temps avec votre enfant dans un environnement naturel pour identifier ses forces, ses sensibilités sensorielles et son style d'apprentissage unique.",
-    // Dark fill on purpose. This card's mark is the Lottie, whose colours are
-    // baked into the JSON (#fdcb40 / #fff9dd); on the sun-400 fill this card
-    // used to have, the yellow measured 1.07:1 against the background — the
-    // animation was invisible. A near-black card lets it read.
     card: "bg-msk-night-950",
     titleTone: "text-msk-sun-400",
     bodyTone: "text-msk-cream-100",
     stage: "bg-msk-cream-100",
-    lottie:
-      "https://maximatherapy.com/assets/lottie/0Program2/0Program2-icons/01.json",
+    lottie: "/methode/lottie/card1.json",
   },
   {
     id: "02",
     title: "Comprendre",
     description:
       "Notre équipe pluridisciplinaire — éducateurs Montessori, psychomotriciens, orthophonistes — croise ses observations avec votre témoignage de parent. Ensemble, nous construisons un portrait complet et bienveillant de votre enfant.",
-    card: "bg-msk-blue-700",
+    card: "bg-msk-blue-900",
     titleTone: "text-msk-sun-300",
     bodyTone: "text-white",
     stage: "bg-msk-blue-50",
+    lottie: "/methode/lottie/card2.json",
   },
   {
     id: "03",
     title: "Adapter",
     description:
       "L'environnement, le matériel, le rythme : tout est ajusté. Le matériel sensoriel Montessori est personnalisé, les séances sont calibrées, les supports pédagogiques sont conçus sur-mesure.",
-    card: "bg-white",
-    titleTone: "text-msk-coral-600",
-    bodyTone: "text-msk-night-700",
+    // Light: this mark is 4M px² of black.
+    card: "bg-msk-cream-100",
+    titleTone: "text-msk-coral-700",
+    bodyTone: "text-msk-night-800",
     stage: "bg-msk-cream-200",
+    lottie: "/methode/lottie/card3.json",
   },
   {
     id: "04",
     title: "Rééduquer",
     description:
       "Grâce à la Neuro-Gym et à la rééducation ciblée, nous stimulons les connexions neuro-motrices, régulons l'attention et libérons le potentiel cognitif. Des exercices concrets, mesurables, qui changent la vie.",
-    card: "bg-msk-coral-600",
-    titleTone: "text-msk-sun-200",
-    bodyTone: "text-white",
+    card: "bg-msk-coral-900",
+    titleTone: "text-msk-sun-400",
+    bodyTone: "text-msk-cream-100",
     stage: "bg-msk-coral-50",
+    lottie: "/methode/lottie/card4.json",
   },
   {
     id: "05",
     title: "Accompagner",
     description:
       "Vous n'êtes jamais seuls. Des bilans réguliers, un dialogue transparent, une équipe disponible. Nous co-construisons chaque progrès avec vous, au quotidien.",
-    card: "bg-msk-night-900",
-    titleTone: "text-msk-sun-400",
+    card: "bg-msk-night-800",
+    titleTone: "text-msk-sun-300",
     bodyTone: "text-msk-cream-100",
     stage: "bg-msk-cream-100",
+    lottie: "/methode/lottie/card5.json",
   },
   {
     id: "06",
     title: "Insérer",
     description:
       "L'objectif final : l'autonomie. Que ce soit l'intégration dans une école classique, une formation professionnelle ou simplement la confiance en soi — nous préparons votre enfant à voler de ses propres ailes.",
+    // Light: this mark is black-dominant too.
     card: "bg-msk-cream-200",
     titleTone: "text-msk-blue-800",
     bodyTone: "text-msk-night-800",
     stage: "bg-msk-sun-50",
+    lottie: "/methode/lottie/card6.json",
   },
 ];
 
@@ -102,56 +105,103 @@ const STEPS: Step[] = [
 const STEP_VH = 62;
 
 /**
- * Resting tilt by position in the stack. Index 0 is the front card and stays at
- * 0° so its copy reads straight; the rest fan out alternately so their corners
- * show past the card in front.
+ * Resting tilt per card. Kept small: the reference fans harder, but these cards
+ * carry four to six lines of French copy and tilted body text at that length is
+ * markedly harder to read.
  */
-const FAN_ANGLES = [0, 7, -6, 10, -9, 4];
+const FAN_ANGLES = [0, 6, -5, 7, -6, 4];
+
+/** Direction each card tips as it leaves, alternating so exits do not all lean the same way. */
+const EXIT_SIGN = [1, -1, 1, -1, 1, -1];
+
+/**
+ * How wide each card's exit window is, measured in slots.
+ *
+ * At 1 the windows would butt up against each other and the deck would step
+ * card-by-card. At 1.5 consecutive exits overlap by half a slot, so one card is
+ * always beginning to leave before the last has finished — which is what makes
+ * the sequence read as continuous rather than as six discrete swaps.
+ */
+const EXIT_WINDOW = 1.5;
+
+const clamp01 = (n: number) => Math.min(1, Math.max(0, n));
 
 export const MethodeStepsSection = () => {
-  const { ref, active } = useScrollStepIndex<HTMLDivElement>();
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const tiltRefs = useRef<(HTMLElement | null)[]>([]);
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const root = scrollRef.current;
+    if (!root) return;
+
+    const ctx = gsap.context(() => {
+      // The deck fans open when it arrives rather than sitting pre-fanned.
+      cardRefs.current.forEach((card, index) => {
+        if (!card) return;
+        gsap.fromTo(
+          card,
+          { rotate: 0 },
+          {
+            rotate: FAN_ANGLES[index] ?? 0,
+            delay: 0.5,
+            duration: 1.2,
+            ease: "elastic.out(2, 0.8)",
+            scrollTrigger: { trigger: root, start: "top 80%" },
+          },
+        );
+      });
+
+      ScrollTrigger.create({
+        trigger: root,
+        start: "top top",
+        end: "bottom center",
+        scrub: true,
+        onUpdate: (self) => {
+          const p = self.progress;
+          const n = STEPS.length;
+
+          STEPS.forEach((_, index) => {
+            const from = index / n;
+            const to = (index + EXIT_WINDOW) / n;
+            const local = clamp01((p - from) / (to - from));
+
+            // gsap.to on every update, rather than writing the value straight
+            // in, so each card *damps toward* the scrub position. That lag is
+            // where the springiness comes from — setting it directly would feel
+            // rigidly welded to the scrollbar.
+            gsap.to(cardRefs.current[index], {
+              yPercent: -local * 170,
+              duration: 1,
+              ease: "elastic.out(1, 0.5)",
+              overwrite: "auto",
+            });
+            gsap.to(tiltRefs.current[index], {
+              rotate: local * 40 * (EXIT_SIGN[index] ?? 1),
+              duration: 1,
+              ease: "elastic.out(1, 0.5)",
+              overwrite: "auto",
+            });
+          });
+
+          setActive(Math.min(n - 1, Math.floor(p * n)));
+        },
+      });
+    }, root);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section
-      id="etapes"
-      className={`relative w-full transition-colors duration-700 ${STEPS[active].stage}`}
-    >
-      {/* Registers <dotlottie-wc>. Only cards with a `lottie` use it, and the
-          deck and the mobile stack share this one load. */}
-      {STEPS.some((step) => step.lottie) && (
-        <Script
-          src={DOTLOTTIE_PLAYER}
-          type="module"
-          strategy="afterInteractive"
-          // A cross-origin module is always fetched in CORS mode, so without
-          // this the emitted <link rel="preload"> mismatches and is thrown
-          // away — the browser then downloads the script a second time.
-          crossOrigin="anonymous"
-        />
-      )}
-
-      {/* ---------- Sticky flip deck (lg and up) ---------- */}
+    <section id="etapes" className="relative w-full bg-msk-cream-100">
+      {/* ---------- Scrubbed deck (lg and up) ---------- */}
       <div
-        ref={ref}
+        ref={scrollRef}
         className="relative hidden lg:block"
         style={{ height: `${STEPS.length * STEP_VH}vh` }}
       >
-        {/* Sentinel bands: contiguous, one per card. Geometry only, no paint. */}
-        <div aria-hidden className="pointer-events-none absolute inset-0">
-          {STEPS.map((step, index) => (
-            <div
-              key={step.id}
-              data-step-index={index}
-              className="absolute inset-x-0"
-              style={{ top: `${index * STEP_VH}vh`, height: `${STEP_VH}vh` }}
-            />
-          ))}
-        </div>
-
         <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
-          {/* Step counter, mirroring the reference's fixed corner label. */}
-          {/* Full-strength night-700, not /60: at 14px this needs 4.5:1 and the
-              60% tint only reaches 3.51 against the pale stage fills. */}
           <div className="absolute left-10 top-1/2 -translate-y-1/2 font-display text-sm font-semibold uppercase tracking-[0.2em] text-msk-night-700">
             <span className="block text-6xl leading-none text-msk-night-900">
               {STEPS[active].id}
@@ -160,37 +210,25 @@ export const MethodeStepsSection = () => {
           </div>
 
           <div className="relative h-[30rem] w-[27rem]">
-            {STEPS.map((step, index) => {
-              const offset = index - active;
-              const done = offset < 0;
-
-              // The front card sits square-on so its copy stays readable; the
-              // ones still to come fan out behind it by stack position, not by
-              // card, so the arrangement holds as the deck advances. Spent
-              // cards tumble up out of the sticky frame.
-              // -170%, not -135%: the card starts centred in a viewport-tall
-              // frame, so it has to travel its own half-height plus half the
-              // frame — and the tilt adds a little more — before its lowest
-              // corner clears the top edge. Anything less fades out in view.
-              const transform = done
-                ? `translateY(-170%) rotate(-14deg)`
-                : `rotate(${FAN_ANGLES[offset % FAN_ANGLES.length]}deg)`;
-
-              return (
+            {STEPS.map((step, index) => (
+              <div
+                key={step.id}
+                ref={(node) => {
+                  cardRefs.current[index] = node;
+                }}
+                className="absolute inset-0"
+                style={{ zIndex: STEPS.length - index }}
+              >
                 <article
-                  key={step.id}
-                  aria-hidden={offset !== 0}
-                  className={`absolute inset-0 flex flex-col items-center justify-between rounded-[1.75rem] p-9 text-center shadow-2xl transition-all duration-700 ease-out ${step.card}`}
-                  style={{
-                    transform,
-                    opacity: done ? 0 : 1,
-                    zIndex: STEPS.length - offset,
+                  ref={(node) => {
+                    tiltRefs.current[index] = node;
                   }}
+                  className={`flex h-full w-full flex-col items-center justify-between rounded-[1.75rem] p-9 text-center shadow-2xl ${step.card}`}
                 >
                   <div>
                     {/* Body tone, not titleTone: at 14px this is normal-size
                         text and needs 4.5:1, which the title colours miss on
-                        the blue and coral fills. */}
+                        the lighter fills. */}
                     <span
                       className={`font-display text-xs font-semibold uppercase tracking-[0.2em] ${step.bodyTone}`}
                     >
@@ -203,14 +241,7 @@ export const MethodeStepsSection = () => {
                     </h3>
                   </div>
 
-                  {step.lottie ? (
-                    <MethodeCardLottie src={step.lottie} className="h-24 w-24" />
-                  ) : (
-                    <MethodeCardMotif
-                      delay={`${index * -4}s`}
-                      className={`h-24 w-24 ${step.titleTone}`}
-                    />
-                  )}
+                  <MethodeLottie src={step.lottie} className="h-24 w-24" />
 
                   <p
                     className={`text-[0.95rem] font-medium leading-snug ${step.bodyTone}`}
@@ -218,8 +249,8 @@ export const MethodeStepsSection = () => {
                     {step.description}
                   </p>
                 </article>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -227,7 +258,7 @@ export const MethodeStepsSection = () => {
       {/* ---------- Plain stack (below lg) ---------- */}
       <div className="mx-auto max-w-md px-6 py-20 sm:px-10 lg:hidden">
         <ul className="flex flex-col gap-6">
-          {STEPS.map((step, index) => (
+          {STEPS.map((step) => (
             <li
               key={step.id}
               className={`flex flex-col items-center gap-6 rounded-[1.75rem] p-8 text-center shadow-lg ${step.card}`}
@@ -245,14 +276,7 @@ export const MethodeStepsSection = () => {
                 </h3>
               </div>
 
-              {step.lottie ? (
-                <MethodeCardLottie src={step.lottie} className="h-24 w-24" />
-              ) : (
-                <MethodeCardMotif
-                  delay={`${index * -4}s`}
-                  className={`h-24 w-24 ${step.titleTone}`}
-                />
-              )}
+              <MethodeLottie src={step.lottie} className="h-24 w-24" />
 
               <p
                 className={`text-[0.95rem] font-medium leading-snug ${step.bodyTone}`}

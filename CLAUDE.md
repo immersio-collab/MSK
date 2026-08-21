@@ -157,6 +157,20 @@ className, and reference the variable — never a literal family name.
 
 Check for an existing equivalent before adding one. This project shipped both
 `framer-motion` and `motion` (the same library, two majors apart) and carried
-`gsap` with zero imports. Use `framer-motion`; it is the established choice.
+`gsap` with zero imports.
+
+`framer-motion` remains the default for component-level animation — it has ~27
+consumers and every entrance, fade and layout transition on the site uses it.
+
+**`gsap` + `ScrollTrigger` were deliberately reintroduced** (2026-08-21) for
+`/notre-centre/la-methode`, where the design calls for scrubbed scroll
+timelines and `elastic.out` easing that framer-motion does not express directly.
+This is a considered exception, not the earlier accident — unlike then, it has
+real consumers. Keep it to scroll-driven work; do not port existing
+framer-motion components to it piecemeal, or the codebase ends up with two
+half-migrated animation layers.
+
+`lottie-web` renders the JSON marks in `public/methode/lottie`. Import it
+dynamically — it is ~250KB and belongs nowhere near the initial bundle.
 
 Removing the last consumer of a package means removing the package.
