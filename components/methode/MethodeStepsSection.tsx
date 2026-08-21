@@ -208,21 +208,24 @@ export const MethodeStepsSection = () => {
         style={{ height: `${STEPS.length * STEP_VH}vh` }}
       >
         <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
-          {/* Behind the deck. Low weights so they drift slowly and do not
-              compete with the cards for attention. */}
+          {/* Behind the deck, climbing bottom-to-top as the cards advance.
+              Differing weights give them separate rates so they separate on
+              the way up rather than rising as one layer. */}
           <div aria-hidden className="pointer-events-none absolute inset-0">
             <MethodeCloud
+              motion="rise"
               shape="b"
-              weight={0.28}
-              offset={-0.15}
-              className="absolute left-[8%] top-[18%] w-44 text-white xl:w-60"
+              weight={0.55}
+              offset={-0.1}
+              className="absolute left-[8%] top-[42%] w-44 text-white xl:w-60"
             />
             <MethodeCloud
+              motion="rise"
               shape="a"
-              weight={0.45}
-              offset={0.2}
+              weight={0.8}
+              offset={0.15}
               delay={0.15}
-              className="absolute right-[7%] bottom-[16%] w-40 text-white xl:w-56"
+              className="absolute right-[7%] top-[58%] w-40 text-white xl:w-56"
             />
           </div>
 

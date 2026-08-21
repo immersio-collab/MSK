@@ -38,6 +38,16 @@ interface MethodeCloudProps {
   offset?: number;
   /** Stagger for the entrance pop. */
   delay?: number;
+  /**
+   * - `parallax` drifts vertically with page scroll (the default).
+   * - `float` crosses the viewport sideways forever, independent of scroll.
+   * - `rise` travels bottom-to-top across its section, scrubbed to scroll.
+   */
+  motion?: "parallax" | "float" | "rise";
+  /** `float` only: seconds for one full crossing. Lower is faster. */
+  speed?: number;
+  /** `float` only: 0-1 starting point in the loop, to spread clouds apart. */
+  phase?: number;
 }
 
 export const MethodeCloud = ({
@@ -46,6 +56,9 @@ export const MethodeCloud = ({
   weight = 1,
   offset = 0,
   delay = 0,
+  motion = "parallax",
+  speed = 46,
+  phase = 0,
 }: MethodeCloudProps) => {
   const ref = useRef<SVGSVGElement | null>(null);
 
@@ -54,21 +67,90 @@ export const MethodeCloud = ({
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      // `from` with immediateRender:false, not `fromTo`. A fromTo would stamp
-      // scale:0 on at mount, so any failure to run the tween — gsap not
-      // loading, a JS error earlier in the page — would leave the clouds
-      // permanently invisible rather than merely unanimated. This way the
-      // shrunk state is only applied once the trigger has actually fired, and
-      // the resting state is the visible one.
-      gsap.from(el, {
-        scale: 0,
-        transformOrigin: "center center",
-        duration: 1.2,
-        ease: "elastic.out(1, 1)",
-        delay,
-        immediateRender: false,
-        scrollTrigger: { trigger: el, start: "top bottom" },
-      });
+      // No entrance pop for floaters: they drift in from off the left edge, so
+      // scaling them up as well is both redundant and a liability — above the
+      // fold the trigger fires at once, and if the tween could not then finish
+      // the cloud would be stranded at scale 0.
+      if (motion !== "float") {
+        // `from` with immediateRender:false, not `fromTo`. A fromTo would stamp
+        // scale:0 on at mount, so any failure to run the tween — gsap not
+        // loading, a JS error earlier in the page — would leave the clouds
+        // permanently invisible rather than merely unanimated. This way the
+        // shrunk state is only applied once the trigger has actually fired, and
+        // the resting state is the visible one.
+        gsap.from(el, {
+          scale: 0,
+          transformOrigin: "center center",
+          duration: 1.2,
+          ease: "elastic.out(1, 1)",
+          delay,
+          immediateRender: false,
+          scrollTrigger: { trigger: el, start: "top bottom" },
+        });
+      }
+
+      if (motion === "float") {
+        // Seamless sideways loop. The cloud starts one width off the left edge
+        // and travels the viewport plus its own width, so the wrap point sits
+        // off-screen and never shows as a jump. `modifiers` does the wrapping,
+        // which keeps it to a single tween rather than a restart per lap.
+        const span = () => window.innerWidth + el.getBoundingClientRect().width;
+        let total = span();
+
+        // fromTo with immediateRender:false rather than a bare set + to. The
+        // start state parks the cloud one width off the left edge, which is
+        // what makes the wrap seam land off-screen — but applying that at mount
+        // would hide the clouds outright if the tween never ran. Deferring it
+        // to tween start keeps the CSS position as the resting state.
+        const loop = gsap.fromTo(
+          el,
+          { xPercent: -100, x: 0 },
+          {
+            x: total,
+            duration: speed,
+            ease: "none",
+            repeat: -1,
+            immediateRender: false,
+            modifiers: {
+              x: gsap.utils.unitize((x: string) => parseFloat(x) % total),
+            },
+          },
+        );
+
+        // Phase, not delay: a delay would stall the cloud off-screen before its
+        // first pass. Seeking into the loop starts it mid-crossing instead.
+        loop.progress(phase % 1);
+
+        // Recompute on resize, or the wrap distance stops matching the viewport
+        // and the cloud starts jumping mid-screen.
+        const onResize = () => {
+          total = span();
+          loop.invalidate();
+        };
+        window.addEventListener("resize", onResize);
+        return () => window.removeEventListener("resize", onResize);
+      }
+
+      if (motion === "rise") {
+        // Bottom to top across the owning section, scrubbed — so in the deck
+        // the clouds climb as the cards advance.
+        const scope = el.closest("section");
+        gsap.fromTo(
+          el,
+          { yPercent: weight * 150 + offset * 150 },
+          {
+            yPercent: -weight * 150 + offset * 150,
+            ease: "none",
+            scrollTrigger: {
+              trigger: scope ?? el,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          },
+        );
+        return;
+      }
 
       const centre = offset * 150;
       gsap.fromTo(
@@ -88,7 +170,7 @@ export const MethodeCloud = ({
     }, el);
 
     return () => ctx.revert();
-  }, [weight, offset, delay]);
+  }, [weight, offset, delay, motion, speed, phase]);
 
   const { viewBox, d } = SHAPES[shape];
 

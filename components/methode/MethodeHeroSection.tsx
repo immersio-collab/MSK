@@ -21,29 +21,31 @@ export const MethodeHeroSection = () => {
         style={{ clipPath: "polygon(0 0, 100% 0, 100% 72%, 0 100%)" }}
       />
 
-      {/* Clouds. Differing weights give them separate parallax rates, so they
-          part as the page moves rather than travelling as one flat layer. */}
+      {/* Clouds drift sideways forever, independent of scroll. Each is pinned
+          to left-0 and offset by the tween, so the off-screen wrap point works
+          out from the viewport width. Differing speeds keep them from moving
+          as a single block. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
         <MethodeCloud
+          motion="float"
           shape="a"
-          weight={0.35}
-          offset={-0.1}
-          delay={0.2}
-          className="absolute left-[4%] top-[52%] w-40 text-white md:w-56"
+          speed={52}
+          phase={0.2}
+          className="absolute left-0 top-[52%] w-40 text-white md:w-56"
         />
         <MethodeCloud
+          motion="float"
           shape="b"
-          weight={0.6}
-          offset={0.05}
-          delay={0.35}
-          className="absolute right-[6%] top-[26%] w-48 text-white md:w-72"
+          speed={38}
+          phase={0.5}
+          className="absolute left-0 top-[26%] w-48 text-white md:w-72"
         />
         <MethodeCloud
+          motion="float"
           shape="a"
-          weight={0.2}
-          offset={0.15}
-          delay={0.5}
-          className="absolute left-[38%] top-[8%] hidden w-32 text-msk-cream-50 lg:block"
+          speed={64}
+          phase={0.8}
+          className="absolute left-0 top-[8%] hidden w-32 text-msk-cream-50 lg:block"
         />
       </div>
 
