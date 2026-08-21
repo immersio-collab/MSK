@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { CornerDownRight } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
 
 import { FadeUp } from "@/components/motion/FadeUp";
+import { useScrollStepIndex } from "@/hooks/use-scroll-step-index";
 
 interface Stat {
   value: string;
@@ -69,10 +69,10 @@ const ghostCenterVh = (index: number) =>
   index * (STEP_VH - 100 / STATS.length) + 50;
 
 /**
- * Contiguous, non-overlapping bands — one per stat — used as IntersectionObserver
- * sentinels. Stat `i` is active while the viewport's mid-line sits inside band `i`,
- * and each band opens exactly where that stat's ghost reaches the mid-line, so the
- * tile switches at the instant the ghost lines up behind it.
+ * Contiguous, non-overlapping bands — one per stat — consumed by
+ * `useScrollStepIndex`. Stat `i` is active while the viewport's mid-line sits
+ * inside band `i`, and each band opens exactly where that stat's ghost reaches
+ * the mid-line, so the tile switches at the instant the ghost lines up behind it.
  */
 const sentinelBandVh = (index: number) => {
   const start = index === 0 ? 0 : ghostCenterVh(index);
@@ -91,45 +91,7 @@ const StatValue = ({ value, unit }: Pick<Stat, "value" | "unit">) => (
 );
 
 export const StatsScrollSection = () => {
-  const pinnedRef = useRef<HTMLDivElement | null>(null);
-  const [active, setActive] = useState(0);
-
-  useEffect(() => {
-    const root = pinnedRef.current;
-    if (!root) return;
-
-    // Deliberately not a `scroll` listener. This page mounts Lenis (via
-    // ScrollEffectSection), which owns scrolling; an observer measures where the
-    // section actually is rather than assuming who moved it, so it behaves the
-    // same under Lenis, anchor jumps, keyboard scroll and a restored scroll
-    // position — and costs nothing while the section is off-screen.
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // A fast flick can coalesce several crossings into one callback, and
-        // entry order is not chronological — take the most recent one that is
-        // actually intersecting. The bands are disjoint, so it is unambiguous.
-        let index = -1;
-        let latest = -1;
-        for (const entry of entries) {
-          if (!entry.isIntersecting || entry.time < latest) continue;
-          latest = entry.time;
-          index = Number((entry.target as HTMLElement).dataset.statIndex);
-        }
-        if (index < 0) return;
-        setActive((current) => (current === index ? current : index));
-      },
-      // A hairline band across the vertical middle of the viewport. The extra
-      // 0.1% keeps the root from collapsing to zero area, which some engines
-      // treat as never intersecting.
-      { rootMargin: "-50% 0px -49.9% 0px", threshold: 0 },
-    );
-
-    root
-      .querySelectorAll<HTMLElement>("[data-stat-index]")
-      .forEach((node) => observer.observe(node));
-
-    return () => observer.disconnect();
-  }, []);
+  const { ref: pinnedRef, active } = useScrollStepIndex<HTMLDivElement>();
 
   const trackStyle = { transform: `translateY(-${active * 100}%)` };
 
@@ -162,7 +124,7 @@ export const StatsScrollSection = () => {
             return (
               <div
                 key={stat.title}
-                data-stat-index={index}
+                data-step-index={index}
                 className="absolute inset-x-0"
                 style={{ top: `${start}vh`, height: `${height}vh` }}
               />
