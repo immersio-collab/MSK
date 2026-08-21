@@ -10,6 +10,7 @@ import { ScrollStrokePath } from "@/components/motion/ScrollStrokePath";
 import { ScrollEffectSection } from "@/components/home/ScrollEffectSection";
 import ScrollExpand from "@/components/motion/ScrollExpand";
 import { GallerySection } from "@/components/home/GallerySection";
+import { StatsScrollSection } from "@/components/home/StatsScrollSection";
 import { TargetAudienceSection } from "@/components/home/TargetAudienceSection";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { CtaFinalSection } from "@/components/home/CtaFinalSection";
@@ -25,7 +26,10 @@ export const metadata: Metadata = {
 export default function HomePage() {
 
   return (
-    <div className="relative flex flex-col min-h-screen bg-msk-cream-50 overflow-hidden">
+    // `overflow-x-clip`, not `overflow-hidden`: hidden creates a scroll container on
+    // both axes, which silently disables `position: sticky` in StatsScrollSection.
+    // `clip` still contains the decorative blobs without becoming a scrollport.
+    <div className="relative flex flex-col min-h-screen bg-msk-cream-50 overflow-x-clip">
       {/* Interactive Background Scroll Stroke flowing from Hero down to Footer */}
       {/* <ScrollStrokePath /> */}
 
@@ -107,7 +111,7 @@ export default function HomePage() {
       <ScrollEffectSection />
 
       {/* 3rd Section — Les Chiffres Qui Comptent */}
-      <StatsSection />
+      <StatsScrollSection />
 
 
       {/* Method Section */}

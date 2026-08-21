@@ -2,9 +2,8 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, ArrowRight } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 
 type ProgramId = "maternelle" | "primaire";
 
@@ -18,7 +17,6 @@ interface ProgramData {
   conditions: string[];
   schedule: string;
   image: string;
-  link: string;
 }
 
 const programs: ProgramData[] = [
@@ -37,7 +35,6 @@ const programs: ProgramData[] = [
     conditions: ["Retard de langage", "Troubles du spectre autistique (léger)", "Hyperactivité précoce"],
     schedule: "Matinées structurées (Montessori) / Après-midis sieste et jeux libres",
     image: "/maternelle1.jpg",
-    link: "/programmes/maternelle"
   },
   {
     id: "primaire",
@@ -54,7 +51,6 @@ const programs: ProgramData[] = [
     conditions: ["TDAH", "Dyslexie, Dysorthographie", "Dyspraxie", "Dyscalculie"],
     schedule: "Apprentissages cognitifs (matin) / Ateliers thérapeutiques et créatifs (après-midi)",
     image: "/primaire1.webp",
-    link: "/programmes/primaire"
   }
 ];
 
