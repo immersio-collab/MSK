@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { MethodeCloud } from "@/components/methode/MethodeCloud";
 import { MethodeLottie } from "@/components/methode/MethodeLottie";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -207,6 +208,24 @@ export const MethodeStepsSection = () => {
         style={{ height: `${STEPS.length * STEP_VH}vh` }}
       >
         <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
+          {/* Behind the deck. Low weights so they drift slowly and do not
+              compete with the cards for attention. */}
+          <div aria-hidden className="pointer-events-none absolute inset-0">
+            <MethodeCloud
+              shape="b"
+              weight={0.28}
+              offset={-0.15}
+              className="absolute left-[8%] top-[18%] w-44 text-white xl:w-60"
+            />
+            <MethodeCloud
+              shape="a"
+              weight={0.45}
+              offset={0.2}
+              delay={0.15}
+              className="absolute right-[7%] bottom-[16%] w-40 text-white xl:w-56"
+            />
+          </div>
+
           <div className="absolute left-10 top-1/2 -translate-y-1/2 font-display text-sm font-semibold uppercase tracking-[0.2em] text-msk-night-700">
             <span className="block text-6xl leading-none text-msk-night-900">
               {STEPS[active].id}

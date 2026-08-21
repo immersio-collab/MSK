@@ -3,6 +3,7 @@
 import { ChevronDown } from "lucide-react";
 
 import { MethodeAssetSlot } from "@/components/methode/MethodeAssetSlot";
+import { MethodeCloud } from "@/components/methode/MethodeCloud";
 import { FadeUp } from "@/components/motion/FadeUp";
 
 /**
@@ -20,10 +21,30 @@ export const MethodeHeroSection = () => {
         style={{ clipPath: "polygon(0 0, 100% 0, 100% 72%, 0 100%)" }}
       />
 
-      {/* Soft cloud shapes, as in the reference. */}
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="absolute left-[6%] top-[46%] h-16 w-40 rounded-full bg-white/80 blur-[1px]" />
-        <div className="absolute right-[8%] top-[30%] h-20 w-52 rounded-full bg-white/70 blur-[1px]" />
+      {/* Clouds. Differing weights give them separate parallax rates, so they
+          part as the page moves rather than travelling as one flat layer. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <MethodeCloud
+          shape="a"
+          weight={0.35}
+          offset={-0.1}
+          delay={0.2}
+          className="absolute left-[4%] top-[52%] w-40 text-white md:w-56"
+        />
+        <MethodeCloud
+          shape="b"
+          weight={0.6}
+          offset={0.05}
+          delay={0.35}
+          className="absolute right-[6%] top-[26%] w-48 text-white md:w-72"
+        />
+        <MethodeCloud
+          shape="a"
+          weight={0.2}
+          offset={0.15}
+          delay={0.5}
+          className="absolute left-[38%] top-[8%] hidden w-32 text-msk-cream-50 lg:block"
+        />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 sm:px-10">

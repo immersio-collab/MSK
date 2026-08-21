@@ -54,11 +54,21 @@ export const MethodeCloud = ({
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el,
-        { scale: 0, transformOrigin: "center center" },
-        { scale: 1, duration: 1.2, ease: "elastic.out(1, 1)", delay },
-      );
+      // `from` with immediateRender:false, not `fromTo`. A fromTo would stamp
+      // scale:0 on at mount, so any failure to run the tween — gsap not
+      // loading, a JS error earlier in the page — would leave the clouds
+      // permanently invisible rather than merely unanimated. This way the
+      // shrunk state is only applied once the trigger has actually fired, and
+      // the resting state is the visible one.
+      gsap.from(el, {
+        scale: 0,
+        transformOrigin: "center center",
+        duration: 1.2,
+        ease: "elastic.out(1, 1)",
+        delay,
+        immediateRender: false,
+        scrollTrigger: { trigger: el, start: "top bottom" },
+      });
 
       const centre = offset * 150;
       gsap.fromTo(
