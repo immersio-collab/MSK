@@ -10,7 +10,6 @@ import { ScrollStrokePath } from "@/components/motion/ScrollStrokePath";
 import { ScrollEffectSection } from "@/components/home/ScrollEffectSection";
 import ScrollExpand from "@/components/motion/ScrollExpand";
 import { GallerySection } from "@/components/home/GallerySection";
-import { StatsScrollSection } from "@/components/home/StatsScrollSection";
 import { TargetAudienceSection } from "@/components/home/TargetAudienceSection";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { CtaFinalSection } from "@/components/home/CtaFinalSection";
@@ -110,7 +109,7 @@ export default function HomePage() {
       <ScrollEffectSection />
 
       {/* 3rd Section — Les Chiffres Qui Comptent */}
-      <StatsScrollSection />
+      <StatsSection />
 
 
       {/* Method Section */}
