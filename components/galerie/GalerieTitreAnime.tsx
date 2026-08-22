@@ -1,0 +1,90 @@
+"use client";
+
+import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
+
+/**
+ * Titre qui se pose lettre par lettre, avec un léger dépassement.
+ *
+ * En framer-motion et non en gsap, délibérément. La règle du projet réserve gsap
+ * au scroll-driven et garde framer-motion pour les entrées ; surtout, elle
+ * avertit qu'au-dessus de la ligne de flottaison un état de départ invisible n'a
+ * aucun filet. Ici `initial`/`animate` part au montage sans dépendre d'un
+ * trigger : rien ne peut laisser le titre bloqué hors champ.
+ *
+ * Le rebond vient de l'amortissement du ressort (damping bas pour une raideur
+ * élevée), pas d'une courbe de Bézier : c'est ce dépassement qui donne le
+ * caractère, une lettre monte au-delà de sa place avant d'y revenir.
+ *
+ * Le texte complet est porté par `aria-label` et chaque lettre masquée aux
+ * technologies d'assistance, sinon le titre serait épelé caractère par
+ * caractère.
+ */
+
+const CONTENEUR: Variants = {
+  cache: {},
+  visible: (retard: number) => ({
+    transition: { staggerChildren: 0.026, delayChildren: retard },
+  }),
+};
+
+const LETTRE: Variants = {
+  cache: { y: 58, rotate: -7, opacity: 0 },
+  visible: {
+    y: 0,
+    rotate: 0,
+    opacity: 1,
+    transition: { type: "spring", stiffness: 330, damping: 15, mass: 0.9 },
+  },
+};
+
+interface GalerieTitreAnimeProps {
+  texte: string;
+  className?: string;
+  /** `chargement` démarre au montage ; `scroll` attend l'entrée dans le champ. */
+  au?: "chargement" | "scroll";
+  retard?: number;
+  as?: "h1" | "h2";
+}
+
+export const GalerieTitreAnime = ({
+  texte,
+  className,
+  au = "chargement",
+  retard = 0.15,
+  as = "h2",
+}: GalerieTitreAnimeProps) => {
+  const Balise = as === "h1" ? motion.h1 : motion.h2;
+
+  const declencheur =
+    au === "scroll"
+      ? { whileInView: "visible" as const, viewport: { once: true, margin: "-80px" } }
+      : { animate: "visible" as const };
+
+  return (
+    <Balise
+      aria-label={texte}
+      className={className}
+      variants={CONTENEUR}
+      custom={retard}
+      initial="cache"
+      {...declencheur}
+    >
+      {/* `split("")` et non `[...texte]` : la cible TS du projet est en ES5, où
+          l'itération de chaîne est refusée. Tous les caractères en jeu sont dans
+          le plan BMP, donc aucune paire de substitution à préserver. */}
+      {texte.split("").map((caractere, index) => (
+        <motion.span
+          key={`${caractere}-${index}`}
+          aria-hidden
+          variants={LETTRE}
+          className="inline-block will-change-transform"
+        >
+          {/* Espace insécable : une espace ordinaire dans un inline-block
+              s'effondre et les mots se colleraient. */}
+          {caractere === " " ? " " : caractere}
+        </motion.span>
+      ))}
+    </Balise>
+  );
+};

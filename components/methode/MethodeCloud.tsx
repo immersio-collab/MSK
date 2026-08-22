@@ -27,6 +27,24 @@ const SHAPES = {
     viewBox: "1733 304 418 146",
     d: "M2150.68 450C2150.86 447.409 2151 444.819 2151 442.168C2151 388.738 2111.03 345.448 2061.71 345.448C2039.74 345.448 2019.62 354.07 2004.07 368.338C1986.17 330.168 1949.59 304 1907.38 304C1856.47 304 1813.77 342.008 1802.13 393.272C1799.02 392.725 1795.83 392.442 1792.56 392.442C1761.75 392.442 1736.39 417.619 1733 450.02H2150.68V450Z",
   },
+  // Shapes c-e are drawn here rather than traced: each is a set of circle
+  // subpaths tangent to a common baseline, plus a rectangle filling between
+  // them. Every subpath is wound the same way (arc sweep flag 1, and the
+  // rectangle runs right-down-left), so the default nonzero fill-rule unions
+  // them instead of punching holes. Consecutive circles are given overlapping
+  // spans, which is what keeps the silhouette a single blob.
+  c: {
+    viewBox: "26 6 204 104",
+    d: "M26 66a44 44 0 1 1 88 0a44 44 0 1 1-88 0ZM93 58a52 52 0 1 1 104 0a52 52 0 1 1-104 0ZM170 80a30 30 0 1 1 60 0a30 30 0 1 1-60 0ZM26 66H230V110H26Z",
+  },
+  d: {
+    viewBox: "22 10 269 100",
+    d: "M22 72a38 38 0 1 1 76 0a38 38 0 1 1-76 0ZM80 60a50 50 0 1 1 100 0a50 50 0 1 1-100 0ZM161 66a44 44 0 1 1 88 0a44 44 0 1 1-88 0ZM239 84a26 26 0 1 1 52 0a26 26 0 1 1-52 0ZM22 72H291V110H22Z",
+  },
+  e: {
+    viewBox: "8 14 145 96",
+    d: "M8 70a40 40 0 1 1 80 0a40 40 0 1 1-80 0ZM57 62a48 48 0 1 1 96 0a48 48 0 1 1-96 0ZM8 70H153V110H8Z",
+  },
 } as const;
 
 interface MethodeCloudProps {

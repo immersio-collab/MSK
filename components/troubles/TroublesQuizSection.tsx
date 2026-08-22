@@ -1,9 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MagneticButton } from "@/components/motion/MagneticButton";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Question = {
   id: number;
@@ -19,6 +23,43 @@ const questions: Question[] = [
 export const TroublesQuizSection: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<boolean[]>([]);
+  const root = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return;
+
+    const ctx = gsap.context(() => {
+      // La carte elle-même n'est animée par personne d'autre : ses enfants
+      // framer-motion (barre de progression, panneaux AnimatePresence) sont des
+      // éléments distincts, donc aucun conflit de bibliothèque.
+      //
+      // `from` + immediateRender:false : si le tween ne part jamais, la carte
+      // reste droite et pleine taille plutôt que bloquée à scale 0.9 / opacity 0.
+      gsap.from(".quiz-card", {
+        y: 48,
+        rotate: -2.2,
+        scale: 0.94,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        immediateRender: false,
+        scrollTrigger: { trigger: ".quiz-card", start: "top 85%" },
+      });
+
+      gsap.from(".quiz-heading > *", {
+        y: 26,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power3.out",
+        stagger: 0.1,
+        immediateRender: false,
+        scrollTrigger: { trigger: ".quiz-heading", start: "top 88%" },
+      });
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
 
   const handleAnswer = (answer: boolean) => {
     setAnswers([...answers, answer]);
@@ -31,9 +72,9 @@ export const TroublesQuizSection: React.FC = () => {
   const hasPositiveAnswers = answers.some((a) => a === true);
 
   return (
-    <section className="py-20 bg-[#FAF8F5]">
+    <section ref={root} className="py-20 bg-[#FAF8F5]">
       <div className="container mx-auto px-4 max-w-4xl">
-        <div className="text-center mb-12">
+        <div className="quiz-heading text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-msk-night-900 mb-4">
             Mon enfant a-t-il besoin de MSK ?
           </h2>
@@ -42,7 +83,7 @@ export const TroublesQuizSection: React.FC = () => {
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xs border border-msk-cream-200 relative overflow-hidden min-h-[350px] flex flex-col justify-center">
+        <div className="quiz-card bg-white rounded-3xl p-8 md:p-12 shadow-xs border border-msk-cream-200 relative overflow-hidden min-h-[350px] flex flex-col justify-center">
           {/* Progress bar */}
           <div className="absolute top-0 left-0 w-full h-2 bg-gray-100">
             <motion.div 

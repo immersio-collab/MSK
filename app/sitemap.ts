@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/notre-centre/troubles-accompagnes",
     "/notre-centre/equipe",
     "/notre-centre/nos-espaces",
+    "/notre-centre/galerie",
     "/programmes",
     "/admissions",
     "/actualites",

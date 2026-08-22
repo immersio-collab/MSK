@@ -30,6 +30,10 @@ export const NAV_LINKS: NavItem[] = [
         title: "Nos Espaces (Tour Virtuel)",
         href: "/notre-centre/nos-espaces",
       },
+      {
+        title: "Galerie photo",
+        href: "/notre-centre/galerie",
+      },
     ],
   },
   { label: "Programmes", href: "/programmes" },
@@ -72,6 +76,26 @@ export const PARENT_CONCERNS_FAQ = [
     answer: "Tout à fait. La première étape de notre méthode est \"L'observation bienveillante\". Un bilan initial avec notre équipe pluridisciplinaire est indispensable pour comprendre finement le profil de l'enfant et concevoir son programme sur-mesure.",
   },
 ];
+
+/**
+ * Visite immersive du centre (Realsee / Matterport).
+ *
+ * ⚠️ COLLEZ VOTRE LIEN D'INTÉGRATION CI-DESSOUS. C'est le seul endroit à
+ * modifier : la section Tour virtuel de la galerie le consomme.
+ *
+ * Prenez l'URL d'EMBED (celle du `src` de l'iframe fournie par Realsee ou
+ * Matterport), pas l'URL de partage : beaucoup de visionneuses refusent d'être
+ * embarquées depuis leur URL publique.
+ *
+ * Tant que la chaîne est vide, la section affiche une affiche cliquable inerte
+ * accompagnée d'un avertissement visible, plutôt qu'une iframe cassée.
+ */
+export const VIRTUAL_TOUR = {
+  embedUrl: "",
+  provider: "Realsee",
+  /** Photo affichée avant le clic. L'iframe n'est montée qu'ensuite. */
+  poster: "/espace montesori.jpeg",
+};
 
 export const SCHOOL_INFO = {
   name: "MSK Montessori School",

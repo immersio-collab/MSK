@@ -1,7 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface TroubleItem {
   title: string;
@@ -62,10 +66,50 @@ const troubles: TroubleItem[] = [
 ];
 
 export const TroublesGridSection: React.FC = () => {
+  const root = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return;
+
+    const ctx = gsap.context(() => {
+      // Un seul ScrollTrigger pour toute la section, le stagger fait la
+      // séquence — plutôt qu'un trigger par carte.
+      //
+      // `from` avec immediateRender:false, jamais `fromTo` : l'état de départ
+      // n'est écrit qu'au déclenchement. Si gsap ne se charge pas, si une erreur
+      // JS survient avant, ou si l'onglet est gelé, les cartes restent
+      // simplement visibles et droites au lieu d'être bloquées à opacity 0.
+      gsap.from(".troubles-card", {
+        y: 56,
+        rotate: (i: number) => (i % 2 ? 4.5 : -4.5),
+        scale: 0.92,
+        opacity: 0,
+        duration: 0.75,
+        ease: "power3.out",
+        stagger: 0.07,
+        immediateRender: false,
+        scrollTrigger: { trigger: ".troubles-grid", start: "top 82%" },
+      });
+
+      gsap.from(".troubles-heading > *", {
+        y: 28,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power3.out",
+        stagger: 0.1,
+        immediateRender: false,
+        scrollTrigger: { trigger: ".troubles-heading", start: "top 88%" },
+      });
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="py-20 bg-white" id="troubles">
+    <section ref={root} className="py-20 bg-white" id="troubles">
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className="text-center mb-16">
+        <div className="troubles-heading text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-msk-night-900 mb-4">
             Les troubles que nous accompagnons
           </h2>
@@ -74,10 +118,14 @@ export const TroublesGridSection: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="troubles-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {troubles.map((item, idx) => (
-            <motion.div 
-              key={idx} 
+            // Wrapper neutre : c'est LUI que gsap anime. Le motion.div en
+            // dessous possède déjà son `transform` (le flip rotateY de
+            // framer-motion) et la règle du projet interdit d'animer un même
+            // élément avec les deux bibliothèques.
+            <div key={idx} className="troubles-card">
+            <motion.div
               className="relative h-72 w-full cursor-pointer"
               style={{ perspective: 1200 }}
               initial="initial"
@@ -116,6 +164,7 @@ export const TroublesGridSection: React.FC = () => {
                 </div>
               </motion.div>
             </motion.div>
+            </div>
           ))}
         </div>
       </div>
