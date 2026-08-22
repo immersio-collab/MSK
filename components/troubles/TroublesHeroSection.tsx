@@ -85,31 +85,24 @@ export const TroublesHeroSection: React.FC = () => {
       <div aria-hidden className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
         <MethodeCloud
           motion="float"
-          shape="d"
-          speed={58}
-          phase={0.1}
-          className="absolute left-0 top-[12%] w-44 text-white md:w-72"
+          shape="a"
+          speed={52}
+          phase={0.2}
+          className="absolute left-0 top-[52%] w-40 text-white md:w-56"
         />
         <MethodeCloud
           motion="float"
-          shape="c"
-          speed={42}
-          phase={0.45}
-          className="absolute left-0 top-[30%] w-36 text-white md:w-56"
+          shape="b"
+          speed={38}
+          phase={0.5}
+          className="absolute left-0 top-[26%] w-48 text-white md:w-72"
         />
         <MethodeCloud
           motion="float"
-          shape="e"
-          speed={70}
-          phase={0.75}
-          className="absolute left-0 top-[6%] hidden w-28 text-msk-cream-50 lg:block"
-        />
-        <MethodeCloud
-          motion="float"
-          shape="c"
-          speed={50}
-          phase={0.6}
-          className="absolute left-0 top-[52%] hidden w-32 text-white/80 lg:block"
+          shape="a"
+          speed={64}
+          phase={0.8}
+          className="absolute left-0 top-[8%] hidden w-32 text-msk-cream-50 lg:block"
         />
 
         {/* Le canard est un PNG encapsulé dans un .svg, pas un vecteur : son
@@ -144,37 +137,39 @@ export const TroublesHeroSection: React.FC = () => {
         className="pointer-events-none absolute -bottom-16 left-[2%] z-[3] w-56 md:w-72 lg:left-[6%] lg:w-80"
       />
 
-      <div className="container relative z-10 mx-auto max-w-4xl px-4 text-center">
-        <motion.span
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-4 block text-sm font-bold uppercase tracking-widest text-msk-night-700"
-        >
-          Troubles Accompagnés
-        </motion.span>
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 sm:px-10">
+        <div className="mx-auto mt-10 max-w-2xl rounded-[1.75rem] bg-white px-8 py-10 text-center shadow-2xl md:px-12">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-5xl md:text-6xl"
+          >
+            Nous comprenons ce que{" "}
+            <span className="text-msk-coral-700">traverse votre enfant.</span>
+          </motion.h1>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-6 text-4xl font-extrabold leading-tight text-msk-night-900 md:text-5xl lg:text-6xl"
-        >
-          Nous comprenons ce que{" "}
-          <span className="text-msk-coral-700">traverse votre enfant.</span>
-        </motion.h1>
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mt-6 inline-block rounded-full bg-msk-night-900/10 px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-700"
+          >
+            Troubles Accompagnés
+          </motion.span>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mx-auto max-w-3xl text-lg leading-relaxed text-msk-night-800 md:text-xl"
+          className="mx-auto mt-6 max-w-3xl text-base font-medium leading-snug text-msk-night-800 md:text-lg"
         >
           MSK accompagne les enfants de la maternelle et du primaire avec des
           difficultés d&apos;apprentissage, de langage, de comportement et de
           développement. Un cadre bienveillant, une méthode adaptée et une équipe
           dévouée.
         </motion.p>
+        </div>
       </div>
     </section>
   );

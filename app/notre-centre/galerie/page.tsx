@@ -7,7 +7,7 @@ import { GaleriePelliculeSection } from "@/components/galerie/GaleriePelliculeSe
 import { CtaFinalSection } from "@/components/home/CtaFinalSection";
 
 export const metadata: Metadata = {
-  title: "Galerie photo | MSK Montessori School Casablanca",
+  title: "Nos Espaces (Visite Virtuelle) | MSK Montessori School Casablanca",
   description:
     "Découvrez en images les espaces du centre MSK à Casablanca : salle sensorielle, espace Montessori, Neuro-Gym, parc extérieur. Visite virtuelle 360° incluse.",
 };

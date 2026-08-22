@@ -90,15 +90,12 @@ export const GalerieHeroSection = () => {
 
         <FadeUp delay={0.1}>
           <div className="mx-auto max-w-2xl rounded-[1.75rem] bg-msk-night-900 px-8 py-10 text-center shadow-2xl md:px-12">
-            <span className="inline-block rounded-full bg-white/15 px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-sun-300">
-              Galerie photo
-            </span>
 
             <GalerieTitreAnime
               as="h1"
               au="chargement"
               retard={0.25}
-              texte="La vie à MSK, en images"
+              texte="Nos Espaces (Visite Virtuelle)"
               className="mt-6 font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-white sm:text-5xl md:text-6xl"
             />
 

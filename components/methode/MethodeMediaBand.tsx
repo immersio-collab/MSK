@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { MethodeAssetSlot } from "@/components/methode/MethodeAssetSlot";
 
 /**
  * Full-bleed photographic band with a slanted top edge, the way the reference
@@ -26,12 +25,15 @@ export const MethodeMediaBand = () => {
 
         {/* Decorative vector props layered over the photograph. */}
         <div className="pointer-events-none absolute inset-0">
-          <MethodeAssetSlot
-            label="Props vectoriels"
-            hint="Nuages, soleil, formes — superposés"
-            tone="bg-white/70 text-msk-night-800"
-            className="absolute bottom-8 right-6 h-24 w-52 md:right-14"
-          />
+          <div className="absolute bottom-8 right-6 md:right-14">
+            <Image
+              src="/Bird pair love and flying sky.svg"
+              alt="Props vectoriels"
+              width={320}
+              height={148}
+              className="h-auto w-64 md:w-80 object-contain"
+            />
+          </div>
         </div>
       </div>
     </section>

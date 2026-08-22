@@ -48,7 +48,7 @@ export const EquipePhilosophieSection: React.FC = () => {
             <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl group cursor-pointer bg-msk-cream-200">
               <Image 
                 src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1000"
-                alt="L'équipe MSK en action"
+                alt="Khadija en action"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
@@ -61,7 +61,7 @@ export const EquipePhilosophieSection: React.FC = () => {
               
               {/* Optional: label indicating video */}
               <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full text-xs font-bold text-msk-night-900 shadow-xs">
-                ▶ Présentation de l'équipe (0:45)
+                ▶ Présentation de la fondatrice (0:45)
               </div>
             </div>
           </div>

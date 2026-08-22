@@ -23,15 +23,11 @@ export const NAV_LINKS: NavItem[] = [
         href: "/notre-centre/troubles-accompagnes",
       },
       {
-        title: "L'Équipe pluridisciplinaire",
-        href: "/notre-centre/equipe",
+        title: "La Fondatrice",
+        href: "/notre-centre/la-fondatrice",
       },
       {
-        title: "Nos Espaces (Tour Virtuel)",
-        href: "/notre-centre/nos-espaces",
-      },
-      {
-        title: "Galerie photo",
+        title: "Nos Espaces (Visite Virtuelle)",
         href: "/notre-centre/galerie",
       },
     ],
@@ -73,7 +69,7 @@ export const PARENT_CONCERNS_FAQ = [
   },
   {
     question: "Y a-t-il un bilan d'évaluation avant l'inscription ?",
-    answer: "Tout à fait. La première étape de notre méthode est \"L'observation bienveillante\". Un bilan initial avec notre équipe pluridisciplinaire est indispensable pour comprendre finement le profil de l'enfant et concevoir son programme sur-mesure.",
+    answer: "Tout à fait. La première étape de notre méthode est \"L'observation bienveillante\". Un bilan initial avec notre fondatrice est indispensable pour comprendre finement le profil de l'enfant et concevoir son programme sur-mesure.",
   },
 ];
 

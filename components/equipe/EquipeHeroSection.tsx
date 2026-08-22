@@ -18,7 +18,7 @@ export const EquipeHeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-sm font-bold uppercase tracking-widest text-msk-coral-500 mb-6 block"
+          className="mb-6 inline-block rounded-full bg-msk-coral-100 px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-coral-700"
         >
           La Fondatrice
         </motion.span>
@@ -27,16 +27,16 @@ export const EquipeHeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8 leading-tight text-msk-night-900"
+          className="mb-8 font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-5xl md:text-6xl"
         >
-          L'expertise et la bienveillance au service de <span className="text-transparent bg-clip-text bg-linear-to-r from-msk-coral-500 to-msk-sun-500">votre enfant.</span>
+          L'expertise et la bienveillance au service de <span className="text-msk-coral-500">votre enfant.</span>
         </motion.h1>
         
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg md:text-xl text-msk-night-700 max-w-3xl mx-auto leading-relaxed"
+          className="mx-auto max-w-3xl text-base font-medium leading-snug text-msk-night-800 md:text-lg"
         >
           Découvrez le parcours de notre fondatrice, une spécialiste passionnée et dévouée à l'épanouissement de chaque enfant à travers une approche globale et inclusive.
         </motion.p>

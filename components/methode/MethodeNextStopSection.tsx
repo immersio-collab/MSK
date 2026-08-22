@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
 import { MethodeAssetSlot } from "@/components/methode/MethodeAssetSlot";
@@ -57,12 +58,15 @@ export const MethodeNextStopSection = () => {
           </Link>
         </FadeUp>
 
-        <MethodeAssetSlot
-          label="Illustration — prochaine étape"
-          hint="Personnage vectoriel plat, aligné bas de section · ~420×260"
-          tone="bg-msk-blue-900 text-msk-blue-50"
-          className="mx-auto mt-14 h-40 w-full max-w-md"
-        />
+        <div className="mx-auto mt-14 flex w-full max-w-sm justify-center">
+          <Image
+            src="/Class Board.svg"
+            alt="Illustration"
+            width={384}
+            height={238}
+            className="h-auto w-full object-contain"
+          />
+        </div>
       </div>
     </section>
   );
