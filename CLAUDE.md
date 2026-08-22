@@ -153,6 +153,15 @@ default for exactly this reason.
 To add a font: load it in `layout.tsx`, add its `.variable` to the `<html>`
 className, and reference the variable — never a literal family name.
 
+## Scroll-driven pages
+
+Pages with pinned sections, scrubbed sequences, Lottie marks or decorative
+motion follow `.agents/rules/scroll-page-composition.md`. Read it before
+touching that kind of section — it covers the gsap/framer-motion split, why an
+animation that never runs must still leave a visible element, how to measure
+travel distances and wrap seams, and how to verify contrast without the audit
+lying to you.
+
 ## Dependencies
 
 Check for an existing equivalent before adding one. This project shipped both
