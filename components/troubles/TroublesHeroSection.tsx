@@ -74,7 +74,7 @@ export const TroublesHeroSection: React.FC = () => {
   return (
     <section
       ref={root}
-      className="relative flex min-h-[92vh] flex-col justify-center overflow-hidden bg-msk-cream-100 pt-32 pb-28 md:pt-40 md:pb-36"
+      className="relative flex min-h-[100dvh] flex-col justify-center overflow-hidden bg-msk-cream-100 pb-16 pt-16 md:pb-20"
     >
       {/* Ciel. Il s'arrête plus bas que la couture pour que celle-ci ait
           toujours du bleu à découper, quel que soit son angle. */}
@@ -138,7 +138,7 @@ export const TroublesHeroSection: React.FC = () => {
       />
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 sm:px-10">
-        <div className="mx-auto mt-10 max-w-2xl rounded-[1.75rem] bg-white px-8 py-10 text-center shadow-2xl md:px-12">
+        <div className="mx-auto mt-4 max-w-2xl rounded-[1.75rem] bg-white px-8 py-10 text-center shadow-2xl md:px-12">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

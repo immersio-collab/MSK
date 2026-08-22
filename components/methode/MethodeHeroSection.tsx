@@ -13,7 +13,7 @@ import { FadeUp } from "@/components/motion/FadeUp";
  */
 export const MethodeHeroSection = () => {
   return (
-    <section className="relative w-full bg-msk-cream-100 pb-16 pt-16 md:pb-20">
+    <section className="relative flex min-h-[100dvh] w-full flex-col justify-center bg-msk-cream-100 pb-16 pt-16 md:pb-20">
       <div
         aria-hidden
         className="absolute inset-x-0 top-0 h-[75%] bg-msk-sun-400"

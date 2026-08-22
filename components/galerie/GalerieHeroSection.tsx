@@ -31,10 +31,10 @@ const POLAROID_POSE = [
 
 export const GalerieHeroSection = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-msk-cream-100 pb-24 pt-28 md:pb-32 md:pt-36">
+    <section className="relative flex min-h-[100dvh] w-full flex-col justify-center overflow-hidden bg-msk-cream-100 pb-16 pt-16 md:pb-20">
       <div
         aria-hidden
-        className="absolute inset-x-0 top-0 h-[58%] bg-msk-coral-400"
+        className="absolute inset-x-0 top-0 h-[75%] bg-msk-blue-400"
         style={{ clipPath: "polygon(0 0, 100% 0, 100% 72%, 0 100%)" }}
       />
 
@@ -60,6 +60,20 @@ export const GalerieHeroSection = () => {
           phase={0.8}
           className="absolute left-0 top-[8%] hidden w-32 text-msk-cream-50 lg:block"
         />
+
+        {/* Octopus décoratifs */}
+        <img
+          src="/My Octopus Teacher.svg"
+          alt=""
+          aria-hidden
+          className="absolute right-[2%] top-[10%] w-48 sm:w-64 md:w-80 lg:w-[28rem] opacity-90"
+        />
+        <img
+          src="/My theacher octopus 2.svg"
+          alt=""
+          aria-hidden
+          className="absolute left-[2%] bottom-[15%] w-48 sm:w-64 md:w-80 lg:w-[28rem] opacity-90"
+        />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 sm:px-10">
@@ -70,7 +84,7 @@ export const GalerieHeroSection = () => {
           {HERO_POLAROIDS.map((photo, index) => (
             <figure
               key={photo.src}
-              className={`absolute bottom-0 w-32 bg-white p-2.5 pb-8 shadow-2xl sm:w-40 md:w-52 ${POLAROID_POSE[index]}`}
+              className={`absolute bottom-0 w-32 bg-white p-2.5 shadow-2xl sm:w-40 md:w-52 ${POLAROID_POSE[index]}`}
             >
               <Image
                 src={photo.src}
@@ -81,15 +95,12 @@ export const GalerieHeroSection = () => {
                 sizes="(max-width: 640px) 40vw, 220px"
                 priority={index === 1}
               />
-              <figcaption className="mt-2 text-center font-display text-[11px] font-semibold text-msk-night-800 sm:text-xs">
-                {photo.titre}
-              </figcaption>
             </figure>
           ))}
         </div>
 
         <FadeUp delay={0.1}>
-          <div className="mx-auto max-w-2xl rounded-[1.75rem] bg-msk-night-900 px-8 py-10 text-center shadow-2xl md:px-12">
+          <div className="mx-auto mt-4 max-w-2xl rounded-[1.75rem] bg-msk-night-900 px-8 py-10 text-center shadow-2xl md:px-12">
 
             <GalerieTitreAnime
               as="h1"
