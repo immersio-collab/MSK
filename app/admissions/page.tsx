@@ -6,7 +6,6 @@ import { AdmissionsMassarSection } from "@/components/admissions/AdmissionsMassa
 import { AdmissionsDocumentsSection } from "@/components/admissions/AdmissionsDocumentsSection";
 import { AdmissionsNextStopSection } from "@/components/admissions/AdmissionsNextStopSection";
 import { MethodeKineticBanner } from "@/components/methode/MethodeKineticBanner";
-import { CtaFinalSection } from "@/components/home/CtaFinalSection";
 
 export const metadata: Metadata = {
   title: "Admissions & Inscriptions | MSK Casablanca",
@@ -36,12 +35,7 @@ export default function AdmissionsPage() {
 
       {/* Hand-off to the method */}
       <AdmissionsNextStopSection />
-
-      <CtaFinalSection
-        title="Prêts à commencer les démarches ?"
-        subtitle="Réservez un bilan d'évaluation gratuit et sans engagement. Nous vous guidons pour le reste."
-        buttonText="Réserver mon bilan"
-      />
     </div>
   );
 }
+

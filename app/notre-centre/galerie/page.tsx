@@ -4,7 +4,7 @@ import { GalerieHeroSection } from "@/components/galerie/GalerieHeroSection";
 import { GalerieGridSection } from "@/components/galerie/GalerieGridSection";
 import { GalerieTourSection } from "@/components/galerie/GalerieTourSection";
 import { GaleriePelliculeSection } from "@/components/galerie/GaleriePelliculeSection";
-import { CtaFinalSection } from "@/components/home/CtaFinalSection";
+import { NextStepSection } from "@/components/common/NextStepSection";
 
 export const metadata: Metadata = {
   title: "Nos Espaces (Visite Virtuelle) | MSK Montessori School Casablanca",
@@ -23,11 +23,22 @@ export default function GaleriePage() {
 
       <GaleriePelliculeSection />
 
-      <CtaFinalSection
-        title="Venez le voir de vos propres yeux."
-        subtitle="Une visite du centre vaut mieux que mille photos. Réservez un créneau, on vous fait tout découvrir."
-        buttonText="Réserver une visite"
+      <NextStepSection
+        eyebrow="Prochaine étape"
+        title="La Méthode"
+        description="Une approche en 6 étapes pour observer, comprendre et accompagner votre enfant."
+        buttonText="Découvrir"
+        buttonHref="/notre-centre/la-methode"
+        svgSrc="/Class Board.svg"
+        bgColor="bg-msk-night-800"
+        cloudColor="text-white/50"
+        textColor="text-msk-cream-100"
+        buttonTextColor="text-msk-night-900"
+        eyebrowColor="text-msk-sun-300"
       />
     </div>
   );
 }
+
+
+

@@ -5,8 +5,7 @@ import { MethodeStepsSection } from "@/components/methode/MethodeStepsSection";
 import { MethodeMediaBand } from "@/components/methode/MethodeMediaBand";
 import { MethodeStatementSection } from "@/components/methode/MethodeStatementSection";
 import { MethodeProcessSection } from "@/components/methode/MethodeProcessSection";
-import { MethodeNextStopSection } from "@/components/methode/MethodeNextStopSection";
-import { CtaFinalSection } from "@/components/home/CtaFinalSection";
+import { NextStepSection } from "@/components/common/NextStepSection";
 
 export const metadata: Metadata = {
   title: "La Méthode MSK | MSK Montessori School Casablanca",
@@ -35,14 +34,21 @@ export default function LaMethodePage() {
       <MethodeProcessSection />
 
       {/* Hand-off to the next page */}
-      <MethodeNextStopSection />
-
-      {/* Reused CTA with custom content */}
-      <CtaFinalSection
-        title="Prêts à franchir la première étape ?"
-        subtitle="Vous souhaitez en savoir plus ? Réservez un bilan d'évaluation gratuit et sans engagement."
-        buttonText="Réserver mon bilan"
+      <NextStepSection
+        eyebrow="Prochaine étape"
+        title="Troubles accompagnés"
+        description="TDAH, dyslexie, dyspraxie, troubles du langage : comment nous adaptons le cadre à chaque profil."
+        buttonText="Découvrir"
+        buttonHref="/notre-centre/troubles-accompagnes"
+        svgSrc="/Enjoying the fun time.svg"
+        bgColor="bg-msk-blue-800"
+        cloudColor="text-white/50"
+        textColor="text-msk-blue-50"
+        buttonTextColor="text-msk-blue-900"
       />
     </div>
   );
 }
+
+
+

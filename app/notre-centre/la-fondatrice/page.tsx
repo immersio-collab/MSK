@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { EquipeHeroSection } from "@/components/equipe/EquipeHeroSection";
 import { EquipeGridSection } from "@/components/equipe/EquipeGridSection";
 import { EquipePhilosophieSection } from "@/components/equipe/EquipePhilosophieSection";
-import { CtaFinalSection } from "@/components/home/CtaFinalSection";
+import { NextStepSection } from "@/components/common/NextStepSection";
 
 export const metadata: Metadata = {
   title: "La Fondatrice | MSK Montessori School Casablanca",
@@ -17,12 +17,23 @@ export default function EquipePage() {
       <EquipeGridSection />
       
       <EquipePhilosophieSection />
-      
-      <CtaFinalSection 
-        title="Venez rencontrer Khadija."
-        subtitle="Nous vous accueillons avec plaisir pour discuter de l'avenir de votre enfant."
-        buttonText="Réserver une visite"
+
+      <NextStepSection
+        eyebrow="Prochaine étape"
+        title="Nos Espaces"
+        description="Un environnement pensé et adapté pour le bien-être et le développement de chaque enfant."
+        buttonText="Visite virtuelle"
+        buttonHref="/notre-centre/galerie"
+        svgSrc="/kid swing.svg"
+        bgColor="bg-msk-sun-500"
+        cloudColor="text-white/80"
+        textColor="text-msk-sun-900"
+        buttonTextColor="text-msk-sun-600"
+        eyebrowColor="text-msk-sun-900"
       />
     </div>
   );
 }
+
+
+

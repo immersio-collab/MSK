@@ -6,7 +6,6 @@ import { ProgrammesMediaBand } from "@/components/programmes/ProgrammesMediaBand
 import { ProgrammesStatementSection } from "@/components/programmes/ProgrammesStatementSection";
 import { ProgrammesTableSection } from "@/components/programmes/ProgrammesTableSection";
 import { ProgrammesNextStopSection } from "@/components/programmes/ProgrammesNextStopSection";
-import { CtaFinalSection } from "@/components/home/CtaFinalSection";
 
 export const metadata: Metadata = {
   title: "Programmes & Classes | MSK Montessori School Casablanca",
@@ -36,11 +35,7 @@ export default function ProgrammesPage() {
       <ProgrammesNextStopSection />
 
       {/* CTA final partagé */}
-      <CtaFinalSection
-        title="Pas sûr du programme adapté ?"
-        subtitle="Nos experts sont là pour vous guider. Réservez un bilan d'orientation gratuit et sans engagement."
-        buttonText="Réserver un bilan gratuit"
-      />
     </div>
   );
 }
+
