@@ -16,7 +16,7 @@ export const MethodeNextStopSection = () => {
   // blue-800, not blue-700: the sun-300 eyebrow is 14px, so it needs 4.5:1 and
   // only reaches 3.46 against the lighter blue.
   return (
-    <section className="relative w-full overflow-hidden bg-msk-blue-800 py-24 text-center md:py-32">
+    <section className="relative w-full overflow-hidden bg-msk-blue-800 py-12 text-center md:py-16">
       {/* blue-900 on blue-800 keeps the clouds present without turning the
           section into a white field. */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
@@ -35,35 +35,35 @@ export const MethodeNextStopSection = () => {
         />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-5xl px-6 sm:px-10">
-        <FadeUp>
+      <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center justify-center px-6 sm:px-10">
+        <FadeUp className="relative z-20">
           <span className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-msk-sun-300">
             Prochaine étape
           </span>
 
-          <h2 className="mt-6 font-display text-[2.5rem] font-bold uppercase leading-[0.9] text-white sm:text-6xl md:text-7xl">
+          <h2 className="mt-4 font-display text-[2.5rem] font-bold uppercase leading-[0.9] text-white sm:text-6xl md:text-7xl">
             Troubles accompagnés
           </h2>
 
-          <p className="mx-auto mt-6 max-w-xl text-lg font-medium leading-snug text-msk-blue-50">
+          <p className="mx-auto mt-4 max-w-xl text-lg font-medium leading-snug text-msk-blue-50">
             TDAH, dyslexie, dyspraxie, troubles du langage : comment nous
             adaptons le cadre à chaque profil.
           </p>
 
           <Link
             href="/notre-centre/troubles-accompagnes"
-            className="mt-10 inline-flex rounded-full bg-white px-8 py-4 font-display text-sm font-semibold uppercase tracking-[0.14em] text-msk-blue-900 transition-transform hover:scale-105"
+            className="mt-8 inline-flex rounded-full bg-white px-8 py-4 font-display text-sm font-semibold uppercase tracking-[0.14em] text-msk-blue-900 transition-transform hover:scale-105"
           >
             Découvrir
           </Link>
         </FadeUp>
 
-        <div className="mx-auto mt-14 flex w-full max-w-sm justify-center">
+        <div className="relative z-10 mx-auto -mt-8 sm:-mt-12 md:-mt-20 flex w-full max-w-2xl justify-center pointer-events-none">
           <Image
-            src="/Class Board.svg"
+            src="/Enjoying the fun time.svg"
             alt="Illustration"
-            width={384}
-            height={238}
+            width={700}
+            height={700}
             className="h-auto w-full object-contain"
           />
         </div>

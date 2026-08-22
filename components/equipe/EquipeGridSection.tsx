@@ -6,8 +6,22 @@ import Image from "next/image";
 export const EquipeGridSection: React.FC = () => {
   return (
     <section className="py-20 bg-[#FAF8F5]">
-      <div className="container mx-auto px-4 max-w-5xl">
-        <div className="bg-white rounded-3xl overflow-hidden shadow-xl border border-msk-cream-200 flex flex-col md:flex-row">
+      <div className="container mx-auto px-4 max-w-5xl relative">
+        {/* Decorative SVGs */}
+        <img 
+          src="/Graduation.svg" 
+          alt="" 
+          aria-hidden="true" 
+          className="absolute -top-10 -right-6 md:-right-12 w-28 md:w-40 lg:w-48 pointer-events-none z-20" 
+        />
+        <img 
+          src="/Diploma Certificate Animation Icon.svg" 
+          alt="" 
+          aria-hidden="true" 
+          className="absolute -bottom-8 -left-6 md:-left-12 w-24 md:w-36 lg:w-44 pointer-events-none z-20" 
+        />
+
+        <div className="bg-white rounded-3xl overflow-hidden shadow-xl border border-msk-cream-200 flex flex-col md:flex-row relative z-10">
           {/* Left: Photo */}
           <div className="md:w-2/5 relative h-[400px] md:h-auto">
             <Image 
@@ -51,8 +65,12 @@ export const EquipeGridSection: React.FC = () => {
                     "Formatrice en psycho-neuro-éducation"
                   ].map((specialty, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <span className="text-msk-sun-500 text-lg mt-0.5">✅</span>
-                      <span className="text-msk-night-800 font-medium">{specialty}</span>
+                      <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-[6px] bg-msk-coral-500 text-white shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                      </div>
+                      <span className="text-msk-night-800 font-medium text-lg leading-snug">{specialty}</span>
                     </li>
                   ))}
                 </ul>
