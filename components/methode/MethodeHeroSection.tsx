@@ -13,11 +13,10 @@ import { FadeUp } from "@/components/motion/FadeUp";
  */
 export const MethodeHeroSection = () => {
   return (
-    <section className="relative w-full bg-msk-cream-100 pb-24 pt-24 md:pb-32">
-      {/* Colour band. `clip-path` gives the angled base; it is decorative only. */}
+    <section className="relative w-full bg-msk-cream-100 pb-16 pt-16 md:pb-20">
       <div
         aria-hidden
-        className="absolute inset-x-0 top-0 h-[58%] bg-msk-sun-400"
+        className="absolute inset-x-0 top-0 h-[75%] bg-msk-sun-400"
         style={{ clipPath: "polygon(0 0, 100% 0, 100% 72%, 0 100%)" }}
       />
 
@@ -53,12 +52,12 @@ export const MethodeHeroSection = () => {
         <img
           src="/kid swing.svg"
           alt="Illustration méthode"
-          className="mx-auto h-auto w-full max-w-3xl md:h-80 object-contain scale-[1.6] md:scale-[2.2] translate-y-28 md:translate-y-[14rem] origin-bottom relative z-10 pointer-events-none"
+          className="mx-auto h-auto w-full max-w-2xl md:h-64 object-contain scale-[1.3] md:scale-[1.6] translate-y-12 md:translate-y-24 origin-bottom relative z-10 pointer-events-none"
         />
 
         {/* Title card, overlapping the band's lower edge. */}
         <FadeUp delay={0.1}>
-          <div className="mx-auto mt-10 max-w-2xl rounded-[1.75rem] bg-msk-coral-600 px-8 py-10 text-center shadow-2xl md:px-12">
+          <div className="mx-auto mt-4 max-w-2xl rounded-[1.75rem] bg-msk-coral-600 px-8 py-10 text-center shadow-2xl md:px-12">
             <h1 className="font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-msk-sun-200 sm:text-5xl md:text-6xl">
               Une méthode en 6 étapes, pensée pour votre enfant
             </h1>

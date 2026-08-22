@@ -41,24 +41,24 @@ export const GalerieHeroSection = () => {
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
         <MethodeCloud
           motion="float"
-          shape="d"
-          speed={58}
-          phase={0.12}
-          className="absolute left-0 top-[9%] w-40 text-white md:w-60"
+          shape="a"
+          speed={52}
+          phase={0.2}
+          className="absolute left-0 top-[52%] w-40 text-white md:w-56"
         />
         <MethodeCloud
           motion="float"
-          shape="c"
-          speed={41}
-          phase={0.48}
-          className="absolute left-0 top-[26%] w-32 text-msk-coral-100 md:w-48"
+          shape="b"
+          speed={38}
+          phase={0.5}
+          className="absolute left-0 top-[26%] w-48 text-msk-coral-100 md:w-72"
         />
         <MethodeCloud
           motion="float"
-          shape="e"
-          speed={70}
+          shape="a"
+          speed={64}
           phase={0.8}
-          className="absolute left-0 top-[4%] hidden w-28 text-msk-cream-50 lg:block"
+          className="absolute left-0 top-[8%] hidden w-32 text-msk-cream-50 lg:block"
         />
       </div>
 
