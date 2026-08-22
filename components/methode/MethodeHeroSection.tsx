@@ -1,10 +1,15 @@
 "use client";
 
+import React, { useEffect, useRef } from "react";
 import { ChevronDown } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { MethodeAssetSlot } from "@/components/methode/MethodeAssetSlot";
 import { MethodeCloud } from "@/components/methode/MethodeCloud";
 import { FadeUp } from "@/components/motion/FadeUp";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /**
  * Bold colour band with the scene artwork, and the page's title card overlapping
@@ -12,8 +17,31 @@ import { FadeUp } from "@/components/motion/FadeUp";
  * so the card sits on a diagonal rather than a straight horizon.
  */
 export const MethodeHeroSection = () => {
+  const root = useRef<HTMLElement>(null);
+  const kid = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return;
+
+    const ctx = gsap.context(() => {
+      const scrub = {
+        trigger: el,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      } as const;
+
+      if (kid.current) {
+        gsap.to(kid.current, { yPercent: 120, ease: "none", scrollTrigger: scrub });
+      }
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="relative flex min-h-[100dvh] w-full flex-col justify-center bg-msk-cream-100 pb-16 pt-16 md:pb-20">
+    <section ref={root} className="relative flex min-h-[100dvh] w-full flex-col justify-center bg-msk-cream-100 pb-16 pt-16 md:pb-20">
       <div
         aria-hidden
         className="absolute inset-x-0 top-0 h-[75%] bg-msk-sun-400"
@@ -50,6 +78,7 @@ export const MethodeHeroSection = () => {
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 sm:px-10">
         <img
+          ref={kid}
           src="/kid swing.svg"
           alt="Illustration méthode"
           className="mx-auto h-auto w-full max-w-2xl md:h-64 object-contain scale-[1.3] md:scale-[1.6] translate-y-12 md:translate-y-24 origin-bottom relative z-10 pointer-events-none"

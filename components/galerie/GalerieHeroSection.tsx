@@ -1,12 +1,17 @@
 "use client";
 
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { MethodeCloud } from "@/components/methode/MethodeCloud";
 import { FadeUp } from "@/components/motion/FadeUp";
 import { GalerieTitreAnime } from "@/components/galerie/GalerieTitreAnime";
 import { HERO_POLAROIDS } from "@/components/galerie/galerie-content";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /**
  * Hero de la galerie — même grammaire que MethodeHeroSection et
@@ -30,8 +35,35 @@ const POLAROID_POSE = [
 ];
 
 export const GalerieHeroSection = () => {
+  const root = useRef<HTMLElement>(null);
+  const octopus1 = useRef<HTMLImageElement>(null);
+  const octopus2 = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return;
+
+    const ctx = gsap.context(() => {
+      const scrub = {
+        trigger: el,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      } as const;
+
+      if (octopus1.current) {
+        gsap.to(octopus1.current, { yPercent: 150, ease: "none", scrollTrigger: scrub });
+      }
+      if (octopus2.current) {
+        gsap.to(octopus2.current, { yPercent: -150, ease: "none", scrollTrigger: scrub });
+      }
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="relative flex min-h-[100dvh] w-full flex-col justify-center overflow-hidden bg-msk-cream-100 pb-16 pt-16 md:pb-20">
+    <section ref={root} className="relative flex min-h-[100dvh] w-full flex-col justify-center overflow-hidden bg-msk-cream-100 pb-16 pt-16 md:pb-20">
       <div
         aria-hidden
         className="absolute inset-x-0 top-0 h-[75%] bg-msk-blue-400"
@@ -63,12 +95,14 @@ export const GalerieHeroSection = () => {
 
         {/* Octopus décoratifs */}
         <img
+          ref={octopus1}
           src="/My Octopus Teacher.svg"
           alt=""
           aria-hidden
           className="absolute right-[2%] top-[10%] w-48 sm:w-64 md:w-80 lg:w-[28rem] opacity-90"
         />
         <img
+          ref={octopus2}
           src="/My theacher octopus 2.svg"
           alt=""
           aria-hidden
