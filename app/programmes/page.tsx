@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ProgrammesHeroSection } from "@/components/programmes/ProgrammesHeroSection";
-import { ProgrammesKineticBanner } from "@/components/programmes/ProgrammesKineticBanner";
+
 import { ProgrammesSelectorSection } from "@/components/programmes/ProgrammesSelectorSection";
 import { ProgrammesMediaBand } from "@/components/programmes/ProgrammesMediaBand";
 import { ProgrammesStatementSection } from "@/components/programmes/ProgrammesStatementSection";
@@ -19,8 +19,6 @@ export default function ProgrammesPage() {
       {/* Bande de couleur inclinée + nuages SVG flottants + carte-titre */}
       <ProgrammesHeroSection />
 
-      {/* Bannière kinétique marquee — transition vers la section programmes */}
-      <ProgrammesKineticBanner />
 
       {/* Onglets de sélection du programme (Maternelle / Primaire) */}
       <ProgrammesSelectorSection />

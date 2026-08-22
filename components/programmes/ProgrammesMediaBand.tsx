@@ -25,11 +25,11 @@ export const ProgrammesMediaBand = () => {
 
         {/* Decorative vector props layered over the photograph. */}
         <div className="pointer-events-none absolute inset-0">
-          <MethodeAssetSlot
-            label="Props vectoriels"
-            hint="Nuages, formes pour programmes"
-            tone="bg-white/70 text-msk-night-800"
-            className="absolute bottom-8 right-6 h-24 w-52 md:right-14 pointer-events-auto"
+          <img
+            src="/games icon.svg"
+            alt=""
+            aria-hidden="true"
+            className="absolute bottom-4 right-2 w-40 md:bottom-8 md:right-10 md:w-56 pointer-events-auto"
           />
         </div>
       </div>

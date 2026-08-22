@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { ContactHeroSection } from "@/components/contact/ContactHeroSection";
-import { ContactCardsSection } from "@/components/contact/ContactCardsSection";
-import { ContactFormSection } from "@/components/contact/ContactFormSection";
+import { ContactMainSection } from "@/components/contact/ContactMainSection";
 import { ContactMapSection } from "@/components/contact/ContactMapSection";
 
 export const metadata: Metadata = {
@@ -11,12 +10,10 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-msk-cream-50">
       <ContactHeroSection />
       
-      <ContactCardsSection />
-      
-      <ContactFormSection />
+      <ContactMainSection />
       
       <ContactMapSection />
     </div>

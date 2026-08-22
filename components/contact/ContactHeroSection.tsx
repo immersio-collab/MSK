@@ -1,45 +1,28 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import { MethodeAssetSlot } from "@/components/methode/MethodeAssetSlot";
+import { MethodeLottie } from "@/components/methode/MethodeLottie";
 
 export const ContactHeroSection: React.FC = () => {
   return (
-    <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 bg-[#FAF8F5] text-msk-night-900 overflow-hidden">
-      {/* Decorative patterns */}
-      <div className="absolute inset-0 z-0 opacity-40">
-        <div className="absolute top-10 left-10 w-72 h-72 bg-msk-coral-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
-        <div className="absolute top-20 right-10 w-72 h-72 bg-msk-sun-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-20 left-1/3 w-72 h-72 bg-msk-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-4000"></div>
-      </div>
+    <section className="relative w-full bg-[#E6F4F1] pt-24 pb-48 md:pt-32 md:pb-64 overflow-hidden">
+      <div className="relative z-10 mx-auto w-full max-w-[1400px] min-h-[30vh] md:min-h-[40vh] pointer-events-none">
+        
+        {/* Scène principale : Fille et Montagne 
+            Très large pour remplir l'écran (w-[110%] sur desktop).
+            translate-y-32 / md:translate-y-40 permet de la descendre
+            suffisamment pour que sa base soit cachée par la carte blanche. */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[180%] sm:w-[140%] md:w-[120%] lg:w-[110%] xl:w-[105%] max-w-[1600px] translate-y-32 md:translate-y-40 z-10">
+          <MethodeLottie src="/contact.json" className="w-full h-auto" fit={false} />
+        </div>
 
-      <div className="container mx-auto px-4 relative z-10 text-center max-w-4xl">
-        <motion.span
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-sm font-bold uppercase tracking-widest text-msk-coral-500 mb-6 block"
-        >
-          Contact & Accès
-        </motion.span>
-        
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-6 leading-tight text-msk-night-900"
-        >
-          Parlons de <span className="text-transparent bg-clip-text bg-linear-to-r from-msk-coral-500 to-msk-sun-500">votre enfant.</span>
-        </motion.h1>
-        
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg md:text-xl text-msk-night-700 max-w-3xl mx-auto leading-relaxed"
-        >
-          Appelez, écrivez, ou passez nous voir. Chaque question mérite une réponse. Nous sommes là pour vous guider.
-        </motion.p>
+        {/* Plante : positionnée indépendamment à gauche.
+            Largeur ajustée pour correspondre à la maquette.
+            Aussi descendue pour se caler derrière la carte. */}
+        <div className="absolute bottom-0 -left-12 md:-left-16 w-72 md:w-[32rem] lg:w-[38rem] translate-y-32 md:translate-y-40 z-20">
+          <MethodeLottie src="/plant.json" className="w-full h-auto" fit={false} />
+        </div>
+
       </div>
     </section>
   );

@@ -39,6 +39,7 @@ export const MethodeLottie = ({
 
     let cancelled = false;
     let observer: IntersectionObserver | null = null;
+    let isVisible = false;
 
     import("lottie-web").then(({ default: lottie }) => {
       if (cancelled || !host.current) return;
@@ -61,6 +62,20 @@ export const MethodeLottie = ({
       // The bounds are sampled across the timeline and unioned, not taken from
       // a single frame: these animations move, and cropping to frame 0 would
       // clip whatever travels outside it later.
+      // Only run while on screen. Compositor-driven, so it is independent of
+      // however the page happens to be scrolled.
+      observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            isVisible = entry.isIntersecting;
+            if (isVisible) anim.current?.play();
+            else anim.current?.pause();
+          }
+        },
+        { rootMargin: "200px 0px" },
+      );
+      observer.observe(host.current);
+
       anim.current.addEventListener("DOMLoaded", () => {
         if (!fit || !anim.current || !host.current) return;
         const svg = host.current.querySelector("svg");
@@ -82,32 +97,26 @@ export const MethodeLottie = ({
             x1 = Math.max(x1, b.x + b.width);
             y1 = Math.max(y1, b.y + b.height);
           } catch {
+            // Restore playback state if error
+            if (isVisible) anim.current.play();
             return;
           }
         }
+        
         anim.current.goToAndStop(0, true);
 
-        if (!Number.isFinite(x0) || x1 <= x0 || y1 <= y0) return;
-        const pad = Math.max(x1 - x0, y1 - y0) * 0.04;
-        svg.setAttribute(
-          "viewBox",
-          `${x0 - pad} ${y0 - pad} ${x1 - x0 + pad * 2} ${y1 - y0 + pad * 2}`,
-        );
-        svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
-      });
+        if (Number.isFinite(x0) && x1 > x0 && y1 > y0) {
+          const pad = Math.max(x1 - x0, y1 - y0) * 0.04;
+          svg.setAttribute(
+            "viewBox",
+            `${x0 - pad} ${y0 - pad} ${x1 - x0 + pad * 2} ${y1 - y0 + pad * 2}`,
+          );
+          svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+        }
 
-      // Only run while on screen. Compositor-driven, so it is independent of
-      // however the page happens to be scrolled.
-      observer = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting) anim.current?.play();
-            else anim.current?.pause();
-          }
-        },
-        { rootMargin: "200px 0px" },
-      );
-      observer.observe(host.current);
+        // Restore playback state after crop
+        if (isVisible) anim.current.play();
+      });
     });
 
     return () => {

@@ -50,11 +50,10 @@ export const MethodeHeroSection = () => {
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 sm:px-10">
-        <MethodeAssetSlot
-          label="Illustration héro"
-          hint="Scène vectorielle plate — enfant, formes, nuages · ~900×420"
-          tone="bg-msk-sun-300/60 text-msk-night-900"
-          className="mx-auto h-56 w-full max-w-3xl md:h-72"
+        <img
+          src="/kid swing.svg"
+          alt="Illustration méthode"
+          className="mx-auto h-auto w-full max-w-3xl md:h-80 object-contain scale-[1.6] md:scale-[2.2] translate-y-28 md:translate-y-[14rem] origin-bottom relative z-10 pointer-events-none"
         />
 
         {/* Title card, overlapping the band's lower edge. */}

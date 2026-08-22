@@ -58,11 +58,10 @@ export const ProgrammesNextStopSection = () => {
           </Link>
         </FadeUp>
 
-        <MethodeAssetSlot
-          label="Illustration — admissions"
-          hint="Personnage vectoriel plat · ~420×260"
-          tone="bg-msk-coral-900 text-msk-coral-100"
-          className="mx-auto mt-14 h-40 w-full max-w-md"
+        <img
+          src="/Parenting.svg"
+          alt="Illustration admissions"
+          className="mx-auto mt-14 h-auto w-full max-w-md object-contain"
         />
       </div>
     </section>

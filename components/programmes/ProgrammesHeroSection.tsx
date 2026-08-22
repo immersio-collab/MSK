@@ -51,11 +51,10 @@ export const ProgrammesHeroSection = () => {
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 sm:px-10">
-        <MethodeAssetSlot
-          label="Illustration héro"
-          hint="Scène vectorielle plate pour programmes · ~900×420"
-          tone="bg-msk-blue-800/60 text-white"
-          className="mx-auto h-56 w-full max-w-3xl md:h-72"
+        <img
+          src="/kids playing - kidcare.svg"
+          alt="Illustration enfants qui jouent"
+          className="mx-auto h-auto w-full max-w-3xl md:h-80 object-contain"
         />
 
         {/* Carte-titre overlapping la bande inférieure. */}
