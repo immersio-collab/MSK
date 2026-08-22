@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { ProgrammesHeroSection } from "@/components/programmes/ProgrammesHeroSection";
+import { ProgrammesKineticBanner } from "@/components/programmes/ProgrammesKineticBanner";
 import { ProgrammesSelectorSection } from "@/components/programmes/ProgrammesSelectorSection";
+import { ProgrammesMediaBand } from "@/components/programmes/ProgrammesMediaBand";
+import { ProgrammesStatementSection } from "@/components/programmes/ProgrammesStatementSection";
 import { ProgrammesTableSection } from "@/components/programmes/ProgrammesTableSection";
+import { ProgrammesNextStopSection } from "@/components/programmes/ProgrammesNextStopSection";
 import { CtaFinalSection } from "@/components/home/CtaFinalSection";
 
 export const metadata: Metadata = {
@@ -12,13 +16,29 @@ export const metadata: Metadata = {
 export default function ProgrammesPage() {
   return (
     <div className="flex flex-col min-h-screen">
+      {/* Bande de couleur inclinée + nuages SVG flottants + carte-titre */}
       <ProgrammesHeroSection />
-      
+
+      {/* Bannière kinétique marquee — transition vers la section programmes */}
+      <ProgrammesKineticBanner />
+
+      {/* Onglets de sélection du programme (Maternelle / Primaire) */}
       <ProgrammesSelectorSection />
-      
+
+      {/* Photo pleine-largeur à bord incliné */}
+      <ProgrammesMediaBand />
+
+      {/* Déclaration oversized + CTA circulaire + photo */}
+      <ProgrammesStatementSection />
+
+      {/* Tableau comparatif des programmes */}
       <ProgrammesTableSection />
-      
-      <CtaFinalSection 
+
+      {/* Hand-off vers la page Admissions */}
+      <ProgrammesNextStopSection />
+
+      {/* CTA final partagé */}
+      <CtaFinalSection
         title="Pas sûr du programme adapté ?"
         subtitle="Nos experts sont là pour vous guider. Réservez un bilan d'orientation gratuit et sans engagement."
         buttonText="Réserver un bilan gratuit"

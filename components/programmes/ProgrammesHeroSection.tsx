@@ -1,45 +1,88 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 
-export const ProgrammesHeroSection: React.FC = () => {
+import { MethodeCloud } from "@/components/methode/MethodeCloud";
+import { FadeUp } from "@/components/motion/FadeUp";
+import { MethodeAssetSlot } from "@/components/methode/MethodeAssetSlot";
+
+/**
+ * Hero de la page Programmes — même grammaire visuelle que MethodeHeroSection :
+ * bande de couleur inclinée en haut, nuages SVG flottants, carte-titre overlapping.
+ *
+ * Différences intentionnelles par rapport à la méthode :
+ * - Bande de fond : msk-blue-700 (vs msk-sun-400) pour distinguer les deux pages
+ * - Carte-titre : bg-msk-coral-600 → bg-msk-blue-800
+ * - Eyebrow pill : "Programmes & Classes"
+ */
+export const ProgrammesHeroSection = () => {
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-24 bg-[#FAF8F5] text-msk-night-900 overflow-hidden">
-      {/* Decorative patterns */}
-      <div className="absolute inset-0 z-0 opacity-40">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-msk-coral-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-msk-sun-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-20 left-1/3 w-72 h-72 bg-msk-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-4000"></div>
+    <section className="relative w-full bg-msk-cream-100 pb-24 pt-24 md:pb-32">
+      {/* Colour band inclinée — même clip-path que la méthode. */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-[58%] bg-msk-blue-700"
+        style={{ clipPath: "polygon(0 0, 100% 0, 100% 72%, 0 100%)" }}
+      />
+
+      {/* Nuages flottants — même composant que la méthode, teintes différentes. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <MethodeCloud
+          motion="float"
+          shape="a"
+          speed={54}
+          phase={0.15}
+          className="absolute left-0 top-[50%] w-40 text-msk-blue-50 md:w-56"
+        />
+        <MethodeCloud
+          motion="float"
+          shape="b"
+          speed={40}
+          phase={0.55}
+          className="absolute left-0 top-[24%] w-48 text-white md:w-72"
+        />
+        <MethodeCloud
+          motion="float"
+          shape="a"
+          speed={66}
+          phase={0.8}
+          className="absolute left-0 top-[10%] hidden w-32 text-msk-blue-200 lg:block"
+        />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10 text-center max-w-4xl">
-        <motion.span
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-sm font-bold uppercase tracking-widest text-msk-coral-500 mb-6 block"
-        >
-          Programmes & Classes
-        </motion.span>
-        
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-8 leading-tight text-msk-night-900"
-        >
-          Un programme adapté à chaque âge, à chaque <span className="text-transparent bg-clip-text bg-linear-to-r from-msk-coral-500 to-msk-sun-500">besoin.</span>
-        </motion.h1>
-        
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg md:text-xl text-msk-night-700 max-w-3xl mx-auto leading-relaxed"
-        >
-          De 2 ans à l'âge adulte, nous accompagnons chaque étape du développement avec une pédagogie sur-mesure et bienveillante.
-        </motion.p>
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 sm:px-10">
+        <MethodeAssetSlot
+          label="Illustration héro"
+          hint="Scène vectorielle plate pour programmes · ~900×420"
+          tone="bg-msk-blue-800/60 text-white"
+          className="mx-auto h-56 w-full max-w-3xl md:h-72"
+        />
+
+        {/* Carte-titre overlapping la bande inférieure. */}
+        <FadeUp delay={0.1}>
+          <div className="mx-auto mt-16 max-w-2xl rounded-[1.75rem] bg-msk-blue-800 px-8 py-10 text-center shadow-2xl md:px-12">
+            <span className="inline-block rounded-full bg-white/15 px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-sun-300">
+              Programmes &amp; Classes
+            </span>
+
+            <h1 className="mt-6 font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-white sm:text-5xl md:text-6xl">
+              Un programme adapté à chaque âge, à chaque besoin
+            </h1>
+
+            <p className="mx-auto mt-6 max-w-md text-base font-medium leading-snug text-msk-blue-100 md:text-lg">
+              De 2 ans à l&apos;âge adulte, une pédagogie sur-mesure et
+              bienveillante pour chaque étape du développement.
+            </p>
+
+            <a
+              href="#programmes"
+              aria-label="Aller aux programmes"
+              className="mx-auto mt-8 flex h-11 w-11 items-center justify-center rounded-full border-2 border-white/70 text-white transition-colors hover:bg-white hover:text-msk-blue-800"
+            >
+              <ChevronDown className="h-5 w-5" aria-hidden />
+            </a>
+          </div>
+        </FadeUp>
       </div>
     </section>
   );

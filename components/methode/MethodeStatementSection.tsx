@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 import { MethodeAssetSlot } from "@/components/methode/MethodeAssetSlot";
 import { FadeUp } from "@/components/motion/FadeUp";
@@ -43,12 +44,15 @@ export const MethodeStatementSection = () => {
             </Link>
           </FadeUp>
 
-          <MethodeAssetSlot
-            label="Photo — séance d'accompagnement"
-            hint="Photographie réelle, coins arrondis · ~640×420"
-            tone="bg-msk-cream-100 text-msk-night-700"
-            className="h-56 w-full md:h-64"
-          />
+          <div className="relative h-56 w-full overflow-hidden rounded-3xl md:h-64">
+            <Image
+              src="/accompagnement.jpeg"
+              alt="Séance d'accompagnement"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </div>
         </div>
       </div>
     </section>
