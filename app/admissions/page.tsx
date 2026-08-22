@@ -1,4 +1,12 @@
 import type { Metadata } from "next";
+import { AdmissionsHeroSection } from "@/components/admissions/AdmissionsHeroSection";
+import { AdmissionsStepsSection } from "@/components/admissions/AdmissionsStepsSection";
+import { AdmissionsMediaBand } from "@/components/admissions/AdmissionsMediaBand";
+import { AdmissionsMassarSection } from "@/components/admissions/AdmissionsMassarSection";
+import { AdmissionsDocumentsSection } from "@/components/admissions/AdmissionsDocumentsSection";
+import { AdmissionsNextStopSection } from "@/components/admissions/AdmissionsNextStopSection";
+import { MethodeKineticBanner } from "@/components/methode/MethodeKineticBanner";
+import { CtaFinalSection } from "@/components/home/CtaFinalSection";
 
 export const metadata: Metadata = {
   title: "Admissions & Inscriptions | MSK Casablanca",
@@ -6,40 +14,34 @@ export const metadata: Metadata = {
 };
 
 export default function AdmissionsPage() {
-  const sections = [
-    { id: "hero", title: "Admissions & Inscriptions — Introduction" },
-    { id: "massar", title: "Cas Spécifique : Accueil sans Code Massar" },
-    { id: "process", title: "Les 4 Étapes de l'Admission" },
-    { id: "documents", title: "Documents à Fournir" },
-    { id: "cta", title: "Prise de Rendez-vous & Bilan" },
-  ];
-
   return (
-    <div className="flex flex-col min-h-screen pt-28 pb-20 bg-[#FAF8F5]">
-      <div className="container mx-auto px-4 md:px-6 max-w-5xl space-y-10">
-        <div className="text-center space-y-2">
-          <span className="text-xs font-bold uppercase tracking-widest text-msk-night-700">
-            Page
-          </span>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-msk-night-900">
-            Admissions & Inscriptions
-          </h1>
-        </div>
+    <div className="flex flex-col min-h-screen">
+      {/* Colour band + title card */}
+      <AdmissionsHeroSection />
 
-        {sections.map((section, idx) => (
-          <div
-            key={section.id}
-            className="rounded-2xl border-2 border-dashed border-msk-cream-300/80 p-12 text-center bg-white"
-          >
-            <span className="text-xs font-bold uppercase tracking-widest text-msk-night-700 block mb-2">
-              Section {idx + 1}
-            </span>
-            <h2 className="text-xl md:text-2xl font-bold text-msk-night-900">
-              {section.title}
-            </h2>
-          </div>
-        ))}
-      </div>
+      {/* Kinetic slogan band */}
+      <MethodeKineticBanner text="Contacter. Évaluer. Proposer. Inscrire." />
+
+      {/* The 4 admission steps as a scroll-pinned fanned deck */}
+      <AdmissionsStepsSection />
+
+      {/* Full-bleed photography, slanted top edge */}
+      <AdmissionsMediaBand />
+
+      {/* Sans code Massar — the page's key reassurance */}
+      <AdmissionsMassarSection />
+
+      {/* Documents à fournir */}
+      <AdmissionsDocumentsSection />
+
+      {/* Hand-off to the method */}
+      <AdmissionsNextStopSection />
+
+      <CtaFinalSection
+        title="Prêts à commencer les démarches ?"
+        subtitle="Réservez un bilan d'évaluation gratuit et sans engagement. Nous vous guidons pour le reste."
+        buttonText="Réserver mon bilan"
+      />
     </div>
   );
 }
