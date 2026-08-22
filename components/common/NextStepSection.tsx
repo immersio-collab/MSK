@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
 
 import { MethodeCloud } from "@/components/methode/MethodeCloud";
 import { FadeUp } from "@/components/motion/FadeUp";
@@ -108,16 +109,26 @@ export const NextStepSection = ({
           >
             {description}
           </p>
-
-          <Link
-            href={buttonHref}
-            className={cn(
-              "mt-8 inline-flex rounded-full bg-white px-8 py-4 font-display text-sm font-semibold uppercase tracking-[0.14em] transition-transform hover:scale-105",
-              buttonTextColor
-            )}
-          >
-            {buttonText}
-          </Link>
+          <FadeUp delay={0.3}>
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href={buttonHref}
+                className={cn(
+                  "inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold uppercase tracking-[0.14em] transition-transform hover:scale-105 active:scale-95",
+                  buttonTextColor
+                )}
+              >
+                {buttonText}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-full bg-msk-coral-500 px-8 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-white transition-all hover:scale-105 hover:bg-msk-coral-400 active:scale-95 shadow-md"
+              >
+                Nous contacter
+              </Link>
+            </div>
+          </FadeUp>
         </FadeUp>
 
         <div

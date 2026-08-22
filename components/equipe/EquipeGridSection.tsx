@@ -14,12 +14,6 @@ export const EquipeGridSection: React.FC = () => {
           aria-hidden="true" 
           className="absolute -top-10 -right-6 md:-right-12 w-28 md:w-40 lg:w-48 pointer-events-none z-20" 
         />
-        <img 
-          src="/Diploma Certificate Animation Icon.svg" 
-          alt="" 
-          aria-hidden="true" 
-          className="absolute -bottom-8 -left-6 md:-left-12 w-24 md:w-36 lg:w-44 pointer-events-none z-20" 
-        />
 
         <div className="bg-white rounded-3xl overflow-hidden shadow-xl border border-msk-cream-200 flex flex-col md:flex-row relative z-10">
           {/* Left: Photo */}
