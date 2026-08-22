@@ -4,8 +4,9 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Pagination, Autoplay } from "swiper/modules";
-import { Play, X, Maximize2 } from "lucide-react";
+import { Play, X, Maximize2, Trees, Sparkles, BookOpen, Smile, Gamepad2, Brain, Palette } from "lucide-react";
 import { FadeUp } from "@/components/motion/FadeUp";
+import { motion, AnimatePresence } from "framer-motion";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
@@ -38,22 +39,72 @@ const VIDEOS = [
   },
 ];
 
-// Dummy Photo Data for Masonry
+// 7 Spaces requested by the client
 const PHOTOS = [
-  { id: 1, src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80", alt: "Classe Primaire MSK", aspect: "aspect-4/3" },
-  { id: 2, src: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80", alt: "Matériel Montessori", aspect: "aspect-3/4" },
-  { id: 3, src: "https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?auto=format&fit=crop&w=800&q=80", alt: "Salle de rééducation", aspect: "aspect-4/5" },
-  { id: 4, src: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80", alt: "Neuro-Gym", aspect: "aspect-square" },
-  { id: 5, src: "https://images.unsplash.com/photo-1536640712-4d4c36ef0e47?auto=format&fit=crop&w=800&q=80", alt: "Espace détente", aspect: "aspect-3/4" },
-  { id: 6, src: "https://images.unsplash.com/photo-1564424224827-cd24b8915874?auto=format&fit=crop&w=800&q=80", alt: "Travail en petit groupe", aspect: "aspect-video" },
-  { id: 7, src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80", alt: "Intervention orthophoniste", aspect: "aspect-square" },
+  { 
+    id: 1, 
+    src: "/park exterieur.jpg", 
+    title: "Le Parc Extérieur", 
+    description: "Un espace de plein air pour se ressourcer et jouer librement.", 
+    aspect: "aspect-4/3",
+    icon: Trees
+  },
+  { 
+    id: 2, 
+    src: "/salel sensorielle.jpg", 
+    title: "Salle Sensorielle", 
+    description: "Un environnement apaisant conçu pour la stimulation et la détente.", 
+    aspect: "aspect-3/4",
+    icon: Sparkles
+  },
+  { 
+    id: 3, 
+    src: "/brain exercises.webp", 
+    title: "Salle d'Étude", 
+    description: "Un lieu calme dédié à la concentration et au soutien scolaire.", 
+    aspect: "aspect-square",
+    icon: BookOpen
+  },
+  { 
+    id: 4, 
+    src: "/espace montesori.jpeg", 
+    title: "Espace Montessori", 
+    description: "Matériel adapté favorisant l'autonomie et l'apprentissage à son rythme.", 
+    aspect: "aspect-4/5",
+    icon: Smile
+  },
+  { 
+    id: 5, 
+    src: "/espace détente.avif", 
+    title: "Salle de Jeux", 
+    description: "Où l'apprentissage passe par le divertissement et l'interaction sociale.", 
+    aspect: "aspect-video",
+    icon: Gamepad2
+  },
+  { 
+    id: 6, 
+    src: "/salle de réeducation.jpg", 
+    title: "Salle Neuro-Gym", 
+    description: "Équipements spécialisés pour la rééducation neuro-motrice.", 
+    aspect: "aspect-square",
+    icon: Brain
+  },
+  { 
+    id: 7, 
+    src: "/atelier creatif.jpg", 
+    title: "Atelier Créatif", 
+    description: "Pour l'expression artistique et le développement de la motricité fine.", 
+    aspect: "aspect-3/4",
+    icon: Palette
+  },
 ];
 
 export const GallerySection = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [activePhoto, setActivePhoto] = useState<{src: string, alt: string} | null>(null);
+  const [activePhoto, setActivePhoto] = useState<{src: string, title: string, description: string} | null>(null);
+  const [activeId, setActiveId] = useState(1);
 
-  const openLightbox = (photo: {src: string, alt: string}) => {
+  const openLightbox = (photo: {src: string, title: string, description: string}) => {
     setActivePhoto(photo);
     setLightboxOpen(true);
     document.body.style.overflow = "hidden";
@@ -64,6 +115,8 @@ export const GallerySection = () => {
     setTimeout(() => setActivePhoto(null), 300);
     document.body.style.overflow = "auto";
   };
+
+  const activePhotoObj = PHOTOS.find(p => p.id === activeId) || PHOTOS[0];
 
   return (
     <section id="galerie" className="py-20 md:py-32 relative z-10 bg-white overflow-hidden">
@@ -131,35 +184,78 @@ export const GallerySection = () => {
           </Swiper>
         </FadeUp>
 
-        {/* Masonry Photo Grid */}
+        {/* FeatureCard Interactive Layout */}
         <FadeUp delay={0.4}>
           <div className="flex items-center justify-between mb-8">
             <h3 className="text-2xl font-bold text-msk-night-900">Nos Espaces</h3>
             <span className="text-sm font-bold text-msk-blue-600 bg-msk-blue-50 px-3 py-1 rounded-full">Photos</span>
           </div>
-          
-          <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
-            {PHOTOS.map((photo) => (
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            {/* Left Column: Feature Cards Stack */}
+            <div className="order-2 lg:order-1 lg:col-span-6 space-y-4">
+              {PHOTOS.map((photo) => {
+                const IconComponent = photo.icon;
+                const isActive = activeId === photo.id;
+                return (
+                  <button
+                    key={photo.id}
+                    onClick={() => setActiveId(photo.id)}
+                    className={`w-full text-left p-6 rounded-3xl transition-all duration-300 border flex gap-5 items-start cursor-pointer ${
+                      isActive 
+                        ? "bg-msk-cream-100 border-msk-coral-400 shadow-md scale-[1.01]" 
+                        : "bg-[#fdfbf7]/50 border-msk-cream-200 hover:bg-msk-cream-50/50 hover:border-msk-cream-300"
+                    }`}
+                  >
+                    <div className={`p-3.5 rounded-2xl shrink-0 transition-colors ${
+                      isActive ? 'bg-msk-coral-500 text-white' : 'bg-msk-cream-200 text-msk-night-800'
+                    }`}>
+                      <IconComponent className="w-6 h-6" />
+                    </div>
+                    <div className="space-y-1">
+                      <h4 className="font-bold text-lg text-msk-night-900 leading-tight">
+                        {photo.id}. {photo.title}
+                      </h4>
+                      <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+                        {photo.description}
+                      </p>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Right Column: Sticky Active Image */}
+            <div className="order-1 lg:order-2 lg:col-span-6 lg:sticky lg:top-28">
               <div 
-                key={photo.id} 
-                className={`relative w-full rounded-2xl overflow-hidden group cursor-zoom-in break-inside-avoid ${photo.aspect}`}
-                onClick={() => openLightbox(photo)}
+                className="relative aspect-4/3 rounded-4xl overflow-hidden shadow-xl border border-msk-cream-300 bg-msk-cream-50 group cursor-zoom-in"
+                onClick={() => openLightbox(activePhotoObj)}
               >
-                <Image 
-                  src={photo.src} 
-                  alt={photo.alt} 
-                  fill 
-                  className="object-cover transition-transform duration-700 group-hover:scale-110" 
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-                <div className="absolute inset-0 bg-msk-night-900/0 group-hover:bg-msk-night-900/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                  <Maximize2 className="w-8 h-8 text-white mb-4" />
-                  <div className="absolute bottom-0 left-0 right-0 p-5 bg-linear-to-t from-msk-night-900/90 to-transparent translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    <p className="text-white font-bold text-sm tracking-wide">{photo.alt}</p>
-                  </div>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeId}
+                    initial={{ opacity: 0, scale: 0.96 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.96 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    className="absolute inset-0 w-full h-full"
+                  >
+                    <Image
+                      src={activePhotoObj.src}
+                      alt={activePhotoObj.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      priority
+                    />
+                  </motion.div>
+                </AnimatePresence>
+                {/* Maximize Icon on Hover */}
+                <div className="absolute inset-0 bg-msk-night-900/0 group-hover:bg-msk-night-900/30 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                  <Maximize2 className="w-8 h-8 text-white" />
                 </div>
               </div>
-            ))}
+            </div>
           </div>
         </FadeUp>
       </div>
@@ -182,14 +278,19 @@ export const GallerySection = () => {
           <div className="relative w-full max-w-5xl h-[80vh] mx-4" onClick={(e) => e.stopPropagation()}>
             <Image
               src={activePhoto.src}
-              alt={activePhoto.alt}
+              alt={activePhoto.title}
               fill
               className="object-contain"
               sizes="100vw"
             />
-            <p className="absolute -bottom-10 left-0 right-0 text-center text-white/70 font-medium">
-              {activePhoto.alt}
-            </p>
+            <div className="absolute -bottom-12 left-0 right-0 text-center">
+              <p className="text-white font-bold text-lg">
+                {activePhoto.title}
+              </p>
+              <p className="text-white/70 font-medium text-sm">
+                {activePhoto.description}
+              </p>
+            </div>
           </div>
         )}
       </div>

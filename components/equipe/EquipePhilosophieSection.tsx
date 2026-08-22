@@ -30,7 +30,7 @@ export const EquipePhilosophieSection: React.FC = () => {
             <div className="flex items-center gap-4 pt-4">
               <div className="w-12 h-12 rounded-full overflow-hidden relative">
                 <Image 
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200"
+                  src="/fondatrice.webp"
                   alt="Khadija Elabaya"
                   fill
                   className="object-cover"

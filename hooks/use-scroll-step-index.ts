@@ -10,10 +10,10 @@ import { useEffect, useRef, useState } from "react";
  * positioned as contiguous, non-overlapping bands. Because the bands tile the
  * whole column, exactly one can intersect the mid-line at a time.
  *
- * Deliberately not a `scroll` listener. The site mounts Lenis, so observing
- * where the section actually is behaves the same under Lenis, anchor jumps,
- * keyboard scroll and a restored scroll position — and costs nothing while the
- * section is off-screen.
+ * Deliberately not a `scroll` listener. Observing where the section actually is
+ * behaves the same under anchor jumps, keyboard scroll, a restored scroll
+ * position, and any smooth-scroll layer that may be reintroduced — and costs
+ * nothing while the section is off-screen.
  */
 export const useScrollStepIndex = <T extends HTMLElement>() => {
   const ref = useRef<T | null>(null);

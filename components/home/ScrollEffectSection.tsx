@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import ReactLenis from "lenis/react";
 import React, { useRef } from "react";
 
 import { cn } from "@/lib/utils";
@@ -68,43 +67,41 @@ export const ScrollEffectSection = () => {
   });
 
   return (
-    <ReactLenis root>
-      <div className="w-full bg-msk-cream-50">
+    <div className="w-full bg-msk-cream-50">
+      <div
+        ref={targetRef}
+        className="relative box-border flex h-[calc(100vh-80px)] items-center justify-center gap-[2vw] overflow-hidden bg-msk-cream-50 p-[2vw]"
+      >
         <div
-          ref={targetRef}
-          className="relative box-border flex h-[calc(100vh-80px)] items-center justify-center gap-[2vw] overflow-hidden bg-msk-cream-50 p-[2vw]"
+          className="w-full max-w-5xl text-center text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-msk-night-900 flex flex-wrap justify-center gap-y-2 md:gap-y-4"
+          style={{
+            perspective: "500px",
+          }}
         >
-          <div
-            className="w-full max-w-5xl text-center text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-msk-night-900 flex flex-wrap justify-center gap-y-2 md:gap-y-4"
-            style={{
-              perspective: "500px",
-            }}
-          >
-            {wordElements.map((wordObj, wordIndex) => (
-              <span key={wordIndex} className="inline-block whitespace-nowrap">
-                {wordObj.chars.map((c) => (
-                  <CharacterV1
-                    key={c.index}
-                    char={c.char}
-                    index={c.index}
-                    centerIndex={centerIndex}
-                    scrollYProgress={scrollYProgress}
-                  />
-                ))}
-                {wordIndex !== wordElements.length - 1 && (
-                  <CharacterV1
-                    key={wordObj.space.index}
-                    char={wordObj.space.char}
-                    index={wordObj.space.index}
-                    centerIndex={centerIndex}
-                    scrollYProgress={scrollYProgress}
-                  />
-                )}
-              </span>
-            ))}
-          </div>
+          {wordElements.map((wordObj, wordIndex) => (
+            <span key={wordIndex} className="inline-block whitespace-nowrap">
+              {wordObj.chars.map((c) => (
+                <CharacterV1
+                  key={c.index}
+                  char={c.char}
+                  index={c.index}
+                  centerIndex={centerIndex}
+                  scrollYProgress={scrollYProgress}
+                />
+              ))}
+              {wordIndex !== wordElements.length - 1 && (
+                <CharacterV1
+                  key={wordObj.space.index}
+                  char={wordObj.space.char}
+                  index={wordObj.space.index}
+                  centerIndex={centerIndex}
+                  scrollYProgress={scrollYProgress}
+                />
+              )}
+            </span>
+          ))}
         </div>
       </div>
-    </ReactLenis>
+    </div>
   );
 };

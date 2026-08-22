@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { WordPullUp } from "@/components/motion/WordPullUp";
 import { FadeUp } from "@/components/motion/FadeUp";
 import { MagneticButton } from "@/components/motion/MagneticButton";
@@ -9,11 +10,12 @@ import { ScrollStrokePath } from "@/components/motion/ScrollStrokePath";
 import { ScrollEffectSection } from "@/components/home/ScrollEffectSection";
 import ScrollExpand from "@/components/motion/ScrollExpand";
 import { GallerySection } from "@/components/home/GallerySection";
-import { ConfettiParticles } from "@/components/motion/ConfettiParticles";
 import { StatsScrollSection } from "@/components/home/StatsScrollSection";
 import { TargetAudienceSection } from "@/components/home/TargetAudienceSection";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { CtaFinalSection } from "@/components/home/CtaFinalSection";
+
+const ConfettiParticles = dynamic(() => import("@/components/motion/ConfettiParticles").then(m => m.ConfettiParticles), { ssr: false });
 
 export const metadata: Metadata = {
   title: "Accueil | MSK Montessori School Casablanca",

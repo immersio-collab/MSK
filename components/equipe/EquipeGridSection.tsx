@@ -11,7 +11,7 @@ export const EquipeGridSection: React.FC = () => {
           {/* Left: Photo */}
           <div className="md:w-2/5 relative h-[400px] md:h-auto">
             <Image 
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800"
+              src="/fondatrice.webp"
               alt="Khadija Elabaya"
               fill
               className="object-cover"

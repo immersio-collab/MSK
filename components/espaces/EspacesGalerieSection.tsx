@@ -1,110 +1,263 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Maximize2, Trees, Sparkles, BookOpen, Smile, Gamepad2, Brain, Palette } from "lucide-react";
+import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
+import { cn } from "@/lib/utils";
 
-import PhotoAlbum from "react-photo-album";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
-type Category = "Tous" | "Classes Montessori" | "Salle Neuro-Gym" | "Espaces Créatifs" | "Extérieurs";
+type Category = "Tous" | "Éducatif" | "Sensoriel & Moteur" | "Loisirs & Créativité";
 
 interface GalleryImage {
   id: number;
   src: string;
-  alt: string;
+  alt: string; 
+  title: string;
+  description: string; 
   category: Category;
   width: number;
   height: number;
+  icon: React.ComponentType<any>;
 }
 
 const images: GalleryImage[] = [
-  { id: 1, category: "Classes Montessori", src: "https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?auto=format&fit=crop&q=80&w=800", alt: "Classe primaire lumineuse", width: 800, height: 1000 },
-  { id: 2, category: "Salle Neuro-Gym", src: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=800", alt: "Matériel de psychomotricité", width: 800, height: 800 },
-  { id: 3, category: "Classes Montessori", src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=800", alt: "Matériel Montessori bois", width: 800, height: 533 },
-  { id: 4, category: "Espaces Créatifs", src: "https://images.unsplash.com/photo-1603354350317-6f7aaa5911c5?auto=format&fit=crop&q=80&w=800", alt: "Atelier peinture", width: 800, height: 1000 },
-  { id: 5, category: "Extérieurs", src: "https://images.unsplash.com/photo-1595844730298-b960fad9722a?auto=format&fit=crop&q=80&w=800", alt: "Cour de récréation verte", width: 800, height: 800 },
-  { id: 6, category: "Classes Montessori", src: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&q=80&w=800", alt: "Enfants au travail", width: 800, height: 533 },
-  { id: 7, category: "Salle Neuro-Gym", src: "https://images.unsplash.com/photo-1517130038641-a774d04afb3c?auto=format&fit=crop&q=80&w=800", alt: "Parcours d'équilibre", width: 800, height: 1000 },
-  { id: 8, category: "Espaces Créatifs", src: "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&q=80&w=800", alt: "Dessin et arts plastiques", width: 800, height: 800 },
+  { 
+    id: 1, 
+    category: "Loisirs & Créativité", 
+    src: "/park exterieur.jpg", 
+    title: "Le Parc Extérieur",
+    description: "Un vaste espace de plein air sécurisé et verdoyant, conçu pour permettre aux enfants de se ressourcer, de courir et de jouer en toute liberté. C'est le lieu idéal pour développer la motricité globale à travers des jeux collectifs, des parcours d'obstacles naturels et des activités d'exploration sensorielle en contact direct avec la nature.",
+    alt: "Le Parc Extérieur", 
+    width: 800, 
+    height: 600,
+    icon: Trees
+  },
+  { 
+    id: 2, 
+    category: "Sensoriel & Moteur", 
+    src: "/salel sensorielle.jpg", 
+    title: "Salle Sensorielle",
+    description: "Inspirée de l'approche Snoezelen, cette salle est un havre de paix conçu pour stimuler les sens de manière douce ou pour offrir un espace de relaxation profonde. Équipée de colonnes à bulles, de fibres optiques lumineuses et de projections visuelles apaisantes, elle aide les enfants à réguler leurs émotions et à explorer leurs perceptions sensorielles.",
+    alt: "Salle Sensorielle", 
+    width: 800, 
+    height: 1066,
+    icon: Sparkles
+  },
+  { 
+    id: 3, 
+    category: "Éducatif", 
+    src: "/brain exercises.webp", 
+    title: "Salle d'Étude",
+    description: "Un espace calme, épuré et propice à la concentration individuelle et au soutien scolaire personnalisé. Cet environnement est structuré pour minimiser les distractions visuelles et auditives, permettant à chaque enfant de consolider ses apprentissages académiques et de développer des méthodes de travail autonomes et efficaces.",
+    alt: "Salle d'Étude", 
+    width: 800, 
+    height: 800,
+    icon: BookOpen
+  },
+  { 
+    id: 4, 
+    category: "Éducatif", 
+    src: "/espace montesori.jpeg", 
+    title: "Espace Montessori",
+    description: "Aménagé selon les principes de Maria Montessori, cet espace met à disposition un matériel pédagogique scientifique et auto-correcteur unique. Chaque élément est placé à hauteur d'enfant pour encourager le libre choix des activités, favorisant ainsi l'autonomie, la motricité fine, la coordination oculo-manuelle et la confiance en soi.",
+    alt: "Espace Montessori", 
+    width: 800, 
+    height: 1000,
+    icon: Smile
+  },
+  { 
+    id: 5, 
+    category: "Loisirs & Créativité", 
+    src: "/espace détente.avif", 
+    title: "Salle de Jeux",
+    description: "Un lieu chaleureux et interactif où le jeu est le moteur principal de l'apprentissage et du développement social. À travers des jeux de rôle, des puzzles collaboratifs et des ateliers ludiques, les enfants apprennent à interagir avec leurs pairs, à exprimer leurs émotions et à développer leur langage en s'amusant.",
+    alt: "Salle de Jeux", 
+    width: 800, 
+    height: 450,
+    icon: Gamepad2
+  },
+  { 
+    id: 6, 
+    category: "Sensoriel & Moteur", 
+    src: "/salle de réeducation.jpg", 
+    title: "Salle Neuro-Gym",
+    description: "Une salle équipée d'un matériel thérapeutique de pointe dédié à la rééducation neuro-motrice et à l'intégration motrice. Sous la supervision de professionnels, les enfants travaillent leur équilibre, leur tonus musculaire, leur planification motrice et leur proprioception à l'aide de ballons de thérapie, de trampolines et de parcours de motricité.",
+    alt: "Salle Neuro-Gym", 
+    width: 800, 
+    height: 800,
+    icon: Brain
+  },
+  { 
+    id: 7, 
+    category: "Loisirs & Créativité", 
+    src: "/atelier creatif.jpg", 
+    title: "Atelier Créatif",
+    description: "Un espace vibrant d'expression artistique où l'imagination des enfants prend vie à travers la peinture, le modelage, le découpage et le dessin. Ces activités manuelles variées sont spécialement conçues pour affiner la motricité fine, renforcer la force des doigts et stimuler la pensée créative de manière ludique.",
+    alt: "Atelier Créatif", 
+    width: 800, 
+    height: 1066,
+    icon: Palette
+  },
 ];
 
-const categories: Category[] = ["Tous", "Classes Montessori", "Salle Neuro-Gym", "Espaces Créatifs", "Extérieurs"];
+const SpaceCharacter = ({
+  char,
+  index,
+  centerIndex,
+  scrollYProgress,
+}: {
+  char: string;
+  index: number;
+  centerIndex: number;
+  scrollYProgress: any;
+}) => {
+  const isSpace = char === " ";
+  const distanceFromCenter = index - centerIndex;
 
-export const EspacesGalerieSection: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<Category>("Tous");
-  const [index, setIndex] = useState(-1);
-
-  const filteredImages = images.filter(img => activeTab === "Tous" || img.category === activeTab);
+  const x = useTransform(
+    scrollYProgress,
+    [0, 0.45],
+    [distanceFromCenter * 40, 0],
+  );
+  const rotateX = useTransform(
+    scrollYProgress,
+    [0, 0.45],
+    [distanceFromCenter * 40, 0],
+  );
 
   return (
-    <section id="galerie" className="py-24 bg-white relative">
-      <div className="container mx-auto px-4 max-w-7xl">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-msk-night-900 mb-4">
-            Galerie Immersive
-          </h2>
-          <p className="text-lg text-msk-night-700/80 max-w-2xl mx-auto">
-            Explorez nos différents espaces conçus spécifiquement pour répondre aux besoins de chaque enfant.
-          </p>
-        </div>
+    <motion.span
+      className={cn("inline-block text-msk-blue-600 font-black uppercase tracking-tighter", isSpace ? "w-4 md:w-8" : "")}
+      style={{
+        x,
+        rotateX,
+      }}
+    >
+      {char}
+    </motion.span>
+  );
+};
 
-        {/* Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveTab(cat)}
-              className={`relative px-6 py-2.5 rounded-full text-sm font-bold transition-colors ${
-                activeTab === cat 
-                  ? "text-white" 
-                  : "text-msk-night-700 hover:bg-msk-cream-100"
-              }`}
-            >
-              {activeTab === cat && (
-                <motion.div
-                  layoutId="active-tab"
-                  className="absolute inset-0 bg-msk-coral-500 rounded-full"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                />
-              )}
-              <span className="relative z-10">{cat}</span>
-            </button>
-          ))}
-        </div>
+export const EspacesGalerieSection: React.FC = () => {
+  const [activeId, setActiveId] = useState(1);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const headerRef = useRef<HTMLDivElement>(null);
 
-        {/* Masonry Grid via react-photo-album */}
-        <motion.div layout className="relative">
-          <AnimatePresence mode="popLayout">
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-            >
-              <PhotoAlbum
-                layout="masonry"
-                photos={filteredImages}
-                columns={(containerWidth: number) => {
-                  if (containerWidth < 640) return 1;
-                  if (containerWidth < 1024) return 2;
-                  return 3;
-                }}
-                spacing={16}
-                onClick={({ index }: { index: number }) => setIndex(index)}
-              />
-            </motion.div>
-          </AnimatePresence>
-        </motion.div>
+  const lightboxIndex = images.findIndex(img => img.id === activeId);
+
+  // Animating the short header text over a full section height scroll
+  const { scrollYProgress: headerScroll } = useScroll({
+    target: headerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const animatedText = "Explorez nos espaces. Un univers conçu pour chaque enfant.";
+  const words = animatedText.split(" ");
+  const characters = animatedText.split("");
+  const centerIndex = Math.floor(characters.length / 2);
+
+  let globalIndex = 0;
+  const wordElements = words.map((word) => {
+    const chars = word.split("").map((char) => ({ char, index: globalIndex++ }));
+    const space = { char: " ", index: globalIndex++ };
+    return { chars, space };
+  });
+
+  const stickyContent = images.map((photo) => ({
+    title: photo.title,
+    description: photo.description,
+    content: (
+      <div 
+        className="relative w-full h-full cursor-zoom-in group" 
+        onClick={() => {
+          setActiveId(photo.id);
+          setLightboxOpen(true);
+        }}
+      >
+        <Image
+          src={photo.src}
+          alt={photo.title}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          sizes="(max-width: 1024px) 100vw, 50vw"
+        />
+        <div className="absolute inset-0 bg-msk-night-900/0 group-hover:bg-msk-night-900/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+          <Maximize2 className="w-8 h-8 text-white" />
+        </div>
+      </div>
+    ),
+    mobileImage: (
+      <div 
+        className="relative w-full h-full cursor-zoom-in" 
+        onClick={() => {
+          setActiveId(photo.id);
+          setLightboxOpen(true);
+        }}
+      >
+        <Image
+          src={photo.src}
+          alt={photo.title}
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+      </div>
+    )
+  }));
+
+  return (
+    <section id="galerie" className="bg-white relative">
+      
+      {/* Full Section Height Typographic Scroll Section */}
+      <div className="w-full bg-msk-cream-50">
+        <div 
+          ref={headerRef} 
+          className="relative box-border flex h-[calc(100vh-80px)] items-center justify-center gap-[2vw] overflow-hidden bg-msk-cream-50 p-[2vw]"
+        >
+          <div
+            className="w-full max-w-5xl text-center text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-msk-night-900 flex flex-wrap justify-center gap-y-2 md:gap-y-4"
+            style={{ perspective: "500px" }}
+          >
+            {wordElements.map((wordObj, wordIndex) => (
+              <span key={wordIndex} className="inline-block whitespace-nowrap">
+                {wordObj.chars.map((c) => (
+                  <SpaceCharacter
+                    key={c.index}
+                    char={c.char}
+                    index={c.index}
+                    centerIndex={centerIndex}
+                    scrollYProgress={headerScroll}
+                  />
+                ))}
+                {wordIndex !== wordElements.length - 1 && (
+                  <SpaceCharacter
+                    key={wordObj.space.index}
+                    char={wordObj.space.char}
+                    index={wordObj.space.index}
+                    centerIndex={centerIndex}
+                    scrollYProgress={headerScroll}
+                  />
+                )}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Sticky Scroll Reveal Layout (Outside container for full horizontal width) */}
+      <div className="w-full">
+        <StickyScroll content={stickyContent} />
       </div>
 
       <Lightbox
-        open={index >= 0}
-        index={index}
-        close={() => setIndex(-1)}
-        slides={filteredImages}
+        open={lightboxOpen}
+        index={lightboxIndex >= 0 ? lightboxIndex : 0}
+        close={() => setLightboxOpen(false)}
+        slides={images.map(img => ({ src: img.src, title: img.title, description: img.description }))}
       />
     </section>
   );

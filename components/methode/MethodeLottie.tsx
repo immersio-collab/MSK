@@ -96,7 +96,8 @@ export const MethodeLottie = ({
         svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
       });
 
-      // Only run while on screen. Compositor-driven, so it works under Lenis.
+      // Only run while on screen. Compositor-driven, so it is independent of
+      // however the page happens to be scrolled.
       observer = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {
