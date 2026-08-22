@@ -1,28 +1,55 @@
 "use client";
 
-import { MethodeAssetSlot } from "@/components/methode/MethodeAssetSlot";
+import {
+  ContactBackdrop,
+  ContactForeground,
+} from "@/components/contact/ContactScene";
 import { MethodeLottie } from "@/components/methode/MethodeLottie";
 
+/**
+ * Contact scene, laid out as in the reference: a fixed-height band on a mint
+ * field, with four stacked layers.
+ *
+ * Order matters and is the whole trick — the animated figure sits *between* two
+ * vector layers, so the hill and tree overlap it while the big cloud stays
+ * behind. Percentages and z-indices are transcribed rather than eyeballed.
+ *
+ * The band's own height is what crops the hill flat along the bottom; the form
+ * panel below then overlaps that edge.
+ */
 export const ContactHeroSection: React.FC = () => {
+  // Top padding below `lg` only — on desktop the scene runs to the very top and
+  // the fixed navbar floats over it, as in the reference. Applying the padding
+  // at every width is what pushed the whole scene down and left a band of empty
+  // mint above it.
   return (
-    <section className="relative w-full bg-[#E6F4F1] pt-24 pb-48 md:pt-32 md:pb-64 overflow-hidden">
-      <div className="relative z-10 mx-auto w-full max-w-[1400px] min-h-[30vh] md:min-h-[40vh] pointer-events-none">
-        
-        {/* Scène principale : Fille et Montagne 
-            Très large pour remplir l'écran (w-[110%] sur desktop).
-            translate-y-32 / md:translate-y-40 permet de la descendre
-            suffisamment pour que sa base soit cachée par la carte blanche. */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[180%] sm:w-[140%] md:w-[120%] lg:w-[110%] xl:w-[105%] max-w-[1600px] translate-y-32 md:translate-y-40 z-10">
-          <MethodeLottie src="/contact.json" className="w-full h-auto" fit={false} />
-        </div>
+    <section className="w-full overflow-hidden bg-[#cff2f1] max-lg:pt-[4.0625rem]">
+      <div className="w-full lg:h-[35.5625rem]">
+        <div className="relative h-auto w-full overflow-hidden lg:h-full lg:w-auto">
+          {/* 1 — cloud behind the figure */}
+          <ContactBackdrop className="absolute z-10 h-auto w-full lg:h-full lg:w-auto" />
 
-        {/* Plante : positionnée indépendamment à gauche.
-            Largeur ajustée pour correspondre à la maquette.
-            Aussi descendue pour se caler derrière la carte. */}
-        <div className="absolute bottom-0 -left-12 md:-left-16 w-72 md:w-[32rem] lg:w-[38rem] translate-y-32 md:translate-y-40 z-20">
-          <MethodeLottie src="/plant.json" className="w-full h-auto" fit={false} />
-        </div>
+          {/* 2 — the figure */}
+          <div className="absolute top-0 left-[-4.5%] z-10 h-auto w-[113%]">
+            <MethodeLottie
+              src="/contact.json"
+              className="h-full w-full"
+              fit={false}
+            />
+          </div>
 
+          {/* 3 — clouds, tree and striped hill, over the figure */}
+          <ContactForeground className="relative z-12 h-auto w-full lg:h-full lg:w-auto" />
+
+          {/* 4 — plant, nearest the viewer */}
+          <div className="absolute top-[21%] left-[-13%] z-[14] h-auto w-[44%]">
+            <MethodeLottie
+              src="/plant.json"
+              className="h-full w-full"
+              fit={false}
+            />
+          </div>
+        </div>
       </div>
     </section>
   );

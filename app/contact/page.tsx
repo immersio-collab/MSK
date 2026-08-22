@@ -9,8 +9,11 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  // Mint carries the whole page, as the reference does on <main>. The form panel
+  // is pulled up over the scene and must stay transparent, so the field behind
+  // it has to come from here.
   return (
-    <div className="flex flex-col min-h-screen bg-msk-cream-50">
+    <div className="flex min-h-screen flex-col bg-[#cff2f1]">
       <ContactHeroSection />
       
       <ContactMainSection />
