@@ -11,9 +11,17 @@ import { SCHOOL_INFO } from "@/lib/data/site-content";
  * real text that is visible before (and without) JavaScript, and the marquee is
  * a single compositor-friendly transform.
  */
-export const MethodeKineticBanner = () => {
-  // "Observer. Comprendre. Adapter. Rééduquer. Accompagner. Insérer."
-  const words = SCHOOL_INFO.baseline
+export const MethodeKineticBanner = ({
+  text = SCHOOL_INFO.baseline,
+}: {
+  /**
+   * Full-stop separated phrase. Defaults to the method's own baseline; pages
+   * with a different sequence pass their own, or the band ends up announcing
+   * the wrong six words.
+   */
+  text?: string;
+}) => {
+  const words = text
     .split(".")
     .map((word) => word.trim())
     .filter(Boolean);
@@ -47,7 +55,7 @@ export const MethodeKineticBanner = () => {
     <section className="w-full overflow-hidden bg-msk-night-950 py-14 md:py-20">
       {/* The slogan is announced once here; both marquee tracks are decorative,
           so the repeated words are not read out twice. */}
-      <h2 className="sr-only">{SCHOOL_INFO.baseline}</h2>
+      <h2 className="sr-only">{text}</h2>
       <div
         aria-hidden
         className="flex w-max animate-marquee motion-reduce:animate-none"
