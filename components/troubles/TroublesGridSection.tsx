@@ -265,11 +265,13 @@ export function TroublesGridSection() {
 
   return (
     <section ref={root} id="troubles" className="relative overflow-hidden bg-msk-cream-100 py-24 md:py-28">
-      {/* Bande oblique, même device que le hero de /la-methode. */}
+      {/* Coin oblique posé derrière les cartes. Il ne touche jamais le bord
+          haut de la section : le raccord avec le hero reste donc en crème,
+          sans trait horizontal. Même device de clip-path que /la-methode. */}
       <div
         aria-hidden
-        className="absolute inset-x-0 top-0 h-[46%] bg-msk-sun-100"
-        style={{ clipPath: "polygon(0 0, 100% 0, 100% 70%, 0 100%)" }}
+        className="absolute inset-x-0 top-0 h-[56%] bg-msk-sun-100"
+        style={{ clipPath: "polygon(0 14%, 100% 4%, 100% 62%, 0 92%)" }}
       />
 
       {/* Nuages : dérive latérale continue, vitesses et phases distinctes. */}

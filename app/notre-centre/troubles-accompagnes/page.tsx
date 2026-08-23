@@ -25,7 +25,7 @@ export default function TroublesAccompagnesPage() {
         buttonText="Rencontrer"
         buttonHref="/notre-centre/la-fondatrice"
         svgSrc="/Islamic business woman with gestures up.svg"
-        bgColor="bg-msk-night-800"
+        bgColor="bg-msk-blue-800"
         cloudColor="text-white/50"
         textColor="text-msk-cream-100"
         buttonTextColor="text-msk-night-900"

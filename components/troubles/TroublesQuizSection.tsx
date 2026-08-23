@@ -1,28 +1,48 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
+import { AnimatePresence, motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowRight, Check, HeartHandshake, RotateCcw, Sprout } from "lucide-react";
+import { MethodeAssetSlot } from "@/components/methode/MethodeAssetSlot";
+import { MethodeCloud } from "@/components/methode/MethodeCloud";
 import { MorphButton } from "@/components/motion/MorphButton";
+import { cn } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
 
-type Question = {
-  id: number;
-  text: string;
-};
+// Confettis du résultat : canvas + rAF, inutiles côté serveur et hors du
+// bundle initial — même import que sur la page d'accueil.
+const ConfettiParticles = dynamic(
+  () => import("@/components/motion/ConfettiParticles").then((m) => m.ConfettiParticles),
+  { ssr: false },
+);
 
-const questions: Question[] = [
+type Question = { id: number; text: string };
+
+const QUESTIONS: Question[] = [
   { id: 1, text: "Votre enfant a-t-il des difficultés à se concentrer plus de 10 minutes ou à rester en place ?" },
   { id: 2, text: "Avez-vous remarqué des difficultés d'apprentissage (lecture, écriture, calcul) ou un retard de langage ?" },
   { id: 3, text: "Rencontre-t-il des difficultés d'intégration scolaire, de sociabilisation, ou a-t-il été réorienté ?" },
 ];
 
-export const TroublesQuizSection: React.FC = () => {
+type StepStatus = "done" | "current" | "todo";
+
+const STEP_LABEL: Record<StepStatus, string> = {
+  done: "répondue",
+  current: "en cours",
+  todo: "à venir",
+};
+
+const SPRING = { type: "spring", stiffness: 300, damping: 20 } as const;
+
+export function TroublesQuizSection() {
+  const root = useRef<HTMLElement>(null);
+  const sun = useRef<HTMLImageElement>(null);
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<boolean[]>([]);
-  const root = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const el = root.current;
@@ -30,18 +50,18 @@ export const TroublesQuizSection: React.FC = () => {
 
     const ctx = gsap.context(() => {
       // La carte elle-même n'est animée par personne d'autre : ses enfants
-      // framer-motion (barre de progression, panneaux AnimatePresence) sont des
-      // éléments distincts, donc aucun conflit de bibliothèque.
+      // framer-motion (badges, panneaux AnimatePresence) sont des éléments
+      // distincts, donc aucun conflit de bibliothèque.
       //
       // `from` + immediateRender:false : si le tween ne part jamais, la carte
-      // reste droite et pleine taille plutôt que bloquée à scale 0.9 / opacity 0.
+      // reste droite et pleine taille plutôt que bloquée à scale 0.94 / opacity 0.
       gsap.from(".quiz-card", {
         y: 48,
         rotate: -2.2,
         scale: 0.94,
         opacity: 0,
         duration: 0.8,
-        ease: "power3.out",
+        ease: "back.out(1.4)",
         immediateRender: false,
         scrollTrigger: { trigger: ".quiz-card", start: "top 85%" },
       });
@@ -55,124 +75,260 @@ export const TroublesQuizSection: React.FC = () => {
         immediateRender: false,
         scrollTrigger: { trigger: ".quiz-heading", start: "top 88%" },
       });
+
+      // Parallaxe du soleil : `to` depuis sa position naturelle, donc rien
+      // n'est déplacé tant que le scroll ne commence pas. Ses rayons tournent
+      // déjà d'eux-mêmes (SMIL dans le SVG).
+      if (sun.current) {
+        gsap.to(sun.current, {
+          yPercent: 55,
+          xPercent: -12,
+          ease: "none",
+          scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
+        });
+      }
     }, el);
 
     return () => ctx.revert();
   }, []);
 
-  const handleAnswer = (answer: boolean) => {
-    setAnswers([...answers, answer]);
-    setCurrentStep(currentStep + 1);
+  const answer = (value: boolean) => {
+    setAnswers((previous) => [...previous, value]);
+    setCurrentStep((step) => step + 1);
   };
 
-  const progress = (currentStep / questions.length) * 100;
-  const isFinished = currentStep === questions.length;
+  const reset = () => {
+    setAnswers([]);
+    setCurrentStep(0);
+  };
 
-  const hasPositiveAnswers = answers.some((a) => a === true);
+  const isFinished = currentStep >= QUESTIONS.length;
+  const question = QUESTIONS[currentStep];
+  const positive = answers.some(Boolean);
 
   return (
-    <section ref={root} className="py-20 bg-[#FAF8F5]">
-      <div className="container mx-auto px-4 max-w-4xl">
-        <div className="quiz-heading text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-msk-night-900 mb-4">
-            Mon enfant a-t-il besoin de MSK ?
+    <section
+      ref={root}
+      className="relative overflow-hidden bg-msk-cream-100 pb-24 pt-28 md:pb-32 md:pt-36"
+    >
+      {/* Ciel. Même bleu que le ciel du hero : la page n'a qu'un seul ciel.
+          Il démarre en biais SOUS le bord haut des deux côtés, donc le raccord
+          avec la grille reste en crème ; il descend en revanche jusqu'au bord
+          bas, où le CTA bleu foncé prend le relais. */}
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-msk-blue-300"
+        style={{ clipPath: "polygon(0 18%, 100% 8%, 100% 100%, 0 100%)" }}
+      />
+
+      {/* Soleil + nuages. Le soleil est un SVG auto-animé (plain <img> : next/image
+          l'aplatirait), poussé par le scroll ; les nuages dérivent en continu. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <img
+          ref={sun}
+          src="/methode/sun-cloud.svg"
+          alt=""
+          className="absolute -right-6 top-[10%] w-28 sm:right-[3%] sm:w-44 lg:right-[7%] lg:w-64"
+        />
+        <MethodeCloud
+          motion="float"
+          shape="b"
+          speed={48}
+          phase={0.15}
+          className="absolute left-0 top-[26%] w-40 text-white md:w-60"
+        />
+        <MethodeCloud
+          motion="float"
+          shape="a"
+          speed={62}
+          phase={0.6}
+          className="absolute left-0 top-[62%] hidden w-32 text-white lg:block"
+        />
+      </div>
+
+      <div className="container relative mx-auto max-w-3xl px-4">
+        <div className="quiz-heading mx-auto mb-10 max-w-2xl text-center">
+          <span className="inline-block rounded-full bg-white px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-coral-700 shadow-sm">
+            Petit test · 3 questions
+          </span>
+          <h2 className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-5xl md:text-6xl">
+            {/* coral-800 et non 700 : ce titre est posé sur le ciel, pas sur
+                le crème — 5:1 au lieu de 3.9:1. */}
+            Mon enfant a-t-il besoin de <span className="text-msk-coral-800">MSK</span> ?
           </h2>
-          <p className="text-lg text-msk-night-700/80">
-            Faites ce petit test rapide de 3 questions pour savoir si notre approche pourrait aider votre enfant.
+          <p className="mt-5 text-base text-msk-night-800 md:text-lg">
+            Trois questions rapides pour savoir si notre approche peut aider votre enfant.
           </p>
         </div>
 
-        <div className="quiz-card bg-white rounded-3xl p-8 md:p-12 shadow-xs border border-msk-cream-200 relative overflow-hidden min-h-[350px] flex flex-col justify-center">
-          {/* Progress bar */}
-          <div className="absolute top-0 left-0 w-full h-2 bg-gray-100">
-            <motion.div 
-              className="h-full bg-linear-to-r from-msk-coral-500 to-msk-sun-500"
-              initial={{ width: 0 }}
-              animate={{ width: `${progress}%` }}
-              transition={{ duration: 0.3 }}
-            />
+        <div className="relative">
+          <div className="quiz-card relative overflow-hidden rounded-[1.75rem] bg-white px-6 py-8 shadow-2xl shadow-msk-night-900/15 md:px-12 md:py-10">
+            {isFinished ? <ConfettiParticles count={28} className="opacity-90" /> : null}
+
+            <div className="relative">
+              {/* Badges d'étapes : coral = en cours, sun + coche = répondue, crème = à venir. */}
+              <ol className="flex items-center justify-center" aria-label="Progression du test">
+                {QUESTIONS.map((q, i) => {
+                  const status: StepStatus = i < currentStep ? "done" : i === currentStep ? "current" : "todo";
+                  return (
+                    <li key={q.id} className="flex items-center">
+                      {i > 0 ? (
+                        <span
+                          aria-hidden
+                          className={cn(
+                            "mx-2.5 w-8 border-t-2 border-dashed sm:mx-3 sm:w-12",
+                            i <= currentStep ? "border-msk-sun-400" : "border-msk-cream-300",
+                          )}
+                        />
+                      ) : null}
+                      <motion.span
+                        aria-current={status === "current" ? "step" : undefined}
+                        initial={false}
+                        animate={{ scale: status === "current" ? 1.15 : 1 }}
+                        transition={SPRING}
+                        className={cn(
+                          "flex h-9 w-9 items-center justify-center rounded-full font-display text-sm font-bold",
+                          status === "current" && "bg-msk-coral-600 text-white shadow-lg shadow-msk-coral-600/30",
+                          status === "done" && "bg-msk-sun-300 text-msk-coral-700",
+                          status === "todo" && "bg-msk-cream-200 text-msk-night-700",
+                        )}
+                      >
+                        {status === "done" ? <Check className="h-4 w-4" strokeWidth={3} aria-hidden /> : i + 1}
+                        <span className="sr-only">
+                          {" "}
+                          Question {i + 1}, {STEP_LABEL[status]}
+                        </span>
+                      </motion.span>
+                    </li>
+                  );
+                })}
+              </ol>
+
+              {/* Région live persistante : le résultat est annoncé aux lecteurs
+                  d'écran sans que la région elle-même ait à apparaître. */}
+              <div aria-live="polite">
+              <AnimatePresence mode="wait" initial={false}>
+                {!isFinished && question ? (
+                  <motion.div
+                    key={question.id}
+                    initial={{ opacity: 0, x: 24 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -24 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    className="mt-8 text-center"
+                  >
+                    <span className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-coral-700">
+                      Question {currentStep + 1} / {QUESTIONS.length}
+                    </span>
+                    <h3 className="mx-auto mt-3 max-w-xl font-display text-2xl font-semibold leading-[1.2] text-balance text-msk-night-900 md:text-[2rem]">
+                      {question.text}
+                    </h3>
+
+                    <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+                      <MorphButton
+                        onClick={() => answer(true)}
+                        maxDiameter="13rem"
+                        className="font-semibold text-white"
+                        fillClassName="bg-msk-coral-600 shadow-lg shadow-msk-coral-600/25 group-hover:bg-msk-coral-700"
+                      >
+                        Oui, tout à fait
+                      </MorphButton>
+                      <MorphButton
+                        onClick={() => answer(false)}
+                        maxDiameter="13rem"
+                        className="font-semibold text-msk-night-900"
+                        fillClassName="border-2 border-msk-cream-300 bg-msk-cream-100 group-hover:bg-msk-cream-200"
+                      >
+                        Non / Pas vraiment
+                      </MorphButton>
+                    </div>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="result"
+                    initial={{ opacity: 0, scale: 0.94, y: 12 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{ type: "spring", stiffness: 260, damping: 22 }}
+                    className="mt-8 text-center"
+                  >
+                    {/* Sticker de résultat : arrive en tournant, se pose légèrement penché. */}
+                    <motion.span
+                      aria-hidden
+                      initial={{ rotate: -30, scale: 0.6 }}
+                      animate={{ rotate: -6, scale: 1 }}
+                      transition={{ type: "spring", stiffness: 260, damping: 14, delay: 0.1 }}
+                      className={cn(
+                        "mx-auto flex h-20 w-20 items-center justify-center rounded-full shadow-lg",
+                        positive
+                          ? "bg-msk-sun-300 text-msk-coral-700 shadow-msk-sun-500/30"
+                          : "bg-msk-blue-100 text-msk-blue-700 shadow-msk-blue-500/20",
+                      )}
+                    >
+                      {positive ? (
+                        <Sprout className="h-10 w-10" strokeWidth={2.2} />
+                      ) : (
+                        <HeartHandshake className="h-10 w-10" strokeWidth={2.2} />
+                      )}
+                    </motion.span>
+
+                    <h3 className="mx-auto mt-5 max-w-xl font-display text-[1.75rem] font-bold uppercase leading-[0.95] text-msk-night-900 md:text-4xl">
+                      {positive ? (
+                        <>
+                          Votre enfant pourrait bénéficier de{" "}
+                          <span className="text-msk-coral-700">MSK</span>
+                        </>
+                      ) : (
+                        <>
+                          Chaque enfant est <span className="text-msk-coral-700">unique</span>
+                        </>
+                      )}
+                    </h3>
+                    <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-msk-night-700">
+                      {positive
+                        ? "Les difficultés que vous observez sont exactement celles que nous accompagnons au quotidien. Ne restez pas seul(e) face à cette situation."
+                        : "Si vous avez le moindre doute, parlons-en : même si ces signes ne sont pas évidents, une évaluation professionnelle peut parfois révéler des besoins spécifiques."}
+                    </p>
+
+                    <div className="mt-7 flex justify-center">
+                      <MorphButton
+                        href="/contact"
+                        className="font-semibold text-white"
+                        fillClassName="bg-msk-coral-600 shadow-lg shadow-msk-coral-600/25 group-hover:bg-msk-coral-700"
+                      >
+                        Prendre RDV pour un bilan gratuit
+                        <ArrowRight className="h-4 w-4" />
+                      </MorphButton>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={reset}
+                      className="mx-auto mt-5 inline-flex items-center gap-2 rounded-full px-2 py-1 text-sm font-medium text-msk-night-700 underline-offset-4 transition-colors hover:text-msk-coral-700 hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-msk-coral-400"
+                    >
+                      <RotateCcw className="h-4 w-4" aria-hidden />
+                      Refaire le test
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              </div>
+            </div>
           </div>
 
-          <AnimatePresence mode="wait">
-            {!isFinished ? (
-              <motion.div
-                key={currentStep}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-                className="text-center"
-              >
-                <span className="text-sm font-bold text-slate-600 mb-4 block">
-                  Question {currentStep + 1} / {questions.length}
-                </span>
-                <h3 className="text-2xl md:text-3xl font-bold text-msk-night-900 mb-10">
-                  {questions[currentStep].text}
-                </h3>
-                
-                <div className="flex flex-col sm:flex-row justify-center gap-4">
-                  <MorphButton
-                    onClick={() => handleAnswer(true)}
-                    maxDiameter="13rem"
-                    className="text-lg font-bold text-msk-night-900"
-                    fillClassName="bg-[#FAF8F5] border-2 border-msk-cream-300 group-hover:border-msk-coral-400 group-hover:bg-msk-coral-50"
-                  >
-                    Oui, tout à fait
-                  </MorphButton>
-                  <MorphButton
-                    onClick={() => handleAnswer(false)}
-                    maxDiameter="13rem"
-                    className="text-lg font-bold text-msk-night-900"
-                    fillClassName="bg-[#FAF8F5] border-2 border-msk-cream-300 group-hover:bg-gray-50"
-                  >
-                    Non / Pas vraiment
-                  </MorphButton>
-                </div>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="result"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                className="text-center"
-              >
-                <div className="w-20 h-20 bg-msk-sun-100 text-msk-sun-600 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">
-                  {hasPositiveAnswers ? "🌱" : "✨"}
-                </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-msk-night-900 mb-4">
-                  {hasPositiveAnswers 
-                    ? "Votre enfant pourrait bénéficier d'un accompagnement MSK."
-                    : "Chaque enfant est unique. Si vous avez le moindre doute, parlons-en."}
-                </h3>
-                <p className="text-lg text-msk-night-700/80 mb-8 max-w-2xl mx-auto">
-                  {hasPositiveAnswers 
-                    ? "Les difficultés que vous observez sont exactement celles que nous accompagnons au quotidien. Ne restez pas seul(e) face à cette situation."
-                    : "Même si ces signes ne sont pas évidents, une évaluation professionnelle peut parfois révéler des besoins spécifiques."}
-                </p>
-                <div className="flex justify-center">
-                  <MorphButton
-                    href="/contact"
-                    className="font-bold text-white"
-                    fillClassName="bg-msk-night-900 shadow-lg group-hover:bg-msk-night-800"
-                  >
-                    Prendre RDV pour un bilan gratuit
-                  </MorphButton>
-                </div>
-                <button 
-                  onClick={() => {
-                    setCurrentStep(0);
-                    setAnswers([]);
-                  }}
-                  className="mt-6 text-sm text-slate-600 hover:text-msk-coral-500 underline"
-                >
-                  Refaire le quiz
-                </button>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {/* Emplacement du SVG décoratif (parent & enfant), collé sur le coin
+              bas-gauche de la carte. Remplacez le slot par votre <img>, même taille. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -bottom-8 -left-3 w-28 -rotate-6 sm:-left-8 sm:w-36 md:-bottom-10 md:w-44"
+          >
+            <MethodeAssetSlot
+              label="SVG"
+              hint="Parent & enfant"
+              tone="bg-msk-blue-50 text-msk-blue-800"
+              className="aspect-square w-full shadow-lg"
+            />
+          </div>
         </div>
       </div>
     </section>
   );
-};
+}
