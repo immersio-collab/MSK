@@ -138,6 +138,14 @@ export function GalerieAlbumSection() {
         style={{ clipPath: "polygon(0 10%, 100% 2%, 100% 70%, 0 96%)" }}
       />
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        {/* Soleil du ciel. Plain <img> et non next/image : le SVG porte sa
+            propre animation SMIL (les rayons tournent), que l'optimiseur
+            d'images aplatirait. */}
+        <img
+          src="/Sunny.svg"
+          alt=""
+          className="absolute right-[1%] top-[3%] w-24 sm:w-32 lg:right-[4%] lg:w-44"
+        />
         <MethodeCloud
           motion="float"
           shape="a"

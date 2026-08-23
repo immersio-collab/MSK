@@ -1,6 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type PointerEvent as ReactPointerEvent,
+} from "react";
 import Image from "next/image";
 import { useReducedMotion } from "framer-motion";
 import gsap from "gsap";
@@ -11,6 +16,8 @@ import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/captions.css";
 import "yet-another-react-lightbox/plugins/counter.css";
+
+import { MoveHorizontal, ZoomIn } from "lucide-react";
 
 import { PELLICULE } from "@/components/galerie/galerie-content";
 import { GalerieTitreAnime } from "@/components/galerie/GalerieTitreAnime";
@@ -54,7 +61,9 @@ export const GaleriePelliculeSection = () => {
   /** Survol, focus clavier ou glissement en cours : la bande est en pause. */
   const pause = useRef(false);
   /** Glissement souris en cours (origine du pointeur + position de départ). */
-  const glisse = useRef<{ x: number; depart: number; bouge: boolean } | null>(null);
+  const glisse = useRef<{ x: number; depart: number; bouge: boolean } | null>(
+    null,
+  );
   /** Le dernier geste était un glissement : le clic qui suit ne doit pas ouvrir. */
   const aGlisse = useRef(false);
   const [ouvert, setOuvert] = useState(-1);
@@ -86,7 +95,8 @@ export const GaleriePelliculeSection = () => {
     const observateur = new ResizeObserver(() => {
       const avant = periode;
       mesurer();
-      if (avant > 0 && periode > 0) piste.scrollLeft = (piste.scrollLeft / avant) * periode;
+      if (avant > 0 && periode > 0)
+        piste.scrollLeft = (piste.scrollLeft / avant) * periode;
     });
     observateur.observe(liste);
 
@@ -110,33 +120,54 @@ export const GaleriePelliculeSection = () => {
     };
   }, [reduceMotion]);
 
-  // Glissement à la souris. Le tactile et le stylet gardent le défilement
-  // natif du conteneur, qui est déjà meilleur que tout ce qu'on écrirait ici.
+  // Glissement à la souris.
+  //
+  // Volontairement SANS `setPointerCapture` : capturer le pointeur redirige le
+  // `click` qui suit vers l'élément capteur — le rail — si bien que le bouton
+  // de la vignette ne le recevait jamais et qu'un clic n'ouvrait rien. Le suivi
+  // passe donc par des écouteurs sur `window`, ce qui permet en prime de
+  // continuer à faire glisser la bande quand le curseur sort du rail.
+  //
+  // Le tactile et le stylet gardent le défilement natif du conteneur, qui est
+  // déjà meilleur que tout ce qu'on écrirait ici.
   const auPointeurBas = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (event.pointerType !== "mouse" || !rail.current) return;
+    if (event.pointerType !== "mouse" || event.button !== 0 || !rail.current)
+      return;
+    const piste = rail.current;
     aGlisse.current = false;
-    glisse.current = { x: event.clientX, depart: rail.current.scrollLeft, bouge: false };
+    glisse.current = {
+      x: event.clientX,
+      depart: piste.scrollLeft,
+      bouge: false,
+    };
     pause.current = true;
-    rail.current.setPointerCapture(event.pointerId);
-  };
 
-  const auPointeurBouge = (event: ReactPointerEvent<HTMLDivElement>) => {
-    const geste = glisse.current;
-    if (!geste || !rail.current) return;
-    const dx = event.clientX - geste.x;
-    if (Math.abs(dx) > 4) geste.bouge = true;
-    rail.current.scrollLeft = geste.depart - dx;
-  };
+    const bouger = (e: PointerEvent) => {
+      const geste = glisse.current;
+      if (!geste) return;
+      const dx = e.clientX - geste.x;
+      if (Math.abs(dx) > 4) geste.bouge = true;
+      piste.scrollLeft = geste.depart - dx;
+    };
 
-  const auPointeurHaut = (event: ReactPointerEvent<HTMLDivElement>) => {
-    const geste = glisse.current;
-    if (!geste || !rail.current) return;
-    rail.current.releasePointerCapture?.(event.pointerId);
-    aGlisse.current = geste.bouge;
-    glisse.current = null;
-    // La souris peut avoir quitté la bande pendant la capture : on ne relance
-    // que si le curseur est effectivement revenu dessus.
-    pause.current = rail.current.matches(":hover");
+    const lacher = () => {
+      window.removeEventListener("pointermove", bouger);
+      window.removeEventListener("pointerup", lacher);
+      window.removeEventListener("pointercancel", lacher);
+      const geste = glisse.current;
+      if (!geste) return;
+      // Consommé par le `click` qui suit immédiatement : un glissement ne doit
+      // pas ouvrir la photo sur laquelle on a relâché.
+      aGlisse.current = geste.bouge;
+      glisse.current = null;
+      // Le curseur a pu quitter la bande pendant le geste : on ne relance le
+      // défilement que s'il est effectivement revenu dessus.
+      pause.current = piste.matches(":hover");
+    };
+
+    window.addEventListener("pointermove", bouger);
+    window.addEventListener("pointerup", lacher);
+    window.addEventListener("pointercancel", lacher);
   };
 
   const ouvrir = (index: number) => {
@@ -148,84 +179,130 @@ export const GaleriePelliculeSection = () => {
   };
 
   return (
-    <section className="w-full overflow-hidden bg-msk-cream-200 py-24 md:py-28">
-      <div className="mx-auto mb-11 w-full max-w-6xl px-6 sm:px-10">
-        <GalerieTitreAnime
-          au="scroll"
-          texte="Chaque jour, de nouvelles découvertes"
-          className="max-w-[18ch] font-display text-3xl font-bold uppercase leading-tight text-msk-night-900 md:text-4xl lg:text-5xl"
+    <section className="w-full overflow-hidden bg-msk-cream-200 py-12 md:py-16">
+      <div className="mx-auto mb-8 flex w-full max-w-6xl items-center justify-between gap-8 px-6 sm:px-10">
+        <div>
+          <GalerieTitreAnime
+            au="scroll"
+            texte="Chaque jour, de nouvelles découvertes"
+            className="max-w-[18ch] font-display text-3xl font-bold uppercase leading-tight text-msk-night-900 md:text-4xl lg:text-5xl"
+          />
+          <p className="mt-4 max-w-lg text-base leading-relaxed text-msk-night-700 md:text-lg">
+            La pellicule défile toute seule. Survolez-la pour l&apos;arrêter.
+          </p>
+
+          {/* Le glissement est invisible par nature : sans repère explicite,
+              personne ne devine qu'on peut attraper la bande. */}
+          <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 font-display text-xs font-semibold uppercase tracking-[0.14em] text-msk-night-800 shadow-sm">
+            <MoveHorizontal
+              className="h-4 w-4 text-msk-coral-600"
+              aria-hidden
+            />
+            Glissez pour parcourir · cliquez pour agrandir
+          </p>
+        </div>
+
+        {/* Illustration décorative, à droite du titre. Plain <img> : l'optimiseur
+            d'images refuse les SVG locaux (400) et aplatirait l'animation SMIL.
+            Masquée sous md, où la colonne de texte prend toute la largeur. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/Camera - Copie.svg"
+          alt=""
+          aria-hidden
+          width={400}
+          height={300}
+          loading="lazy"
+          decoding="async"
+          className="hidden w-72 shrink-0 rotate-6 md:block lg:w-96"
         />
-        <p className="mt-4 max-w-lg text-base leading-relaxed text-msk-night-700 md:text-lg">
-          La pellicule défile toute seule. Survolez-la pour l&apos;arrêter, faites-la glisser, et
-          cliquez sur une photo pour la voir en grand.
-        </p>
       </div>
 
-      <div
-        ref={rail}
-        onPointerDown={auPointeurBas}
-        onPointerMove={auPointeurBouge}
-        onPointerUp={auPointeurHaut}
-        onPointerCancel={auPointeurHaut}
-        onMouseEnter={() => {
-          pause.current = true;
-        }}
-        onMouseLeave={() => {
-          if (!glisse.current) pause.current = false;
-        }}
-        onFocusCapture={() => {
-          pause.current = true;
-        }}
-        onBlurCapture={() => {
-          pause.current = false;
-        }}
-        className="hide-scrollbar flex cursor-grab gap-6 overflow-x-auto px-6 py-3 active:cursor-grabbing sm:px-10"
-      >
-        {COPIES.map((copie) => (
-          <ul
-            key={copie}
-            ref={copie === 0 ? premiereListe : undefined}
-            // Seule la première copie est exposée aux technologies d'assistance ;
-            // les autres n'existent que pour masquer le raccord de la boucle.
-            aria-hidden={copie > 0 || undefined}
-            aria-label={copie === 0 ? "Photos du centre" : undefined}
-            className="flex w-max shrink-0 gap-6"
-          >
-            {PELLICULE.map((photo, index) => (
-              <li key={`${copie}-${photo.src}-${index}`} className="shrink-0">
-                <button
-                  type="button"
-                  // Les copies ne sont pas atteignables au clavier : un même
-                  // contenu répété trois fois dans l'ordre de tabulation serait
-                  // pénible, et `aria-hidden` interdit d'y laisser le focus.
-                  tabIndex={copie === 0 ? undefined : -1}
-                  onClick={() => ouvrir(index)}
-                  aria-label={`Agrandir : ${photo.titre}`}
-                  className={`group block w-[min(46vw,340px)] cursor-zoom-in bg-white p-2 pb-3 shadow-xl transition-transform duration-300 hover:rotate-0 hover:scale-[1.03] focus-visible:outline-hidden focus-visible:ring-4 focus-visible:ring-msk-coral-400 ${
-                    index % 2
-                      ? "mt-6 rotate-2 rounded-[6px_20px_8px_18px]"
-                      : "-rotate-2 rounded-[18px_6px_20px_8px]"
-                  }`}
-                >
-                  <span className="relative block aspect-4/3 w-full overflow-hidden">
-                    <Image
-                      src={photo.src}
-                      alt=""
-                      width={photo.width}
-                      height={photo.height}
-                      sizes="(max-width: 640px) 46vw, 340px"
-                      draggable={false}
-                      className="h-full w-full object-cover"
-                    />
-                  </span>
-                  <span className="mt-2 block text-center font-display text-xs font-semibold text-msk-night-800">
-                    {photo.titre}
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        ))}
+      {/* Conteneur relatif : il porte les dégradés de bord, qui montrent que la
+          bande se poursuit hors cadre au lieu de s'arrêter net. */}
+      <div className="relative">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-linear-to-r from-msk-cream-200 to-transparent sm:w-16"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-linear-to-l from-msk-cream-200 to-transparent sm:w-16"
+        />
+
+        <div
+          ref={rail}
+          onPointerDown={auPointeurBas}
+          onMouseEnter={() => {
+            pause.current = true;
+          }}
+          onMouseLeave={() => {
+            if (!glisse.current) pause.current = false;
+          }}
+          onFocusCapture={() => {
+            pause.current = true;
+          }}
+          onBlurCapture={() => {
+            pause.current = false;
+          }}
+          className="hide-scrollbar flex cursor-grab select-none gap-6 overflow-x-auto px-6 py-3 active:cursor-grabbing sm:px-10"
+        >
+          {COPIES.map((copie) => (
+            <ul
+              key={copie}
+              ref={copie === 0 ? premiereListe : undefined}
+              // Seule la première copie est exposée aux technologies d'assistance ;
+              // les autres n'existent que pour masquer le raccord de la boucle.
+              aria-hidden={copie > 0 || undefined}
+              aria-label={copie === 0 ? "Photos du centre" : undefined}
+              className="flex w-max shrink-0 gap-6"
+            >
+              {PELLICULE.map((photo, index) => (
+                <li key={`${copie}-${photo.src}-${index}`} className="shrink-0">
+                  <button
+                    type="button"
+                    // Les copies ne sont pas atteignables au clavier : un même
+                    // contenu répété trois fois dans l'ordre de tabulation serait
+                    // pénible, et `aria-hidden` interdit d'y laisser le focus.
+                    tabIndex={copie === 0 ? undefined : -1}
+                    onClick={() => ouvrir(index)}
+                    aria-label={`Agrandir : ${photo.titre}`}
+                    // Curseur « main » et non « loupe » : la main est le signal
+                    // universel du glissement, et c'est le geste que personne ne
+                    // devinait. La loupe reste présente, mais en pastille sur la
+                    // photo — les deux actions sont ainsi annoncées à la fois.
+                    className={`group block w-[min(46vw,340px)] cursor-grab bg-white p-2 pb-3 shadow-xl transition-transform duration-300 hover:rotate-0 hover:scale-[1.03] focus-visible:outline-hidden focus-visible:ring-4 focus-visible:ring-msk-coral-400 active:cursor-grabbing ${
+                      index % 2
+                        ? "mt-6 rotate-2 rounded-[6px_20px_8px_18px]"
+                        : "-rotate-2 rounded-[18px_6px_20px_8px]"
+                    }`}
+                  >
+                    <span className="relative block aspect-4/3 w-full overflow-hidden">
+                      <Image
+                        src={photo.src}
+                        alt=""
+                        width={photo.width}
+                        height={photo.height}
+                        sizes="(max-width: 640px) 46vw, 340px"
+                        draggable={false}
+                        className="h-full w-full object-cover"
+                      />
+                      <span
+                        aria-hidden
+                        className="pointer-events-none absolute right-2 top-2 flex h-9 w-9 items-center justify-center rounded-full bg-white text-msk-night-900 opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
+                      >
+                        <ZoomIn className="h-4 w-4" strokeWidth={2.5} />
+                      </span>
+                    </span>
+                    <span className="mt-2 block text-center font-display text-xs font-semibold text-msk-night-800">
+                      {photo.titre}
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
       </div>
 
       {/* Montée seulement à l'ouverture : `index` n'est lu qu'au montage par la
@@ -236,12 +313,27 @@ export const GaleriePelliculeSection = () => {
           index={ouvert}
           close={() => setOuvert(-1)}
           plugins={[Captions, Counter, Zoom]}
-          slides={PELLICULE.map((p) => ({ src: p.src, alt: p.titre, title: p.titre }))}
+          slides={PELLICULE.map((p) => ({
+            src: p.src,
+            alt: p.titre,
+            title: p.titre,
+          }))}
           styles={{
-            container: { backgroundColor: "color-mix(in oklab, var(--color-msk-night-950) 94%, transparent)" },
+            container: {
+              backgroundColor:
+                "color-mix(in oklab, var(--color-msk-night-950) 94%, transparent)",
+            },
             captionsTitle: { fontFamily: "var(--font-display)" },
           }}
-          counter={{ container: { style: { top: "unset", bottom: 0, fontFamily: "var(--font-display)" } } }}
+          counter={{
+            container: {
+              style: {
+                top: "unset",
+                bottom: 0,
+                fontFamily: "var(--font-display)",
+              },
+            },
+          }}
         />
       ) : null}
     </section>

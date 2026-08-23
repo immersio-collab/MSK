@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 
@@ -141,11 +140,22 @@ export const NextStepSection = ({
             imageContainerClassName || "-mt-8 sm:-mt-12 md:-mt-20 max-w-2xl"
           )}
         >
-          <Image
+          {/* Plain <img> plutôt que le composant Image : l'optimiseur d'images
+              refuse les SVG locaux tant que `dangerouslyAllowSVG` n'est pas
+              activé — il répond 400 « The requested resource isn't a valid
+              image » et l'illustration ne s'affiche jamais. Or les cinq pages
+              qui utilisent cette section passent toutes un .svg. Un <img> les
+              sert tels quels et préserve au passage leurs animations SMIL,
+              qu'un pipeline d'optimisation aplatirait. Même parti pris que
+              pour /methode/sun-cloud.svg et /Sunny.svg. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={svgSrc}
             alt={svgAlt}
             width={svgWidth}
             height={svgHeight}
+            loading="lazy"
+            decoding="async"
             className="h-[220px] sm:h-[280px] md:h-[360px] w-full object-contain object-top"
           />
         </div>
