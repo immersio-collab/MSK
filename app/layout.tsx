@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, Fredoka, Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Anton, DM_Sans, Fredoka, Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -37,6 +37,16 @@ const fredoka = Fredoka({
   variable: "--font-fredoka",
   display: "swap",
   weight: ["500", "600", "700"],
+});
+
+// Condensed display face for the home page's oversized headlines.
+// Exposed to Tailwind as `font-condensed` via --font-condensed in globals.css.
+// Anton ships a single weight; asking for others silently falls back.
+const anton = Anton({
+  subsets: ["latin"],
+  variable: "--font-anton",
+  display: "swap",
+  weight: ["400"],
 });
 
 export const viewport: Viewport = {
@@ -97,7 +107,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="fr" className={cn(dmSans.variable, inter.variable, jakarta.variable, fredoka.variable, "font-sans")}>
+    <html lang="fr" className={cn(dmSans.variable, inter.variable, jakarta.variable, fredoka.variable, anton.variable, "font-sans")}>
       <head>
         <script
           type="application/ld+json"

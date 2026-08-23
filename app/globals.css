@@ -76,6 +76,8 @@
   --font-heading: var(--font-jakarta), sans-serif;
   /* Rounded display face; --font-fredoka is supplied by next/font in layout.tsx. */
   --font-display: var(--font-fredoka), var(--font-jakarta), sans-serif;
+  /* Condensed display face for the home page; --font-anton from next/font. */
+  --font-condensed: var(--font-anton), "Arial Narrow", sans-serif;
 
   --animate-blob: blob 7s infinite ease-in-out;
   --animate-marquee: marquee 38s linear infinite;
