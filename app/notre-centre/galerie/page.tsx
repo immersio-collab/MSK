@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { GalerieHeroSection } from "@/components/galerie/GalerieHeroSection";
-import { GalerieGridSection } from "@/components/galerie/GalerieGridSection";
+import { GalerieAlbumSection } from "@/components/galerie/GalerieAlbumSection";
 import { GalerieTourSection } from "@/components/galerie/GalerieTourSection";
 import { GaleriePelliculeSection } from "@/components/galerie/GaleriePelliculeSection";
 import { NextStepSection } from "@/components/common/NextStepSection";
@@ -17,7 +17,7 @@ export default function GaleriePage() {
     <div className="flex min-h-screen flex-col">
       <GalerieHeroSection />
 
-      <GalerieGridSection />
+      <GalerieAlbumSection />
 
       <GalerieTourSection />
 

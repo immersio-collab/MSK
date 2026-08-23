@@ -15,12 +15,12 @@ export const NAV_LINKS: NavItem[] = [
     href: "/notre-centre",
     children: [
       {
-        title: "La Méthode MSK",
-        href: "/notre-centre/la-methode",
-      },
-      {
         title: "Troubles accompagnés",
         href: "/notre-centre/troubles-accompagnes",
+      },
+      {
+        title: "La Méthode MSK",
+        href: "/notre-centre/la-methode",
       },
       {
         title: "La Fondatrice",
@@ -33,7 +33,6 @@ export const NAV_LINKS: NavItem[] = [
     ],
   },
   { label: "Programmes", href: "/programmes" },
-  { label: "Admissions", href: "/admissions" },
   { label: "Actualités", href: "/actualites" },
   { label: "Contact", href: "/contact" },
 ];

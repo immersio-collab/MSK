@@ -36,15 +36,16 @@ export default function LaMethodePage() {
       {/* Hand-off to the next page */}
       <NextStepSection
         eyebrow="Prochaine étape"
-        title="Troubles accompagnés"
-        description="TDAH, dyslexie, dyspraxie, troubles du langage : comment nous adaptons le cadre à chaque profil."
-        buttonText="Découvrir"
-        buttonHref="/notre-centre/troubles-accompagnes"
-        svgSrc="/Enjoying the fun time.svg"
+        title="La Fondatrice"
+        description="Découvrez Khadija Elabaya et son parcours dédié à l'accompagnement des enfants neuro-atypiques."
+        buttonText="Rencontrer"
+        buttonHref="/notre-centre/la-fondatrice"
+        svgSrc="/Islamic business woman with gestures up.svg"
         bgColor="bg-msk-blue-800"
         cloudColor="text-white/50"
-        textColor="text-msk-blue-50"
-        buttonTextColor="text-msk-blue-900"
+        textColor="text-msk-cream-100"
+        buttonTextColor="text-msk-night-900"
+        eyebrowColor="text-msk-sun-300"
       />
     </div>
   );

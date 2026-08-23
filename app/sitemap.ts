@@ -11,7 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/notre-centre/la-fondatrice",
     "/notre-centre/galerie",
     "/programmes",
-    "/admissions",
     "/actualites",
     "/contact",
   ];

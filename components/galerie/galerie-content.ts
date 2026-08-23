@@ -56,6 +56,13 @@ export const CATEGORIE_TON: Record<GalerieCategorie, string> = {
   loisirs: "bg-msk-sun-100 text-msk-sun-700",
 };
 
+/** Couleur du libellé de catégorie posé sur blanc (≥ 4,5:1 sur #fff). */
+export const CATEGORIE_TEXTE: Record<GalerieCategorie, string> = {
+  educatif: "text-msk-coral-700",
+  moteur: "text-msk-blue-700",
+  loisirs: "text-msk-sun-800",
+};
+
 export const GALERIE_PHOTOS: GaleriePhoto[] = [
   {
     src: "/espace montesori.jpeg",
@@ -146,39 +153,6 @@ export const GALERIE_PHOTOS: GaleriePhoto[] = [
     width: 1408,
     height: 768,
     icon: BookOpen,
-  },
-];
-
-/**
- * Cartes de texte intercalées dans le mur, pour casser la monotonie d'une
- * grille de photos et laisser respirer le regard.
- *
- * `apres` est le rang de la photo après laquelle la carte s'insère, compté sur
- * la liste AFFICHÉE. Un filtre réduisant la liste sous ce rang, la carte se
- * range simplement en fin de mur au lieu de disparaître.
- */
-export interface GalerieAccent {
-  apres: number;
-  ton: "coral" | "sun";
-  citation?: boolean;
-  titre: string;
-  sousTitre: string;
-}
-
-export const GALERIE_ACCENTS: GalerieAccent[] = [
-  {
-    apres: 2,
-    ton: "coral",
-    titre: "7 espaces pensés pour votre enfant",
-    sousTitre:
-      "Du parc extérieur à la salle Snoezelen, chaque lieu du centre a un rôle précis dans l'accompagnement.",
-  },
-  {
-    apres: 7,
-    ton: "sun",
-    citation: true,
-    titre: "Ici, on apprend en bougeant.",
-    sousTitre: "— L'équipe pluridisciplinaire MSK",
   },
 ];
 

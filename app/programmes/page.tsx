@@ -33,10 +33,10 @@ export default function ProgrammesPage() {
       {/* Hand-off vers la page Admissions */}
       <NextStepSection
         eyebrow="Prochaine étape"
-        title="Admissions"
-        description="Découvrez le processus d'admission en 3 étapes : premier échange, bilan d'évaluation, programme sur-mesure."
-        buttonText="Voir les admissions"
-        buttonHref="/admissions"
+        title="Contact"
+        description="Prêt à faire le premier pas ? Contactez-nous pour échanger sur les besoins de votre enfant."
+        buttonText="Nous contacter"
+        buttonHref="/contact"
         svgSrc="/Children holding letters.svg"
         bgColor="bg-msk-coral-700"
         cloudColor="text-msk-coral-900"

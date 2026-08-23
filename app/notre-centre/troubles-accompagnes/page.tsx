@@ -20,16 +20,15 @@ export default function TroublesAccompagnesPage() {
 
       <NextStepSection
         eyebrow="Prochaine étape"
-        title="La Fondatrice"
-        description="Découvrez Khadija Elabaya et son parcours dédié à l'accompagnement des enfants neuro-atypiques."
-        buttonText="Rencontrer"
-        buttonHref="/notre-centre/la-fondatrice"
-        svgSrc="/Islamic business woman with gestures up.svg"
+        title="La Méthode MSK"
+        description="Découvrez notre approche sur-mesure combinant pédagogie Montessori, neuro-gym et thérapies intégrées."
+        buttonText="Découvrir"
+        buttonHref="/notre-centre/la-methode"
+        svgSrc="/Enjoying the fun time.svg"
         bgColor="bg-msk-blue-800"
         cloudColor="text-white/50"
-        textColor="text-msk-cream-100"
-        buttonTextColor="text-msk-night-900"
-        eyebrowColor="text-msk-sun-300"
+        textColor="text-msk-blue-50"
+        buttonTextColor="text-msk-blue-900"
       />
     </div>
   );

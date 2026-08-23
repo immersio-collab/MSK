@@ -122,13 +122,15 @@ export const NextStepSection = ({
                 {buttonText}
                 <ArrowRight className="h-4 w-4" />
               </MorphButton>
-              <MorphButton
-                href="/contact"
-                className="text-sm font-semibold uppercase tracking-[0.14em] text-white"
-                fillClassName="bg-msk-coral-500 shadow-md group-hover:bg-msk-coral-400"
-              >
-                Nous contacter
-              </MorphButton>
+              {buttonHref !== "/contact" && (
+                <MorphButton
+                  href="/contact"
+                  className="text-sm font-semibold uppercase tracking-[0.14em] text-white"
+                  fillClassName="bg-msk-coral-500 shadow-md group-hover:bg-msk-coral-400"
+                >
+                  Nous contacter
+                </MorphButton>
+              )}
             </div>
           </FadeUp>
         </FadeUp>

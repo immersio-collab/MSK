@@ -1,5 +1,6 @@
 "use client";
 
+import { Fragment } from "react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 
@@ -70,20 +71,32 @@ export const GalerieTitreAnime = ({
       initial="cache"
       {...declencheur}
     >
-      {/* `split("")` et non `[...texte]` : la cible TS du projet est en ES5, où
+      {/* Chaque mot est un bloc insécable : les lettres sont des inline-block,
+          et sans ce groupage un mot pouvait être coupé n'importe où en fin de
+          ligne (« MOMENT / S »). L'espace entre les mots reste une espace
+          ordinaire, donc la ligne se casse toujours entre deux mots.
+
+          `split("")` et non `[...texte]` : la cible TS du projet est en ES5, où
           l'itération de chaîne est refusée. Tous les caractères en jeu sont dans
           le plan BMP, donc aucune paire de substitution à préserver. */}
-      {texte.split("").map((caractere, index) => (
-        <motion.span
-          key={`${caractere}-${index}`}
-          aria-hidden
-          variants={LETTRE}
-          className="inline-block will-change-transform"
-        >
-          {/* Espace insécable : une espace ordinaire dans un inline-block
-              s'effondre et les mots se colleraient. */}
-          {caractere === " " ? " " : caractere}
-        </motion.span>
+      {texte.split(" ").map((mot, indexMot, mots) => (
+        <Fragment key={`${mot}-${indexMot}`}>
+          <span className="inline-block whitespace-nowrap">
+            {mot.split("").map((caractere, index) => (
+              <motion.span
+                key={`${caractere}-${index}`}
+                aria-hidden
+                variants={LETTRE}
+                className="inline-block will-change-transform"
+              >
+                {caractere}
+              </motion.span>
+            ))}
+          </span>
+          {/* L'espace vit ENTRE les blocs, hors nowrap : c'est elle qui offre
+              le point de coupure de ligne. */}
+          {indexMot < mots.length - 1 ? " " : null}
+        </Fragment>
       ))}
     </Balise>
   );
