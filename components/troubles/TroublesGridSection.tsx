@@ -1,92 +1,246 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  ArrowRight,
+  BookOpen,
+  Brain,
+  Calculator,
+  GraduationCap,
+  Hand,
+  MessageCircle,
+  Rainbow,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
+import { MethodeCloud } from "@/components/methode/MethodeCloud";
+import { TROUBLES, type TroubleIcon, type TroubleItem, type TroubleTone } from "@/lib/data/troubles";
+import { cn } from "@/lib/utils";
+import { TroubleDetailDialog, type TroubleLook } from "./TroubleDetailDialog";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface TroubleItem {
-  title: string;
-  icon: string;
-  description: string;
-  solution: string;
+/** Clé d'icône (données) → composant lucide. Remplaçable par vos propres SVG. */
+const ICONS: Record<TroubleIcon, LucideIcon> = {
+  brain: Brain,
+  book: BookOpen,
+  hand: Hand,
+  calculator: Calculator,
+  rainbow: Rainbow,
+  speech: MessageCircle,
+  zap: Zap,
+  school: GraduationCap,
+};
+
+/**
+ * Les quatre tons des stickers. Classes complètes, jamais construites
+ * dynamiquement — Tailwind n'émet que ce qu'il lit tel quel.
+ *
+ * Contrastes du texte courant vérifiés ≥ 4.5:1 sur chaque fond :
+ * blanc/coral-600, night-900/sun-400, night-900/blue-500, cream-200/night-800.
+ */
+const LOOKS: Record<TroubleTone, TroubleLook> = {
+  coral: {
+    card: "bg-msk-coral-600 text-white",
+    title: "text-white",
+    body: "text-msk-coral-50",
+    icon: "text-msk-coral-600",
+    label: "text-msk-coral-700",
+    slot: "bg-msk-coral-50 text-msk-coral-800",
+    ring: "has-[:focus-visible]:ring-msk-coral-400",
+  },
+  sun: {
+    card: "bg-msk-sun-400 text-msk-night-900",
+    title: "text-msk-night-900",
+    body: "text-msk-sun-900",
+    icon: "text-msk-sun-600",
+    label: "text-msk-sun-800",
+    slot: "bg-msk-sun-50 text-msk-sun-800",
+    ring: "has-[:focus-visible]:ring-msk-sun-500",
+  },
+  blue: {
+    card: "bg-msk-blue-500 text-msk-night-900",
+    title: "text-msk-night-900",
+    body: "text-msk-night-800",
+    icon: "text-msk-blue-600",
+    label: "text-msk-blue-700",
+    slot: "bg-msk-blue-50 text-msk-blue-800",
+    ring: "has-[:focus-visible]:ring-msk-blue-500",
+  },
+  night: {
+    card: "bg-msk-night-800 text-msk-cream-100",
+    title: "text-msk-sun-300",
+    body: "text-msk-cream-200",
+    icon: "text-msk-night-800",
+    label: "text-msk-night-800",
+    slot: "bg-msk-cream-200 text-msk-night-700",
+    ring: "has-[:focus-visible]:ring-msk-night-700",
+  },
+};
+
+/** Inclinaison au repos de chaque sticker, alternée pour l'effet « collé à la main ». */
+const TILTS = [-2.5, 1.5, -1.5, 2.5, 2, -1.5, 2.5, -2];
+
+const SPRING = { type: "spring", stiffness: 300, damping: 24 } as const;
+
+type CardState = "rest" | "hover" | "dimmed";
+
+/** Vrai seulement pour un focus clavier — un clic souris ne soulève pas la carte. */
+function isFocusVisible(el: HTMLElement) {
+  try {
+    return el.matches(":focus-visible");
+  } catch {
+    return true;
+  }
 }
 
-const troubles: TroubleItem[] = [
-  {
-    title: "TDAH",
-    icon: "🧠",
-    description: "Difficulté d'attention, hyperactivité, impulsivité.",
-    solution: "Neuro-Gym + environnement structuré + rythme adapté."
-  },
-  {
-    title: "Dyslexie",
-    icon: "📖",
-    description: "Difficulté de lecture et d'écriture.",
-    solution: "Matériel Montessori sensoriel + remédiation phonologique."
-  },
-  {
-    title: "Dyspraxie",
-    icon: "✋",
-    description: "Coordination motrice altérée.",
-    solution: "Psychomotricité + exercices neuro-moteurs ciblés."
-  },
-  {
-    title: "Dyscalculie",
-    icon: "🔢",
-    description: "Difficulté avec les nombres et le calcul.",
-    solution: "Manipulation concrète Montessori + raisonnement logique."
-  },
-  {
-    title: "TSA (Autisme)",
-    icon: "🌈",
-    description: "Spectre autistique, difficultés sociales.",
-    solution: "Environnement prévisible + supports visuels + socialisation progressive."
-  },
-  {
-    title: "Troubles du langage",
-    icon: "💬",
-    description: "Retard ou trouble du langage oral.",
-    solution: "Orthophonie intégrée + stimulation langagière quotidienne."
-  },
-  {
-    title: "Troubles du comportement",
-    icon: "⚡",
-    description: "Opposition, colères, anxiété.",
-    solution: "Régulation émotionnelle + cadre bienveillant + Neuro-Gym."
-  },
-  {
-    title: "Difficultés scolaires",
-    icon: "📉",
-    description: "Échec scolaire, décrochage, phobie scolaire.",
-    solution: "Remédiation + restauration de la confiance + insertion progressive."
-  }
-];
+// `custom` porte l'inclinaison propre à chaque carte : `rest` et `dimmed` y
+// reviennent, `hover` redresse et soulève.
+const CARD_VARIANTS: Variants = {
+  rest: (tilt: number) => ({ rotate: tilt, y: 0, scale: 1, opacity: 1 }),
+  hover: { rotate: 0, y: -8, scale: 1.03, opacity: 1 },
+  dimmed: (tilt: number) => ({ rotate: tilt, y: 0, scale: 0.97, opacity: 0.5 }),
+};
 
-export const TroublesGridSection: React.FC = () => {
+// La pastille frétille au survol (images-clés, donc tween et pas ressort).
+const DISC_VARIANTS: Variants = {
+  rest: { rotate: -6, transition: SPRING },
+  hover: { rotate: [-6, 10, -8, 4, 0], transition: { duration: 0.6, ease: "easeInOut" } },
+  dimmed: { rotate: -6, transition: SPRING },
+};
+
+const ARROW_VARIANTS: Variants = {
+  rest: { x: 0 },
+  hover: { x: 4 },
+  dimmed: { x: 0 },
+};
+
+interface TroubleStickerCardProps {
+  item: TroubleItem;
+  index: number;
+  state: CardState;
+  onOpen: (slug: string) => void;
+  buttonRef: (el: HTMLButtonElement | null) => void;
+}
+
+function TroubleStickerCard({ item, index, state, onOpen, buttonRef }: TroubleStickerCardProps) {
+  const reduceMotion = useReducedMotion();
+  const [keyboardFocus, setKeyboardFocus] = useState(false);
+  const tilt = reduceMotion ? 0 : (TILTS[index % TILTS.length] ?? 0);
+  const look = LOOKS[item.tone];
+  const Icon = ICONS[item.icon];
+  const animateTo: CardState = state === "dimmed" ? "dimmed" : keyboardFocus ? "hover" : "rest";
+
+  return (
+    // Wrapper neutre : c'est LUI que gsap anime à l'entrée. L'article en
+    // dessous appartient à framer-motion (inclinaison, survol, expansion vers
+    // la fiche) — la règle du projet interdit d'animer un même élément avec
+    // les deux bibliothèques.
+    <div className="troubles-card flex">
+      <motion.article
+        layoutId={`trouble-${item.slug}`}
+        custom={tilt}
+        variants={CARD_VARIANTS}
+        initial={false}
+        animate={animateTo}
+        whileHover={state === "dimmed" ? undefined : "hover"}
+        whileTap={state === "dimmed" ? undefined : { scale: 0.98 }}
+        transition={SPRING}
+        // Rayon en style inline pour que framer-motion corrige les coins
+        // pendant le changement d'échelle vers la fiche.
+        style={{ borderRadius: 28 }}
+        className={cn(
+          "group relative flex min-h-[18rem] w-full flex-col p-6 text-left shadow-xl shadow-msk-night-900/10",
+          "has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-msk-cream-100",
+          look.card,
+          look.ring,
+        )}
+      >
+        <motion.span
+          aria-hidden
+          variants={reduceMotion ? undefined : DISC_VARIANTS}
+          className={cn(
+            "flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-md",
+            look.icon,
+          )}
+        >
+          <Icon className="h-8 w-8" strokeWidth={2.2} />
+        </motion.span>
+
+        <h3 className={cn("mt-5 font-display text-2xl font-bold uppercase leading-[0.95]", look.title)}>
+          {item.title}
+        </h3>
+        <p className={cn("mt-2 text-sm leading-relaxed", look.body)}>{item.short}</p>
+
+        {/* Onglet visuel ; le vrai contrôle est le bouton étiré ci-dessous. */}
+        <span aria-hidden className="mt-auto pt-5">
+          <span
+            className={cn(
+              "inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 font-display text-[0.7rem] font-semibold uppercase tracking-[0.16em] shadow-sm",
+              look.label,
+            )}
+          >
+            En savoir plus
+            <motion.span variants={ARROW_VARIANTS} className="inline-flex">
+              <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
+            </motion.span>
+          </span>
+        </span>
+
+        {/* Bouton étiré sur toute la carte : un seul contrôle, un libellé
+            explicite, et le titre reste un vrai <h3> pour les lecteurs d'écran. */}
+        <button
+          ref={buttonRef}
+          type="button"
+          onClick={() => onOpen(item.slug)}
+          onFocus={(event) => setKeyboardFocus(isFocusVisible(event.currentTarget))}
+          onBlur={() => setKeyboardFocus(false)}
+          aria-haspopup="dialog"
+          aria-label={`En savoir plus sur ${item.title}`}
+          className="absolute inset-0 cursor-pointer rounded-[1.75rem] focus-visible:outline-hidden"
+        />
+      </motion.article>
+    </div>
+  );
+}
+
+export function TroublesGridSection() {
   const root = useRef<HTMLElement>(null);
+  const buttons = useRef(new Map<string, HTMLButtonElement>());
+  const previousSlug = useRef<string | null>(null);
+  const [activeSlug, setActiveSlug] = useState<string | null>(null);
+
+  const open = useCallback((slug: string) => setActiveSlug(slug), []);
+  const close = useCallback(() => setActiveSlug(null), []);
+
+  // À la fermeture, le focus revient sur la carte qui a ouvert la fiche.
+  useEffect(() => {
+    if (!activeSlug && previousSlug.current) {
+      const button = buttons.current.get(previousSlug.current);
+      requestAnimationFrame(() => button?.focus({ preventScroll: true }));
+    }
+    previousSlug.current = activeSlug;
+  }, [activeSlug]);
 
   useEffect(() => {
     const el = root.current;
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      // Un seul ScrollTrigger pour toute la section, le stagger fait la
-      // séquence — plutôt qu'un trigger par carte.
-      //
-      // `from` avec immediateRender:false, jamais `fromTo` : l'état de départ
-      // n'est écrit qu'au déclenchement. Si gsap ne se charge pas, si une erreur
-      // JS survient avant, ou si l'onglet est gelé, les cartes restent
-      // simplement visibles et droites au lieu d'être bloquées à opacity 0.
+      // Un seul ScrollTrigger pour toute la grille, le stagger fait la
+      // séquence. `from` + immediateRender:false : l'état de départ n'est
+      // écrit qu'au déclenchement — si gsap ne part jamais, les stickers
+      // restent simplement visibles au lieu d'être bloqués à opacity 0.
       gsap.from(".troubles-card", {
         y: 56,
-        rotate: (i: number) => (i % 2 ? 4.5 : -4.5),
-        scale: 0.92,
+        rotate: (i: number) => (i % 2 ? 5 : -5),
+        scale: 0.9,
         opacity: 0,
-        duration: 0.75,
-        ease: "power3.out",
+        duration: 0.8,
+        ease: "back.out(1.7)",
         stagger: 0.07,
         immediateRender: false,
         scrollTrigger: { trigger: ".troubles-grid", start: "top 82%" },
@@ -106,68 +260,75 @@ export const TroublesGridSection: React.FC = () => {
     return () => ctx.revert();
   }, []);
 
+  const activeIndex = TROUBLES.findIndex((t) => t.slug === activeSlug);
+  const activeItem = activeIndex >= 0 ? TROUBLES[activeIndex] : null;
+
   return (
-    <section ref={root} className="py-20 bg-white" id="troubles">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="troubles-heading text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-msk-night-900 mb-4">
-            Les troubles que nous accompagnons
+    <section ref={root} id="troubles" className="relative overflow-hidden bg-msk-cream-100 py-24 md:py-28">
+      {/* Bande oblique, même device que le hero de /la-methode. */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-[46%] bg-msk-sun-100"
+        style={{ clipPath: "polygon(0 0, 100% 0, 100% 70%, 0 100%)" }}
+      />
+
+      {/* Nuages : dérive latérale continue, vitesses et phases distinctes. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <MethodeCloud
+          motion="float"
+          shape="a"
+          speed={52}
+          phase={0.2}
+          className="absolute left-0 top-[5%] w-40 text-white md:w-56"
+        />
+        <MethodeCloud
+          motion="float"
+          shape="b"
+          speed={40}
+          phase={0.65}
+          className="absolute left-0 top-[24%] w-36 text-white md:w-52"
+        />
+      </div>
+
+      <div className="container relative mx-auto max-w-6xl px-4">
+        <div className="troubles-heading mx-auto mb-14 max-w-2xl text-center">
+          <span className="inline-block rounded-full bg-white px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-coral-700 shadow-sm">
+            8 troubles · 1 approche
+          </span>
+          <h2 className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-5xl md:text-6xl">
+            Les troubles que nous <span className="text-msk-coral-700">accompagnons</span>
           </h2>
-          <p className="text-lg text-msk-night-700/80 max-w-2xl mx-auto">
-            Survolez chaque carte pour découvrir comment l&apos;approche MSK apporte une solution concrète à chaque difficulté.
+          <p className="mt-5 text-base text-msk-night-700 md:text-lg">
+            Cliquez sur une carte pour comprendre le trouble et découvrir comment MSK
+            l&apos;accompagne.
           </p>
         </div>
 
-        <div className="troubles-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {troubles.map((item, idx) => (
-            // Wrapper neutre : c'est LUI que gsap anime. Le motion.div en
-            // dessous possède déjà son `transform` (le flip rotateY de
-            // framer-motion) et la règle du projet interdit d'animer un même
-            // élément avec les deux bibliothèques.
-            <div key={idx} className="troubles-card">
-            <motion.div
-              className="relative h-72 w-full cursor-pointer"
-              style={{ perspective: 1200 }}
-              initial="initial"
-              whileHover="hover"
-              animate="initial"
-            >
-              <motion.div 
-                className="w-full h-full relative shadow-md hover:shadow-xl rounded-2xl transition-shadow duration-300"
-                style={{ transformStyle: "preserve-3d" }}
-                variants={{
-                  initial: { rotateY: 0 },
-                  hover: { rotateY: 180 }
-                }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
-              >
-                {/* Front Face */}
-                <div 
-                  className="absolute inset-0 w-full h-full flex flex-col items-center justify-center p-6 bg-[#FAF8F5] border border-msk-cream-200 rounded-2xl text-center"
-                  style={{ backfaceVisibility: "hidden" }}
-                >
-                  <span className="text-5xl mb-4">{item.icon}</span>
-                  <h3 className="text-xl font-bold text-msk-night-900 mb-2">{item.title}</h3>
-                  <p className="text-sm text-msk-night-700/80">{item.description}</p>
-                </div>
-
-                {/* Back Face */}
-                <div 
-                  className="absolute inset-0 w-full h-full flex flex-col items-center justify-center p-6 bg-linear-to-br from-msk-coral-500 to-msk-sun-500 rounded-2xl text-center text-white"
-                  style={{ 
-                    backfaceVisibility: "hidden",
-                    transform: "rotateY(180deg)" 
-                  }}
-                >
-                  <span className="text-3xl mb-3 opacity-90">✨ MSK :</span>
-                  <p className="text-base font-medium leading-relaxed">{item.solution}</p>
-                </div>
-              </motion.div>
-            </motion.div>
-            </div>
+        <div className="troubles-grid grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-7">
+          {TROUBLES.map((item, index) => (
+            <TroubleStickerCard
+              key={item.slug}
+              item={item}
+              index={index}
+              state={activeSlug && activeSlug !== item.slug ? "dimmed" : "rest"}
+              onOpen={open}
+              buttonRef={(el) => {
+                if (el) buttons.current.set(item.slug, el);
+                else buttons.current.delete(item.slug);
+              }}
+            />
           ))}
         </div>
       </div>
+
+      <TroubleDetailDialog
+        item={activeItem}
+        position={activeIndex + 1}
+        total={TROUBLES.length}
+        look={activeItem ? LOOKS[activeItem.tone] : null}
+        Icon={activeItem ? ICONS[activeItem.icon] : null}
+        onClose={close}
+      />
     </section>
   );
-};
+}
