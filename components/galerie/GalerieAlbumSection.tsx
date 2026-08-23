@@ -129,7 +129,7 @@ export function GalerieAlbumSection() {
   const Icone = photo.icon;
 
   return (
-    <section id="galerie" className="relative overflow-hidden bg-msk-cream-100 pb-32 pt-24 md:pb-40 md:pt-28">
+    <section id="galerie" className="relative overflow-hidden bg-msk-cream-100 pb-28 pt-16 md:pb-36 md:pt-20">
       {/* Ciel en biais, même device que le hero et /la-methode. Il ne touche
           pas le bord haut : le raccord avec le hero reste en crème. */}
       <div
@@ -154,25 +154,19 @@ export function GalerieAlbumSection() {
         />
       </div>
 
-      <div className="relative mx-auto w-full max-w-5xl px-4 sm:px-8">
-        {/* En-tête */}
-        <div className="mx-auto mb-8 max-w-2xl text-center">
-          <span className="inline-block rounded-full bg-white px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-coral-700 shadow-sm">
-            Galerie · {GALERIE_PHOTOS.length} photos
-          </span>
+      <div className="relative mx-auto w-full max-w-4xl px-4 sm:px-8">
+        {/* En-tête volontairement réduit au titre : l'album doit tenir dans
+            la hauteur d'écran avec son rail de vignettes. */}
+        <div className="mx-auto mb-4 max-w-3xl text-center">
           <GalerieTitreAnime
             au="scroll"
             texte="Nos espaces, mille moments"
-            className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-5xl md:text-6xl"
+            className="font-display text-[2rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-4xl md:text-5xl"
           />
-          <p className="mt-5 text-base text-msk-night-800 md:text-lg">
-            Filtrez par univers, ou laissez-vous porter. Chaque photo est prise dans nos locaux, avec nos
-            enfants et notre équipe.
-          </p>
         </div>
 
         {/* Filtres : la pastille coral glisse d'un filtre à l'autre. */}
-        <div role="group" aria-label="Filtrer la galerie" className="mb-10 flex flex-wrap justify-center gap-2">
+        <div role="group" aria-label="Filtrer la galerie" className="mb-5 flex flex-wrap justify-center gap-2">
           {CATEGORIES.map((cat) => {
             const actif = filtre === cat.cle;
             return (
@@ -255,7 +249,7 @@ export function GalerieAlbumSection() {
                     style={{ borderRadius: 24, rotate: reduceMotion ? 0 : -1.2 }}
                     className="col-start-1 row-start-1 cursor-grab touch-pan-y bg-white p-3 shadow-2xl shadow-msk-night-900/20 active:cursor-grabbing"
                   >
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-[1rem] bg-msk-cream-200 md:aspect-[16/10]">
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-[1rem] bg-msk-cream-200 md:aspect-[16/9]">
                       <Image
                         src={photo.src}
                         alt={photo.alt}
@@ -289,7 +283,7 @@ export function GalerieAlbumSection() {
                       </span>
                     </div>
 
-                    <figcaption className="flex items-end justify-between gap-4 px-2 pb-1 pt-4">
+                    <figcaption className="flex items-end justify-between gap-4 px-2 pb-0.5 pt-3">
                       <div className="flex min-w-0 items-start gap-3">
                         <span
                           aria-hidden
@@ -365,8 +359,8 @@ export function GalerieAlbumSection() {
         </div>
 
         {/* Rail de vignettes */}
-        <div ref={rail} className="hide-scrollbar relative -mx-4 mt-8 overflow-x-auto px-4 pb-4 pt-3 sm:-mx-8 sm:px-8">
-          <ul className="flex w-max items-end gap-3" aria-label="Vignettes">
+        <div ref={rail} className="hide-scrollbar relative -mx-4 mt-5 overflow-x-auto px-4 pb-4 pt-3 sm:-mx-8 sm:px-8">
+          <ul className="flex w-max items-end gap-4" aria-label="Vignettes">
             {photos.map((p, i) => {
               const actif = i === position;
               return (
@@ -388,23 +382,23 @@ export function GalerieAlbumSection() {
                     whileHover={{ rotate: 0, y: -4, opacity: 1 }}
                     transition={SPRING}
                     className={cn(
-                      "block w-24 rounded-xl bg-white p-1.5 pb-2 text-left shadow-md focus-visible:outline-hidden focus-visible:ring-4 focus-visible:ring-msk-coral-300 md:w-28",
+                      "block w-32 rounded-2xl bg-white p-2 pb-2.5 text-left shadow-md focus-visible:outline-hidden focus-visible:ring-4 focus-visible:ring-msk-coral-300 md:w-40",
                       actif && "ring-[3px] ring-msk-coral-600",
                     )}
                   >
-                    <span className="relative block aspect-[4/3] overflow-hidden rounded-lg bg-msk-cream-200">
+                    <span className="relative block aspect-[4/3] overflow-hidden rounded-xl bg-msk-cream-200">
                       <Image
                         src={p.src}
                         alt=""
                         fill
-                        sizes="112px"
+                        sizes="160px"
                         className="object-cover"
                         draggable={false}
                       />
                     </span>
                     <span
                       className={cn(
-                        "mt-1.5 block truncate text-center font-display text-[0.65rem] font-semibold",
+                        "mt-2 block truncate text-center font-display text-xs font-semibold",
                         actif ? "text-msk-night-900" : "text-msk-night-700",
                       )}
                     >

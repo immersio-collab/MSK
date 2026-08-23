@@ -17,9 +17,9 @@ export default function GaleriePage() {
     <div className="flex min-h-screen flex-col">
       <GalerieHeroSection />
 
-      <GalerieAlbumSection />
-
       <GalerieTourSection />
+
+      <GalerieAlbumSection />
 
       <GaleriePelliculeSection />
 
