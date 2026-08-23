@@ -44,11 +44,16 @@ export const AccueilPourQui = () => {
       <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
         <FadeUp>
           <span className="inline-block rounded-[0.4rem] bg-msk-coral-200 px-3 py-1.5 font-condensed text-sm uppercase tracking-wide text-msk-night-950">
-            À qui s&apos;adresse MSK ?
+            Maternelle &amp; Primaire
           </span>
           <h2 className="mt-6 max-w-3xl font-condensed text-[2.75rem] uppercase leading-[0.86] text-msk-night-950 sm:text-[4rem] lg:text-[5rem]">
-            Chaque âge, chaque profil a sa place
+            Nos programmes
           </h2>
+          <p className="mt-6 max-w-xl font-body text-base leading-relaxed text-msk-night-800 md:text-lg">
+            Deux parcours, un même principe : le cadre s&apos;adapte à
+            l&apos;enfant, jamais l&apos;inverse. Chacun avance à son rythme,
+            avec les thérapies dont il a besoin intégrées à sa journée.
+          </p>
         </FadeUp>
 
         <ul className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-8">

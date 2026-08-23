@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { AccueilHero } from "@/components/accueil/AccueilHero";
 import { AccueilStatement } from "@/components/accueil/AccueilStatement";
 import { AccueilPourQui } from "@/components/accueil/AccueilPourQui";
+import { AccueilTroubles } from "@/components/accueil/AccueilTroubles";
 import { AccueilSteps } from "@/components/accueil/AccueilSteps";
 import { AccueilNeuroGym } from "@/components/accueil/AccueilNeuroGym";
 import { AccueilStats } from "@/components/accueil/AccueilStats";
@@ -32,6 +33,8 @@ export default function HomePage() {
       />
 
       <AccueilPourQui />
+
+      <AccueilTroubles />
 
       <AccueilSteps />
 
