@@ -25,7 +25,7 @@ export const AccueilStats = () => {
           {STATS.map((stat, index) => (
             <li key={stat.label}>
               <FadeUp delay={0.08 * index}>
-                <p className="font-condensed text-[3.25rem] uppercase leading-none text-msk-night-950 sm:text-[4.5rem]">
+                <p className="font-display text-[2.25rem] font-bold uppercase leading-none text-msk-night-950 sm:text-[3rem]">
                   {stat.value}
                   {stat.unit ? (
                     <span className="text-[0.45em] text-msk-coral-600">
@@ -33,7 +33,7 @@ export const AccueilStats = () => {
                     </span>
                   ) : null}
                 </p>
-                <p className="mt-3 max-w-[14rem] font-body text-sm font-medium leading-snug text-msk-night-800">
+                <p className="mt-3 max-w-[14rem] text-sm font-medium leading-snug text-msk-night-800">
                   {stat.label}
                 </p>
               </FadeUp>

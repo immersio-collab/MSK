@@ -28,7 +28,7 @@ export const AccueilStatement = ({
     <section className={`w-full py-24 text-center md:py-32 ${background}`}>
       <div className="mx-auto w-full max-w-5xl px-6 sm:px-10">
         <FadeUp>
-          <p className="font-condensed text-[2.5rem] uppercase leading-[0.9] text-msk-night-950 sm:text-[3.25rem] lg:text-[4rem]">
+          <p className="font-display text-[1.75rem] font-bold uppercase leading-[1.1] text-msk-night-950 sm:text-[2.25rem] lg:text-[2.75rem]">
             {quote}
           </p>
         </FadeUp>
@@ -37,7 +37,7 @@ export const AccueilStatement = ({
           <FadeUp delay={0.15}>
             <Link
               href={cta.href}
-              className="mt-12 inline-flex items-center gap-2 rounded-full bg-msk-night-950 px-7 py-4 font-body text-sm font-semibold text-white transition-colors hover:bg-msk-night-800"
+              className="mt-12 inline-flex items-center gap-2 rounded-full bg-msk-night-950 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-msk-night-800"
             >
               {cta.label}
               <ArrowRight className="h-4 w-4" aria-hidden />

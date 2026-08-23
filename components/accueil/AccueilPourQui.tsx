@@ -43,13 +43,13 @@ export const AccueilPourQui = () => {
     <section id="programmes" className="w-full bg-msk-blue-50 py-24 md:py-32">
       <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
         <FadeUp>
-          <span className="inline-block rounded-[0.4rem] bg-msk-coral-200 px-3 py-1.5 font-condensed text-sm uppercase tracking-wide text-msk-night-950">
+          <span className="inline-block rounded-[0.4rem] bg-msk-coral-200 px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950">
             Maternelle &amp; Primaire
           </span>
-          <h2 className="mt-6 max-w-3xl font-condensed text-[2.75rem] uppercase leading-[0.86] text-msk-night-950 sm:text-[4rem] lg:text-[5rem]">
+          <h2 className="mt-6 max-w-3xl font-display text-[1.875rem] font-bold uppercase leading-[1.05] text-msk-night-950 sm:text-[2.5rem] lg:text-[3rem]">
             Nos programmes
           </h2>
-          <p className="mt-6 max-w-xl font-body text-base leading-relaxed text-msk-night-800 md:text-lg">
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-msk-night-800 md:text-lg">
             Deux parcours, un même principe : le cadre s&apos;adapte à
             l&apos;enfant, jamais l&apos;inverse. Chacun avance à son rythme,
             avec les thérapies dont il a besoin intégrées à sa journée.
@@ -76,22 +76,22 @@ export const AccueilPourQui = () => {
 
                   <div className="flex flex-1 flex-col p-8">
                     <div className="flex flex-wrap items-center gap-3">
-                      <h3 className="font-condensed text-[2rem] uppercase leading-none text-msk-night-950">
+                      <h3 className="font-display text-[1.5rem] font-bold uppercase leading-tight text-msk-night-950">
                         {profile.title}
                       </h3>
-                      <span className="rounded-full bg-white px-3 py-1 font-body text-xs font-semibold text-msk-night-800">
+                      <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-msk-night-800">
                         {profile.age}
                       </span>
                     </div>
 
-                    <p className="mt-4 font-condensed text-lg uppercase leading-tight text-msk-coral-700">
+                    <p className="mt-4 font-display text-base font-semibold uppercase leading-snug text-msk-coral-700">
                       {profile.quote}
                     </p>
-                    <p className="mt-4 font-body text-base leading-relaxed text-msk-night-800">
+                    <p className="mt-4 text-base leading-relaxed text-msk-night-800">
                       {profile.description}
                     </p>
 
-                    <span className="mt-8 inline-flex items-center gap-2 font-body text-sm font-semibold text-msk-night-950">
+                    <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-msk-night-950">
                       Découvrir le programme
                       <ArrowRight
                         className="h-4 w-4 transition-transform group-hover:translate-x-1"
