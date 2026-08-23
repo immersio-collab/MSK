@@ -1,45 +1,80 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
+import { MethodeCloud } from "@/components/methode/MethodeCloud";
 
-export const ActualitesHeroSection: React.FC = () => {
+/**
+ * Hero des actualités — même grammaire que les autres pages (bande de couleur
+ * inclinée, nuages, carte-titre blanche), mais en CORAL : chaque page garde sa
+ * dominante (méthode = sun, galerie = blue, troubles = ciel blue-300), et
+ * celle-ci n'était pas encore prise.
+ *
+ * Les entrées sont en framer-motion pur (`animate` au montage, sans trigger) :
+ * au-dessus de la ligne de flottaison, rien ne doit pouvoir rester bloqué
+ * invisible.
+ */
+export const ActualitesHeroSection = () => {
   return (
-    <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 bg-[#FAF8F5] text-msk-night-900 overflow-hidden">
-      {/* Decorative patterns */}
-      <div className="absolute inset-0 z-0 opacity-40">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-msk-coral-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-msk-sun-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-20 left-1/3 w-72 h-72 bg-msk-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-4000"></div>
+    <section className="relative overflow-hidden bg-msk-cream-100 pb-14 pt-28 md:pb-16 md:pt-36">
+      {/* Bande coral inclinée. Elle s'arrête avant le bas : le raccord avec la
+          section suivante reste en crème. */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-[76%] bg-msk-coral-400"
+        style={{ clipPath: "polygon(0 0, 100% 0, 100% 60%, 0 92%)" }}
+      />
+
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        {/* Soleil auto-animé (SMIL) — plain <img>, next/image l'aplatirait. */}
+        <img
+          src="/Sunny.svg"
+          alt=""
+          className="absolute right-[4%] top-8 w-24 sm:w-32 lg:right-[7%] lg:w-40"
+        />
+        <MethodeCloud
+          motion="float"
+          shape="a"
+          speed={52}
+          phase={0.25}
+          className="absolute left-0 top-[8%] w-40 text-white md:w-56"
+        />
+        <MethodeCloud
+          motion="float"
+          shape="b"
+          speed={40}
+          phase={0.7}
+          className="absolute left-0 top-[30%] hidden w-36 text-white lg:block"
+        />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 sm:px-10">
-        <div className="mx-auto mt-10 max-w-2xl rounded-[1.75rem] bg-white px-8 py-10 text-center shadow-2xl md:px-12">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-5xl md:text-6xl"
-          >
-            Ressources, conseils et <span className="text-msk-coral-500">vie du centre.</span>
-          </motion.h1>
-
+      <div className="relative mx-auto w-full max-w-6xl px-6 sm:px-10">
+        <div className="mx-auto max-w-2xl rounded-[1.75rem] bg-white px-8 py-10 text-center shadow-2xl md:px-12">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mt-6 inline-block rounded-full bg-msk-coral-100 px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-coral-700"
+            className="inline-block rounded-full bg-msk-sun-300 px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-900"
           >
-            Actualités & Blog
+            Actualités · Blog
           </motion.span>
-          
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.92] text-msk-night-900 sm:text-5xl md:text-6xl"
+          >
+            Ressources, conseils et <span className="text-msk-coral-600">vie du centre</span>
+          </motion.h1>
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto mt-6 max-w-3xl text-base font-medium leading-snug text-msk-night-800 md:text-lg"
+            className="mx-auto mt-5 max-w-md text-base leading-relaxed text-msk-night-800 md:text-lg"
           >
-            Découvrez nos derniers articles éducatifs, les événements à venir, et nos conseils pour accompagner au mieux le développement de votre enfant.
+            Découvrez nos derniers articles éducatifs, les événements à venir, et nos conseils
+            pour accompagner au mieux le développement de votre enfant.
           </motion.p>
         </div>
       </div>

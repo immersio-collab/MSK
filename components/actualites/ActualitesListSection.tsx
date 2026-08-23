@@ -1,136 +1,229 @@
 "use client";
 
-import React from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowRight, Calendar, Tag } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight, Calendar } from "lucide-react";
 
-interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  date: string;
-  image: string;
-  color: string;
+import {
+  ARTICLES,
+  CATEGORIES_ARTICLES,
+  CATEGORIE_ARTICLE_BADGE,
+  CATEGORIE_ARTICLE_LABEL,
+  type Article,
+  type ArticleCategorie,
+} from "@/lib/data/actualites";
+import { cn } from "@/lib/utils";
+
+/**
+ * Le tableau d'affichage : filtres par catégorie, article « À la une » en
+ * grande carte inclinée, puis grille de cartes polaroid. Un coin bleu pâle en
+ * biais derrière la grille — la page traverse coral → crème → bleu → jaune.
+ *
+ * Tout le mouvement est en framer-motion : entrées au montage et transitions
+ * de filtre — rien de scroll-driven ici.
+ */
+
+type Filtre = ArticleCategorie | "tous";
+
+const SPRING = { type: "spring", stiffness: 300, damping: 26 } as const;
+
+/** Inclinaison au repos des cartes, alternée façon stickers. */
+const TILTS = [-1.6, 1.3, -1.2, 1.6, -1.4, 1.2];
+
+function CarteArticle({ article, index }: { article: Article; index: number }) {
+  const tilt = TILTS[index % TILTS.length] ?? 0;
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 24, rotate: tilt }}
+      animate={{ opacity: 1, y: 0, rotate: tilt }}
+      exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.15 } }}
+      whileHover={{ rotate: 0, y: -8 }}
+      transition={{ ...SPRING, delay: index * 0.05 }}
+      style={{ borderRadius: 22 }}
+      className="group relative flex h-full flex-col bg-white p-2.5 pb-5 shadow-xl shadow-msk-night-900/10"
+    >
+      <div className="relative aspect-[16/10] overflow-hidden rounded-[0.9rem]">
+        <Image
+          src={article.image}
+          alt=""
+          fill
+          sizes="(max-width: 768px) 92vw, (max-width: 1024px) 45vw, 350px"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <span
+          className={cn(
+            "absolute left-2.5 top-2.5 rounded-full px-3 py-1.5 font-display text-[0.65rem] font-semibold uppercase tracking-[0.14em] shadow-sm",
+            CATEGORIE_ARTICLE_BADGE[article.categorie],
+          )}
+        >
+          {CATEGORIE_ARTICLE_LABEL[article.categorie]}
+        </span>
+      </div>
+
+      <div className="flex grow flex-col px-3 pt-4">
+        <span className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500">
+          <Calendar className="h-4 w-4" aria-hidden />
+          {article.date}
+        </span>
+        <h3 className="mt-2 font-display text-lg font-semibold leading-snug text-msk-night-900 transition-colors group-hover:text-msk-coral-600">
+          <Link href={`/actualites/${article.id}`} className="focus-visible:outline-hidden">
+            {article.titre}
+            {/* Lien étiré : toute la carte est cliquable. */}
+            <span aria-hidden className="absolute inset-0" />
+          </Link>
+        </h3>
+        <p className="mt-2 grow text-sm leading-relaxed text-msk-night-700">{article.extrait}</p>
+        <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-msk-coral-700">
+          Lire l&apos;article
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
+        </span>
+      </div>
+    </motion.article>
+  );
 }
 
-const dummyPosts: BlogPost[] = [
-  {
-    id: "post-1",
-    title: "Comment reconnaître les premiers signes d'un TDAH chez l'enfant ?",
-    excerpt: "L'inattention ou l'hyperactivité peuvent être difficiles à interpréter chez les jeunes enfants. Voici les 5 signes qui doivent vous amener à consulter.",
-    category: "Conseils Parents",
-    date: "15 Oct 2023",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800",
-    color: "bg-msk-coral-500",
-  },
-  {
-    id: "post-2",
-    title: "La méthode Montessori : Pourquoi est-elle idéale pour l'inclusion ?",
-    excerpt: "En s'adaptant au rythme de chacun, la pédagogie Montessori offre un cadre sécurisant pour les enfants à besoins spécifiques.",
-    category: "Pédagogie",
-    date: "02 Nov 2023",
-    image: "https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?auto=format&fit=crop&q=80&w=800",
-    color: "bg-msk-sun-500",
-  },
-  {
-    id: "post-3",
-    title: "Journée portes ouvertes : Venez découvrir nos nouveaux espaces",
-    excerpt: "Le centre MSK a le plaisir de vous inviter à sa journée portes ouvertes le samedi 25 Novembre. Visite de la salle Neuro-Gym au programme.",
-    category: "Événement",
-    date: "10 Nov 2023",
-    image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800",
-    color: "bg-msk-blue-500",
-  },
-  {
-    id: "post-4",
-    title: "Neuro-Gym : Les bienfaits de l'activité neuro-motrice sur la concentration",
-    excerpt: "Découvrez comment des exercices physiques ciblés peuvent aider votre enfant à mieux réguler son attention en classe.",
-    category: "Thérapie",
-    date: "28 Nov 2023",
-    image: "https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&q=80&w=800",
-    color: "bg-slate-600",
-  },
-  {
-    id: "post-5",
-    title: "Gérer les devoirs avec un enfant dyslexique : 3 astuces simples",
-    excerpt: "Le moment des devoirs se transforme souvent en conflit. Voici des stratégies concrètes pour apaiser ce moment crucial.",
-    category: "Conseils Parents",
-    date: "05 Dec 2023",
-    image: "https://images.unsplash.com/photo-1425421598808-4a22ce59fc97?auto=format&fit=crop&q=80&w=800",
-    color: "bg-msk-coral-500",
-  },
-  {
-    id: "post-6",
-    title: "L'importance de la guidance parentale dans le parcours thérapeutique",
-    excerpt: "Un accompagnement réussi implique toujours les parents. Découvrez pourquoi nous accordons une place centrale à la guidance parentale.",
-    category: "Pédagogie",
-    date: "12 Dec 2023",
-    image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=800",
-    color: "bg-msk-sun-500",
-  }
-];
+export const ActualitesListSection = () => {
+  const [filtre, setFiltre] = useState<Filtre>("tous");
 
-export const ActualitesListSection: React.FC = () => {
+  const articles = useMemo(
+    () => (filtre === "tous" ? ARTICLES : ARTICLES.filter((a) => a.categorie === filtre)),
+    [filtre],
+  );
+  const [aLaUne, ...reste] = articles;
+
+  const compte = (cle: Filtre) =>
+    cle === "tous" ? ARTICLES.length : ARTICLES.filter((a) => a.categorie === cle).length;
+
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4 max-w-6xl">
-        
-        {/* Grille d'articles */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {dummyPosts.map((post, idx) => (
-            <motion.article 
-              key={post.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="group bg-[#FAF8F5] rounded-3xl overflow-hidden border border-msk-cream-200 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col h-full hover:-translate-y-2"
-            >
-              {/* Image Container */}
-              <div className="relative h-56 overflow-hidden">
-                <Image 
-                  src={post.image}
-                  alt={post.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute top-4 left-4 z-10 flex gap-2">
-                  <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-white shadow-xs ${post.color}`}>
-                    <Tag className="w-3.5 h-3.5" />
-                    {post.category}
-                  </span>
-                </div>
-              </div>
+    <section className="relative overflow-hidden bg-msk-cream-100 pb-24 md:pb-28">
+      {/* Coin bleu pâle derrière la grille — jamais collé au bord haut, le
+          raccord avec le hero reste en crème. */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 top-40 bg-msk-blue-100"
+        style={{ clipPath: "polygon(0 12%, 100% 0, 100% 74%, 0 96%)" }}
+      />
 
-              {/* Content Container */}
-              <div className="p-6 md:p-8 flex flex-col grow">
-                <div className="flex items-center gap-2 text-sm text-slate-500 font-medium mb-4">
-                  <Calendar className="w-4 h-4" />
-                  <span>{post.date}</span>
-                </div>
-                
-                <h3 className="text-xl font-bold text-msk-night-900 mb-3 leading-snug group-hover:text-msk-coral-500 transition-colors">
-                  <Link href={`/actualites/${post.id}`}>
-                    {post.title}
-                    <span className="absolute inset-0 z-0"></span>
-                  </Link>
-                </h3>
-                
-                <p className="text-msk-night-700/90 leading-relaxed mb-6 grow">
-                  {post.excerpt}
-                </p>
-                
-                <div className="mt-auto pt-4 border-t border-msk-cream-200/50 flex items-center text-msk-night-900 font-bold group-hover:text-msk-coral-500 transition-colors">
-                  Lire l'article
-                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-                </div>
-              </div>
-            </motion.article>
-          ))}
+      <div className="relative mx-auto w-full max-w-6xl px-6 sm:px-10">
+        {/* Filtres : la pastille bleu nuit glisse d'une catégorie à l'autre. */}
+        <div role="group" aria-label="Filtrer les articles" className="flex flex-wrap justify-center gap-2.5">
+          {CATEGORIES_ARTICLES.map((cat) => {
+            const actif = filtre === cat.cle;
+            return (
+              <button
+                key={cat.cle}
+                type="button"
+                aria-pressed={actif}
+                onClick={() => setFiltre(cat.cle)}
+                className={cn(
+                  "relative inline-flex h-10 items-center gap-2 rounded-full px-4 font-display text-[0.7rem] font-semibold uppercase tracking-[0.13em] transition-colors focus-visible:outline-hidden focus-visible:ring-4 focus-visible:ring-msk-blue-300",
+                  actif ? "text-white" : "text-msk-night-900 hover:text-msk-coral-700",
+                )}
+              >
+                {actif ? (
+                  <motion.span
+                    layoutId="actualites-filtre-actif"
+                    aria-hidden
+                    transition={SPRING}
+                    className="absolute inset-0 rounded-full bg-msk-night-900 shadow-lg shadow-msk-night-900/30"
+                  />
+                ) : (
+                  <span aria-hidden className="absolute inset-0 rounded-full border-2 border-msk-cream-300 bg-white" />
+                )}
+                <span className="relative">{cat.label}</span>
+                <span
+                  className={cn(
+                    "relative rounded-full px-1.5 py-0.5 text-[0.65rem]",
+                    actif ? "bg-msk-sun-300 text-msk-night-900" : "bg-msk-cream-100 text-msk-night-700",
+                  )}
+                >
+                  {compte(cat.cle)}
+                </span>
+              </button>
+            );
+          })}
         </div>
 
+        {/* À la une : le premier article de la liste filtrée, en grand. */}
+        <AnimatePresence mode="wait" initial={false}>
+          {aLaUne ? (
+            <motion.div
+              key={`${filtre}-${aLaUne.id}`}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.97, transition: { duration: 0.15 } }}
+              transition={SPRING}
+              className="relative mt-12"
+            >
+              <motion.article
+                whileHover={{ rotate: 0, y: -6 }}
+                initial={false}
+                animate={{ rotate: -0.8 }}
+                transition={SPRING}
+                style={{ borderRadius: 26 }}
+                className="group relative grid gap-5 bg-white p-3.5 shadow-2xl shadow-msk-night-900/15 md:grid-cols-[1.05fr_1fr]"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden rounded-[1.1rem]">
+                  <Image
+                    src={aLaUne.image}
+                    alt=""
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 92vw, 560px"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="flex flex-col justify-center px-2 pb-3 md:py-4 md:pr-6">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span
+                      className={cn(
+                        "rounded-full px-3 py-1.5 font-display text-[0.65rem] font-semibold uppercase tracking-[0.14em]",
+                        CATEGORIE_ARTICLE_BADGE[aLaUne.categorie],
+                      )}
+                    >
+                      {CATEGORIE_ARTICLE_LABEL[aLaUne.categorie]}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500">
+                      <Calendar className="h-4 w-4" aria-hidden />
+                      {aLaUne.date}
+                    </span>
+                  </div>
+                  <h2 className="mt-4 font-display text-2xl font-semibold leading-[1.12] text-msk-night-900 transition-colors group-hover:text-msk-coral-600 md:text-3xl">
+                    <Link href={`/actualites/${aLaUne.id}`} className="focus-visible:outline-hidden">
+                      {aLaUne.titre}
+                      <span aria-hidden className="absolute inset-0" />
+                    </Link>
+                  </h2>
+                  <p className="mt-3 text-[15px] leading-relaxed text-msk-night-700">{aLaUne.extrait}</p>
+                  <span className="mt-5 inline-flex items-center gap-2 font-bold text-msk-coral-700">
+                    Lire l&apos;article
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
+                  </span>
+                </div>
+              </motion.article>
+
+              {/* Sticker « À la une », posé sur le coin. */}
+              <span
+                aria-hidden
+                className="absolute -top-6 right-2 flex h-20 w-20 rotate-[9deg] items-center justify-center rounded-full bg-msk-coral-600 text-center font-display text-sm font-bold uppercase leading-[1.05] text-white shadow-lg shadow-msk-coral-600/40 md:-right-3"
+              >
+                À la
+                <br />
+                une
+              </span>
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
+
+        {/* Le reste des articles, en polaroids inclinés. `key={filtre}` :
+            changer de filtre rejoue l'entrée de la grille. */}
+        <div key={filtre} className="mt-12 grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3">
+          {reste.map((article, index) => (
+            <CarteArticle key={article.id} article={article} index={index} />
+          ))}
+        </div>
       </div>
     </section>
   );

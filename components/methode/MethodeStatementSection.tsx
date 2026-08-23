@@ -40,7 +40,7 @@ export const MethodeStatementSection = () => {
               carry the poster feel instead, and leading stays open enough to
               read.
             */}
-            <h2 className="relative z-20 text-balance font-display text-5xl font-bold leading-[1.25] tracking-[-0.02em] text-msk-coral-600 sm:text-6xl lg:text-[clamp(3.5rem,5vw,6rem)]">
+            <h2 className="relative z-20 text-balance font-display text-4xl font-bold leading-[1.25] tracking-[-0.02em] text-msk-coral-600 sm:text-5xl lg:text-[clamp(3rem,4.2vw,5rem)]">
               {SCHOOL_INFO.coreQuote}
             </h2>
 

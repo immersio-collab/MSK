@@ -1,99 +1,213 @@
 "use client";
 
-import React, { useState } from "react";
-import { Check } from "lucide-react";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  Brain,
+  Check,
+  HeartHandshake,
+  MessageCircle,
+  School,
+  Shapes,
+  type LucideIcon,
+} from "lucide-react";
 
 import { FadeUp } from "@/components/motion/FadeUp";
+import { cn } from "@/lib/utils";
 
-export const ProgrammesTableSection: React.FC = () => {
-  const [hoveredCol, setHoveredCol] = useState<number | null>(null);
+gsap.registerPlugin(ScrollTrigger);
 
-  const columns = [
-    { title: "Critères", color: "text-msk-night-900", bg: "bg-transparent" },
-    { title: "Maternelle", color: "text-msk-coral-600", bg: "bg-msk-coral-50" },
-    { title: "Primaire", color: "text-msk-sun-600", bg: "bg-msk-sun-50" }
-  ];
+/**
+ * Comparatif des programmes — deux fiches au lieu d'un tableau.
+ *
+ * Chaque programme est une carte polaroid inclinée à bandeau teinté (coral
+ * Maternelle, sun Primaire). Un critère = une ligne icône + coche pleine ou
+ * pastille texte ; « — » est devenu « Pas encore ». L'âge vit dans le bandeau,
+ * plus besoin d'une ligne dédiée. Sur mobile les fiches s'empilent : plus
+ * aucun défilement horizontal.
+ */
 
-  const rows = [
-    { label: "Âge", values: ["2-5 ans", "6-11 ans"] },
-    { label: "Pédagogie Montessori", values: [true, true] },
-    { label: "Séances Neuro-Gym", values: [true, true] },
-    { label: "Orthophonie", values: [true, true] },
-    { label: "Intégration scolaire", values: ["—", true] },
-    { label: "Soutien Psychologique", values: ["Parents", "Enfant & Parents"] },
-    { label: "Coaching / Orientation", values: ["—", "—"] }
-  ];
+/** Un critère : coche (true), pastille texte, ou « Pas encore » (false). */
+interface Critere {
+  label: string;
+  icon: LucideIcon;
+  maternelle: boolean | string;
+  primaire: boolean | string;
+}
+
+const CRITERES: Critere[] = [
+  { label: "Pédagogie Montessori", icon: Shapes, maternelle: true, primaire: true },
+  { label: "Séances Neuro-Gym", icon: Brain, maternelle: true, primaire: true },
+  { label: "Orthophonie", icon: MessageCircle, maternelle: true, primaire: true },
+  { label: "Intégration scolaire", icon: School, maternelle: false, primaire: true },
+  { label: "Soutien psychologique", icon: HeartHandshake, maternelle: "Parents", primaire: "Enfant & parents" },
+];
+
+/** Habillage par programme — classes complètes, jamais concaténées. */
+interface FicheTeinte {
+  bandeau: string;
+  bandeauTitre: string;
+  bandeauAge: string;
+  iconeDisque: string;
+  coche: string;
+  pastille: string;
+}
+
+const FICHES: {
+  id: "maternelle" | "primaire";
+  titre: string;
+  age: string;
+  tilt: string;
+  teinte: FicheTeinte;
+}[] = [
+  {
+    id: "maternelle",
+    titre: "Maternelle",
+    age: "2–5 ans",
+    tilt: "lg:rotate-[-1deg]",
+    teinte: {
+      bandeau: "bg-msk-coral-500",
+      bandeauTitre: "text-white",
+      bandeauAge: "bg-white text-msk-coral-700",
+      iconeDisque: "bg-msk-coral-50 text-msk-coral-600",
+      coche: "bg-msk-coral-500 text-white",
+      pastille: "bg-msk-coral-50 text-msk-coral-800",
+    },
+  },
+  {
+    id: "primaire",
+    titre: "Primaire",
+    age: "6–11 ans",
+    tilt: "lg:rotate-[1deg]",
+    teinte: {
+      bandeau: "bg-msk-sun-400",
+      bandeauTitre: "text-msk-night-900",
+      bandeauAge: "bg-white text-msk-sun-800",
+      iconeDisque: "bg-msk-sun-50 text-msk-sun-700",
+      coche: "bg-msk-sun-400 text-msk-night-900",
+      pastille: "bg-msk-sun-50 text-msk-sun-900",
+    },
+  },
+];
+
+export const ProgrammesTableSection = () => {
+  const root = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return;
+
+    const ctx = gsap.context(() => {
+      // Les fiches se posent comme des stickers. `from` + immediateRender:false :
+      // si le tween ne part jamais, elles restent simplement visibles.
+      gsap.from(".comparatif-fiche", {
+        y: 48,
+        rotate: (i: number) => (i % 2 ? 4 : -4),
+        scale: 0.94,
+        opacity: 0,
+        duration: 0.75,
+        ease: "back.out(1.6)",
+        stagger: 0.12,
+        immediateRender: false,
+        scrollTrigger: { trigger: ".comparatif-grille", start: "top 82%" },
+      });
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section className="relative bg-msk-cream-100 py-24">
-      <div className="mx-auto max-w-6xl px-6 sm:px-10">
+    <section ref={root} className="relative overflow-hidden bg-msk-cream-100 py-24">
+      <div className="mx-auto max-w-4xl px-6 sm:px-10">
         <FadeUp>
-          <div className="mb-16 text-center">
-            <span className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-msk-coral-600">
+          <div className="mb-12 text-center">
+            <span className="inline-block rounded-full bg-white px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-coral-700 shadow-sm">
               Vue d&apos;ensemble
             </span>
-            <h2 className="mt-3 font-display text-4xl font-bold text-msk-night-900 md:text-5xl">
-              Comparatif des Programmes
+            <h2 className="mt-4 font-display text-3xl font-bold uppercase leading-[0.95] text-msk-night-900 md:text-4xl">
+              Comparatif des <span className="text-msk-coral-700">programmes</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-msk-night-700">
+            <p className="mx-auto mt-4 max-w-xl text-base text-msk-night-700 md:text-lg">
               Un aperçu rapide de ce qui est inclus ou adapté selon l&apos;âge de l&apos;enfant.
             </p>
           </div>
         </FadeUp>
 
-        <div className="-mx-6 hide-scrollbar overflow-x-auto pb-8 px-6 sm:mx-0 sm:px-0">
-          <div className="min-w-[600px] w-full overflow-hidden rounded-2xl border border-msk-cream-300 bg-white shadow-xs">
-            {/* Header Row */}
-            <div className="grid grid-cols-3 border-b border-msk-cream-300 bg-msk-cream-100">
-              {columns.map((col, idx) => (
-                <div
-                  key={idx}
-                  className={`border-r border-msk-cream-300/50 p-6 text-center text-lg font-bold last:border-r-0 transition-colors duration-300 ${col.color} ${hoveredCol === idx && idx > 0 ? col.bg : ""}`}
-                  onMouseEnter={() => setHoveredCol(idx)}
-                  onMouseLeave={() => setHoveredCol(null)}
-                >
-                  {col.title}
-                </div>
-              ))}
-            </div>
+        <div className="comparatif-grille grid grid-cols-1 gap-7 lg:grid-cols-2">
+          {FICHES.map((fiche) => (
+            <article
+              key={fiche.id}
+              className={cn(
+                "comparatif-fiche overflow-hidden rounded-[1.5rem] bg-white shadow-2xl shadow-msk-night-900/15 transition-transform duration-300 hover:rotate-0 hover:-translate-y-1.5",
+                fiche.tilt,
+              )}
+            >
+              <header className={cn("flex items-center justify-between px-6 py-4", fiche.teinte.bandeau)}>
+                <h3 className={cn("font-display text-xl font-bold uppercase leading-none", fiche.teinte.bandeauTitre)}>
+                  {fiche.titre}
+                </h3>
+                <span className={cn("rounded-full px-3 py-1 text-sm font-semibold", fiche.teinte.bandeauAge)}>
+                  {fiche.age}
+                </span>
+              </header>
 
-            {/* Data Rows */}
-            {rows.map((row, rIdx) => (
-              <div key={rIdx} className="grid grid-cols-3 border-b border-msk-cream-300/50 last:border-b-0 transition-colors hover:bg-msk-cream-100/50">
-                {/* Row Label */}
-                <div
-                  className="flex items-center border-r border-msk-cream-300/50 p-4 text-left font-semibold text-msk-night-800 md:p-6"
-                  onMouseEnter={() => setHoveredCol(0)}
-                  onMouseLeave={() => setHoveredCol(null)}
-                >
-                  {row.label}
-                </div>
-
-                {/* Values */}
-                {row.values.map((val, vIdx) => {
-                  const colIdx = vIdx + 1;
+              <ul className="px-5 pb-5 pt-2 sm:px-6">
+                {CRITERES.map((critere, index) => {
+                  const valeur = critere[fiche.id];
+                  const Icone = critere.icon;
                   return (
-                    <div
-                      key={vIdx}
-                      className={`flex items-center justify-center border-r border-msk-cream-300/50 p-4 last:border-r-0 transition-colors duration-300 md:p-6 ${hoveredCol === colIdx ? columns[colIdx].bg : ""}`}
-                      onMouseEnter={() => setHoveredCol(colIdx)}
-                      onMouseLeave={() => setHoveredCol(null)}
-                    >
-                      {val === true ? (
-                        <div className={`flex h-8 w-8 items-center justify-center rounded-full border border-msk-cream-300 bg-white shadow-xs ${columns[colIdx].color}`}>
-                          <Check className="h-5 w-5" />
-                        </div>
-                      ) : val === "—" ? (
-                        <span className="font-bold text-msk-cream-300">—</span>
-                      ) : (
-                        <span className="font-medium text-msk-night-700">{val}</span>
+                    <li
+                      key={critere.label}
+                      className={cn(
+                        "flex items-center justify-between gap-4 py-3.5",
+                        index < CRITERES.length - 1 && "border-b-2 border-dashed border-msk-cream-200",
                       )}
-                    </div>
+                    >
+                      <span className="flex items-center gap-3 text-[15px] font-medium text-msk-night-900">
+                        <span
+                          aria-hidden
+                          className={cn(
+                            "flex h-9 w-9 shrink-0 items-center justify-center rounded-full",
+                            fiche.teinte.iconeDisque,
+                          )}
+                        >
+                          <Icone className="h-4.5 w-4.5" />
+                        </span>
+                        {critere.label}
+                      </span>
+
+                      {valeur === true ? (
+                        <span
+                          className={cn(
+                            "flex h-7 w-7 shrink-0 items-center justify-center rounded-full",
+                            fiche.teinte.coche,
+                          )}
+                          role="img"
+                          aria-label="Inclus"
+                        >
+                          <Check className="h-4 w-4" strokeWidth={3} aria-hidden />
+                        </span>
+                      ) : valeur === false ? (
+                        <span className="shrink-0 rounded-full bg-msk-cream-200 px-3 py-1.5 text-xs font-semibold text-msk-night-700">
+                          Pas encore
+                        </span>
+                      ) : (
+                        <span
+                          className={cn(
+                            "shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold",
+                            fiche.teinte.pastille,
+                          )}
+                        >
+                          {valeur}
+                        </span>
+                      )}
+                    </li>
                   );
                 })}
-              </div>
-            ))}
-          </div>
+              </ul>
+            </article>
+          ))}
         </div>
       </div>
     </section>

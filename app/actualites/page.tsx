@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ActualitesHeroSection } from "@/components/actualites/ActualitesHeroSection";
 import { ActualitesListSection } from "@/components/actualites/ActualitesListSection";
-import { ActualitesNewsletterSection } from "@/components/actualites/ActualitesNewsletterSection";
+import { ActualitesCtaSection } from "@/components/actualites/ActualitesCtaSection";
 
 export const metadata: Metadata = {
   title: "Actualités, Blog & Ressources | MSK Montessori School Casablanca",
@@ -14,8 +14,8 @@ export default function ActualitesPage() {
       <ActualitesHeroSection />
       
       <ActualitesListSection />
-      
-      <ActualitesNewsletterSection />
+
+      <ActualitesCtaSection />
     </div>
   );
 }

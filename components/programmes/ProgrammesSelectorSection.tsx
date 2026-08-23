@@ -1,196 +1,278 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2 } from "lucide-react";
+import { useState } from "react";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
+import { Check, MoonStar, Sunrise } from "lucide-react";
 
 import { FadeUp } from "@/components/motion/FadeUp";
+import { cn } from "@/lib/utils";
+
+/**
+ * Sélecteur Maternelle / Primaire — version allégée.
+ *
+ * La carte est un grand polaroid blanc légèrement incliné (il se redresse au
+ * survol), au vocabulaire du site : titre Fredoka, vignettes d'objectifs 2×2,
+ * profils en pastilles teintées, rythme sur une ligne Matin / Après-midi.
+ * Chaque programme garde sa teinte (coral / sun) via des classes COMPLÈTES,
+ * jamais concaténées.
+ */
 
 type ProgramId = "maternelle" | "primaire";
+
+/** Habillage d'un programme : toutes les classes en toutes lettres. */
+interface Teinte {
+  /** Onglet actif. */
+  tab: string;
+  /** Pastille d'âge de l'onglet actif. */
+  tabAge: string;
+  /** Pastille d'âge à côté du titre. */
+  age: string;
+  /** Fond des vignettes d'objectifs. */
+  vignette: string;
+  /** Disque de la coche. */
+  coche: string;
+  /** Intertitre « Profils accompagnés ». */
+  label: string;
+  /** Pastilles de profils. */
+  profil: string;
+}
+
+const TEINTES: Record<ProgramId, Teinte> = {
+  maternelle: {
+    tab: "bg-msk-coral-500",
+    tabAge: "bg-white/25 text-white",
+    age: "bg-msk-coral-100 text-msk-coral-700",
+    vignette: "bg-msk-coral-50",
+    coche: "bg-msk-coral-500 text-white",
+    label: "text-msk-coral-700",
+    profil: "bg-msk-coral-100 text-msk-coral-800",
+  },
+  primaire: {
+    tab: "bg-msk-sun-500",
+    tabAge: "bg-white/25 text-white",
+    age: "bg-msk-sun-100 text-msk-sun-800",
+    vignette: "bg-msk-sun-50",
+    coche: "bg-msk-sun-500 text-white",
+    label: "text-msk-sun-800",
+    profil: "bg-msk-sun-100 text-msk-sun-900",
+  },
+};
 
 interface ProgramData {
   id: ProgramId;
   title: string;
   age: string;
-  color: string;
   description: string;
   objectives: string[];
   conditions: string[];
-  schedule: string;
+  matin: string;
+  apresMidi: string;
   image: string;
+  legende: string;
 }
 
 const programs: ProgramData[] = [
   {
     id: "maternelle",
     title: "Maternelle",
-    age: "2-5 ans",
-    color: "bg-msk-coral-500",
-    description: "Un environnement préparé pour favoriser l'éveil sensoriel, le langage et l'autonomie des tout-petits. Nous respectons le rythme de chaque enfant pour construire des fondations solides.",
+    age: "2–5 ans",
+    description:
+      "Un environnement préparé pour l'éveil sensoriel, le langage et l'autonomie — au rythme de chaque enfant.",
     objectives: [
-      "Développement de la motricité fine et globale",
-      "Éveil sensoriel et découverte du monde",
-      "Acquisition du langage oral",
-      "Socialisation et gestion des émotions"
+      "Motricité fine et globale",
+      "Éveil sensoriel",
+      "Langage oral",
+      "Émotions et socialisation",
     ],
-    conditions: ["Retard de langage", "Troubles du spectre autistique (léger)", "Hyperactivité précoce"],
-    schedule: "Matinées structurées (Montessori) / Après-midis sieste et jeux libres",
+    conditions: ["Retard de langage", "TSA léger", "Hyperactivité précoce"],
+    matin: "Montessori structuré",
+    apresMidi: "Sieste et jeux libres",
     image: "/maternelle1.jpg",
+    legende: "La classe des 2–5 ans",
   },
   {
     id: "primaire",
     title: "Primaire",
-    age: "6-11 ans",
-    color: "bg-msk-sun-500",
-    description: "Une approche pédagogique inclusive visant l'acquisition des fondamentaux (lecture, écriture, calcul) tout en intégrant des séances thérapeutiques spécifiques.",
+    age: "6–11 ans",
+    description:
+      "Les fondamentaux — lecture, écriture, calcul — dans un cadre inclusif, avec les séances thérapeutiques intégrées.",
     objectives: [
-      "Acquisition de la lecture et de l'écriture",
-      "Développement du raisonnement logique et mathématique",
-      "Renforcement de l'estime de soi",
-      "Préparation à l'inclusion en milieu scolaire ordinaire"
+      "Lecture et écriture",
+      "Raisonnement logique",
+      "Estime de soi",
+      "Inclusion en milieu ordinaire",
     ],
-    conditions: ["TDAH", "Dyslexie, Dysorthographie", "Dyspraxie", "Dyscalculie"],
-    schedule: "Apprentissages cognitifs (matin) / Ateliers thérapeutiques et créatifs (après-midi)",
+    conditions: ["TDAH", "Dyslexie, dysorthographie", "Dyspraxie", "Dyscalculie"],
+    matin: "Apprentissages cognitifs",
+    apresMidi: "Ateliers thérapeutiques et créatifs",
     image: "/primaire1.webp",
-  }
+    legende: "La classe des 6–11 ans",
+  },
 ];
 
-export const ProgrammesSelectorSection: React.FC = () => {
+export const ProgrammesSelectorSection = () => {
   const [activeTab, setActiveTab] = useState<ProgramId>("maternelle");
 
-  const activeProgram = programs.find(p => p.id === activeTab)!;
+  const prog = programs.find((p) => p.id === activeTab)!;
+  const teinte = TEINTES[prog.id];
 
   return (
-    <section id="programmes" className="bg-msk-cream-200 py-20">
+    <section id="programmes" className="overflow-hidden bg-msk-cream-200 py-20">
       <div className="mx-auto max-w-6xl px-6 sm:px-10">
-
-        {/* Eyebrow + titre de section */}
         <FadeUp>
-          <div className="mb-12 text-center">
-            <span className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-msk-coral-600">
+          <div className="mb-10 text-center">
+            <span className="inline-block rounded-full bg-white px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-coral-700 shadow-sm">
               Nos niveaux
             </span>
-            <h2 className="mt-3 font-display text-3xl font-bold leading-[1.1] text-msk-night-900 md:text-4xl">
+            <h2 className="mt-4 font-display text-3xl font-bold uppercase leading-[0.95] text-msk-night-900 md:text-4xl">
               Choisissez le programme de votre enfant
             </h2>
           </div>
         </FadeUp>
 
         {/*
-          Selector Tabs — the one place that deliberately keeps its own button
-          instead of `MorphButton`. The active tab is marked by a shared-layout
-          `motion.div` that slides between tabs, and it is absolutely positioned
-          inside the button: MorphButton's own absolute fill would sit under a
-          rectangle that never morphs, so the two indicators fight. Tabs are a
-          selection, not an action, and the slide reads better here.
+          Onglets — la seule place qui garde son propre bouton plutôt que
+          MorphButton : l'indicateur actif est un motion.div en shared layout
+          qui glisse d'un onglet à l'autre, et il vit en absolu DANS le bouton.
+          Le remplissage absolu de MorphButton se battrait avec lui.
         */}
-        <div className="flex flex-col justify-center gap-2 md:flex-row mb-12">
-          {programs.map((prog) => (
-            <button
-              key={prog.id}
-              onClick={() => setActiveTab(prog.id)}
-              className={`relative flex flex-col items-center justify-center gap-1 rounded-2xl px-6 py-4 text-base font-bold transition-all md:flex-row md:gap-2 md:rounded-full md:py-3 ${
-                activeTab === prog.id
-                  ? "text-white shadow-md"
-                  : "bg-msk-cream-100 text-msk-night-700 hover:bg-msk-cream-200"
-              }`}
-            >
-              {activeTab === prog.id && (
-                <motion.div
-                  layoutId="active-program-tab"
-                  className={`absolute inset-0 rounded-2xl md:rounded-full ${prog.color}`}
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                />
-              )}
-              <span className="relative z-10">{prog.title}</span>
-              <span className={`relative z-10 rounded-full px-2 py-0.5 text-xs ${activeTab === prog.id ? "bg-white/20" : "bg-msk-cream-300 text-msk-night-700"}`}>
-                {prog.age}
-              </span>
-            </button>
-          ))}
+        <div className="mb-10 flex flex-col justify-center gap-2 md:flex-row">
+          {programs.map((p) => {
+            const actif = activeTab === p.id;
+            return (
+              <button
+                key={p.id}
+                type="button"
+                aria-pressed={actif}
+                onClick={() => setActiveTab(p.id)}
+                className={cn(
+                  "relative flex items-center justify-center gap-2 rounded-full px-6 py-3 font-display text-sm font-semibold uppercase tracking-[0.08em] transition-colors focus-visible:outline-hidden focus-visible:ring-4 focus-visible:ring-msk-coral-300",
+                  actif ? "text-white" : "bg-white text-msk-night-800 hover:text-msk-coral-700",
+                )}
+              >
+                {actif ? (
+                  <motion.span
+                    layoutId="active-program-tab"
+                    aria-hidden
+                    className={cn("absolute inset-0 rounded-full shadow-md", TEINTES[p.id].tab)}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+                ) : null}
+                <span className="relative">{p.title}</span>
+                <span
+                  className={cn(
+                    "relative rounded-full px-2 py-0.5 text-xs normal-case tracking-normal",
+                    actif ? TEINTES[p.id].tabAge : "bg-msk-cream-200 text-msk-night-700",
+                  )}
+                >
+                  {p.age}
+                </span>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Content Area */}
-        <div className="min-h-[500px] overflow-hidden rounded-3xl border border-msk-cream-300 bg-msk-cream-50 shadow-xl">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeProgram.id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-              className="flex h-full flex-col lg:flex-row"
-            >
-              {/* Left: Text Content */}
-              <div className="flex flex-col justify-between p-8 md:p-12 lg:w-1/2">
-                <div>
-                  <div className="mb-4 flex items-center gap-3">
-                    <div className={`h-3 w-3 rounded-full ${activeProgram.color}`} />
-                    <h3 className="text-3xl font-bold text-msk-night-900">{activeProgram.title}</h3>
-                    <span className="rounded-full border border-msk-cream-300 bg-white px-3 py-1 text-sm font-bold text-slate-600 shadow-xs">
-                      {activeProgram.age}
+        {/* La carte : polaroid blanc, légèrement incliné, qui se redresse au survol. */}
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.article
+            key={prog.id}
+            initial={{ opacity: 0, y: 16, rotate: -0.6 }}
+            animate={{ opacity: 1, y: 0, rotate: -0.6 }}
+            exit={{ opacity: 0, y: -12, transition: { duration: 0.18 } }}
+            whileHover={{ rotate: 0 }}
+            transition={{ type: "spring", stiffness: 280, damping: 26 }}
+            style={{ borderRadius: 28 }}
+            className="grid gap-3 bg-white p-3 shadow-2xl shadow-msk-night-900/15 lg:grid-cols-[1.05fr_0.95fr]"
+          >
+            {/* Texte */}
+            <div className="flex flex-col justify-center px-5 py-6 md:px-8 md:py-8">
+              <div className="flex flex-wrap items-center gap-3">
+                <h3 className="font-display text-3xl font-bold uppercase leading-none text-msk-night-900">
+                  {prog.title}
+                </h3>
+                <span className={cn("rounded-full px-3 py-1 text-sm font-semibold", teinte.age)}>
+                  {prog.age}
+                </span>
+              </div>
+
+              <p className="mt-4 max-w-md text-base leading-relaxed text-msk-night-700">
+                {prog.description}
+              </p>
+
+              {/* Objectifs : quatre vignettes compactes, deux par deux. */}
+              <ul className="mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                {prog.objectives.map((objectif, idx) => (
+                  <motion.li
+                    key={objectif}
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.15 + idx * 0.06 }}
+                    className={cn(
+                      "flex items-center gap-3 rounded-2xl px-3.5 py-2.5 text-sm font-medium text-msk-night-900",
+                      teinte.vignette,
+                    )}
+                  >
+                    <span
+                      aria-hidden
+                      className={cn(
+                        "flex h-6 w-6 shrink-0 items-center justify-center rounded-full",
+                        teinte.coche,
+                      )}
+                    >
+                      <Check className="h-3.5 w-3.5" strokeWidth={3} />
                     </span>
-                  </div>
+                    {objectif}
+                  </motion.li>
+                ))}
+              </ul>
 
-                  <p className="mb-8 text-lg leading-relaxed text-msk-night-700">
-                    {activeProgram.description}
-                  </p>
-
-                  <div className="mb-8">
-                    <h4 className="mb-4 text-sm font-bold uppercase tracking-widest text-slate-500">
-                      Objectifs Principaux
-                    </h4>
-                    <ul className="space-y-3">
-                      {activeProgram.objectives.map((obj, idx) => (
-                        <motion.li
-                          key={idx}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.2 + idx * 0.1 }}
-                          className="flex items-start gap-3"
-                        >
-                          <CheckCircle2 className={`mt-0.5 h-5 w-5 shrink-0 ${activeProgram.color.replace("bg-", "text-")}`} />
-                          <span className="font-medium text-msk-night-800">{obj}</span>
-                        </motion.li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="mb-8 grid grid-cols-1 gap-6 rounded-2xl border border-msk-cream-300 bg-white p-6 sm:grid-cols-2">
-                    <div>
-                      <h4 className="mb-2 text-xs font-bold uppercase text-slate-500">Profils accompagnés</h4>
-                      <div className="flex flex-wrap gap-1.5">
-                        {activeProgram.conditions.map((cond, idx) => (
-                          <span key={idx} className="rounded-md bg-msk-cream-100 px-2 py-1 text-xs font-medium text-msk-night-700">
-                            {cond}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <div>
-                      <h4 className="mb-2 text-xs font-bold uppercase text-slate-500">Rythme</h4>
-                      <p className="text-sm font-medium leading-tight text-msk-night-800">
-                        {activeProgram.schedule}
-                      </p>
-                    </div>
-                  </div>
-                </div>
+              <p className={cn("mt-6 font-display text-xs font-semibold uppercase tracking-[0.16em]", teinte.label)}>
+                Profils accompagnés
+              </p>
+              <div className="mt-2.5 flex flex-wrap gap-2">
+                {prog.conditions.map((condition) => (
+                  <span
+                    key={condition}
+                    className={cn("rounded-full px-3 py-1.5 text-sm font-medium", teinte.profil)}
+                  >
+                    {condition}
+                  </span>
+                ))}
               </div>
 
-              {/* Right: Image */}
-              <div className="relative min-h-[300px] lg:min-h-full lg:w-1/2">
-                <Image
-                  src={activeProgram.image}
-                  alt={`Programme ${activeProgram.title}`}
-                  fill
-                  className="object-cover"
-                />
-                <div className={`absolute inset-0 opacity-20 mix-blend-multiply ${activeProgram.color}`} />
+              {/* Rythme : une ligne Matin / Après-midi, icônes à l'appui. */}
+              <div className="mt-6 flex flex-col gap-2.5 text-sm text-msk-night-800 sm:flex-row sm:gap-6">
+                <span className="inline-flex items-center gap-2">
+                  <Sunrise className="h-5 w-5 text-msk-sun-600" aria-hidden />
+                  <span>
+                    <strong className="font-semibold">Matin</strong> · {prog.matin}
+                  </span>
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <MoonStar className="h-5 w-5 text-msk-blue-700" aria-hidden />
+                  <span>
+                    <strong className="font-semibold">Après-midi</strong> · {prog.apresMidi}
+                  </span>
+                </span>
               </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+            </div>
+
+            {/* Photo : dans le cadre, coins arrondis, sans voile de couleur. */}
+            <div className="relative min-h-[280px] overflow-hidden rounded-[1.25rem] bg-msk-cream-200 lg:min-h-[420px]">
+              <Image
+                src={prog.image}
+                alt={`Programme ${prog.title}`}
+                fill
+                sizes="(max-width: 1024px) 92vw, 540px"
+                className="object-cover"
+              />
+              <span className="absolute bottom-3 left-3 rounded-full bg-white px-3 py-1.5 font-display text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-msk-coral-700 shadow-sm">
+                {prog.legende}
+              </span>
+            </div>
+          </motion.article>
+        </AnimatePresence>
       </div>
     </section>
   );
