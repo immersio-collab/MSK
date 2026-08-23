@@ -5,7 +5,9 @@ import { ProgrammesSelectorSection } from "@/components/programmes/ProgrammesSel
 import { ProgrammesMediaBand } from "@/components/programmes/ProgrammesMediaBand";
 import { ProgrammesStatementSection } from "@/components/programmes/ProgrammesStatementSection";
 import { ProgrammesTableSection } from "@/components/programmes/ProgrammesTableSection";
+import { FaqSection } from "@/components/common/FaqSection";
 import { NextStepSection } from "@/components/common/NextStepSection";
+import { FAQ_PROGRAMMES } from "@/lib/data/faq";
 
 export const metadata: Metadata = {
   title: "Programmes & Classes | MSK Montessori School Casablanca",
@@ -29,6 +31,19 @@ export default function ProgrammesPage() {
 
       {/* Tableau comparatif des programmes */}
       <ProgrammesTableSection />
+
+      {/* Questions de parents sur les deux programmes. Fond bleu : la page
+          arrive ici après trois plages crème, et le bleu est déjà sa couleur
+          (bande du hero, carte-titre, titre de la déclaration). */}
+      <FaqSection
+        tone="blueMid"
+        title="Choisir le bon"
+        titleAccent="programme"
+        description="Une question qui n'est pas là ? Écrivez-nous, nous répondons à chacune."
+        items={FAQ_PROGRAMMES}
+        ctaLabel="Poser votre question"
+        ctaHref="/contact"
+      />
 
       {/* Hand-off vers la page Admissions */}
       <NextStepSection

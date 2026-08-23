@@ -5,7 +5,9 @@ import { MethodeStepsSection } from "@/components/methode/MethodeStepsSection";
 import { MethodeMediaBand } from "@/components/methode/MethodeMediaBand";
 import { MethodeStatementSection } from "@/components/methode/MethodeStatementSection";
 import { MethodeProcessSection } from "@/components/methode/MethodeProcessSection";
+import { FaqSection } from "@/components/common/FaqSection";
 import { NextStepSection } from "@/components/common/NextStepSection";
+import { FAQ_METHODE } from "@/lib/data/faq";
 
 export const metadata: Metadata = {
   title: "La Méthode MSK | MSK Montessori School Casablanca",
@@ -32,6 +34,22 @@ export default function LaMethodePage() {
 
       {/* How to begin */}
       <MethodeProcessSection />
+
+      {/* Fond rose : la page vient d'enchaîner deux sections crème-200, donc un
+          jaune pâle n'aurait fait qu'une nuance d'écart. Le corail est la
+          seconde voix de cette page (carte-titre du hero, titre de la
+          déclaration, numéros du process) et le bouton reprend le bleu-700 des
+          deux autres boutons de la page. */}
+      <FaqSection
+        tone="coralLight"
+        button="blue"
+        title="Comprendre la"
+        titleAccent="méthode"
+        description="Une question qui n'est pas là ? Écrivez-nous, nous répondons à chacune."
+        items={FAQ_METHODE}
+        ctaLabel="Poser votre question"
+        ctaHref="/contact"
+      />
 
       {/* Hand-off to the next page */}
       <NextStepSection

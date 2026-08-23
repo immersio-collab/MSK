@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { EquipeHeroSection } from "@/components/equipe/EquipeHeroSection";
 import { EquipeGridSection } from "@/components/equipe/EquipeGridSection";
 import { EquipePhilosophieSection } from "@/components/equipe/EquipePhilosophieSection";
+import { FaqSection } from "@/components/common/FaqSection";
 import { NextStepSection } from "@/components/common/NextStepSection";
+import { FAQ_FONDATRICE } from "@/lib/data/faq";
 
 export const metadata: Metadata = {
   title: "La Fondatrice | MSK Montessori School Casablanca",
@@ -17,6 +19,20 @@ export default function EquipePage() {
       <EquipeGridSection />
       
       <EquipePhilosophieSection />
+
+      {/* Fond jaune pâle : la section philosophie au-dessus est blanche, donc
+          la couture se voit, et la page tient une histoire chaude de bout en
+          bout (bande sun-400 du hero, filet sun-400 de la citation, CTA
+          sun-500). */}
+      <FaqSection
+        tone="sunLight"
+        title="Mieux connaître la"
+        titleAccent="fondatrice"
+        description="Une question qui n'est pas là ? Écrivez-nous, nous répondons à chacune."
+        items={FAQ_FONDATRICE}
+        ctaLabel="Poser votre question"
+        ctaHref="/contact"
+      />
 
       <NextStepSection
         eyebrow="Prochaine étape"

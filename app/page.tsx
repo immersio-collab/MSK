@@ -8,8 +8,9 @@ import { AccueilSteps } from "@/components/accueil/AccueilSteps";
 import { AccueilNeuroGym } from "@/components/accueil/AccueilNeuroGym";
 import { AccueilStats } from "@/components/accueil/AccueilStats";
 import { AccueilTemoignages } from "@/components/accueil/AccueilTemoignages";
-import { AccueilFaq } from "@/components/accueil/AccueilFaq";
 import { AccueilGalerie } from "@/components/accueil/AccueilGalerie";
+import { FaqSection } from "@/components/common/FaqSection";
+import { FAQ_ACCUEIL } from "@/lib/data/faq";
 import { SCHOOL_INFO } from "@/lib/data/site-content";
 
 export const metadata: Metadata = {
@@ -44,7 +45,15 @@ export default function HomePage() {
 
       <AccueilTemoignages />
 
-      <AccueilFaq />
+      <FaqSection
+        tone="blueLight"
+        title="Ce que les parents nous"
+        titleAccent="demandent"
+        description="Une question qui n'est pas là ? Écrivez-nous, nous répondons à chacune."
+        items={FAQ_ACCUEIL}
+        ctaLabel="Poser votre question"
+        ctaHref="/contact"
+      />
 
       <AccueilStatement
         quote={SCHOOL_INFO.coreQuote}

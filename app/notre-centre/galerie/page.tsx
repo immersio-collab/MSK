@@ -4,7 +4,9 @@ import { GalerieHeroSection } from "@/components/galerie/GalerieHeroSection";
 import { GalerieAlbumSection } from "@/components/galerie/GalerieAlbumSection";
 import { GalerieTourSection } from "@/components/galerie/GalerieTourSection";
 import { GaleriePelliculeSection } from "@/components/galerie/GaleriePelliculeSection";
+import { FaqSection } from "@/components/common/FaqSection";
 import { NextStepSection } from "@/components/common/NextStepSection";
+import { FAQ_GALERIE } from "@/lib/data/faq";
 
 export const metadata: Metadata = {
   title: "Nos Espaces (Visite Virtuelle) | MSK Montessori School Casablanca",
@@ -22,6 +24,19 @@ export default function GaleriePage() {
       <GalerieAlbumSection />
 
       <GaleriePelliculeSection />
+
+      {/* Bleu-200, la couleur exacte de la bande des albums : c'est le ciel de
+          la page revenu à hauteur de lecture. Bleu-100 aurait la même clarté
+          que le crème-200 au-dessus (1,01:1) et la couture disparaîtrait. */}
+      <FaqSection
+        tone="blueDeep"
+        title="Avant de visiter nos"
+        titleAccent="espaces"
+        description="Une question qui n'est pas là ? Écrivez-nous, nous répondons à chacune."
+        items={FAQ_GALERIE}
+        ctaLabel="Poser votre question"
+        ctaHref="/contact"
+      />
 
       <NextStepSection
         eyebrow="Prochaine étape"

@@ -6,6 +6,8 @@ import { ArrowLeft, Calendar } from "lucide-react";
 
 import { ActualitesCtaSection } from "@/components/actualites/ActualitesCtaSection";
 import { ArticlePartageRow } from "@/components/actualites/ArticlePartageRow";
+import { FaqSection } from "@/components/common/FaqSection";
+import { FAQ_ARTICLE } from "@/lib/data/faq";
 import { MethodeCloud } from "@/components/methode/MethodeCloud";
 import {
   ARTICLES,
@@ -260,6 +262,22 @@ export default function ArticlePage({ params }: PageProps) {
           ))}
         </div>
       </section>
+
+      {/* Bleu très pâle : c'est le registre calme de la page (l'encadré « À
+          retenir » du corps d'article est en bleu-100), et c'est la seule
+          valeur claire qui se détache à la fois du crème-200 au-dessus et du
+          jaune de la CTA en dessous. Bouton encre, la CTA suivante étant
+          corail. */}
+      <FaqSection
+        tone="blueLight"
+        button="night"
+        title="Après cette"
+        titleAccent="lecture"
+        description="Une question qui n'est pas là ? Écrivez-nous, nous répondons à chacune."
+        items={FAQ_ARTICLE}
+        ctaLabel="Poser votre question"
+        ctaHref="/contact"
+      />
 
       <ActualitesCtaSection />
     </div>

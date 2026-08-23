@@ -176,7 +176,9 @@ export const ContactMainSection: React.FC = () => {
         </div>
 
         {/* ---------- Right: the form ---------- */}
-        <div className="col-span-12 lg:col-start-7 lg:col-span-5">
+        {/* `id` is the anchor the FAQ at the foot of the page sends the reader
+            back to — it has no CTA section of its own to hand off to. */}
+        <div id="formulaire" className="col-span-12 scroll-mt-28 lg:col-start-7 lg:col-span-5">
           <form
             onSubmit={handleSubmit(onSubmit)}
             noValidate
