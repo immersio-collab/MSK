@@ -1,7 +1,9 @@
 "use client";
 
+import { MorphButton } from "@/components/motion/MorphButton";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Mail, Phone, MapPin, Clock, HeartHandshake } from "lucide-react";
 
 import { SCHOOL_INFO } from "@/lib/data/site-content";
 
@@ -27,7 +29,7 @@ type FormData = {
 
 /** Shared between every input, select and textarea. */
 const FIELD =
-  "w-full rounded-lg bg-[#eef9f8] px-4 py-3 text-[1.1rem] font-medium leading-[120%] tracking-[-0.02em] text-msk-night-900 placeholder:text-msk-night-700/50 focus:outline-none focus:ring-2 focus:ring-[#cff2f1]";
+  "w-full rounded-lg border border-[#b2e5e1] bg-[#eef9f8] px-4 py-3 text-[1.1rem] font-medium leading-[120%] tracking-[-0.02em] text-msk-night-900 placeholder:text-msk-night-700/50 transition-colors focus:border-[#2668fd] focus:outline-none focus:ring-2 focus:ring-[#cff2f1]";
 
 const LABEL =
   "mb-2 block text-[1.1rem] font-medium leading-[120%] tracking-[-0.02em] text-msk-night-900";
@@ -84,30 +86,92 @@ export const ContactMainSection: React.FC = () => {
     // Gutter trimmed from the reference's 3.125rem so the panel runs a little
     // wider. Mobile keeps its own padding.
     <div className="relative z-20 -mt-8 w-full bg-transparent px-5 pb-[4.1875rem] lg:-mt-12 lg:px-[2rem]">
-      <div className="relative grid grid-cols-12 gap-5 rounded-[0.625rem] bg-white px-5 py-[1.5625rem] lg:px-0 lg:py-30">
+      <div className="relative grid grid-cols-12 gap-5 rounded-[0.625rem] bg-white px-5 py-[1.5625rem] lg:px-0 lg:py-20">
         {/* ---------- Left: invitation and coordinates ---------- */}
-        <div className="col-span-12 flex flex-col items-start gap-5 max-lg:mb-10 lg:col-start-2 lg:col-span-4 lg:pr-5">
-          <p className="text-[1.5625rem] font-bold leading-[105%] tracking-[-0.02em] text-msk-night-900 lg:text-[2.1875rem]">
-            Une question, un doute, ou simplement l&apos;envie d&apos;en parler ?
-            Nous sommes là. Sans pression. Juste des gens qui écoutent.
-          </p>
+        <div className="col-span-12 flex flex-col justify-between max-lg:mb-12 lg:col-start-2 lg:col-span-4 lg:pr-6">
+          <div className="space-y-8">
+            {/* Header Badge & Title */}
+            <div className="space-y-3">
+              <span className="inline-flex items-center gap-2 rounded-full border border-msk-coral-200 bg-msk-coral-50 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-msk-coral-600">
+                <HeartHandshake className="h-3.5 w-3.5" />
+                À votre écoute
+              </span>
+              <h2 className="font-heading text-2xl font-bold leading-tight tracking-tight text-msk-night-900 lg:text-3xl">
+                Une question, un doute, ou simplement l&apos;envie d&apos;en parler ?
+              </h2>
+              <p className="text-base font-medium text-slate-600 leading-relaxed">
+                Nous sommes là. Sans pression. Juste des gens qui écoutent.
+              </p>
+            </div>
 
-          <div className="flex flex-col text-[1.0625rem] font-medium leading-[120%] tracking-[-0.02em] text-msk-night-800 lg:text-[1.25rem]">
-            <a href={`mailto:${SCHOOL_INFO.email}`} className="hover:underline">
-              {SCHOOL_INFO.email}
-            </a>
-            <a
-              href={`tel:${SCHOOL_INFO.phone.replace(/\s/g, "")}`}
-              className="hover:underline"
-            >
-              {SCHOOL_INFO.phone}
-            </a>
-            <p>{SCHOOL_INFO.address}</p>
-          </div>
+            {/* Contact Information List */}
+            <div className="space-y-4">
+              {/* Email Card */}
+              <div className="flex items-center gap-4 rounded-2xl border border-msk-cream-200 bg-[#fbfdfd] p-4 transition-all hover:border-msk-blue-300 hover:bg-white hover:shadow-sm">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-msk-blue-50 text-msk-blue-700 border border-msk-blue-100">
+                  <Mail className="h-5 w-5" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    Adresse Email
+                  </p>
+                  <a
+                    href={`mailto:${SCHOOL_INFO.email}`}
+                    className="block truncate text-base font-semibold text-msk-night-900 hover:text-msk-blue-700 transition-colors"
+                  >
+                    {SCHOOL_INFO.email}
+                  </a>
+                </div>
+              </div>
 
-          <div className="text-[1.0625rem] font-medium leading-[120%] tracking-[-0.02em] text-msk-night-800 lg:text-[1.25rem]">
-            <p>Horaires</p>
-            <p>{SCHOOL_INFO.hours}</p>
+              {/* Phone Card */}
+              <div className="flex items-center gap-4 rounded-2xl border border-msk-cream-200 bg-[#fbfdfd] p-4 transition-all hover:border-msk-coral-300 hover:bg-white hover:shadow-sm">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-msk-coral-50 text-msk-coral-600 border border-msk-coral-100">
+                  <Phone className="h-5 w-5" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    Téléphone
+                  </p>
+                  <a
+                    href={`tel:${SCHOOL_INFO.phone.replace(/\s/g, "")}`}
+                    className="block text-base font-semibold text-msk-night-900 hover:text-msk-coral-600 transition-colors"
+                  >
+                    {SCHOOL_INFO.phone}
+                  </a>
+                </div>
+              </div>
+
+              {/* Address Card */}
+              <div className="flex items-center gap-4 rounded-2xl border border-msk-cream-200 bg-[#fbfdfd] p-4 transition-all hover:border-msk-sun-300 hover:bg-white hover:shadow-sm">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-msk-sun-50 text-msk-sun-600 border border-msk-sun-100">
+                  <MapPin className="h-5 w-5" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    Adresse
+                  </p>
+                  <p className="text-base font-semibold text-msk-night-900">
+                    {SCHOOL_INFO.address}
+                  </p>
+                </div>
+              </div>
+
+              {/* Opening Hours Card */}
+              <div className="flex items-center gap-4 rounded-2xl border border-msk-cream-200 bg-[#fbfdfd] p-4 transition-all hover:border-slate-300 hover:bg-white hover:shadow-sm">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-700 border border-slate-200">
+                  <Clock className="h-5 w-5" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    Horaires d&apos;ouverture
+                  </p>
+                  <p className="text-base font-semibold text-msk-night-900">
+                    {SCHOOL_INFO.hours}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -211,10 +275,15 @@ export const ContactMainSection: React.FC = () => {
               </label>
               <textarea
                 id="message"
-                rows={8}
-                className={`${FIELD} min-h-[22rem] resize-none`}
+                rows={3}
+                className={`${FIELD} min-h-[7.5rem] resize-y overflow-hidden transition-[height] duration-150`}
                 aria-invalid={!!errors.message}
                 {...register("message", { required: true })}
+                onInput={(e) => {
+                  const target = e.currentTarget;
+                  target.style.height = "auto";
+                  target.style.height = `${Math.max(120, target.scrollHeight)}px`;
+                }}
               />
             </div>
 
@@ -233,12 +302,13 @@ export const ContactMainSection: React.FC = () => {
             </div>
 
             <div className="col-span-2 mt-5 flex items-center gap-5">
-              <button
+              <MorphButton
                 type="submit"
-                className="flex h-[3.625rem] items-center justify-center rounded-[3.125rem] bg-[#2668fd] px-7 text-[1.0625rem] font-medium leading-[120%] tracking-[-0.02em] text-white transition-transform hover:scale-105 lg:text-[1.25rem]"
+                className="h-[3.625rem] px-7 text-[1.0625rem] font-medium leading-[120%] tracking-[-0.02em] text-white lg:text-[1.25rem]"
+                fillClassName="bg-[#2668fd]"
               >
                 Envoyer
-              </button>
+              </MorphButton>
 
               {isSuccess ? (
                 <p

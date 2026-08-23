@@ -2,10 +2,9 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { MagneticButton } from "@/components/motion/MagneticButton";
+import { MorphButton } from "@/components/motion/MorphButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -112,18 +111,22 @@ export const TroublesQuizSection: React.FC = () => {
                 </h3>
                 
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
-                  <button
+                  <MorphButton
                     onClick={() => handleAnswer(true)}
-                    className="px-8 py-4 rounded-xl bg-[#FAF8F5] border-2 border-msk-cream-300 hover:border-msk-coral-400 hover:bg-msk-coral-50 text-msk-night-900 font-bold transition-all text-lg"
+                    maxDiameter="13rem"
+                    className="text-lg font-bold text-msk-night-900"
+                    fillClassName="bg-[#FAF8F5] border-2 border-msk-cream-300 group-hover:border-msk-coral-400 group-hover:bg-msk-coral-50"
                   >
                     Oui, tout à fait
-                  </button>
-                  <button
+                  </MorphButton>
+                  <MorphButton
                     onClick={() => handleAnswer(false)}
-                    className="px-8 py-4 rounded-xl bg-[#FAF8F5] border-2 border-msk-cream-300 hover:border-msk-cream-300 hover:bg-gray-50 text-msk-night-900 font-bold transition-all text-lg"
+                    maxDiameter="13rem"
+                    className="text-lg font-bold text-msk-night-900"
+                    fillClassName="bg-[#FAF8F5] border-2 border-msk-cream-300 group-hover:bg-gray-50"
                   >
                     Non / Pas vraiment
-                  </button>
+                  </MorphButton>
                 </div>
               </motion.div>
             ) : (
@@ -148,11 +151,13 @@ export const TroublesQuizSection: React.FC = () => {
                     : "Même si ces signes ne sont pas évidents, une évaluation professionnelle peut parfois révéler des besoins spécifiques."}
                 </p>
                 <div className="flex justify-center">
-                  <Link href="/contact">
-                    <MagneticButton className="bg-msk-night-900 text-white px-8 py-4 rounded-full font-bold shadow-lg hover:bg-msk-night-800 transition-colors">
-                      Prendre RDV pour un bilan gratuit
-                    </MagneticButton>
-                  </Link>
+                  <MorphButton
+                    href="/contact"
+                    className="font-bold text-white"
+                    fillClassName="bg-msk-night-900 shadow-lg group-hover:bg-msk-night-800"
+                  >
+                    Prendre RDV pour un bilan gratuit
+                  </MorphButton>
                 </div>
                 <button 
                   onClick={() => {

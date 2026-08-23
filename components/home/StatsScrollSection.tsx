@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { CornerDownRight } from "lucide-react";
+import { MorphButton } from "@/components/motion/MorphButton";
 
 import { FadeUp } from "@/components/motion/FadeUp";
 import { useScrollStepIndex } from "@/hooks/use-scroll-step-index";
@@ -191,13 +191,15 @@ export const StatsScrollSection = () => {
                   </div>
                 </div>
 
-                <Link
+                <MorphButton
                   href={STATS[active].href}
-                  className="mt-8 inline-flex w-fit items-center gap-2.5 rounded-2xl bg-msk-night-900 px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-msk-night-900/15 transition-colors hover:bg-msk-night-800"
+                  size="sm"
+                  className="mt-8 w-fit text-sm font-bold text-white"
+                  fillClassName="bg-msk-night-900 shadow-lg shadow-msk-night-900/15 group-hover:bg-msk-night-800"
                 >
                   <CornerDownRight className="h-4 w-4" aria-hidden />
                   En savoir plus
-                </Link>
+                </MorphButton>
               </div>
             </div>
           </div>
@@ -220,13 +222,15 @@ export const StatsScrollSection = () => {
                   <p className="mt-3 flex-1 text-base text-slate-600 leading-relaxed">
                     {stat.description}
                   </p>
-                  <Link
+                  <MorphButton
                     href={stat.href}
-                    className="mt-6 inline-flex w-fit items-center gap-2.5 rounded-2xl bg-msk-night-900 px-5 py-3.5 text-sm font-bold text-white transition-colors hover:bg-msk-night-800"
+                    size="sm"
+                    className="mt-6 w-fit text-sm font-bold text-white"
+                    fillClassName="bg-msk-night-900 group-hover:bg-msk-night-800"
                   >
                     <CornerDownRight className="h-4 w-4" aria-hidden />
                     En savoir plus
-                  </Link>
+                  </MorphButton>
                 </div>
               </div>
             </FadeUp>

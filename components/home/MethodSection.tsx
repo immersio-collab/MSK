@@ -1,10 +1,9 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import { FadeUp } from "@/components/motion/FadeUp";
 import { MethodHoverExpand, MethodStep } from "@/components/home/MethodHoverExpand";
-import { MagneticButton } from "@/components/motion/MagneticButton";
+import { MorphButton } from "@/components/motion/MorphButton";
 
 const METHOD_STEPS: MethodStep[] = [
   {
@@ -94,14 +93,13 @@ export const MethodSection: React.FC = () => {
         {/* CTA Button */}
         <FadeUp delay={0.4} duration={0.5}>
           <div className="mt-12 md:mt-16 flex justify-center">
-            <Link href="/notre-centre/la-methode">
-              <MagneticButton
-                className="bg-msk-night-900 hover:bg-msk-night-800 text-white font-bold text-sm tracking-wider uppercase rounded-2xl shadow-lg shadow-msk-night-900/20 border-0 px-8 py-4"
-                size="lg"
-              >
-                En savoir plus sur notre méthode
-              </MagneticButton>
-            </Link>
+            <MorphButton
+              href="/notre-centre/la-methode"
+              className="text-sm font-bold uppercase tracking-wider text-white"
+              fillClassName="bg-msk-night-900 shadow-lg shadow-msk-night-900/20 group-hover:bg-msk-night-800"
+            >
+              En savoir plus sur notre méthode
+            </MorphButton>
           </div>
         </FadeUp>
       </div>

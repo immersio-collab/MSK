@@ -77,7 +77,14 @@ export const ProgrammesSelectorSection: React.FC = () => {
           </div>
         </FadeUp>
 
-        {/* Selector Tabs */}
+        {/*
+          Selector Tabs — the one place that deliberately keeps its own button
+          instead of `MorphButton`. The active tab is marked by a shared-layout
+          `motion.div` that slides between tabs, and it is absolutely positioned
+          inside the button: MorphButton's own absolute fill would sit under a
+          rectangle that never morphs, so the two indicators fight. Tabs are a
+          selection, not an action, and the slide reads better here.
+        */}
         <div className="flex flex-col justify-center gap-2 md:flex-row mb-12">
           {programs.map((prog) => (
             <button

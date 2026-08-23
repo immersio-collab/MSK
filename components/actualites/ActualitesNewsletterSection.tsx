@@ -1,5 +1,6 @@
 "use client";
 
+import { MorphButton } from "@/components/motion/MorphButton";
 import React from "react";
 import { Send, BookOpen } from "lucide-react";
 
@@ -38,13 +39,14 @@ export const ActualitesNewsletterSection: React.FC = () => {
                 className="grow bg-[#FAF8F5] border-2 border-transparent rounded-xl px-5 py-4 text-msk-night-900 focus:outline-hidden focus:border-msk-coral-400 focus:bg-white transition-all"
                 required
               />
-              <button 
+              <MorphButton
                 type="submit"
-                className="group inline-flex items-center justify-center gap-2 bg-msk-night-950 hover:bg-msk-night-800 text-white font-bold py-4 px-8 rounded-xl transition-all shadow-md shrink-0"
+                className="shrink-0 font-bold text-white"
+                fillClassName="bg-msk-night-950 shadow-md group-hover:bg-msk-night-800"
               >
                 S'inscrire
                 <Send className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </button>
+              </MorphButton>
             </form>
             <p className="text-xs text-slate-500 mt-4">
               En vous inscrivant, vous acceptez notre politique de confidentialité. Pas de spam, promis.

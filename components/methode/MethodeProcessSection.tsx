@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { MorphButton } from "@/components/motion/MorphButton";
 
 import { FadeUp } from "@/components/motion/FadeUp";
 
@@ -39,18 +39,20 @@ export const MethodeProcessSection = () => {
     <section className="w-full bg-msk-cream-200 pb-24 md:pb-32">
       <div className="mx-auto w-full max-w-7xl px-6 sm:px-10">
         <div className="grid grid-cols-1 gap-12 rounded-[2rem] bg-white px-8 py-14 md:px-14 md:py-20 lg:grid-cols-2 lg:gap-20">
-          <FadeUp>
+          <FadeUp className="flex h-full flex-col justify-center">
             <div>
               <h2 className="max-w-md font-display text-3xl font-bold leading-[1.1] text-msk-night-900 md:text-4xl">
                 Nous savons que c&apos;est un grand pas. Nous l&apos;avons rendu
                 aussi simple que possible.
               </h2>
-              <Link
+              <MorphButton
                 href="/contact"
-                className="mt-8 inline-flex rounded-full bg-msk-blue-700 px-7 py-3.5 font-display text-sm font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-msk-blue-800"
+                size="sm"
+                className="mt-8 px-7 font-display text-sm font-semibold uppercase tracking-[0.14em] text-white"
+                fillClassName="bg-msk-blue-700 group-hover:bg-msk-blue-800"
               >
                 Commencer
-              </Link>
+              </MorphButton>
             </div>
           </FadeUp>
 

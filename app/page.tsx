@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import dynamic from "next/dynamic";
 import { WordPullUp } from "@/components/motion/WordPullUp";
 import { FadeUp } from "@/components/motion/FadeUp";
-import { MagneticButton } from "@/components/motion/MagneticButton";
+import { MorphButton } from "@/components/motion/MorphButton";
 import { MethodSection } from "@/components/home/MethodSection";
 import { ParentFAQSection } from "@/components/home/ParentFAQSection";
 import { ScrollStrokePath } from "@/components/motion/ScrollStrokePath";
@@ -62,24 +61,22 @@ export default function HomePage() {
               </FadeUp>
 
               <FadeUp delay={0.6}>
-                <div className="flex flex-row items-center gap-0 sm:gap-2 pt-2 -ml-5">
-                  <Link href="/contact" className="shrink-0">
-                    <MagneticButton
-                      className="bg-msk-coral-500 hover:bg-msk-coral-600 text-white font-bold text-sm tracking-wider uppercase rounded-2xl shadow-lg shadow-msk-coral-500/25 border-0"
-                      size="lg"
-                    >
-                      Prendre rendez-vous
-                    </MagneticButton>
-                  </Link>
+                <div className="flex flex-row items-center gap-3 pt-2 sm:gap-4">
+                  <MorphButton
+                    href="/contact"
+                    className="shrink-0 text-sm font-bold uppercase tracking-wider text-white"
+                    fillClassName="bg-msk-coral-500 shadow-lg shadow-msk-coral-500/25 group-hover:bg-msk-coral-600"
+                  >
+                    Prendre rendez-vous
+                  </MorphButton>
 
-                  <a href="#methode" className="shrink-0">
-                    <MagneticButton
-                      className="bg-white hover:bg-slate-50 border-2 border-slate-200 text-slate-700 font-bold text-sm tracking-wider uppercase rounded-2xl shadow-md"
-                      size="lg"
-                    >
-                      Découvrir notre méthode
-                    </MagneticButton>
-                  </a>
+                  <MorphButton
+                    href="#methode"
+                    className="shrink-0 text-sm font-bold uppercase tracking-wider text-slate-700"
+                    fillClassName="border-2 border-slate-200 bg-white shadow-md group-hover:bg-slate-50"
+                  >
+                    Découvrir notre méthode
+                  </MorphButton>
                 </div>
               </FadeUp>
             </div>

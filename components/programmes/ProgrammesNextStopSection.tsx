@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { MorphButton } from "@/components/motion/MorphButton";
 
 import { MethodeCloud } from "@/components/methode/MethodeCloud";
 import { FadeUp } from "@/components/motion/FadeUp";
@@ -50,12 +50,13 @@ export const ProgrammesNextStopSection = () => {
             échange, bilan d&apos;évaluation, programme sur-mesure.
           </p>
 
-          <Link
+          <MorphButton
             href="/admissions"
-            className="mt-10 inline-flex rounded-full bg-white px-8 py-4 font-display text-sm font-semibold uppercase tracking-[0.14em] text-msk-coral-800 transition-transform hover:scale-105"
+            className="mt-10 font-display text-sm font-semibold uppercase tracking-[0.14em] text-msk-coral-800"
+            fillClassName="bg-white"
           >
             Voir les admissions
-          </Link>
+          </MorphButton>
         </FadeUp>
 
         <img

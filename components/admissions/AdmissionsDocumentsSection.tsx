@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { MorphButton } from "@/components/motion/MorphButton";
 
 import { FadeUp } from "@/components/motion/FadeUp";
 
@@ -54,12 +54,14 @@ export const AdmissionsDocumentsSection = () => {
                 Rien de tout cela n&apos;est bloquant. Si une pièce vous manque,
                 nous commençons quand même et nous vous aidons à la réunir.
               </p>
-              <Link
+              <MorphButton
                 href="/contact"
-                className="mt-8 inline-flex rounded-full bg-msk-blue-700 px-7 py-3.5 font-display text-sm font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-msk-blue-800"
+                size="sm"
+                className="mt-8 px-7 font-display text-sm font-semibold uppercase tracking-[0.14em] text-white"
+                fillClassName="bg-msk-blue-700 group-hover:bg-msk-blue-800"
               >
                 Demander la liste
-              </Link>
+              </MorphButton>
             </div>
           </FadeUp>
 

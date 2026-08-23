@@ -9,6 +9,7 @@ import "swiper/css/effect-cards";
 import "swiper/css/pagination";
 import { Star, Quote, Play, Pause } from "lucide-react";
 import { FadeUp } from "@/components/motion/FadeUp";
+import { MorphButton } from "@/components/motion/MorphButton";
 
 const TESTIMONIALS = [
   {
@@ -61,15 +62,16 @@ const AudioPlayer = ({ src }: { src: string }) => {
   };
 
   return (
-    <button 
-      onClick={togglePlay} 
-      className="flex items-center gap-2 px-3 py-1.5 bg-msk-cream-100 hover:bg-msk-cream-200 text-msk-night-800 rounded-full text-xs font-bold transition-colors shadow-xs border border-msk-cream-200"
+    <MorphButton
+      onClick={togglePlay}
+      className="h-8 px-3 text-xs font-bold text-msk-night-800"
+      fillClassName="border border-msk-cream-200 bg-msk-cream-100 shadow-xs group-hover:bg-msk-cream-200"
       aria-label="Écouter le témoignage"
     >
       {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
       <span>{isPlaying ? "Pause" : "Écouter l'audio"}</span>
       <audio ref={audioRef} src={src} onEnded={() => setIsPlaying(false)} />
-    </button>
+    </MorphButton>
   );
 };
 

@@ -18,6 +18,7 @@ import {
   type GalerieCategorie,
 } from "@/components/galerie/galerie-content";
 import { GalerieTitreAnime } from "@/components/galerie/GalerieTitreAnime";
+import { MorphButton } from "@/components/motion/MorphButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -120,19 +121,21 @@ export const GalerieGridSection = () => {
           {CATEGORIES.map((cat) => {
             const actif = filtre === cat.cle;
             return (
-              <button
+              <MorphButton
                 key={cat.cle}
-                type="button"
                 aria-pressed={actif}
                 onClick={() => setFiltre(cat.cle)}
-                className={`rounded-full border-2 px-5 py-2.5 font-display text-[13px] font-semibold uppercase tracking-wider transition-colors ${
-                  actif
-                    ? "border-msk-night-900 bg-msk-night-900 text-white"
-                    : "border-msk-cream-300 bg-white text-msk-night-800 hover:border-msk-coral-400"
+                className={`h-10 px-5 font-display text-[13px] font-semibold uppercase tracking-wider ${
+                  actif ? "text-white" : "text-msk-night-800"
                 }`}
+                fillClassName={
+                  actif
+                    ? "border-2 border-msk-night-900 bg-msk-night-900"
+                    : "border-2 border-msk-cream-300 bg-white group-hover:border-msk-coral-400"
+                }
               >
                 {cat.label}
-              </button>
+              </MorphButton>
             );
           })}
         </div>

@@ -157,14 +157,14 @@ export const ScrollCardDeck = ({
               motion="rise"
               shape="b"
               cycles={steps.length}
-              className="absolute left-[8%] top-1/2 w-44 text-white xl:w-60"
+              className="absolute left-[8%] top-1/2 w-44 text-white drop-shadow-md xl:w-60"
             />
             <MethodeCloud
               motion="rise"
               shape="a"
               cycles={steps.length}
               phase={0.45}
-              className="absolute right-[7%] top-1/2 w-40 text-white xl:w-56"
+              className="absolute right-[7%] top-1/2 w-40 text-white drop-shadow-md xl:w-56"
             />
           </div>
 

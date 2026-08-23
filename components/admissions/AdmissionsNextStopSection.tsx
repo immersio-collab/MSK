@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { MorphButton } from "@/components/motion/MorphButton";
 
 import { MethodeAssetSlot } from "@/components/methode/MethodeAssetSlot";
 import { MethodeCloud } from "@/components/methode/MethodeCloud";
@@ -44,12 +44,13 @@ export const AdmissionsNextStopSection = () => {
             ce qui se passe une fois votre enfant accueilli.
           </p>
 
-          <Link
+          <MorphButton
             href="/notre-centre/la-methode"
-            className="mt-10 inline-flex rounded-full bg-white px-8 py-4 font-display text-sm font-semibold uppercase tracking-[0.14em] text-msk-coral-700 transition-transform hover:scale-105"
+            className="mt-10 font-display text-sm font-semibold uppercase tracking-[0.14em] text-msk-coral-700"
+            fillClassName="bg-white"
           >
             Découvrir
-          </Link>
+          </MorphButton>
         </FadeUp>
 
         <MethodeAssetSlot

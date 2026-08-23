@@ -34,17 +34,17 @@ export const MethodeKineticBanner = ({
   ];
 
   const track = (
-    <ul className="flex shrink-0 items-center gap-8 pr-8 md:gap-14 md:pr-14">
+    <ul className="flex shrink-0 items-center gap-6 pr-6 md:gap-10 md:pr-10">
       {words.map((word, index) => (
-        <li key={word} className="flex items-center gap-8 md:gap-14">
+        <li key={word} className="flex items-center gap-6 md:gap-10">
           <span
-            className={`font-display text-5xl font-bold uppercase leading-none tracking-tight md:text-7xl lg:text-8xl ${tone[index % tone.length]}`}
+            className={`font-display text-3xl font-bold uppercase leading-none tracking-tight md:text-5xl lg:text-6xl ${tone[index % tone.length]}`}
           >
             {word}
           </span>
           <span
             aria-hidden
-            className="h-3 w-3 shrink-0 rounded-full bg-msk-cream-300 md:h-4 md:w-4"
+            className="h-2 w-2 shrink-0 rounded-full bg-msk-cream-300 md:h-2.5 md:w-2.5"
           />
         </li>
       ))}
@@ -52,7 +52,7 @@ export const MethodeKineticBanner = ({
   );
 
   return (
-    <section className="w-full overflow-hidden bg-msk-night-950 py-14 md:py-20">
+    <section className="w-full overflow-hidden bg-msk-night-800 py-8 md:py-12">
       {/* The slogan is announced once here; both marquee tracks are decorative,
           so the repeated words are not read out twice. */}
       <h2 className="sr-only">{text}</h2>
