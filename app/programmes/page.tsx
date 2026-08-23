@@ -5,7 +5,7 @@ import { ProgrammesSelectorSection } from "@/components/programmes/ProgrammesSel
 import { ProgrammesMediaBand } from "@/components/programmes/ProgrammesMediaBand";
 import { ProgrammesStatementSection } from "@/components/programmes/ProgrammesStatementSection";
 import { ProgrammesTableSection } from "@/components/programmes/ProgrammesTableSection";
-import { ProgrammesNextStopSection } from "@/components/programmes/ProgrammesNextStopSection";
+import { NextStepSection } from "@/components/common/NextStepSection";
 
 export const metadata: Metadata = {
   title: "Programmes & Classes | MSK Montessori School Casablanca",
@@ -17,7 +17,6 @@ export default function ProgrammesPage() {
     <div className="flex flex-col min-h-screen">
       {/* Bande de couleur inclinée + nuages SVG flottants + carte-titre */}
       <ProgrammesHeroSection />
-
 
       {/* Onglets de sélection du programme (Maternelle / Primaire) */}
       <ProgrammesSelectorSection />
@@ -32,9 +31,19 @@ export default function ProgrammesPage() {
       <ProgrammesTableSection />
 
       {/* Hand-off vers la page Admissions */}
-      <ProgrammesNextStopSection />
-
-      {/* CTA final partagé */}
+      <NextStepSection
+        eyebrow="Prochaine étape"
+        title="Admissions"
+        description="Découvrez le processus d'admission en 3 étapes : premier échange, bilan d'évaluation, programme sur-mesure."
+        buttonText="Voir les admissions"
+        buttonHref="/admissions"
+        svgSrc="/Children holding letters.svg"
+        bgColor="bg-msk-coral-700"
+        cloudColor="text-msk-coral-900"
+        textColor="text-msk-coral-100"
+        buttonTextColor="text-msk-coral-800"
+        eyebrowColor="text-msk-sun-300"
+      />
     </div>
   );
 }

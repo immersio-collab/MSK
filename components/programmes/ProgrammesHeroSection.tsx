@@ -1,10 +1,14 @@
 "use client";
 
+import React, { useEffect, useRef } from "react";
 import { ChevronDown } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { MethodeCloud } from "@/components/methode/MethodeCloud";
 import { FadeUp } from "@/components/motion/FadeUp";
-import { MethodeAssetSlot } from "@/components/methode/MethodeAssetSlot";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /**
  * Hero de la page Programmes — même grammaire visuelle que MethodeHeroSection :
@@ -12,16 +16,39 @@ import { MethodeAssetSlot } from "@/components/methode/MethodeAssetSlot";
  *
  * Différences intentionnelles par rapport à la méthode :
  * - Bande de fond : msk-blue-700 (vs msk-sun-400) pour distinguer les deux pages
- * - Carte-titre : bg-msk-coral-600 → bg-msk-blue-800
+ * - Carte-titre : bg-msk-blue-800
  * - Eyebrow pill : "Programmes & Classes"
  */
 export const ProgrammesHeroSection = () => {
+  const root = useRef<HTMLElement>(null);
+  const kid = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return;
+
+    const ctx = gsap.context(() => {
+      const scrub = {
+        trigger: el,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      } as const;
+
+      if (kid.current) {
+        gsap.to(kid.current, { yPercent: 120, ease: "none", scrollTrigger: scrub });
+      }
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="relative w-full bg-msk-cream-100 pb-24 pt-24 md:pb-32">
+    <section ref={root} className="relative flex h-[100dvh] w-full flex-col justify-center bg-msk-cream-100 overflow-hidden">
       {/* Colour band inclinée — même clip-path que la méthode. */}
       <div
         aria-hidden
-        className="absolute inset-x-0 top-0 h-[58%] bg-msk-blue-700"
+        className="absolute inset-x-0 top-0 h-[75%] bg-msk-blue-700"
         style={{ clipPath: "polygon(0 0, 100% 0, 100% 72%, 0 100%)" }}
       />
 
@@ -50,27 +77,27 @@ export const ProgrammesHeroSection = () => {
         />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 sm:px-10">
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 sm:px-10 mt-12 md:mt-20">
         <img
+          ref={kid}
           src="/kids playing - kidcare.svg"
           alt="Illustration enfants qui jouent"
-          className="mx-auto h-auto w-full max-w-3xl md:h-80 object-contain"
+          className="mx-auto h-auto w-full max-w-xl md:h-64 object-contain scale-105 md:scale-110 translate-y-6 origin-bottom relative z-10 pointer-events-none"
         />
 
         {/* Carte-titre overlapping la bande inférieure. */}
         <FadeUp delay={0.1}>
-          <div className="mx-auto mt-16 max-w-2xl rounded-[1.75rem] bg-msk-blue-800 px-8 py-10 text-center shadow-2xl md:px-12">
+          <div className="mx-auto mt-4 max-w-2xl rounded-[1.75rem] bg-msk-blue-800 px-8 py-10 text-center shadow-2xl md:px-12">
             <span className="inline-block rounded-full bg-white/15 px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-sun-300">
               Programmes &amp; Classes
             </span>
 
             <h1 className="mt-6 font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-white sm:text-5xl md:text-6xl">
-              Un programme adapté à chaque âge, à chaque besoin
+              Un programme pour chaque âge
             </h1>
 
             <p className="mx-auto mt-6 max-w-md text-base font-medium leading-snug text-msk-blue-100 md:text-lg">
-              De 2 ans à l&apos;âge adulte, une pédagogie sur-mesure et
-              bienveillante pour chaque étape du développement.
+              De 2 ans à l&apos;âge adulte, un apprentissage sur-mesure.
             </p>
 
             <a

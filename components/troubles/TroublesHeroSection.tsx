@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import { ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -145,8 +146,7 @@ export const TroublesHeroSection: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-5xl md:text-6xl"
           >
-            Nous comprenons ce que{" "}
-            <span className="text-msk-coral-700">traverse votre enfant.</span>
+            Nous comprenons <span className="text-msk-coral-700">votre enfant.</span>
           </motion.h1>
 
           <motion.span
@@ -162,13 +162,21 @@ export const TroublesHeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mx-auto mt-6 max-w-3xl text-base font-medium leading-snug text-msk-night-800 md:text-lg"
+          className="mx-auto mt-6 max-w-xl text-base font-medium leading-snug text-msk-night-800 md:text-lg"
         >
-          MSK accompagne les enfants de la maternelle et du primaire avec des
-          difficultés d&apos;apprentissage, de langage, de comportement et de
-          développement. Un cadre bienveillant, une méthode adaptée et une équipe
-          dévouée.
+          Un accompagnement sur-mesure pour les enfants avec des difficultés d&apos;apprentissage, de langage ou de développement.
         </motion.p>
+
+        <motion.a
+          href="#troubles"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          aria-label="Aller aux troubles"
+          className="mx-auto mt-8 flex h-11 w-11 items-center justify-center rounded-full border-2 border-msk-night-900/20 text-msk-night-800 transition-colors hover:bg-msk-night-900 hover:text-white"
+        >
+          <ChevronDown className="h-5 w-5" aria-hidden />
+        </motion.a>
         </div>
       </div>
     </section>
