@@ -35,20 +35,20 @@ export const AccueilNeuroGym = () => {
 
             <div className="absolute inset-0 flex items-end p-8 sm:p-12 lg:p-16">
               <div className="max-w-2xl">
-                <span className="inline-block rounded-[0.4rem] bg-msk-sun-300 px-3 py-1.5 font-condensed text-sm uppercase tracking-wide text-msk-night-950">
+                <span className="inline-block rounded-[0.4rem] bg-msk-sun-300 px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950">
                   Unique au Maroc
                 </span>
-                <h2 className="mt-5 font-condensed text-[2.25rem] uppercase leading-[0.9] text-white sm:text-[3rem] lg:text-[3.75rem]">
+                <h2 className="mt-5 font-display text-[1.625rem] font-bold uppercase leading-[1.05] text-white sm:text-[2rem] lg:text-[2.5rem]">
                   La Neuro-Gym : quand le corps libère l&apos;esprit
                 </h2>
-                <p className="mt-5 max-w-xl font-body text-base leading-relaxed text-white/90 md:text-lg">
+                <p className="mt-5 max-w-xl text-base leading-relaxed text-white/90 md:text-lg">
                   Des exercices ciblés de coordination neuro-motrice qui
                   améliorent l&apos;attention, la mémoire et la régulation
                   émotionnelle.
                 </p>
                 <Link
                   href="/notre-centre/la-methode"
-                  className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 font-body text-sm font-semibold text-msk-night-950 transition-colors hover:bg-msk-cream-200"
+                  className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-msk-night-950 transition-colors hover:bg-msk-cream-200"
                 >
                   Voir la méthode
                   <ArrowRight className="h-4 w-4" aria-hidden />

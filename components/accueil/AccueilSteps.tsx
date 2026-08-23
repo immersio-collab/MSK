@@ -87,13 +87,13 @@ export const AccueilSteps = () => {
       <section className="w-full bg-msk-cream-50 pt-24 md:pt-32">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
           <FadeUp>
-            <span className="inline-block rounded-[0.4rem] bg-msk-sun-200 px-3 py-1.5 font-condensed text-sm uppercase tracking-wide text-msk-night-950">
+            <span className="inline-block rounded-[0.4rem] bg-msk-sun-200 px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950">
               Notre pédagogie
             </span>
-            <h2 className="mt-6 max-w-3xl font-condensed text-[2.75rem] uppercase leading-[0.86] text-msk-night-950 sm:text-[4rem] lg:text-[5rem]">
+            <h2 className="mt-6 max-w-3xl font-display text-[1.875rem] font-bold uppercase leading-[1.05] text-msk-night-950 sm:text-[2.5rem] lg:text-[3rem]">
               La méthode en 6 étapes
             </h2>
-            <p className="mt-6 max-w-xl font-body text-base leading-relaxed text-msk-night-800 md:text-lg">
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-msk-night-800 md:text-lg">
               Un cheminement structuré pour accompagner l&apos;enfant de ses
               premiers blocages jusqu&apos;à son autonomie.
             </p>
@@ -107,13 +107,13 @@ export const AccueilSteps = () => {
             <div className="grid grid-cols-1 items-center gap-10 py-16 md:py-20 lg:grid-cols-2 lg:gap-16">
               <FadeUp>
                 <div>
-                  <span className="inline-block rounded-[0.4rem] bg-white px-3 py-1.5 font-condensed text-sm uppercase tracking-wide text-msk-night-950 shadow-sm">
+                  <span className="inline-block rounded-[0.4rem] bg-white px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950 shadow-sm">
                     Étape {step.number} · {step.verb}
                   </span>
-                  <h3 className="mt-5 max-w-xl font-condensed text-[2.25rem] uppercase leading-[0.9] text-msk-night-950 sm:text-[3rem] lg:text-[3.5rem]">
+                  <h3 className="mt-5 max-w-xl font-display text-[1.625rem] font-bold uppercase leading-[1.05] text-msk-night-950 sm:text-[2rem] lg:text-[2.25rem]">
                     {step.title}
                   </h3>
-                  <p className="mt-6 max-w-lg font-body text-base leading-relaxed text-msk-night-800 md:text-lg">
+                  <p className="mt-6 max-w-lg text-base leading-relaxed text-msk-night-800 md:text-lg">
                     {step.description}
                   </p>
                 </div>

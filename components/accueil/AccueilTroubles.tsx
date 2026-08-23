@@ -45,15 +45,15 @@ const angleAt = (i: number) =>
 
 const Heading = () => (
   <>
-    <span className="inline-block rounded-[0.4rem] bg-msk-blue-200 px-3 py-1.5 font-condensed text-sm uppercase tracking-wide text-msk-night-950">
+    <span className="inline-block rounded-[0.4rem] bg-msk-blue-200 px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950">
       À qui s&apos;adresse MSK ?
     </span>
-    {/* Capped measure: at 5.5rem this line is ~1330px of Anton and the
-        section's overflow-hidden clipped the last word. */}
-    <h2 className="mx-auto mt-6 max-w-[19ch] font-condensed text-[2.75rem] uppercase leading-[0.86] text-msk-night-950 sm:text-[4rem] lg:text-[4.5rem]">
+    {/* Capped measure: unbounded, this line overran the section's
+        overflow-hidden and the last word was clipped. */}
+    <h2 className="mx-auto mt-6 max-w-[19ch] font-display text-[1.875rem] font-bold uppercase leading-[1.05] text-msk-night-950 sm:text-[2.5rem] lg:text-[2.75rem]">
       Chaque âge, chaque profil a sa place
     </h2>
-    <p className="mt-5 font-condensed text-base uppercase leading-tight text-msk-coral-600 sm:text-lg">
+    <p className="mt-5 font-display text-sm font-semibold uppercase leading-snug text-msk-coral-600 sm:text-base">
       Les troubles que nous accompagnons au quotidien
     </p>
   </>
@@ -92,9 +92,7 @@ const CARD_TONES = [
  * drift: the title at the top, the trouble's lucide icon on a white disc
  * centred beneath it, and the one-line description at the foot.
  *
- * Titles stay in the condensed face rather than the rounded one the troubles
- * page uses — every other headline on the home page is Anton, and one rounded
- * card here reads as a stray.
+ * Titles use the same rounded display face as the rest of the site.
  */
 const TroubleCard = ({
   trouble,
@@ -111,8 +109,8 @@ const TroubleCard = ({
   return (
     <>
       <h3
-        className={`font-condensed uppercase leading-[0.95] ${tone.title} ${
-          compact ? "text-[1.5rem]" : "text-[1.15rem] xl:text-[1.35rem]"
+        className={`font-display font-bold uppercase leading-tight ${tone.title} ${
+          compact ? "text-lg" : "text-sm xl:text-base"
         }`}
       >
         {trouble.title}
@@ -132,7 +130,7 @@ const TroubleCard = ({
       </span>
 
       <p
-        className={`font-body leading-snug ${tone.body} ${
+        className={`leading-snug ${tone.body} ${
           compact ? "text-sm" : "text-[0.7rem] xl:text-xs"
         }`}
       >
@@ -147,7 +145,7 @@ const TroublesCta = () => (
   <div className="flex justify-center px-6 pb-24 pt-20 sm:px-10">
     <Link
       href={TROUBLES_HREF}
-      className="inline-flex items-center gap-2 rounded-full bg-msk-night-950 px-7 py-4 font-body text-sm font-semibold text-white transition-colors hover:bg-msk-night-800"
+      className="inline-flex items-center gap-2 rounded-full bg-msk-night-950 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-msk-night-800"
     >
       Voir tous les troubles accompagnés
       <ArrowRight className="h-4 w-4" aria-hidden />
@@ -177,7 +175,7 @@ export const AccueilTroubles = () => {
         // frame has taken its viewport height.
         //
         // A function, not a captured constant, and every trigger below is
-        // `invalidateOnRefresh` — Anton loads after first paint and changes the
+        // `invalidateOnRefresh` — the display face loads after first paint and changes the
         // height of every heading above this section, so the section's document
         // position at mount is not where the reader actually meets it. With the
         // positions frozen at mount the deck stayed at progress 0 on the way

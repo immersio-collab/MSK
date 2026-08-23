@@ -31,19 +31,19 @@ export const AccueilHero = () => {
           {/* ---------- Left: type ---------- */}
           <div>
             <FadeUp>
-              <h1 className="font-condensed text-[3rem] uppercase leading-[0.86] tracking-[-0.01em] text-msk-night-950 sm:text-[4.5rem] lg:text-[5.5rem] xl:text-[6.5rem]">
+              <h1 className="font-display text-[2rem] font-bold uppercase leading-[1.02] tracking-[-0.01em] text-msk-night-950 sm:text-[2.75rem] lg:text-[3.5rem] xl:text-[4rem]">
                 L&apos;école où chaque enfant s&apos;éveille
               </h1>
             </FadeUp>
 
             <FadeUp delay={0.1}>
-              <p className="mt-5 font-condensed text-[1.35rem] uppercase leading-[1.05] text-msk-coral-600 sm:text-[1.75rem] lg:text-[2rem]">
+              <p className="mt-5 font-display text-lg font-semibold uppercase leading-[1.15] text-msk-coral-600 sm:text-xl lg:text-2xl">
                 +200 familles · 15 ans d&apos;expérience · Casablanca
               </p>
             </FadeUp>
 
             <FadeUp delay={0.2}>
-              <p className="mt-8 max-w-lg font-body text-base leading-relaxed text-msk-night-800 md:text-lg">
+              <p className="mt-8 max-w-lg text-base leading-relaxed text-msk-night-800 md:text-lg">
                 Le seul centre thérapeutique et éducatif Montessori au Maroc.
                 Accompagnement sur-mesure pour enfants avec difficultés
                 d&apos;apprentissage, de langage ou de comportement.
@@ -54,14 +54,14 @@ export const AccueilHero = () => {
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-msk-night-950 px-6 py-3.5 font-body text-sm font-semibold text-white transition-colors hover:bg-msk-night-800"
+                  className="inline-flex items-center gap-2 rounded-full bg-msk-night-950 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-msk-night-800"
                 >
                   Prendre rendez-vous
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
                 <Link
                   href="/programmes"
-                  className="inline-flex items-center gap-2 rounded-full border-2 border-msk-night-950 px-6 py-3 font-body text-sm font-semibold text-msk-night-950 transition-colors hover:bg-msk-night-950 hover:text-white"
+                  className="inline-flex items-center gap-2 rounded-full border-2 border-msk-night-950 px-6 py-3 text-sm font-semibold text-msk-night-950 transition-colors hover:bg-msk-night-950 hover:text-white"
                 >
                   Voir les programmes
                   <ArrowRight className="h-4 w-4" aria-hidden />
@@ -97,7 +97,7 @@ export const AccueilHero = () => {
                   className="h-5 w-5 shrink-0 text-msk-coral-600"
                   aria-hidden
                 />
-                <span className="font-condensed text-base uppercase leading-none tracking-wide text-msk-night-950 sm:text-lg">
+                <span className="font-display text-sm font-semibold uppercase leading-tight tracking-wide text-msk-night-950 sm:text-base">
                   {promise}
                 </span>
               </FadeUp>

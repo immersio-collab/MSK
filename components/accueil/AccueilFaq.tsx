@@ -23,13 +23,13 @@ export const AccueilFaq = () => {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <FadeUp>
             <div className="lg:sticky lg:top-28">
-              <span className="inline-block rounded-[0.4rem] bg-msk-blue-200 px-3 py-1.5 font-condensed text-sm uppercase tracking-wide text-msk-night-950">
+              <span className="inline-block rounded-[0.4rem] bg-msk-blue-200 px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950">
                 Vos questions
               </span>
-              <h2 className="mt-6 font-condensed text-[2.5rem] uppercase leading-[0.88] text-msk-night-950 sm:text-[3.25rem] lg:text-[3.75rem]">
+              <h2 className="mt-6 font-display text-[1.75rem] font-bold uppercase leading-[1.05] text-msk-night-950 sm:text-[2.25rem] lg:text-[2.5rem]">
                 Ce que les parents nous demandent
               </h2>
-              <p className="mt-6 max-w-sm font-body text-base leading-relaxed text-msk-night-800">
+              <p className="mt-6 max-w-sm text-base leading-relaxed text-msk-night-800">
                 Une question qui n&apos;est pas là ? Écrivez-nous, nous répondons
                 à chacune.
               </p>
@@ -52,7 +52,7 @@ export const AccueilFaq = () => {
                       aria-expanded={isOpen}
                       className="flex w-full items-start justify-between gap-6 py-6 text-left"
                     >
-                      <span className="font-condensed text-lg uppercase leading-tight text-msk-night-950 sm:text-xl">
+                      <span className="font-display text-base font-bold uppercase leading-tight text-msk-night-950 sm:text-lg">
                         {item.question}
                       </span>
                       <Plus
@@ -74,7 +74,7 @@ export const AccueilFaq = () => {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
-                        <p className="max-w-2xl pb-6 font-body text-base leading-relaxed text-msk-night-800">
+                        <p className="max-w-2xl pb-6 text-base leading-relaxed text-msk-night-800">
                           {item.answer}
                         </p>
                       </motion.div>

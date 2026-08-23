@@ -44,10 +44,10 @@ export const AccueilTemoignages = () => {
     <section className="w-full bg-msk-cream-50 py-24 md:py-32">
       <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
         <FadeUp>
-          <span className="inline-block rounded-[0.4rem] bg-msk-coral-200 px-3 py-1.5 font-condensed text-sm uppercase tracking-wide text-msk-night-950">
+          <span className="inline-block rounded-[0.4rem] bg-msk-coral-200 px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950">
             Paroles de parents
           </span>
-          <h2 className="mt-6 max-w-3xl font-condensed text-[2.5rem] uppercase leading-[0.88] text-msk-night-950 sm:text-[3.5rem] lg:text-[4.25rem]">
+          <h2 className="mt-6 max-w-3xl font-display text-[1.75rem] font-bold uppercase leading-[1.05] text-msk-night-950 sm:text-[2.25rem] lg:text-[2.75rem]">
             Ce que les familles racontent
           </h2>
         </FadeUp>
@@ -60,14 +60,14 @@ export const AccueilTemoignages = () => {
                 className={`flex h-full flex-col justify-between rounded-[1.25rem] p-8 ${t.card}`}
               >
                 <div>
-                  <span className="font-body text-xs font-semibold uppercase tracking-[0.16em] text-msk-night-800 opacity-70">
+                  <span className="text-xs font-semibold uppercase tracking-[0.16em] text-msk-night-800 opacity-70">
                     {t.tag}
                   </span>
-                  <blockquote className="mt-4 font-condensed text-[1.5rem] uppercase leading-[1.05] text-msk-night-950">
+                  <blockquote className="mt-4 font-display text-lg font-bold uppercase leading-snug text-msk-night-950">
                     {t.quote}
                   </blockquote>
                 </div>
-                <footer className="mt-8 font-body text-sm leading-snug text-msk-night-800">
+                <footer className="mt-8 text-sm leading-snug text-msk-night-800">
                   <p className="font-semibold">{t.author}</p>
                   <p className="opacity-75">{t.role}</p>
                 </footer>
