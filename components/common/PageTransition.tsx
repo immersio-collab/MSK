@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 /**
  * Balayage de page en trois calques.
@@ -13,6 +13,15 @@ import { useRouter } from "next/navigation";
  *
  * Timings mesurés en 1280x720 : le carré paraît à 261 ms, couvre entièrement
  * l'écran à 599 ms, y reste 258 ms, et tout est terminé à 1720 ms.
+ *
+ * Le retrait ne part PAS sur un minuteur : la séquence se fige au point de
+ * couverture totale tant que la page demandée n'est pas montée. Sans ce gel, le
+ * rideau se rouvrait sur l'ANCIENNE page dès que la navigation dépassait le
+ * budget de couverture, et le changement se voyait à découvert une seconde plus
+ * tard. Mesuré : la compilation à la demande d'une route en dev coûte de 550 ms
+ * à 9 s, là où la couverture ne dure que 760 ms après le départ de la
+ * navigation. En production le payload arrive en 17 à 54 ms et le gel ne se
+ * déclenche pratiquement jamais — il n'existe que pour les cas lents.
  *
  * Deux points de géométrie qui ne sont pas cosmétiques :
  *  - l'apex des éventails est à 88% de la hauteur SOUS le bas de l'écran. Au ras
@@ -37,6 +46,20 @@ const MIN_SCALE = 0.004;
 /** Durée totale, et instant où la route change (sous la couverture). */
 const TOTAL = 1720;
 const COVER_AT = 640;
+
+/**
+ * Instant du gel. Le carré couvre la totalité de l'écran de 622 ms à 820 ms :
+ * ce point doit rester dans cette fenêtre, sinon on fige sur une image où la
+ * page transparaît. 750 ms laisse ~130 ms de marge avant, ~70 ms après.
+ */
+const HOLD_AT = 750;
+
+/**
+ * Filet de sécurité : passé ce délai sans navigation, le rideau repart quand
+ * même. Un overlay plein écran bloqué serait bien pire que la couture qu'il
+ * masque.
+ */
+const MAX_WAIT = 5000;
 
 const EASE_IN = "cubic-bezier(.66,0,.24,1)";
 const EASE_OUT = "cubic-bezier(.76,0,.24,1)";
@@ -115,6 +138,7 @@ function paletteFor(pathname: string): Palette {
 
 export default function PageTransition({ children }: { children: React.ReactNode }) {
   const router = useRouter();
+  const pathname = usePathname();
   const overlay = useRef<HTMLDivElement>(null);
   const nearFan = useRef<HTMLDivElement>(null);
   const midFan = useRef<HTMLDivElement>(null);
@@ -122,14 +146,26 @@ export default function PageTransition({ children }: { children: React.ReactNode
   const busy = useRef(false);
   const running = useRef<Animation[]>([]);
   const timers = useRef<number[]>([]);
+  /** Vrai entre le clic et l'arrivée de la page demandée. */
+  const awaiting = useRef(false);
+
+  /** La page est arrivée (ou on renonce à l'attendre) : le rideau repart. */
+  const release = useCallback(() => {
+    if (!awaiting.current) return;
+    awaiting.current = false;
+    running.current.forEach((animation) => {
+      if (animation.playState === "paused") animation.play();
+    });
+  }, []);
 
   const run = useCallback(
-    (href: string, pathname: string) => {
+    (href: string, target: string) => {
       const layers = [overlay.current, nearFan.current, midFan.current, square.current];
       if (busy.current || layers.some((el) => el === null)) return false;
       busy.current = true;
+      awaiting.current = true;
 
-      const palette = paletteFor(pathname);
+      const palette = paletteFor(target);
       nearFan.current!.style.background = palette.near;
       midFan.current!.style.background = palette.mid;
       square.current!.style.background = palette.square;
@@ -143,26 +179,74 @@ export default function PageTransition({ children }: { children: React.ReactNode
         square.current!.animate(SQUARE_KEYFRAMES, TIMING),
       ];
 
-      // La route bascule pendant que le carré couvre tout : le changement de
-      // page n'est jamais visible.
-      timers.current = [
-        window.setTimeout(() => router.push(href), COVER_AT),
-        window.setTimeout(() => {
+      // Le rideau se retire quand les animations se terminent VRAIMENT, y
+      // compris après un gel : plus aucun minuteur ne décide à leur place.
+      Promise.all(running.current.map((animation) => animation.finished))
+        .then(() => {
           if (overlay.current) overlay.current.style.visibility = "hidden";
           running.current = [];
+          awaiting.current = false;
+          timers.current.forEach((id) => window.clearTimeout(id));
+          timers.current = [];
           busy.current = false;
-        }, TOTAL),
+        })
+        .catch(() => {
+          // `cancel()` rejette la promesse : démontage en pleine transition.
+        });
+
+      // Horloge du gel. Une animation sans effet visuel plutôt qu'un
+      // setTimeout : elle vit sur le même timeline que le balayage et ne peut
+      // donc pas dériver par rapport à lui. Un setTimeout est bridé à ~1 s dans
+      // un onglet en arrière-plan — il manquerait la fenêtre de couverture et
+      // figerait la séquence alors que la page est déjà réapparue.
+      overlay
+        .current!.animate([{ opacity: 1 }, { opacity: 1 }], { duration: HOLD_AT })
+        .finished.then(() => {
+          if (awaiting.current) {
+            running.current.forEach((animation) => animation.pause());
+          }
+        })
+        .catch(() => {});
+
+      // Deux filets, volontairement séparés — les enchaîner d'un coup couperait
+      // le rideau net au lieu de le laisser se refermer.
+      timers.current = [
+        window.setTimeout(() => router.push(href), COVER_AT),
+        // 1. La navigation n'arrive pas : on relâche le gel et la fermeture
+        //    se joue normalement.
+        window.setTimeout(release, COVER_AT + MAX_WAIT),
+        // 2. Les animations elles-mêmes ne progressent pas — un onglet en
+        //    arrière-plan les gèle entièrement (mesuré : une animation de
+        //    300 ms ne se termine pas en 3 s), donc `finished` ne se
+        //    résoudrait jamais et l'overlay resterait en travers de la page.
+        //    `finish()` les envoie à leur état final. Ce minuteur laisse
+        //    d'abord au filet 1 le temps de jouer sa fermeture ; si elle a
+        //    eu lieu, la transition est finie et tous les minuteurs sont
+        //    déjà annulés. Les setTimeout, eux, sont seulement bridés à
+        //    ~1 s en arrière-plan : ils finissent toujours par tomber.
+        window.setTimeout(() => {
+          running.current.forEach((animation) => animation.finish());
+        }, COVER_AT + MAX_WAIT + TOTAL),
       ];
 
       return true;
     },
-    [router],
+    [router, release],
   );
+
+  // La page demandée est montée : c'est LE signal qui relance la fermeture.
+  // `usePathname` change à la validation de la navigation, et un `useEffect`
+  // passe après la peinture — la nouvelle page est donc déjà dessinée sous le
+  // rideau au moment où celui-ci recommence à bouger.
+  useEffect(() => {
+    release();
+  }, [pathname, release]);
 
   // Si le composant est démonté en pleine transition, ne pas laisser tourner
   // des animations ni un router.push différé.
   useEffect(
     () => () => {
+      awaiting.current = false;
       running.current.forEach((animation) => animation.cancel());
       timers.current.forEach((id) => window.clearTimeout(id));
     },
