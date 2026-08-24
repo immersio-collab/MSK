@@ -18,7 +18,7 @@ import type { AnimationItem } from "lottie-web";
 /** Frames sampled when measuring the artwork's travelled bounds. */
 const SAMPLES = 12;
 
-export const MethodeLottie = ({
+export const LottieMark = ({
   src,
   className,
   loop = true,
@@ -52,16 +52,6 @@ export const MethodeLottie = ({
         path: src,
       });
 
-      // Crop the viewBox to the artwork.
-      //
-      // These files are exported on whatever canvas the comp happened to use,
-      // and the art does not fill it consistently — card3 occupies 40% of its
-      // 2018px canvas while card5 occupies 93% of a 1080px one. Rendered into
-      // identical boxes that makes some marks look half the size of others.
-      //
-      // The bounds are sampled across the timeline and unioned, not taken from
-      // a single frame: these animations move, and cropping to frame 0 would
-      // clip whatever travels outside it later.
       // Only run while on screen. Compositor-driven, so it is independent of
       // however the page happens to be scrolled.
       observer = new IntersectionObserver(
@@ -76,6 +66,16 @@ export const MethodeLottie = ({
       );
       observer.observe(host.current);
 
+      // Crop the viewBox to the artwork.
+      //
+      // These files are exported on whatever canvas the comp happened to use,
+      // and the art does not fill it consistently — card3 occupies 40% of its
+      // 2018px canvas while card5 occupies 93% of a 1080px one. Rendered into
+      // identical boxes that makes some marks look half the size of others.
+      //
+      // The bounds are sampled across the timeline and unioned, not taken from
+      // a single frame: these animations move, and cropping to frame 0 would
+      // clip whatever travels outside it later.
       anim.current.addEventListener("DOMLoaded", () => {
         if (!fit || !anim.current || !host.current) return;
         const svg = host.current.querySelector("svg");
@@ -97,7 +97,6 @@ export const MethodeLottie = ({
             x1 = Math.max(x1, b.x + b.width);
             y1 = Math.max(y1, b.y + b.height);
           } catch {
-            // Restore playback state if error
             if (isVisible) anim.current.play();
             return;
           }
@@ -114,7 +113,6 @@ export const MethodeLottie = ({
           svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
         }
 
-        // Restore playback state after crop
         if (isVisible) anim.current.play();
       });
     });

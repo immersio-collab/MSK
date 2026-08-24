@@ -8,9 +8,9 @@
  * Les couleurs (badges, bande du hero d'article) sont des classes COMPLÈTES —
  * jamais concaténées — une par famille de la palette et par catégorie.
  *
- * Les images sont encore des photos Unsplash factices, et les corps d'articles
- * des BROUILLONS rédigés pour donner la mesure : remplacez les textes et les
- * `image` par vos contenus au fur et à mesure.
+ * Les images sont des photos locales du centre (dossier `public/`), et les
+ * corps d'articles des BROUILLONS rédigés pour donner la mesure : remplacez
+ * les textes et les `image` par vos contenus au fur et à mesure.
  */
 
 export type ArticleCategorie = "conseils" | "pedagogie" | "evenement" | "therapie";
@@ -97,7 +97,7 @@ export const ARTICLES: Article[] = [
       "Le centre MSK a le plaisir de vous inviter à sa journée portes ouvertes le samedi 25 novembre. Visite de la salle Neuro-Gym au programme.",
     categorie: "evenement",
     date: "10 nov. 2023",
-    image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1200",
+    image: "/park exterieur.jpg",
     legende: "Les espaces du centre, prêts à vous accueillir.",
     corps: [
       {
@@ -135,7 +135,7 @@ export const ARTICLES: Article[] = [
       "L'inattention ou l'hyperactivité peuvent être difficiles à interpréter chez les jeunes enfants. Voici les 5 signes qui doivent vous amener à consulter.",
     categorie: "conseils",
     date: "15 oct. 2023",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1200",
+    image: "/espace motricité.png",
     legende: "Un enfant qui bouge beaucoup n'est pas forcément un enfant TDAH — et inversement.",
     corps: [
       {
@@ -181,7 +181,7 @@ export const ARTICLES: Article[] = [
       "En s'adaptant au rythme de chacun, la pédagogie Montessori offre un cadre sécurisant pour les enfants à besoins spécifiques.",
     categorie: "pedagogie",
     date: "2 nov. 2023",
-    image: "https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?auto=format&fit=crop&q=80&w=1200",
+    image: "/espace montesori.jpeg",
     legende: "Le matériel Montessori : concret, sensoriel, auto-correctif.",
     corps: [
       {
@@ -219,7 +219,7 @@ export const ARTICLES: Article[] = [
       "Découvrez comment des exercices physiques ciblés peuvent aider votre enfant à mieux réguler son attention en classe.",
     categorie: "therapie",
     date: "28 nov. 2023",
-    image: "https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&q=80&w=1200",
+    image: "/neuro-gym.jpg",
     legende: "Parcours moteur en salle Neuro-Gym : le corps au service de l'attention.",
     corps: [
       {
@@ -253,7 +253,7 @@ export const ARTICLES: Article[] = [
       "Le moment des devoirs se transforme souvent en conflit. Voici des stratégies concrètes pour apaiser ce moment crucial.",
     categorie: "conseils",
     date: "5 déc. 2023",
-    image: "https://images.unsplash.com/photo-1425421598808-4a22ce59fc97?auto=format&fit=crop&q=80&w=1200",
+    image: "/primaire.jpg",
     legende: "Des devoirs plus courts, mieux découpés, dans le calme.",
     corps: [
       {
@@ -296,7 +296,7 @@ export const ARTICLES: Article[] = [
       "Un accompagnement réussi implique toujours les parents. Découvrez pourquoi nous accordons une place centrale à la guidance parentale.",
     categorie: "pedagogie",
     date: "12 déc. 2023",
-    image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=1200",
+    image: "/accompagnement.jpeg",
     legende: "Une séance de guidance parentale au centre MSK.",
     corps: [
       {

@@ -1,38 +1,18 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { ChevronDown } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { MethodeCloud } from "@/components/methode/MethodeCloud";
+import { CloudDrift } from "@/components/motion/CloudDrift";
 import { FadeUp } from "@/components/motion/FadeUp";
+import { Eyebrow } from "@/components/common/Eyebrow";
+import { useHeroParallax } from "@/hooks/use-hero-parallax";
 
-gsap.registerPlugin(ScrollTrigger);
-
-export const EquipeHeroSection = () => {
+export const FondatriceHeroSection = () => {
   const root = useRef<HTMLElement>(null);
   const image = useRef<HTMLImageElement>(null);
 
-  useEffect(() => {
-    const el = root.current;
-    if (!el) return;
-
-    const ctx = gsap.context(() => {
-      const scrub = {
-        trigger: el,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      } as const;
-
-      if (image.current) {
-        gsap.to(image.current, { yPercent: 120, ease: "none", scrollTrigger: scrub });
-      }
-    }, el);
-
-    return () => ctx.revert();
-  }, []);
+  useHeroParallax(root, [{ ref: image, vars: { yPercent: 120 } }]);
 
   return (
     <section ref={root} className="relative flex min-h-[100dvh] w-full flex-col justify-center overflow-hidden bg-msk-cream-100 pb-16 pt-16 md:pb-20">
@@ -43,21 +23,21 @@ export const EquipeHeroSection = () => {
       />
 
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="a"
           speed={52}
           phase={0.2}
           className="absolute left-0 top-[52%] w-40 text-white md:w-56"
         />
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="b"
           speed={38}
           phase={0.5}
           className="absolute left-0 top-[26%] w-48 text-msk-sun-100 md:w-72"
         />
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="a"
           speed={64}
@@ -77,21 +57,21 @@ export const EquipeHeroSection = () => {
         <FadeUp delay={0.1}>
           <div className="mx-auto mt-4 max-w-2xl rounded-[1.75rem] bg-white px-8 py-8 text-center shadow-2xl md:px-12">
             <h1 className="font-display text-[2rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-4xl md:text-5xl">
-              L'expertise au service de <span className="text-msk-coral-500">votre enfant.</span>
+              L&apos;expertise au service de <span className="text-msk-coral-500">votre enfant.</span>
             </h1>
 
-            <span className="mt-4 inline-block rounded-full bg-msk-coral-100 px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-coral-700">
+            <Eyebrow className="mt-4 bg-msk-coral-100 text-msk-coral-700">
               La Fondatrice
-            </span>
+            </Eyebrow>
 
             <p className="mx-auto mt-4 max-w-md text-base font-medium leading-snug text-msk-night-800 md:text-lg">
-              Découvrez le parcours de notre fondatrice, dédiée à l'épanouissement de chaque enfant par une approche inclusive.
+              Découvrez le parcours de notre fondatrice, dédiée à l&apos;épanouissement de chaque enfant par une approche inclusive.
             </p>
 
             <a
               href="#suite"
               aria-label="Aller à la suite"
-              className="mx-auto mt-6 flex h-11 w-11 items-center justify-center rounded-full border-2 border-msk-night-200 text-msk-night-700 transition-colors hover:bg-msk-night-900 hover:text-white"
+              className="mx-auto mt-6 flex h-11 w-11 items-center justify-center rounded-full border-2 border-msk-night-900/20 text-msk-night-700 transition-colors hover:bg-msk-night-900 hover:text-white"
             >
               <ChevronDown className="h-5 w-5" aria-hidden />
             </a>

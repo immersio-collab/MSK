@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { MethodeHeroSection } from "@/components/methode/MethodeHeroSection";
 import { MethodeKineticBanner } from "@/components/methode/MethodeKineticBanner";
 import { MethodeStepsSection } from "@/components/methode/MethodeStepsSection";
-import { MethodeMediaBand } from "@/components/methode/MethodeMediaBand";
+import { MediaBand } from "@/components/common/MediaBand";
 import { MethodeStatementSection } from "@/components/methode/MethodeStatementSection";
 import { MethodeProcessSection } from "@/components/methode/MethodeProcessSection";
 import { FaqSection } from "@/components/common/FaqSection";
@@ -10,7 +10,7 @@ import { NextStepSection } from "@/components/common/NextStepSection";
 import { FAQ_METHODE } from "@/lib/data/faq";
 
 export const metadata: Metadata = {
-  title: "La Méthode MSK | MSK Montessori School Casablanca",
+  title: "La Méthode MSK",
   description: "La méthode en 6 étapes : Observer, Comprendre, Adapter, Rééduquer, Accompagner, Insérer.",
 };
 
@@ -27,7 +27,20 @@ export default function LaMethodePage() {
       <MethodeStepsSection />
 
       {/* Full-bleed photography, slanted top edge */}
-      <MethodeMediaBand />
+      <MediaBand
+        sectionBg="bg-msk-cream-100"
+        src="/parcours.jpeg"
+        alt="Enfant en séance, plein cadre"
+        priority
+        overlay={
+          <img
+            src="/Bird pair love and flying sky.svg"
+            alt=""
+            aria-hidden="true"
+            className="absolute bottom-8 right-6 h-auto w-64 object-contain md:right-14 md:w-80"
+          />
+        }
+      />
 
       {/* Oversized statement + supporting copy */}
       <MethodeStatementSection />
@@ -58,7 +71,6 @@ export default function LaMethodePage() {
         description="Découvrez Khadija Elabaya et son parcours dédié à l'accompagnement des enfants neuro-atypiques."
         buttonText="Rencontrer"
         buttonHref="/notre-centre/la-fondatrice"
-        svgSrc="/Islamic business woman with gestures up.svg"
         bgColor="bg-msk-blue-800"
         cloudColor="text-white/50"
         textColor="text-msk-cream-100"

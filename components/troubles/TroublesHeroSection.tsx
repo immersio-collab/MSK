@@ -1,14 +1,13 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { MethodeCloud } from "@/components/methode/MethodeCloud";
-
-gsap.registerPlugin(ScrollTrigger);
+import { CloudDrift } from "@/components/motion/CloudDrift";
+import { FadeUp } from "@/components/motion/FadeUp";
+import { Eyebrow } from "@/components/common/Eyebrow";
+import { useHeroParallax } from "@/hooks/use-hero-parallax";
 
 /**
  * Hero à ciel ouvert : bandeau bleu, nuages qui dérivent, et une « couture »
@@ -42,35 +41,13 @@ export const TroublesHeroSection: React.FC = () => {
   const duck = useRef<HTMLImageElement>(null);
   const baby = useRef<HTMLImageElement>(null);
 
-  useEffect(() => {
-    const el = root.current;
-    if (!el) return;
-
-    const ctx = gsap.context(() => {
-      const scrub = {
-        trigger: el,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      } as const;
-
-      if (seam.current) {
-        gsap.to(seam.current, { rotate: 3.5, ease: "none", scrollTrigger: scrub });
-      }
-
-      // Parallaxe : chaque pièce dérive à sa propre vitesse. `to` depuis la
-      // position naturelle, donc rien n'est déplacé tant que le scroll ne
-      // commence pas — et si le tween ne part jamais, tout reste en place.
-      if (duck.current) {
-        gsap.to(duck.current, { yPercent: 46, ease: "none", scrollTrigger: scrub });
-      }
-      if (baby.current) {
-        gsap.to(baby.current, { yPercent: -22, ease: "none", scrollTrigger: scrub });
-      }
-    }, el);
-
-    return () => ctx.revert();
-  }, []);
+  // La couture pivote depuis son état au repos (rotate(-5.5deg) déjà en CSS) ;
+  // le canard et le bébé dérivent chacun à leur vitesse.
+  useHeroParallax(root, [
+    { ref: seam, vars: { rotate: 3.5 } },
+    { ref: duck, vars: { yPercent: 46 } },
+    { ref: baby, vars: { yPercent: -22 } },
+  ]);
 
   return (
     <section
@@ -84,21 +61,21 @@ export const TroublesHeroSection: React.FC = () => {
       {/* Nuages : dérive latérale continue, indépendante du scroll. Vitesses et
           phases distinctes pour qu'ils ne se déplacent pas en bloc. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="a"
           speed={52}
           phase={0.2}
           className="absolute left-0 top-[52%] w-40 text-white md:w-56"
         />
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="b"
           speed={38}
           phase={0.5}
           className="absolute left-0 top-[26%] w-48 text-white md:w-72"
         />
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="a"
           speed={64}
@@ -140,32 +117,23 @@ export const TroublesHeroSection: React.FC = () => {
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 sm:px-10">
         <div className="mx-auto mt-4 max-w-2xl rounded-[1.75rem] bg-white px-8 py-10 text-center shadow-2xl md:px-12">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-5xl md:text-6xl"
-          >
-            Nous comprenons <span className="text-msk-coral-700">votre enfant.</span>
-          </motion.h1>
+          <FadeUp mode="mount" y={20} duration={0.6} delay={0.1}>
+            <h1 className="font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-5xl md:text-6xl">
+              Nous comprenons <span className="text-msk-coral-700">votre enfant.</span>
+            </h1>
+          </FadeUp>
 
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mt-6 inline-block rounded-full bg-msk-night-900/10 px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-700"
-          >
-            Troubles Accompagnés
-          </motion.span>
+          <FadeUp mode="mount" y={10} duration={0.5}>
+            <Eyebrow className="mt-6 bg-msk-night-900/10 text-msk-night-700">
+              Troubles Accompagnés
+            </Eyebrow>
+          </FadeUp>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mx-auto mt-6 max-w-xl text-base font-medium leading-snug text-msk-night-800 md:text-lg"
-        >
-          Un accompagnement sur-mesure pour les enfants avec des difficultés d&apos;apprentissage, de langage ou de développement.
-        </motion.p>
+        <FadeUp mode="mount" y={20} duration={0.6} delay={0.2}>
+          <p className="mx-auto mt-6 max-w-xl text-base font-medium leading-snug text-msk-night-800 md:text-lg">
+            Un accompagnement sur-mesure pour les enfants avec des difficultés d&apos;apprentissage, de langage ou de développement.
+          </p>
+        </FadeUp>
 
         <motion.a
           href="#troubles"

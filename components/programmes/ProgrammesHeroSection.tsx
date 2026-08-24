@@ -1,14 +1,12 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { ChevronDown } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { MethodeCloud } from "@/components/methode/MethodeCloud";
+import { CloudDrift } from "@/components/motion/CloudDrift";
 import { FadeUp } from "@/components/motion/FadeUp";
-
-gsap.registerPlugin(ScrollTrigger);
+import { Eyebrow } from "@/components/common/Eyebrow";
+import { useHeroParallax } from "@/hooks/use-hero-parallax";
 
 /**
  * Hero de la page Programmes — même grammaire visuelle que MethodeHeroSection :
@@ -23,25 +21,7 @@ export const ProgrammesHeroSection = () => {
   const root = useRef<HTMLElement>(null);
   const kid = useRef<HTMLImageElement>(null);
 
-  useEffect(() => {
-    const el = root.current;
-    if (!el) return;
-
-    const ctx = gsap.context(() => {
-      const scrub = {
-        trigger: el,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      } as const;
-
-      if (kid.current) {
-        gsap.to(kid.current, { yPercent: 120, ease: "none", scrollTrigger: scrub });
-      }
-    }, el);
-
-    return () => ctx.revert();
-  }, []);
+  useHeroParallax(root, [{ ref: kid, vars: { yPercent: 120 } }]);
 
   return (
     <section ref={root} className="relative flex h-[100dvh] w-full flex-col justify-center bg-msk-cream-100 overflow-hidden">
@@ -54,21 +34,21 @@ export const ProgrammesHeroSection = () => {
 
       {/* Nuages flottants — même composant que la méthode, teintes différentes. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="a"
           speed={54}
           phase={0.15}
           className="absolute left-0 top-[50%] w-40 text-msk-blue-50 md:w-56"
         />
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="b"
           speed={40}
           phase={0.55}
           className="absolute left-0 top-[24%] w-48 text-white md:w-72"
         />
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="a"
           speed={66}
@@ -88,9 +68,9 @@ export const ProgrammesHeroSection = () => {
         {/* Carte-titre overlapping la bande inférieure. */}
         <FadeUp delay={0.1}>
           <div className="mx-auto mt-4 max-w-2xl rounded-[1.75rem] bg-msk-blue-800 px-8 py-10 text-center shadow-2xl md:px-12">
-            <span className="inline-block rounded-full bg-white/15 px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-sun-300">
+            <Eyebrow className="bg-white/15 text-msk-sun-300">
               Programmes &amp; Classes
-            </span>
+            </Eyebrow>
 
             <h1 className="mt-6 font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-white sm:text-5xl md:text-6xl">
               Un programme pour chaque âge

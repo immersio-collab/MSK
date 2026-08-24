@@ -10,7 +10,7 @@
  * Accompagner) pour que chaque fiche raconte la même démarche.
  *
  * `visuel` nomme le petit SVG décoratif attendu dans le coin de la fiche
- * (emplacement réservé par MethodeAssetSlot tant qu'il n'est pas fourni).
+ * (emplacement réservé par AssetSlot tant qu'il n'est pas fourni).
  */
 
 export type TroubleTone = "coral" | "sun" | "blue" | "night";
@@ -25,7 +25,7 @@ export type TroubleIcon =
   | "zap"
   | "school";
 
-export interface TroubleStep {
+interface TroubleStep {
   verbe: string;
   texte: string;
 }

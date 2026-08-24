@@ -37,12 +37,12 @@ export const Footer: React.FC = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/notre-centre/nos-espaces" className="text-base font-medium text-slate-200 hover:text-msk-coral-300 transition-colors">
+                  <Link href="/notre-centre/galerie" className="text-base font-medium text-slate-200 hover:text-msk-coral-300 transition-colors">
                     Nos espaces
                   </Link>
                 </li>
                 <li>
-                  <Link href="/admissions" className="text-base font-medium text-slate-200 hover:text-msk-coral-300 transition-colors">
+                  <Link href="/contact" className="text-base font-medium text-slate-200 hover:text-msk-coral-300 transition-colors">
                     Admissions
                   </Link>
                 </li>
@@ -96,7 +96,7 @@ export const Footer: React.FC = () => {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-400">
           <p>© {new Date().getFullYear()} MSK Montessori School Casablanca.</p>
           <div className="flex items-center gap-6">
-            <Link href="/admissions" className="hover:text-white transition-colors">
+            <Link href="/contact" className="hover:text-white transition-colors">
               Inscriptions
             </Link>
             <Link href="/contact" className="hover:text-white transition-colors">

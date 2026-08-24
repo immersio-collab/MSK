@@ -7,6 +7,8 @@ import { Mic, Pause, Play } from "lucide-react";
 import { FadeUp } from "@/components/motion/FadeUp";
 import { MorphButton } from "@/components/motion/MorphButton";
 import { cn } from "@/lib/utils";
+import { SPRING, useTilt } from "@/lib/motion";
+import { Eyebrow } from "@/components/common/Eyebrow";
 import {
   TemoignageChatMock,
   TemoignageLightbox,
@@ -128,11 +130,6 @@ const TEMOIGNAGES: Temoignage[] = [
 
 const VISIBLE_COUNT = 6;
 
-/** Inclinaison au repos, alternée — même rythme que les stickers des troubles. */
-const TILTS = [-2.5, 1.5, -1.5, 2.5, 2, -1.5, 2.5, -2];
-
-const SPRING = { type: "spring", stiffness: 300, damping: 24 } as const;
-
 // `custom` porte l'inclinaison propre à chaque carte : `rest` y revient,
 // `hover` redresse et soulève.
 const CARD_VARIANTS: Variants = {
@@ -173,16 +170,6 @@ const POLAROID_SHADOW = "shadow-xl shadow-msk-night-900/10";
 const POLAROID_CORNERS = ["rounded-[18px_6px_20px_8px]", "rounded-[6px_20px_8px_18px]"];
 const POLAROID_FOCUS =
   "focus-visible:outline-hidden focus-visible:ring-4 focus-visible:ring-msk-coral-300 focus-visible:ring-offset-2 focus-visible:ring-offset-msk-cream-50";
-
-function useTilt(index: number) {
-  // Posé après montage : `useReducedMotion` changerait de valeur dès
-  // l'hydratation et créerait un mismatch serveur/client sur le transform.
-  const [reduceMotion, setReduceMotion] = useState(false);
-  useEffect(() => {
-    setReduceMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  }, []);
-  return reduceMotion ? 0 : (TILTS[index % TILTS.length] ?? 0);
-}
 
 function QuoteCard({
   item,
@@ -473,14 +460,14 @@ export const AccueilTemoignages = () => {
 
       <div className="relative mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
         <FadeUp>
-          <span className="inline-block rounded-full bg-msk-coral-100 px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-coral-700">
+          <Eyebrow className="bg-msk-coral-100 text-msk-coral-700">
             Paroles de parents
-          </span>
+          </Eyebrow>
           <h2 className="mt-5 max-w-3xl font-display text-[2rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-4xl md:text-5xl">
             Ce que les familles <span className="text-msk-coral-700">racontent</span>
           </h2>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-msk-night-800 md:text-lg">
-            Des mots, des voix et des messages de parents, tels qu'ils nous arrivent.
+            Des mots, des voix et des messages de parents, tels qu&apos;ils nous arrivent.
           </p>
         </FadeUp>
 
@@ -524,7 +511,7 @@ export const AccueilTemoignages = () => {
             </MorphButton>
           </div>
           <p className="mt-6 text-center text-sm text-msk-night-700">
-            Chaque témoignage est publié avec l'accord de la famille.
+            Chaque témoignage est publié avec l&apos;accord de la famille.
           </p>
         </FadeUp>
       </div>

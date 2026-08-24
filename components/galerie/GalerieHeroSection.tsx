@@ -1,17 +1,14 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { MethodeCloud } from "@/components/methode/MethodeCloud";
+import { CloudDrift } from "@/components/motion/CloudDrift";
 import { FadeUp } from "@/components/motion/FadeUp";
 import { GalerieTitreAnime } from "@/components/galerie/GalerieTitreAnime";
-import { HERO_POLAROIDS } from "@/components/galerie/galerie-content";
-
-gsap.registerPlugin(ScrollTrigger);
+import { HERO_POLAROIDS } from "@/lib/data/galerie";
+import { useHeroParallax } from "@/hooks/use-hero-parallax";
 
 /**
  * Hero de la galerie — même grammaire que MethodeHeroSection et
@@ -39,28 +36,10 @@ export const GalerieHeroSection = () => {
   const octopus1 = useRef<HTMLImageElement>(null);
   const octopus2 = useRef<HTMLImageElement>(null);
 
-  useEffect(() => {
-    const el = root.current;
-    if (!el) return;
-
-    const ctx = gsap.context(() => {
-      const scrub = {
-        trigger: el,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      } as const;
-
-      if (octopus1.current) {
-        gsap.to(octopus1.current, { yPercent: 150, ease: "none", scrollTrigger: scrub });
-      }
-      if (octopus2.current) {
-        gsap.to(octopus2.current, { yPercent: -150, ease: "none", scrollTrigger: scrub });
-      }
-    }, el);
-
-    return () => ctx.revert();
-  }, []);
+  useHeroParallax(root, [
+    { ref: octopus1, vars: { yPercent: 150 } },
+    { ref: octopus2, vars: { yPercent: -150 } },
+  ]);
 
   return (
     <section ref={root} className="relative flex min-h-[100dvh] w-full flex-col justify-center overflow-hidden bg-msk-cream-100 pb-16 pt-16 md:pb-20">
@@ -71,21 +50,21 @@ export const GalerieHeroSection = () => {
       />
 
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="a"
           speed={52}
           phase={0.2}
           className="absolute left-0 top-[52%] w-40 text-white md:w-56"
         />
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="b"
           speed={38}
           phase={0.5}
           className="absolute left-0 top-[26%] w-48 text-msk-coral-100 md:w-72"
         />
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="a"
           speed={64}

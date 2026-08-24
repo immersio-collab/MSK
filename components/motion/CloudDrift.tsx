@@ -47,7 +47,7 @@ const SHAPES = {
   },
 } as const;
 
-interface MethodeCloudProps {
+interface CloudDriftProps {
   shape?: keyof typeof SHAPES;
   className?: string;
   /** Parallax strength. 0 pins the cloud to the page; 1 is a full-height drift. */
@@ -70,7 +70,7 @@ interface MethodeCloudProps {
   cycles?: number;
 }
 
-export const MethodeCloud = ({
+export const CloudDrift = ({
   shape = "a",
   className,
   weight = 1,
@@ -80,7 +80,7 @@ export const MethodeCloud = ({
   speed = 46,
   phase = 0,
   cycles = 1,
-}: MethodeCloudProps) => {
+}: CloudDriftProps) => {
   const ref = useRef<SVGSVGElement | null>(null);
 
   useEffect(() => {

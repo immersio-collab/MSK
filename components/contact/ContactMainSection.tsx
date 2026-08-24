@@ -87,10 +87,8 @@ export const ContactMainSection: React.FC = () => {
     // wider. Mobile keeps its own padding.
     <div className="relative z-20 -mt-8 w-full bg-transparent px-5 pb-[4.1875rem] lg:-mt-12 lg:px-[2rem]">
       <div className="relative grid grid-cols-12 gap-5 rounded-[0.625rem] bg-white px-5 py-[1.5625rem] lg:px-0 lg:py-20">
-        {/* ---------- Left: invitation and coordinates ---------- */}
         <div className="col-span-12 flex flex-col justify-between max-lg:mb-12 lg:col-start-2 lg:col-span-4 lg:pr-6">
           <div className="space-y-8">
-            {/* Header Badge & Title */}
             <div className="space-y-3">
               <span className="inline-flex items-center gap-2 rounded-full border border-msk-coral-200 bg-msk-coral-50 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-msk-coral-600">
                 <HeartHandshake className="h-3.5 w-3.5" />
@@ -104,9 +102,7 @@ export const ContactMainSection: React.FC = () => {
               </p>
             </div>
 
-            {/* Contact Information List */}
             <div className="space-y-4">
-              {/* Email Card */}
               <div className="flex items-center gap-4 rounded-2xl border border-msk-cream-200 bg-[#fbfdfd] p-4 transition-all hover:border-msk-blue-300 hover:bg-white hover:shadow-sm">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-msk-blue-50 text-msk-blue-700 border border-msk-blue-100">
                   <Mail className="h-5 w-5" />
@@ -124,7 +120,6 @@ export const ContactMainSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Phone Card */}
               <div className="flex items-center gap-4 rounded-2xl border border-msk-cream-200 bg-[#fbfdfd] p-4 transition-all hover:border-msk-coral-300 hover:bg-white hover:shadow-sm">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-msk-coral-50 text-msk-coral-600 border border-msk-coral-100">
                   <Phone className="h-5 w-5" />
@@ -142,7 +137,6 @@ export const ContactMainSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Address Card */}
               <div className="flex items-center gap-4 rounded-2xl border border-msk-cream-200 bg-[#fbfdfd] p-4 transition-all hover:border-msk-sun-300 hover:bg-white hover:shadow-sm">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-msk-sun-50 text-msk-sun-600 border border-msk-sun-100">
                   <MapPin className="h-5 w-5" />
@@ -157,7 +151,6 @@ export const ContactMainSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Opening Hours Card */}
               <div className="flex items-center gap-4 rounded-2xl border border-msk-cream-200 bg-[#fbfdfd] p-4 transition-all hover:border-slate-300 hover:bg-white hover:shadow-sm">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-700 border border-slate-200">
                   <Clock className="h-5 w-5" />
@@ -175,7 +168,6 @@ export const ContactMainSection: React.FC = () => {
           </div>
         </div>
 
-        {/* ---------- Right: the form ---------- */}
         {/* `id` is the anchor the FAQ at the foot of the page sends the reader
             back to — it has no CTA section of its own to hand off to. */}
         <div id="formulaire" className="col-span-12 scroll-mt-28 lg:col-start-7 lg:col-span-5">

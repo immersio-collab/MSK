@@ -8,6 +8,7 @@ import { AlertTriangle, Maximize2, Play } from "lucide-react";
 import { VIRTUAL_TOUR } from "@/lib/data/site-content";
 import { GalerieTitreAnime } from "@/components/galerie/GalerieTitreAnime";
 import { MorphButton } from "@/components/motion/MorphButton";
+import { Eyebrow } from "@/components/common/Eyebrow";
 
 /**
  * Tour virtuel Realsee / Matterport — 2e section de la galerie.
@@ -46,9 +47,9 @@ export const GalerieTourSection = () => {
     >
       {/* En-tête compact : une pill, un titre, une phrase. */}
       <div className="mx-auto mb-6 max-w-4xl text-center md:mb-7">
-        <span className="inline-block rounded-full bg-white px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-coral-700 shadow-sm">
+        <Eyebrow className="bg-white text-msk-coral-700 shadow-sm">
           Tour virtuel · 360°
-        </span>
+        </Eyebrow>
         <GalerieTitreAnime
           au="scroll"
           texte="Visitez le centre depuis votre canapé"

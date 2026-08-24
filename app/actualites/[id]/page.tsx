@@ -4,11 +4,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Calendar } from "lucide-react";
 
-import { ActualitesCtaSection } from "@/components/actualites/ActualitesCtaSection";
+import { NextStepSection } from "@/components/common/NextStepSection";
 import { ArticlePartageRow } from "@/components/actualites/ArticlePartageRow";
 import { FaqSection } from "@/components/common/FaqSection";
 import { FAQ_ARTICLE } from "@/lib/data/faq";
-import { MethodeCloud } from "@/components/methode/MethodeCloud";
+import { CloudDrift } from "@/components/motion/CloudDrift";
 import {
   ARTICLES,
   CATEGORIE_ARTICLE_BADGE,
@@ -60,7 +60,6 @@ export default function ArticlePage({ params }: PageProps) {
 
   return (
     <div className="flex min-h-screen flex-col bg-msk-cream-100">
-      {/* ============ Hero : bande à la couleur de la catégorie ============ */}
       <section className="relative overflow-hidden pt-28 md:pt-32">
         <div
           aria-hidden
@@ -68,14 +67,14 @@ export default function ArticlePage({ params }: PageProps) {
           style={{ clipPath: "polygon(0 0, 100% 0, 100% 64%, 0 94%)" }}
         />
         <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-          <MethodeCloud
+          <CloudDrift
             motion="float"
             shape="a"
             speed={52}
             phase={0.25}
             className="absolute left-0 top-[6%] w-36 text-white/90 md:w-48"
           />
-          <MethodeCloud
+          <CloudDrift
             motion="float"
             shape="b"
             speed={40}
@@ -122,7 +121,6 @@ export default function ArticlePage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* ============ Couverture en cadre polaroid ============ */}
       <figure className="relative mx-auto mt-9 w-full max-w-4xl px-6">
         <div className="rotate-[-0.8deg] rounded-[1.5rem] bg-white p-3 shadow-2xl shadow-msk-night-900/20">
           <div className="relative aspect-[21/9] overflow-hidden rounded-[1rem] bg-msk-cream-200">
@@ -139,7 +137,6 @@ export default function ArticlePage({ params }: PageProps) {
         <figcaption className="pt-3 text-center text-sm text-slate-500">{article.legende}</figcaption>
       </figure>
 
-      {/* ============ Corps ============ */}
       <article className="mx-auto mt-10 w-full max-w-2xl px-6 text-[17px] leading-[1.75] text-msk-night-800">
         {numeroter(article.corps).map(({ bloc, numero }, i) => {
           switch (bloc.type) {
@@ -202,7 +199,6 @@ export default function ArticlePage({ params }: PageProps) {
         })}
       </article>
 
-      {/* ============ Partage + auteur ============ */}
       <div className="mx-auto mt-10 w-full max-w-2xl space-y-6 px-6">
         <ArticlePartageRow titre={article.titre} />
         <div className="flex rotate-[0.5deg] items-center gap-4 rounded-[1.25rem] bg-white px-6 py-5 shadow-xl shadow-msk-night-900/10">
@@ -223,7 +219,6 @@ export default function ArticlePage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* ============ À lire ensuite ============ */}
       <section className="mt-16 bg-msk-cream-200 px-6 py-14 md:py-16">
         <h2 className="text-center font-display text-3xl font-bold uppercase leading-[0.95] text-msk-night-900 md:text-4xl">
           À lire ensuite
@@ -279,7 +274,20 @@ export default function ArticlePage({ params }: PageProps) {
         ctaHref="/contact"
       />
 
-      <ActualitesCtaSection />
+      <NextStepSection
+        eyebrow="Un doute ? Une question ?"
+        title="Parlons de votre enfant"
+        description="Nos articles ne remplacent pas un avis professionnel. Le bilan initial avec notre fondatrice est le vrai premier pas."
+        buttonText="Prendre RDV pour un bilan gratuit"
+        buttonHref="/contact"
+        bgColor="bg-msk-sun-300"
+        cloudColor="text-white/60"
+        textColor="text-msk-sun-900"
+        buttonTextColor="text-white"
+        eyebrowColor="text-msk-coral-700"
+        titleColor="text-msk-night-900"
+        buttonBgColor="bg-msk-coral-600 shadow-lg shadow-msk-coral-700/30 group-hover:bg-msk-coral-700"
+      />
     </div>
   );
 }

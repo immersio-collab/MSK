@@ -6,7 +6,7 @@ import { FaqSection } from "@/components/common/FaqSection";
 import { FAQ_CONTACT } from "@/lib/data/faq";
 
 export const metadata: Metadata = {
-  title: "Contact & Accès | MSK Montessori School Casablanca",
+  title: "Contact & Accès",
   description: "Contactez-nous pour toute question ou demande de bilan. Coordonnées, formulaire et plan d'accès de MSK.",
 };
 

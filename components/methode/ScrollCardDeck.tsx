@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { MethodeCloud } from "@/components/methode/MethodeCloud";
-import { MethodeLottie } from "@/components/methode/MethodeLottie";
+import { CloudDrift } from "@/components/motion/CloudDrift";
+import { LottieMark } from "@/components/motion/LottieMark";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -142,7 +142,6 @@ export const ScrollCardDeck = ({
 
   return (
     <section id={id} className="relative w-full bg-msk-cream-100">
-      {/* ---------- Scrubbed deck (lg and up) ---------- */}
       <div
         ref={scrollRef}
         data-cloud-scope
@@ -153,13 +152,13 @@ export const ScrollCardDeck = ({
           {/* One full climb per card, then round again from below. Offset in
               phase so the two are never at the same height. */}
           <div aria-hidden className="pointer-events-none absolute inset-0">
-            <MethodeCloud
+            <CloudDrift
               motion="rise"
               shape="b"
               cycles={steps.length}
               className="absolute left-[8%] top-1/2 w-44 text-white drop-shadow-md xl:w-60"
             />
-            <MethodeCloud
+            <CloudDrift
               motion="rise"
               shape="a"
               cycles={steps.length}
@@ -207,7 +206,7 @@ export const ScrollCardDeck = ({
                     </h3>
                   </div>
 
-                  <MethodeLottie src={step.lottie} className="h-44 w-44" />
+                  <LottieMark src={step.lottie} className="h-44 w-44" />
 
                   <p
                     className={`text-[0.95rem] font-medium leading-snug ${step.bodyTone}`}
@@ -221,7 +220,6 @@ export const ScrollCardDeck = ({
         </div>
       </div>
 
-      {/* ---------- Plain stack (below lg) ---------- */}
       <div className="mx-auto max-w-md px-6 py-20 sm:px-10 lg:hidden">
         <ul className="flex flex-col gap-6">
           {steps.map((step) => (
@@ -242,7 +240,7 @@ export const ScrollCardDeck = ({
                 </h3>
               </div>
 
-              <MethodeLottie src={step.lottie} className="h-32 w-32" />
+              <LottieMark src={step.lottie} className="h-32 w-32" />
 
               <p
                 className={`text-[0.95rem] font-medium leading-snug ${step.bodyTone}`}

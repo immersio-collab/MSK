@@ -96,11 +96,10 @@ const p = (fanFamily: string, near: number, mid: number, square: string): Palett
 const ROUTE_PALETTES: ReadonlyArray<readonly [string, Palette]> = [
   ["/notre-centre/la-methode", p("coral", 100, 300, "blue-500")],
   ["/notre-centre/troubles-accompagnes", p("sun", 200, 400, "blue-700")],
-  ["/notre-centre/equipe", p("coral", 200, 400, "sun-300")],
-  ["/notre-centre/nos-espaces", p("blue", 100, 300, "coral-600")],
+  ["/notre-centre/la-fondatrice", p("coral", 200, 400, "sun-300")],
+  ["/notre-centre/galerie", p("blue", 100, 300, "coral-600")],
   ["/notre-centre", p("blue", 50, 200, "sun-500")],
   ["/programmes", p("sun", 100, 400, "blue-400")],
-  ["/admissions", p("cream", 100, 300, "coral-700")],
   ["/actualites", p("blue", 200, 400, "sun-400")],
   ["/contact", p("coral", 100, 400, "blue-600")],
 ];

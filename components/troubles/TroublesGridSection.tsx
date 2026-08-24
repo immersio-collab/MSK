@@ -5,18 +5,15 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight } from "lucide-react";
-import { MethodeCloud } from "@/components/methode/MethodeCloud";
+import { CloudDrift } from "@/components/motion/CloudDrift";
 import { TROUBLES, type TroubleItem } from "@/lib/data/troubles";
 import { cn } from "@/lib/utils";
+import { SPRING, useTilt } from "@/lib/motion";
 import { TroubleDetailDialog } from "./TroubleDetailDialog";
 import { ICONS, LOOKS } from "./trouble-look";
+import { Eyebrow } from "@/components/common/Eyebrow";
 
 gsap.registerPlugin(ScrollTrigger);
-
-/** Inclinaison au repos de chaque sticker, alternée pour l'effet « collé à la main ». */
-const TILTS = [-2.5, 1.5, -1.5, 2.5, 2, -1.5, 2.5, -2];
-
-const SPRING = { type: "spring", stiffness: 300, damping: 24 } as const;
 
 type CardState = "rest" | "hover" | "dimmed";
 
@@ -59,9 +56,11 @@ interface TroubleStickerCardProps {
 }
 
 function TroubleStickerCard({ item, index, state, onOpen, buttonRef }: TroubleStickerCardProps) {
-  const reduceMotion = useReducedMotion();
   const [keyboardFocus, setKeyboardFocus] = useState(false);
-  const tilt = reduceMotion ? 0 : (TILTS[index % TILTS.length] ?? 0);
+  const tilt = useTilt(index);
+  // Distinct de useTilt (qui attend le montage pour éviter un mismatch SSR) :
+  // ici seul le frétillement de la pastille est coupé, pas un transform rendu.
+  const reduceMotion = useReducedMotion();
   const look = LOOKS[item.tone];
   const Icon = ICONS[item.icon];
   const animateTo: CardState = state === "dimmed" ? "dimmed" : keyboardFocus ? "hover" : "rest";
@@ -208,14 +207,14 @@ export function TroublesGridSection() {
 
       {/* Nuages : dérive latérale continue, vitesses et phases distinctes. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="a"
           speed={52}
           phase={0.2}
           className="absolute left-0 top-[5%] w-40 text-white md:w-56"
         />
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="b"
           speed={40}
@@ -226,9 +225,9 @@ export function TroublesGridSection() {
 
       <div className="container relative mx-auto max-w-6xl px-4">
         <div className="troubles-heading mx-auto mb-14 max-w-2xl text-center">
-          <span className="inline-block rounded-full bg-white px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-coral-700 shadow-sm">
+          <Eyebrow className="bg-white text-msk-coral-700 shadow-sm">
             8 troubles · 1 approche
-          </span>
+          </Eyebrow>
           <h2 className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-5xl md:text-6xl">
             Les troubles que nous <span className="text-msk-coral-700">accompagnons</span>
           </h2>

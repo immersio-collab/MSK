@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 
-export const EquipeGridSection: React.FC = () => {
+export const FondatriceGridSection: React.FC = () => {
   return (
     <section className="py-20 bg-[#FAF8F5]">
       <div className="container mx-auto px-4 max-w-5xl relative">
@@ -42,12 +42,12 @@ export const EquipeGridSection: React.FC = () => {
 
             <div className="space-y-6">
               <p className="text-lg text-msk-night-700/90 leading-relaxed">
-                Forte d'une expertise pluridisciplinaire, Khadija Elabaya dédie sa carrière à l'accompagnement des enfants neuro-atypiques et à leur épanouissement global.
+                Forte d&apos;une expertise pluridisciplinaire, Khadija Elabaya dédie sa carrière à l&apos;accompagnement des enfants neuro-atypiques et à leur épanouissement global.
               </p>
 
               <div>
                 <h4 className="text-sm font-bold uppercase tracking-widest text-slate-600 mb-4 border-b border-msk-cream-200 pb-2">
-                  Ses Domaines d'Expertise
+                  Ses Domaines d&apos;Expertise
                 </h4>
                 <ul className="space-y-3">
                   {[

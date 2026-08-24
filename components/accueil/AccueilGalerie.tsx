@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { MorphButton } from "@/components/motion/MorphButton";
 import { ArrowRight } from "lucide-react";
 
 import { FadeUp } from "@/components/motion/FadeUp";
-import { PELLICULE } from "@/components/galerie/galerie-content";
+import { PolaroidCard } from "@/components/common/PolaroidCard";
+import { PELLICULE } from "@/lib/data/galerie";
 
 /**
  * The centre's spaces, as an edge-to-edge marquee of the same polaroid cards
@@ -13,7 +14,7 @@ import { PELLICULE } from "@/components/galerie/galerie-content";
  * radius and a tilt that alternate by position, and the title captioned
  * underneath.
  *
- * Photos come from `PELLICULE` in `galerie-content.ts` — the gallery page's own
+ * Photos come from `PELLICULE` in `lib/data/galerie.ts` — the shared
  * list, not a second copy of it. This file used to carry seven hardcoded paths.
  *
  * Unlike the gallery page's cards these are not buttons: there is no lightbox
@@ -40,13 +41,15 @@ export const AccueilGalerie = () => {
               </h2>
             </div>
 
-            <Link
+            <MorphButton
               href="/notre-centre/galerie"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-white/70 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-msk-night-950"
+              size="sm"
+              className="text-sm font-semibold text-white transition-colors group-hover:text-msk-night-950"
+              fillClassName="border-2 border-white/70 bg-transparent group-hover:bg-white"
             >
               Voir la galerie
               <ArrowRight className="h-4 w-4" aria-hidden />
-            </Link>
+            </MorphButton>
           </div>
         </FadeUp>
       </div>
@@ -60,14 +63,11 @@ export const AccueilGalerie = () => {
           >
             {PELLICULE.map((photo, index) => (
               <li key={`${copie}-${photo.src}`} className="shrink-0">
-                <figure
-                  className={`block w-[min(46vw,340px)] bg-white p-2 pb-3 shadow-xl ${
-                    index % 2
-                      ? "mt-6 rotate-2 rounded-[6px_20px_8px_18px]"
-                      : "-rotate-2 rounded-[18px_6px_20px_8px]"
-                  }`}
-                >
-                  <span className="relative block aspect-4/3 w-full overflow-hidden">
+                <PolaroidCard
+                  as="figure"
+                  index={index}
+                  caption={photo.titre}
+                  media={
                     <Image
                       src={photo.src}
                       // Decorative: the visible caption below carries the name.
@@ -78,11 +78,8 @@ export const AccueilGalerie = () => {
                       draggable={false}
                       className="h-full w-full object-cover"
                     />
-                  </span>
-                  <figcaption className="mt-2 block text-center font-display text-xs font-semibold text-msk-night-800">
-                    {photo.titre}
-                  </figcaption>
-                </figure>
+                  }
+                />
               </li>
             ))}
           </ul>

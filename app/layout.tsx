@@ -63,8 +63,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "MSK Montessori School | École Inclusive à Casablanca",
-    description:
-      "MSK ne cherche pas à faire entrer tous les enfants dans le même cadre : c'est le cadre qui s'adapte à l'enfant.",
+    description: SCHOOL_INFO.coreQuote,
     url: "https://mskmontessori.ma",
     siteName: "MSK Montessori School",
     locale: "fr_MA",

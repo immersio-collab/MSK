@@ -1,11 +1,12 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
 
-import { MethodeCloud } from "@/components/methode/MethodeCloud";
+import { CloudDrift } from "@/components/motion/CloudDrift";
 import { FadeUp } from "@/components/motion/FadeUp";
 import { MorphButton } from "@/components/motion/MorphButton";
+import { SCHOOL_INFO } from "@/lib/data/site-content";
 
 interface NextStepSectionProps {
   eyebrow: string;
@@ -13,16 +14,13 @@ interface NextStepSectionProps {
   description: string;
   buttonText: string;
   buttonHref: string;
-  svgSrc: string;
-  svgAlt?: string;
-  svgWidth?: number;
-  svgHeight?: number;
   bgColor: string;
   cloudColor: string;
   textColor: string;
   buttonTextColor: string;
   eyebrowColor?: string;
-  imageContainerClassName?: string;
+  titleColor?: string;
+  buttonBgColor?: string;
 }
 
 /**
@@ -35,34 +33,31 @@ export const NextStepSection = ({
   description,
   buttonText,
   buttonHref,
-  svgSrc,
-  svgAlt = "Illustration",
-  svgWidth = 700,
-  svgHeight = 700,
   bgColor,
   cloudColor,
   textColor,
   buttonTextColor,
   eyebrowColor = "text-msk-sun-300",
-  imageContainerClassName,
+  titleColor = "text-white",
+  buttonBgColor = "bg-white",
 }: NextStepSectionProps) => {
   return (
     <section
       className={cn(
-        "relative w-full overflow-hidden pt-16 pb-4 text-center md:pt-24 md:pb-8",
+        "relative w-full overflow-hidden py-20 text-center md:py-24",
         bgColor
       )}
     >
       {/* Decorative clouds */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
-        <MethodeCloud
+        <CloudDrift
           shape="a"
           motion="float"
           speed={120}
           phase={0.2}
           className={cn("absolute top-[10%] w-44 xl:w-60", cloudColor)}
         />
-        <MethodeCloud
+        <CloudDrift
           shape="b"
           motion="float"
           speed={160}
@@ -73,7 +68,7 @@ export const NextStepSection = ({
             cloudColor
           )}
         />
-        <MethodeCloud
+        <CloudDrift
           shape="d"
           motion="float"
           speed={100}
@@ -96,7 +91,7 @@ export const NextStepSection = ({
             {eyebrow}
           </span>
 
-          <h2 className="mt-4 font-display text-[2.5rem] font-bold uppercase leading-[0.9] text-white sm:text-6xl md:text-7xl">
+          <h2 className={cn("mt-4 font-display text-[2.5rem] font-bold uppercase leading-[0.9] sm:text-6xl md:text-7xl", titleColor)}>
             {title}
           </h2>
 
@@ -116,7 +111,7 @@ export const NextStepSection = ({
                   "text-sm font-semibold uppercase tracking-[0.14em]",
                   buttonTextColor
                 )}
-                fillClassName="bg-white"
+                fillClassName={buttonBgColor}
               >
                 {buttonText}
                 <ArrowRight className="h-4 w-4" />
@@ -130,35 +125,17 @@ export const NextStepSection = ({
                   Nous contacter
                 </MorphButton>
               )}
+              <MorphButton
+                href={SCHOOL_INFO.whatsapp}
+                className="text-sm font-semibold uppercase tracking-[0.14em] text-msk-night-900"
+                fillClassName="bg-white shadow-md group-hover:bg-msk-cream-100"
+              >
+                <MessageCircle className="h-4 w-4" />
+                WhatsApp
+              </MorphButton>
             </div>
           </FadeUp>
         </FadeUp>
-
-        <div
-          className={cn(
-            "relative z-10 mx-auto pointer-events-none flex w-full justify-center",
-            imageContainerClassName || "-mt-8 sm:-mt-12 md:-mt-20 max-w-2xl"
-          )}
-        >
-          {/* Plain <img> plutôt que le composant Image : l'optimiseur d'images
-              refuse les SVG locaux tant que `dangerouslyAllowSVG` n'est pas
-              activé — il répond 400 « The requested resource isn't a valid
-              image » et l'illustration ne s'affiche jamais. Or les cinq pages
-              qui utilisent cette section passent toutes un .svg. Un <img> les
-              sert tels quels et préserve au passage leurs animations SMIL,
-              qu'un pipeline d'optimisation aplatirait. Même parti pris que
-              pour /methode/sun-cloud.svg et /Sunny.svg. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={svgSrc}
-            alt={svgAlt}
-            width={svgWidth}
-            height={svgHeight}
-            loading="lazy"
-            decoding="async"
-            className="h-[220px] sm:h-[280px] md:h-[360px] w-full object-contain object-top"
-          />
-        </div>
       </div>
     </section>
   );

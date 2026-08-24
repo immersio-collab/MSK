@@ -5,11 +5,11 @@
  * while the real illustrations and photography are outstanding. Each slot names
  * what belongs there and roughly what size it is drawn at.
  *
- * To swap one out, replace the <MethodeAssetSlot> element with the real
- * <Image>; nothing else in the section depends on it. `grep -rn MethodeAssetSlot`
+ * To swap one out, replace the <AssetSlot> element with the real
+ * <Image>; nothing else in the section depends on it. `grep -rn AssetSlot`
  * lists every outstanding one.
  */
-export const MethodeAssetSlot = ({
+export const AssetSlot = ({
   label,
   hint,
   className,

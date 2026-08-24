@@ -1,4 +1,4 @@
-export interface NavItem {
+interface NavItem {
   label: string;
   href: string;
   children?: {
@@ -98,6 +98,8 @@ export const SCHOOL_INFO = {
   city: "Casablanca",
   country: "Maroc",
   phone: "+212 5 22 00 00 00",
+  /** Lien WhatsApp complet — numéro placeholder, à remplacer ici et nulle part ailleurs. */
+  whatsapp: "https://wa.me/212600000000",
   email: "contact@mskmontessori.ma",
   address: "Quartier Oasis / Val Fleuri, Casablanca, Maroc",
   hours: "Du Lundi au Vendredi : 8h00 - 18h00",

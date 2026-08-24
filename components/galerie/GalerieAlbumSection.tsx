@@ -19,9 +19,9 @@ import {
   CATEGORIE_TON,
   GALERIE_PHOTOS,
   type GalerieCategorie,
-} from "@/components/galerie/galerie-content";
+} from "@/lib/data/galerie";
 import { GalerieTitreAnime } from "@/components/galerie/GalerieTitreAnime";
-import { MethodeCloud } from "@/components/methode/MethodeCloud";
+import { CloudDrift } from "@/components/motion/CloudDrift";
 import { cn } from "@/lib/utils";
 
 /**
@@ -146,14 +146,14 @@ export function GalerieAlbumSection() {
           alt=""
           className="absolute right-[1%] top-[3%] w-24 sm:w-32 lg:right-[4%] lg:w-44"
         />
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="a"
           speed={54}
           phase={0.3}
           className="absolute left-0 top-[12%] w-40 text-white md:w-56"
         />
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="b"
           speed={42}
@@ -212,7 +212,6 @@ export function GalerieAlbumSection() {
           })}
         </div>
 
-        {/* L'album */}
         <div
           role="region"
           aria-roledescription="carrousel"
@@ -232,7 +231,6 @@ export function GalerieAlbumSection() {
             </button>
 
             <div className="relative min-w-0 flex-1">
-              {/* La pile : une 2e carte dépasse derrière. */}
               <div
                 aria-hidden
                 className="absolute inset-0 translate-x-3 translate-y-2 rotate-[2.2deg] rounded-[1.5rem] bg-white/70 shadow-md"
@@ -310,7 +308,6 @@ export function GalerieAlbumSection() {
                         </div>
                       </div>
 
-                      {/* Points : un par photo, cliquables. */}
                       <div className="hidden shrink-0 items-center gap-1.5 sm:flex" aria-label="Aller à la photo">
                         {photos.map((p, i) => (
                           <button
@@ -342,7 +339,6 @@ export function GalerieAlbumSection() {
             </button>
           </div>
 
-          {/* Sur mobile les flèches passent sous la carte. */}
           <div className="mt-5 flex items-center justify-center gap-4 md:hidden">
             <button
               type="button"
@@ -366,7 +362,6 @@ export function GalerieAlbumSection() {
           </div>
         </div>
 
-        {/* Rail de vignettes */}
         <div ref={rail} className="hide-scrollbar relative -mx-4 mt-5 overflow-x-auto px-4 pb-4 pt-3 sm:-mx-8 sm:px-8">
           <ul className="flex w-max items-end gap-4" aria-label="Vignettes">
             {photos.map((p, i) => {

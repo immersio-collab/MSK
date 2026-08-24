@@ -19,7 +19,8 @@ import "yet-another-react-lightbox/plugins/counter.css";
 
 import { MoveHorizontal, ZoomIn } from "lucide-react";
 
-import { PELLICULE } from "@/components/galerie/galerie-content";
+import { PELLICULE } from "@/lib/data/galerie";
+import { PolaroidCard } from "@/components/common/PolaroidCard";
 import { GalerieTitreAnime } from "@/components/galerie/GalerieTitreAnime";
 
 /**
@@ -259,8 +260,9 @@ export const GaleriePelliculeSection = () => {
             >
               {PELLICULE.map((photo, index) => (
                 <li key={`${copie}-${photo.src}-${index}`} className="shrink-0">
-                  <button
-                    type="button"
+                  <PolaroidCard
+                    as="button"
+                    index={index}
                     // Les copies ne sont pas atteignables au clavier : un même
                     // contenu répété trois fois dans l'ordre de tabulation serait
                     // pénible, et `aria-hidden` interdit d'y laisser le focus.
@@ -271,33 +273,28 @@ export const GaleriePelliculeSection = () => {
                     // universel du glissement, et c'est le geste que personne ne
                     // devinait. La loupe reste présente, mais en pastille sur la
                     // photo — les deux actions sont ainsi annoncées à la fois.
-                    className={`group block w-[min(46vw,340px)] cursor-grab bg-white p-2 pb-3 shadow-xl transition-transform duration-300 hover:rotate-0 hover:scale-[1.03] focus-visible:outline-hidden focus-visible:ring-4 focus-visible:ring-msk-coral-400 active:cursor-grabbing ${
-                      index % 2
-                        ? "mt-6 rotate-2 rounded-[6px_20px_8px_18px]"
-                        : "-rotate-2 rounded-[18px_6px_20px_8px]"
-                    }`}
-                  >
-                    <span className="relative block aspect-4/3 w-full overflow-hidden">
-                      <Image
-                        src={photo.src}
-                        alt=""
-                        width={photo.width}
-                        height={photo.height}
-                        sizes="(max-width: 640px) 46vw, 340px"
-                        draggable={false}
-                        className="h-full w-full object-cover"
-                      />
-                      <span
-                        aria-hidden
-                        className="pointer-events-none absolute right-2 top-2 flex h-9 w-9 items-center justify-center rounded-full bg-white text-msk-night-900 opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
-                      >
-                        <ZoomIn className="h-4 w-4" strokeWidth={2.5} />
-                      </span>
-                    </span>
-                    <span className="mt-2 block text-center font-display text-xs font-semibold text-msk-night-800">
-                      {photo.titre}
-                    </span>
-                  </button>
+                    className="group cursor-grab transition-transform duration-300 hover:rotate-0 hover:scale-[1.03] focus-visible:outline-hidden focus-visible:ring-4 focus-visible:ring-msk-coral-400 active:cursor-grabbing"
+                    caption={photo.titre}
+                    media={
+                      <>
+                        <Image
+                          src={photo.src}
+                          alt=""
+                          width={photo.width}
+                          height={photo.height}
+                          sizes="(max-width: 640px) 46vw, 340px"
+                          draggable={false}
+                          className="h-full w-full object-cover"
+                        />
+                        <span
+                          aria-hidden
+                          className="pointer-events-none absolute right-2 top-2 flex h-9 w-9 items-center justify-center rounded-full bg-white text-msk-night-900 opacity-0 shadow-md transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
+                        >
+                          <ZoomIn className="h-4 w-4" strokeWidth={2.5} />
+                        </span>
+                      </>
+                    }
+                  />
                 </li>
               ))}
             </ul>

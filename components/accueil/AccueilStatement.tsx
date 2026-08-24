@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
 
 import { FadeUp } from "@/components/motion/FadeUp";
+import { MorphButton } from "@/components/motion/MorphButton";
+import { SCHOOL_INFO } from "@/lib/data/site-content";
 
 /**
  * An oversized statement on a flat colour field — the reference's way of
@@ -25,7 +26,7 @@ export const AccueilStatement = ({
   cta,
 }: AccueilStatementProps) => {
   return (
-    <section className={`w-full py-24 text-center md:py-32 ${background}`}>
+    <section className={`w-full py-20 text-center md:py-24 ${background}`}>
       <div className="mx-auto w-full max-w-5xl px-6 sm:px-10">
         <FadeUp>
           <p className="font-display text-[1.75rem] font-bold uppercase leading-[1.1] text-msk-night-950 sm:text-[2.25rem] lg:text-[2.75rem]">
@@ -35,13 +36,24 @@ export const AccueilStatement = ({
 
         {cta ? (
           <FadeUp delay={0.15}>
-            <Link
-              href={cta.href}
-              className="mt-12 inline-flex items-center gap-2 rounded-full bg-msk-night-950 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-msk-night-800"
-            >
-              {cta.label}
-              <ArrowRight className="h-4 w-4" aria-hidden />
-            </Link>
+            <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <MorphButton
+                href={cta.href}
+                className="text-sm font-semibold text-white"
+                fillClassName="bg-msk-night-950 group-hover:bg-msk-night-800"
+              >
+                {cta.label}
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </MorphButton>
+              <MorphButton
+                href={SCHOOL_INFO.whatsapp}
+                className="text-sm font-semibold text-msk-night-900"
+                fillClassName="bg-white shadow-sm group-hover:bg-msk-cream-100"
+              >
+                <MessageCircle className="h-4 w-4" aria-hidden />
+                WhatsApp
+              </MorphButton>
+            </div>
           </FadeUp>
         ) : null}
       </div>

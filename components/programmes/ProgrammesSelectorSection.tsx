@@ -7,6 +7,8 @@ import { Check, MoonStar, Sunrise } from "lucide-react";
 
 import { FadeUp } from "@/components/motion/FadeUp";
 import { cn } from "@/lib/utils";
+import { Eyebrow } from "@/components/common/Eyebrow";
+import { PROGRAMMES } from "@/lib/data/programmes";
 
 /**
  * Sélecteur Maternelle / Primaire — version allégée.
@@ -59,24 +61,12 @@ const TEINTES: Record<ProgramId, Teinte> = {
   },
 };
 
-interface ProgramData {
-  id: ProgramId;
-  title: string;
-  age: string;
-  description: string;
-  objectives: string[];
-  conditions: string[];
-  matin: string;
-  apresMidi: string;
-  image: string;
-  legende: string;
-}
-
-const programs: ProgramData[] = [
+/**
+ * Les faits (âges, profils, rythme, photos) viennent de PROGRAMMES ; cette
+ * surface n'ajoute que sa description, ses objectifs et ses légendes.
+ */
+const EXTRAS = [
   {
-    id: "maternelle",
-    title: "Maternelle",
-    age: "2–5 ans",
     description:
       "Un environnement préparé pour l'éveil sensoriel, le langage et l'autonomie — au rythme de chaque enfant.",
     objectives: [
@@ -85,16 +75,9 @@ const programs: ProgramData[] = [
       "Langage oral",
       "Émotions et socialisation",
     ],
-    conditions: ["Retard de langage", "TSA léger", "Hyperactivité précoce"],
-    matin: "Montessori structuré",
-    apresMidi: "Sieste et jeux libres",
-    image: "/maternelle1.jpg",
     legende: "La classe des 2–5 ans",
   },
   {
-    id: "primaire",
-    title: "Primaire",
-    age: "6–11 ans",
     description:
       "Les fondamentaux — lecture, écriture, calcul — dans un cadre inclusif, avec les séances thérapeutiques intégrées.",
     objectives: [
@@ -103,13 +86,15 @@ const programs: ProgramData[] = [
       "Estime de soi",
       "Inclusion en milieu ordinaire",
     ],
-    conditions: ["TDAH", "Dyslexie, dysorthographie", "Dyspraxie", "Dyscalculie"],
-    matin: "Apprentissages cognitifs",
-    apresMidi: "Ateliers thérapeutiques et créatifs",
-    image: "/primaire1.webp",
     legende: "La classe des 6–11 ans",
   },
 ];
+
+const programs = PROGRAMMES.map((programme, index) => ({
+  ...programme,
+  ...EXTRAS[index],
+  conditions: programme.profils,
+}));
 
 export const ProgrammesSelectorSection = () => {
   const [activeTab, setActiveTab] = useState<ProgramId>("maternelle");
@@ -122,9 +107,9 @@ export const ProgrammesSelectorSection = () => {
       <div className="mx-auto max-w-6xl px-6 sm:px-10">
         <FadeUp>
           <div className="mb-10 text-center">
-            <span className="inline-block rounded-full bg-white px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-coral-700 shadow-sm">
+            <Eyebrow className="bg-white text-msk-coral-700 shadow-sm">
               Nos niveaux
-            </span>
+            </Eyebrow>
             <h2 className="mt-4 font-display text-3xl font-bold uppercase leading-[0.95] text-msk-night-900 md:text-4xl">
               Choisissez le programme de votre enfant
             </h2>

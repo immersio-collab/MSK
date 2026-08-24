@@ -97,7 +97,7 @@ const local = clamp01((p - i / n) / ((i + WINDOW) / n - i / n));
 
 ## Lottie
 
-Rendered through `lottie-web` — see `MethodeLottie`.
+Rendered through `lottie-web` — see `LottieMark` (components/motion/LottieMark.tsx).
 
 - **Import it dynamically.** ~250KB; it belongs nowhere near the initial bundle.
 - **Gate playback on an IntersectionObserver.** Off-screen animations pause
@@ -154,6 +154,6 @@ Verify the deck is actually `display: none` rather than merely off-screen.
 
 ## Outstanding assets
 
-Use `MethodeAssetSlot` for artwork that has not arrived, rather than leaving
+Use `AssetSlot` (components/common/AssetSlot.tsx) for artwork that has not arrived, rather than leaving
 gaps. Each slot names what belongs there and its rough size, so the page reads
-as intentional and `grep -rn MethodeAssetSlot` lists what is still owed.
+as intentional and `grep -rn AssetSlot` lists what is still owed.

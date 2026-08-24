@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Favicon MSK : « M » corail sur fond crème, les trois pastilles de la marque dessous. -->
+  <rect width="64" height="64" rx="14" fill="#fdfbf7"/>
+  <text x="32" y="40" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="900" fill="#df5b85">M</text>
+  <circle cx="20" cy="51" r="4.5" fill="#df5b85"/>
+  <circle cx="32" cy="51" r="4.5" fill="#f5b738"/>
+  <circle cx="44" cy="51" r="4.5" fill="#6aaee0"/>
+</svg>

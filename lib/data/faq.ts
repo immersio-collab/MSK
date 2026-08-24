@@ -15,17 +15,16 @@ import type { FaqItem } from "@/components/common/FaqSection";
  * truth. Only the first five run on the page; the rest still serve other
  * consumers of that constant.
  *
- * ---------------------------------------------------------------------------
  * WHAT THESE ANSWERS ARE NOT ALLOWED TO SAY
- * ---------------------------------------------------------------------------
+ *
  * An adversarial pass over an earlier draft of this file caught eight answers
  * that asserted things the site cannot back. The constraints below are the
  * result; break one and the site promises a parent something it does not have.
  *
- * - No phone number and no WhatsApp link. `SCHOOL_INFO.phone` is
- *   "+212 5 22 00 00 00" and every wa.me link in the repo is
- *   wa.me/212600000000 — both placeholders. Sending a worried parent to dial
- *   one is worse than not answering.
+ * - No phone number and no WhatsApp link. `SCHOOL_INFO.phone` and
+ *   `SCHOOL_INFO.whatsapp` (lib/data/site-content.ts — the single place every
+ *   wa.me link now comes from) are both placeholders. Sending a worried parent
+ *   to dial one is worse than not answering.
  * - Nothing about the contact form being received or answered. Its `onSubmit`
  *   in components/contact/ContactMainSection.tsx only flips local state; there
  *   is no backend, no API call, no mailto. Until one exists, no answer may
@@ -34,11 +33,12 @@ import type { FaqItem } from "@/components/common/FaqSection";
  *   renders "Lien de visite à renseigner" in its place.
  * - No recurring open days. The only source is one dated article from
  *   November 2023, in a file whose header declares its article bodies drafts.
- * - Nothing sourced from components/admissions/*. That folder is unreachable —
- *   no app/admissions route imports it — and its own comments mark the copy as
- *   draft "to confirm before publishing". That rules out the paperwork list
- *   and the "dans un cadre calme / sans engagement" phrasing for the bilan.
- *   "Bilan gratuit" itself is fine: three live pages already print it.
+ * - Nothing sourced from the old components/admissions/* sections (deleted —
+ *   there is no /admissions route; FAQ_ADMISSIONS stays for a possible future
+ *   page). Its copy was draft "to confirm before publishing", which rules out
+ *   the paperwork list and the "dans un cadre calme / sans engagement"
+ *   phrasing for the bilan. "Bilan gratuit" itself is fine: three live pages
+ *   already print it.
  * - No claim that the articles report real clinical observation. Their bodies
  *   are declared drafts and their photographs are stock.
  * - No claim about who took the gallery photographs. Nothing in the repo

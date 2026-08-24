@@ -53,17 +53,17 @@ const FRAMES = [
   { key: "b", from: 12, to: -8 },
 ] as const;
 
-interface MethodeTiltedDuoProps {
+interface TiltedDuoProps {
   src: string;
   alt: string;
   className?: string;
 }
 
-export const MethodeTiltedDuo = ({
+export const TiltedDuo = ({
   src,
   alt,
   className,
-}: MethodeTiltedDuoProps) => {
+}: TiltedDuoProps) => {
   const root = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -137,7 +137,6 @@ export const MethodeTiltedDuo = ({
           style={{ transform: "rotate(-12deg)" }}
         >
           <div className="absolute left-[-111.1%] top-[-55.6%] h-[181.5%] w-[237%]">
-            {/* Decorative: the same photograph, already described above. */}
             <Image
               src={src}
               alt=""

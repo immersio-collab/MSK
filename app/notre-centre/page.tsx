@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { Eyebrow } from "@/components/common/Eyebrow";
 
 export const metadata: Metadata = {
-  title: "Notre Centre | MSK Montessori School Casablanca",
+  title: "Notre Centre",
   description: "Présentation de notre centre thérapeutique et éducatif MSK à Casablanca.",
 };
 
@@ -16,9 +17,9 @@ export default function NotreCentrePage() {
     <div className="flex flex-col min-h-screen pt-28 pb-20 bg-msk-cream-50">
       <div className="container mx-auto px-6 md:px-12 max-w-5xl space-y-10">
         <div className="text-center space-y-2">
-          <span className="text-xs font-bold uppercase tracking-widest text-msk-coral-600">
+          <Eyebrow variant="bare" className="text-msk-coral-600">
             Page
-          </span>
+          </Eyebrow>
           <h1 className="text-3xl md:text-5xl font-extrabold text-msk-night-900">
             Notre Centre
           </h1>

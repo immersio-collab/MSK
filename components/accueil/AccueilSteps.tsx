@@ -3,24 +3,17 @@
 import Image from "next/image";
 
 import { FadeUp } from "@/components/motion/FadeUp";
+import { METHODE_STEPS } from "@/lib/data/methode-steps";
 
 /**
- * The method, in the reference's step arrangement: full-bleed bands that
- * alternate background, each pairing a step badge, an oversized condensed
- * headline and a condensed sub-line on the left with an illustration on a flat
- * colour panel on the right.
+ * The method as full-bleed sticky bands, alternating cream / pale-blue so the
+ * boundary between steps is the colour change itself — no rule or gap needed.
  *
- * Bands alternate cream / pale-blue, so the boundary between steps is the
- * colour change itself and needs no rule or gap.
- *
- * Numbers, verbs, titles and descriptions are the six steps the home page
- * already carried; only the presentation changed. Illustrations replace the
- * remote Unsplash photographs the previous version hot-linked.
+ * Step identity (number + verb) comes from METHODE_STEPS; titles, copy and
+ * presentation are this surface's own.
  */
-const STEPS = [
+const DETAILS = [
   {
-    number: "01",
-    verb: "Observer",
     title: "L'observation bienveillante",
     description:
       "Identifier avec précision les forces, le profil sensoriel et le style d'apprentissage sans jugement ni étiquette.",
@@ -29,8 +22,6 @@ const STEPS = [
     panel: "bg-msk-coral-100",
   },
   {
-    number: "02",
-    verb: "Comprendre",
     title: "L'analyse pluridisciplinaire",
     description:
       "Croiser les regards des éducateurs, psychomotriciens, orthophonistes et de la famille pour cibler les besoins.",
@@ -39,8 +30,6 @@ const STEPS = [
     panel: "bg-msk-blue-200",
   },
   {
-    number: "03",
-    verb: "Adapter",
     title: "L'environnement sur-mesure",
     description:
       "Ajuster le matériel sensoriel Montessori, les rythmes et les supports pédagogiques au profil unique de l'enfant.",
@@ -49,8 +38,6 @@ const STEPS = [
     panel: "bg-msk-sun-200",
   },
   {
-    number: "04",
-    verb: "Rééduquer",
     title: "La Neuro-Gym & la remédiation",
     description:
       "Stimuler les connexions neuro-motrices, réguler l'attention et libérer le potentiel cognitif de l'apprenant.",
@@ -59,8 +46,6 @@ const STEPS = [
     panel: "bg-msk-coral-200",
   },
   {
-    number: "05",
-    verb: "Accompagner",
     title: "Le lien continu avec la famille",
     description:
       "Un dialogue transparent et des bilans réguliers pour co-construire chaque progrès au quotidien.",
@@ -69,8 +54,6 @@ const STEPS = [
     panel: "bg-msk-blue-100",
   },
   {
-    number: "06",
-    verb: "Insérer",
     title: "L'insertion scolaire et sociale",
     description:
       "Développer l'autonomie et la confiance en soi pour une intégration sereine et pérenne.",
@@ -80,11 +63,25 @@ const STEPS = [
   },
 ];
 
+const STEPS = METHODE_STEPS.map((step, index) => ({ ...step, ...DETAILS[index] }));
+
 export const AccueilSteps = () => {
   return (
     <div id="methode">
-      {/* Intro band, on the same cream as the first step so the two read as one run. */}
-      <section className="w-full bg-msk-cream-50 pt-24 md:pt-32">
+      {/*
+        Pinned header: `sticky top-0` keeps it docked at the viewport top for
+        as long as ANY step below is still scrolling past, and `z-10` is what
+        keeps it on top of them — without an explicit z-index it would lose to
+        whichever step comes later in paint order, which is exactly how the
+        steps are meant to cover EACH OTHER (see the comment below). Giving the
+        header the only explicit z-index in this stack makes it win against
+        every step while leaving the steps' own mutual stacking untouched.
+
+        Kept to its natural (non-`min-h-screen`) height so it reads as a
+        compact docked bar, not a full screen — each step reserves matching
+        top space (`lg:pt-[19rem]` etc.) so its own centred content clears it.
+      */}
+      <section className="flex min-h-[100dvh] w-full flex-col justify-center bg-msk-cream-50 py-20">
         <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
           <FadeUp>
             <span className="inline-block rounded-[0.4rem] bg-msk-sun-200 px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950">
@@ -105,8 +102,9 @@ export const AccueilSteps = () => {
         The steps stack rather than scroll past: every band is `sticky top-0`
         inside this one container, so each pins at the top of the viewport and
         the next slides up and covers it. Later siblings paint over earlier
-        ones, which is what makes the covering work — no z-index needed, and no
-        JavaScript at all.
+        ones, which is what makes the covering work — no z-index needed among
+        them, and no JavaScript at all. The pinned header above always wins
+        against all of them (see its own z-index comment).
 
         Two things this depends on:
         - each band must be viewport-tall, or the next one starts covering
@@ -124,7 +122,21 @@ export const AccueilSteps = () => {
           className={`sticky top-0 w-full ${step.band}`}
         >
           <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
-            <div className="grid min-h-screen grid-cols-1 items-center gap-10 py-16 md:py-20 lg:grid-cols-2 lg:gap-16">
+            {/*
+              Top padding clears the pinned header above (measured, not
+              guessed: 345px by default, 298px at sm, 344px at md, 353px from
+              lg up — stable beyond that) with roughly 30–45px of breathing
+              room at each step, so a future edit to the header copy has slack
+              before it needs retuning.
+
+              `items-start`, not `items-center`: centering a row taller than
+              its content splits the LEFTOVER height evenly above and below —
+              on top of the padding already reserved for the header, adding a
+              second, much bigger gap on top of it (166px measured on top of
+              the intended ~40px). Starting the content at the padding's edge
+              is the one placement that doesn't compound.
+            */}
+            <div className="grid min-h-screen grid-cols-1 items-center gap-10 py-16 lg:grid-cols-2 lg:gap-16">
               <FadeUp>
                 <div>
                   <span className="inline-block rounded-[0.4rem] bg-white px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950 shadow-sm">

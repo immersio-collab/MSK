@@ -15,6 +15,8 @@ import {
 
 import { FadeUp } from "@/components/motion/FadeUp";
 import { cn } from "@/lib/utils";
+import { Eyebrow } from "@/components/common/Eyebrow";
+import { PROGRAMMES } from "@/lib/data/programmes";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -54,17 +56,9 @@ interface FicheTeinte {
   pastille: string;
 }
 
-const FICHES: {
-  id: "maternelle" | "primaire";
-  titre: string;
-  age: string;
-  tilt: string;
-  teinte: FicheTeinte;
-}[] = [
+/** Titres et âges viennent de PROGRAMMES ; ici seulement l'habillage. */
+const HABILLAGES: { tilt: string; teinte: FicheTeinte }[] = [
   {
-    id: "maternelle",
-    titre: "Maternelle",
-    age: "2–5 ans",
     tilt: "lg:rotate-[-1deg]",
     teinte: {
       bandeau: "bg-msk-coral-500",
@@ -76,9 +70,6 @@ const FICHES: {
     },
   },
   {
-    id: "primaire",
-    titre: "Primaire",
-    age: "6–11 ans",
     tilt: "lg:rotate-[1deg]",
     teinte: {
       bandeau: "bg-msk-sun-400",
@@ -90,6 +81,13 @@ const FICHES: {
     },
   },
 ];
+
+const FICHES = PROGRAMMES.map((programme, index) => ({
+  id: programme.id,
+  titre: programme.title,
+  age: programme.age,
+  ...HABILLAGES[index],
+}));
 
 export const ProgrammesTableSection = () => {
   const root = useRef<HTMLElement>(null);
@@ -122,9 +120,9 @@ export const ProgrammesTableSection = () => {
       <div className="mx-auto max-w-4xl px-6 sm:px-10">
         <FadeUp>
           <div className="mb-12 text-center">
-            <span className="inline-block rounded-full bg-white px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-coral-700 shadow-sm">
+            <Eyebrow className="bg-white text-msk-coral-700 shadow-sm">
               Vue d&apos;ensemble
-            </span>
+            </Eyebrow>
             <h2 className="mt-4 font-display text-3xl font-bold uppercase leading-[0.95] text-msk-night-900 md:text-4xl">
               Comparatif des <span className="text-msk-coral-700">programmes</span>
             </h2>

@@ -8,10 +8,10 @@ import { FadeUp } from "@/components/motion/FadeUp";
  * The reference's "Get started" beat: a white panel with the invitation and a
  * button on the left, and the numbered path to a first appointment on the right.
  *
- * NOTE — draft copy. The site has no written admissions sequence yet
- * (`app/admissions/page.tsx` is still a section skeleton, and its "Les 4 Étapes
- * de l'Admission" block is empty). These three steps are a plausible reading of
- * that flow, written to be replaced once the real wording exists.
+ * NOTE — draft copy. The site has no written admissions sequence (there is no
+ * /admissions route; admissions CTAs point to /contact). These three steps are
+ * a plausible reading of that flow, written to be replaced once the real
+ * wording exists.
  */
 const PROCESS = [
   {

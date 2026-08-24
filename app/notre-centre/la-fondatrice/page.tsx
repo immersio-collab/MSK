@@ -1,24 +1,24 @@
 import type { Metadata } from "next";
-import { EquipeHeroSection } from "@/components/equipe/EquipeHeroSection";
-import { EquipeGridSection } from "@/components/equipe/EquipeGridSection";
-import { EquipePhilosophieSection } from "@/components/equipe/EquipePhilosophieSection";
+import { FondatriceHeroSection } from "@/components/fondatrice/FondatriceHeroSection";
+import { FondatriceGridSection } from "@/components/fondatrice/FondatriceGridSection";
+import { FondatricePhilosophieSection } from "@/components/fondatrice/FondatricePhilosophieSection";
 import { FaqSection } from "@/components/common/FaqSection";
 import { NextStepSection } from "@/components/common/NextStepSection";
 import { FAQ_FONDATRICE } from "@/lib/data/faq";
 
 export const metadata: Metadata = {
-  title: "La Fondatrice | MSK Montessori School Casablanca",
+  title: "La Fondatrice",
   description: "Découvrez le profil de Khadija Elabaya, fondatrice de MSK Thérapie et spécialiste en éducation inclusive.",
 };
 
-export default function EquipePage() {
+export default function FondatricePage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <EquipeHeroSection />
+      <FondatriceHeroSection />
       
-      <EquipeGridSection />
+      <FondatriceGridSection />
       
-      <EquipePhilosophieSection />
+      <FondatricePhilosophieSection />
 
       {/* Fond jaune pâle : la section philosophie au-dessus est blanche, donc
           la couture se voit, et la page tient une histoire chaude de bout en
@@ -40,7 +40,6 @@ export default function EquipePage() {
         description="Un environnement pensé et adapté pour le bien-être et le développement de chaque enfant."
         buttonText="Visite virtuelle"
         buttonHref="/notre-centre/galerie"
-        svgSrc="/kid swing.svg"
         bgColor="bg-msk-sun-500"
         cloudColor="text-white/80"
         textColor="text-msk-sun-900"

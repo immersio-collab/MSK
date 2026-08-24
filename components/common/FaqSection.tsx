@@ -6,6 +6,7 @@ import { ArrowRight, Plus } from "lucide-react";
 
 import { FadeUp } from "@/components/motion/FadeUp";
 import { MorphButton } from "@/components/motion/MorphButton";
+import { Eyebrow } from "@/components/common/Eyebrow";
 import { cn } from "@/lib/utils";
 
 /**
@@ -157,8 +158,8 @@ const BUTTONS = {
   },
 } as const;
 
-export type FaqTone = keyof typeof TONES;
-export type FaqButton = keyof typeof BUTTONS;
+type FaqTone = keyof typeof TONES;
+type FaqButton = keyof typeof BUTTONS;
 
 interface FaqSectionProps {
   /** Small pill above the heading. */
@@ -190,8 +191,6 @@ export const FaqSection = ({
   button = "coral",
   id,
 }: FaqSectionProps) => {
-  // Every row starts closed: the section opens as a plain list of questions
-  // and nothing is pre-answered for the reader.
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const panelId = useId();
   const t = TONES[tone];
@@ -203,15 +202,9 @@ export const FaqSection = ({
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <FadeUp>
             <div className="lg:sticky lg:top-28">
-              <span
-                className={cn(
-                  "inline-block rounded-full px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] shadow-sm",
-                  t.pillBg,
-                  t.pillText,
-                )}
-              >
+              <Eyebrow className={cn("shadow-sm", t.pillBg, t.pillText)}>
                 {eyebrow}
-              </span>
+              </Eyebrow>
               <h2
                 className={cn(
                   "mt-5 font-display text-[2rem] font-bold uppercase leading-[0.95] sm:text-[2.5rem]",

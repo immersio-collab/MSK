@@ -5,38 +5,37 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { FadeUp } from "@/components/motion/FadeUp";
+import { PROGRAMMES } from "@/lib/data/programmes";
 
 /**
  * The two profiles MSK accueille, as the reference's tilted cards: each sits at
  * a slight angle and straightens on hover.
  *
- * Only Maternelle and Primaire — the same two `/programmes` offers. Do not add
- * an older bracket here without a programme to send it to.
+ * Identity (title, age, image) comes from PROGRAMMES — the same two
+ * `/programmes` offers. Do not add an older bracket here without a programme
+ * to send it to. Quotes, copy and card looks are this surface's own.
  */
-const PROFILES = [
+const EXTRAS = [
   {
-    id: "maternelle",
-    title: "Maternelle",
-    age: "2-5 ans",
     quote: "« Mon enfant ne parle pas encore comme les autres »",
     description:
       "Retard de langage, difficultés de socialisation, éveil sensoriel. Nous l'accueillons avec douceur.",
-    image: "/maternelle1.jpg",
     card: "bg-msk-coral-100",
     tilt: "-rotate-3",
   },
   {
-    id: "primaire",
-    title: "Primaire",
-    age: "6-11 ans",
     quote: "« L'école classique ne lui convient plus »",
     description:
       "TDAH, dyslexie, dyscalculie, rejet scolaire. Nous reconstruisons sa confiance pas à pas.",
-    image: "/primaire1.webp",
     card: "bg-msk-blue-200",
     tilt: "rotate-2",
   },
 ];
+
+const PROFILES = PROGRAMMES.map((programme, index) => ({
+  ...programme,
+  ...EXTRAS[index],
+}));
 
 export const AccueilPourQui = () => {
   return (

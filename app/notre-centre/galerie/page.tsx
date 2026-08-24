@@ -9,7 +9,7 @@ import { NextStepSection } from "@/components/common/NextStepSection";
 import { FAQ_GALERIE } from "@/lib/data/faq";
 
 export const metadata: Metadata = {
-  title: "Nos Espaces (Visite Virtuelle) | MSK Montessori School Casablanca",
+  title: "Nos Espaces (Visite Virtuelle)",
   description:
     "Découvrez en images les espaces du centre MSK à Casablanca : salle sensorielle, espace Montessori, Neuro-Gym, parc extérieur. Visite virtuelle 360° incluse.",
 };
@@ -44,7 +44,6 @@ export default function GaleriePage() {
         description="Une approche en 6 étapes pour observer, comprendre et accompagner votre enfant."
         buttonText="Découvrir"
         buttonHref="/notre-centre/la-methode"
-        svgSrc="/Class Board.svg"
         bgColor="bg-msk-night-800"
         cloudColor="text-white/50"
         textColor="text-msk-cream-100"

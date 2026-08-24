@@ -4,7 +4,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { ArrowRight, X, type LucideIcon } from "lucide-react";
-import { MethodeAssetSlot } from "@/components/methode/MethodeAssetSlot";
+import { AssetSlot } from "@/components/common/AssetSlot";
 import { MorphButton } from "@/components/motion/MorphButton";
 import type { TroubleItem } from "@/lib/data/troubles";
 import { cn } from "@/lib/utils";
@@ -25,7 +25,7 @@ export interface TroubleLook {
   icon: string;
   /** Couleur des libellés posés sur blanc (onglet, pill, intertitres). */
   label: string;
-  /** Tonalité de l'emplacement visuel (MethodeAssetSlot). */
+  /** Tonalité de l'emplacement visuel (AssetSlot). */
   slot: string;
   /** Anneau de focus clavier de la carte. */
   ring: string;
@@ -151,7 +151,6 @@ export function TroubleDetailDialog({
             style={{ borderRadius: 28 }}
             className="relative z-10 flex max-h-[calc(100dvh-1.5rem)] w-full flex-col overflow-hidden bg-white shadow-2xl sm:max-h-[calc(100dvh-2rem)] sm:w-[min(44rem,calc(100vw-2rem))]"
           >
-            {/* Bandeau dans le ton de la carte */}
             <div className={cn("relative shrink-0 px-6 pb-7 pt-6 md:px-9 md:pb-8 md:pt-8", look.card)}>
               <button
                 ref={closeButton}
@@ -204,7 +203,6 @@ export function TroubleDetailDialog({
               </motion.div>
             </div>
 
-            {/* Corps — une seule colonne, volontairement léger */}
             <motion.div
               className="overflow-y-auto px-6 py-7 md:px-9 md:py-8"
               initial="hidden"
@@ -268,7 +266,7 @@ export function TroubleDetailDialog({
                 {/* Emplacement du SVG décoratif de la fiche. Remplacez le slot
                     par votre <img> (même taille : w-28 / md:w-32). */}
                 <div aria-hidden className="-mb-1 -mr-1 w-28 shrink-0 rotate-6 md:w-32">
-                  <MethodeAssetSlot
+                  <AssetSlot
                     label="SVG"
                     hint={item.visuel}
                     tone={look.slot}

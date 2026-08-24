@@ -1,7 +1,8 @@
 import React from "react";
 import Image from "next/image";
+import { Eyebrow } from "@/components/common/Eyebrow";
 
-export const EquipePhilosophieSection: React.FC = () => {
+export const FondatricePhilosophieSection: React.FC = () => {
   return (
     <section className="py-24 bg-white relative overflow-hidden">
       {/* Decorative large quote mark */}
@@ -15,16 +16,16 @@ export const EquipePhilosophieSection: React.FC = () => {
           {/* Left side: Text & Quote */}
           <div className="flex-1 space-y-8">
             <div>
-              <span className="text-sm font-bold uppercase tracking-widest text-msk-coral-500 mb-2 block">
+              <Eyebrow variant="bare" className="mb-2 block text-msk-coral-500">
                 Notre Philosophie
-              </span>
+              </Eyebrow>
               <h2 className="text-3xl md:text-4xl font-bold text-msk-night-900">
-                La neurodiversité n'est pas un obstacle, c'est un autre chemin.
+                La neurodiversité n&apos;est pas un obstacle, c&apos;est un autre chemin.
               </h2>
             </div>
             
             <blockquote className="text-xl md:text-2xl text-msk-night-700/80 italic border-l-4 border-msk-sun-400 pl-6 leading-relaxed">
-              "L'école classique demande à l'enfant de s'adapter à une méthode unique. Chez MSK, c'est notre méthode qui s'adapte à l'enfant. Nous croyons profondément qu'avec le bon environnement, chaque étincelle peut devenir une grande lumière."
+              &laquo;&nbsp;L&apos;école classique demande à l&apos;enfant de s&apos;adapter à une méthode unique. Chez MSK, c&apos;est notre méthode qui s&apos;adapte à l&apos;enfant. Nous croyons profondément qu&apos;avec le bon environnement, chaque étincelle peut devenir une grande lumière.&nbsp;&raquo;
             </blockquote>
             
             <div className="flex items-center gap-4 pt-4">
@@ -47,8 +48,8 @@ export const EquipePhilosophieSection: React.FC = () => {
           <div className="flex-1 w-full">
             <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl group cursor-pointer bg-msk-cream-200">
               <Image 
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1000"
-                alt="Khadija en action"
+                src="/espace montesori.jpeg"
+                alt="L'espace Montessori du centre MSK"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />

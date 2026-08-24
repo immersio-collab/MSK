@@ -1,15 +1,13 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { ChevronDown } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { MethodeAssetSlot } from "@/components/methode/MethodeAssetSlot";
-import { MethodeCloud } from "@/components/methode/MethodeCloud";
+import { AssetSlot } from "@/components/common/AssetSlot";
+import { CloudDrift } from "@/components/motion/CloudDrift";
 import { FadeUp } from "@/components/motion/FadeUp";
-
-gsap.registerPlugin(ScrollTrigger);
+import { Eyebrow } from "@/components/common/Eyebrow";
+import { useHeroParallax } from "@/hooks/use-hero-parallax";
 
 /**
  * Bold colour band with the scene artwork, and the page's title card overlapping
@@ -20,25 +18,7 @@ export const MethodeHeroSection = () => {
   const root = useRef<HTMLElement>(null);
   const kid = useRef<HTMLImageElement>(null);
 
-  useEffect(() => {
-    const el = root.current;
-    if (!el) return;
-
-    const ctx = gsap.context(() => {
-      const scrub = {
-        trigger: el,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      } as const;
-
-      if (kid.current) {
-        gsap.to(kid.current, { yPercent: 120, ease: "none", scrollTrigger: scrub });
-      }
-    }, el);
-
-    return () => ctx.revert();
-  }, []);
+  useHeroParallax(root, [{ ref: kid, vars: { yPercent: 120 } }]);
 
   return (
     <section ref={root} className="relative flex min-h-[100dvh] w-full flex-col justify-center bg-msk-cream-100 pb-16 pt-16 md:pb-20">
@@ -53,21 +33,21 @@ export const MethodeHeroSection = () => {
           out from the viewport width. Differing speeds keep them from moving
           as a single block. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="a"
           speed={52}
           phase={0.2}
           className="absolute left-0 top-[52%] w-40 text-white md:w-56"
         />
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="b"
           speed={38}
           phase={0.5}
           className="absolute left-0 top-[26%] w-48 text-white md:w-72"
         />
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="a"
           speed={64}
@@ -91,9 +71,9 @@ export const MethodeHeroSection = () => {
               Une méthode en 6 étapes, pensée pour votre enfant
             </h1>
 
-            <span className="mt-6 inline-block rounded-full bg-white px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-coral-700">
+            <Eyebrow className="mt-6 bg-white text-msk-coral-700">
               Notre Approche
-            </span>
+            </Eyebrow>
 
             <p className="mx-auto mt-6 max-w-md text-base font-medium leading-snug text-white md:text-lg">
               De l&apos;observation initiale à l&apos;insertion scolaire réussie :

@@ -8,11 +8,12 @@ import { AccueilSteps } from "@/components/accueil/AccueilSteps";
 import { AccueilTemoignages } from "@/components/accueil/AccueilTemoignages";
 import { AccueilGalerie } from "@/components/accueil/AccueilGalerie";
 import { FaqSection } from "@/components/common/FaqSection";
+import { NextStepSection } from "@/components/common/NextStepSection";
 import { FAQ_ACCUEIL } from "@/lib/data/faq";
 import { SCHOOL_INFO } from "@/lib/data/site-content";
 
 export const metadata: Metadata = {
-  title: "Accueil | MSK Montessori School Casablanca",
+  title: "Accueil",
   description:
     "MSK Montessori School - École Inclusive & Réadaptation à Casablanca.",
 };
@@ -49,10 +50,19 @@ export default function HomePage() {
         ctaHref="/contact"
       />
 
-      <AccueilStatement
-        quote={SCHOOL_INFO.coreQuote}
-        background="bg-msk-blue-200"
-        cta={{ href: "/contact", label: "Réserver un bilan gratuit" }}
+      <NextStepSection
+        eyebrow="Le centre"
+        title="Parlons de votre enfant"
+        description={SCHOOL_INFO.coreQuote}
+        buttonText="Réserver un bilan gratuit"
+        buttonHref="/contact"
+        bgColor="bg-msk-blue-200"
+        cloudColor="text-white/60"
+        textColor="text-msk-night-700"
+        titleColor="text-msk-night-950"
+        buttonTextColor="text-white"
+        buttonBgColor="bg-msk-night-950 shadow-md group-hover:bg-msk-night-800"
+        eyebrowColor="text-msk-blue-800"
       />
 
       <AccueilGalerie />

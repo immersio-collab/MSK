@@ -6,17 +6,18 @@ import { AnimatePresence, motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Check, HeartHandshake, RotateCcw, Sprout } from "lucide-react";
-import { MethodeAssetSlot } from "@/components/methode/MethodeAssetSlot";
-import { MethodeCloud } from "@/components/methode/MethodeCloud";
+import { AssetSlot } from "@/components/common/AssetSlot";
+import { CloudDrift } from "@/components/motion/CloudDrift";
 import { MorphButton } from "@/components/motion/MorphButton";
 import { cn } from "@/lib/utils";
+import { Eyebrow } from "@/components/common/Eyebrow";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Confettis du résultat : canvas + rAF, inutiles côté serveur et hors du
-// bundle initial — même import que sur la page d'accueil.
+// Confettis du résultat : canvas + rAF, chargés dynamiquement — inutiles côté
+// serveur et hors du bundle initial tant que le quiz n'est pas terminé.
 const ConfettiParticles = dynamic(
-  () => import("@/components/motion/ConfettiParticles").then((m) => m.ConfettiParticles),
+  () => import("@/components/troubles/ConfettiParticles").then((m) => m.ConfettiParticles),
   { ssr: false },
 );
 
@@ -130,14 +131,14 @@ export function TroublesQuizSection() {
           alt=""
           className="absolute -right-6 top-[10%] w-28 sm:right-[3%] sm:w-44 lg:right-[7%] lg:w-64"
         />
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="b"
           speed={48}
           phase={0.15}
           className="absolute left-0 top-[26%] w-40 text-white md:w-60"
         />
-        <MethodeCloud
+        <CloudDrift
           motion="float"
           shape="a"
           speed={62}
@@ -148,9 +149,9 @@ export function TroublesQuizSection() {
 
       <div className="container relative mx-auto max-w-3xl px-4">
         <div className="quiz-heading mx-auto mb-10 max-w-2xl text-center">
-          <span className="inline-block rounded-full bg-white px-4 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-coral-700 shadow-sm">
+          <Eyebrow className="bg-white text-msk-coral-700 shadow-sm">
             Petit test · 3 questions
-          </span>
+          </Eyebrow>
           <h2 className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-5xl md:text-6xl">
             {/* coral-800 et non 700 : ce titre est posé sur le ciel, pas sur
                 le crème — 5:1 au lieu de 3.9:1. */}
@@ -320,7 +321,7 @@ export function TroublesQuizSection() {
             aria-hidden
             className="pointer-events-none absolute -bottom-8 -left-3 w-28 -rotate-6 sm:-left-8 sm:w-36 md:-bottom-10 md:w-44"
           >
-            <MethodeAssetSlot
+            <AssetSlot
               label="SVG"
               hint="Parent & enfant"
               tone="bg-msk-blue-50 text-msk-blue-800"
