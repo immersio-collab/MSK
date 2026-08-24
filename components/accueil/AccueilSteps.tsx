@@ -101,10 +101,30 @@ export const AccueilSteps = () => {
         </div>
       </section>
 
+      {/*
+        The steps stack rather than scroll past: every band is `sticky top-0`
+        inside this one container, so each pins at the top of the viewport and
+        the next slides up and covers it. Later siblings paint over earlier
+        ones, which is what makes the covering work — no z-index needed, and no
+        JavaScript at all.
+
+        Two things this depends on:
+        - each band must be viewport-tall, or the next one starts covering
+          before the current is fully read;
+        - each band must have an OPAQUE background. A transparent one would let
+          the pinned band underneath show through.
+
+        It also needs no ancestor to be a scroll container: `overflow: hidden`
+        anywhere above would silently kill the sticky. `app/page.tsx` uses
+        `overflow-x-clip` precisely because `clip` does not create one.
+      */}
       {STEPS.map((step) => (
-        <section key={step.number} className={`w-full ${step.band}`}>
+        <section
+          key={step.number}
+          className={`sticky top-0 w-full ${step.band}`}
+        >
           <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
-            <div className="grid grid-cols-1 items-center gap-10 py-16 md:py-20 lg:grid-cols-2 lg:gap-16">
+            <div className="grid min-h-screen grid-cols-1 items-center gap-10 py-16 md:py-20 lg:grid-cols-2 lg:gap-16">
               <FadeUp>
                 <div>
                   <span className="inline-block rounded-[0.4rem] bg-white px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950 shadow-sm">
