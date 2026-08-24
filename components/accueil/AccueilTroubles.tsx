@@ -140,9 +140,17 @@ const TroubleCard = ({
   );
 };
 
-/** The section's one call to action, below the deck rather than on every card. */
-const TroublesCta = () => (
-  <div className="flex justify-center px-6 pb-24 pt-20 sm:px-10">
+/** The section's one call to action, below the deck rather than on every card.
+ *
+ *  `compact` drops the vertical padding: on desktop this sits inside the pinned
+ *  viewport-height frame, where every pixel is budgeted, rather than in normal
+ *  flow below it. */
+const TroublesCta = ({ compact }: { compact?: boolean }) => (
+  <div
+    className={`flex justify-center px-6 sm:px-10 ${
+      compact ? "pb-8 pt-0" : "pb-24 pt-20"
+    }`}
+  >
     <Link
       href={TROUBLES_HREF}
       className="inline-flex items-center gap-2 rounded-full bg-msk-night-950 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-msk-night-800"
@@ -323,49 +331,52 @@ export const AccueilTroubles = () => {
             viewport top their positions are simply viewport coordinates.
           */}
           <div ref={frameRef} className="relative h-screen overflow-hidden">
-            <div className="absolute inset-x-0 top-0 px-6 pt-24 text-center lg:px-16">
+            <div className="absolute inset-x-0 top-0 px-6 pt-16 text-center lg:px-16">
               <Heading />
             </div>
 
             {/*
-              The deck is centred on the whole frame rather than on the strip
-              below the heading. A card's rotated bounding box is taller than
-              that strip on a laptop, so confining it there clipped the fan
-              against the navbar and the bottom edge. Centred, it clears both
-              and overlaps the foot of the heading — which is how the reference
-              composes it too.
+              The deck sits below the heading, and everything — heading plus
+              fan — has to fit inside the one pinned viewport-height frame.
+              That makes the frame's HEIGHT the binding constraint, so the
+              deck is sized and placed in vh, not vw. Anchored in vw it
+              overran a short laptop and, before that, was pulled up over the
+              title.
 
-              The circle's top is anchored in rem+vw, NOT as a percentage of
-              the frame. The heading above it is a fixed ~318px at every
-              viewport height, so a percentage let the two drift apart: on a
-              short laptop the fan overlapped the title as the reference does,
-              but on a tall screen it sank clear of it and the cards no longer
-              rose over the heading at all.
+              `top-[280px]` is the top edge of the circle. The cards are translated
+              `-50%, 0`, which means their top edge sits exactly at this 280px mark.
+              The heading ends around 250px, so this fixed placement guarantees a tight,
+              consistent 30px gap under the title across all screen sizes, eliminating 
+              the excess space we saw when centering them vertically with 50vh.
 
-              A card's rotated half-height is 14.43vw and the arc pushes the
-              outer cards down 2.09vw, so the fan's top edge sits at
-              `10.5rem + 12.5vw - 12.34vw`, i.e. ~170px whatever the width.
-              That lands mid-title, leaving the tops of the letters showing,
-              and keeps the foot of the fan clear of the CTA below.
+              Card width is `min(20vw, (100vh - 380px) * 0.75)`. Since the cards are
+              anchored at 280px and the CTA takes ~100px at the bottom, the space
+              remaining for the cards is roughly `100vh - 380px`. We use `0.75`
+              (inverse of aspect ratio) to size the width so the height fits the space.
+
+              The circles are `pointer-events-none`: each is 250vw across and
+              covers the whole frame, so hit-testing reached them instead of
+              the heading and no text in this section could be selected. The
+              cards re-enable pointer events for themselves.
             */}
-            <div ref={circlesRef} className="absolute inset-0">
+            <div ref={circlesRef} className="pointer-events-none absolute inset-0">
               {TROUBLES.map((trouble, index) => {
                 const angle = angleAt(index);
 
                 return (
                   <div
                     key={trouble.title}
-                    className="js-trouble-circle absolute left-1/2 top-[calc(10.5rem+12.5vw)] h-[250vw] w-[250vw] rounded-full"
+                    className="js-trouble-circle absolute left-1/2 top-[280px] h-[250vw] w-[250vw] rounded-full"
                     style={{
                       transform: `translate(-50%, 0) rotate(${angle}deg)`,
                     }}
                   >
                     <div
-                      className={`js-trouble-card absolute left-1/2 top-0 flex aspect-[0.75] w-[18vw] flex-col justify-between rounded-[0.9vw] p-[1.6vw] shadow-lg ${
+                      className={`js-trouble-card pointer-events-auto absolute left-1/2 top-0 flex aspect-[0.75] w-[min(20vw,calc((100vh-380px)*0.75))] flex-col justify-between rounded-[0.9vw] p-[1.4vh] shadow-lg ${
                         CARD_TONES[index % CARD_TONES.length].card
                       }`}
                       style={{
-                        transform: `translate(-50%, -50%) rotate(${angle}deg)`,
+                        transform: `translate(-50%, 0) rotate(${angle}deg)`,
                       }}
                     >
                       <TroubleCard trouble={trouble} index={index} />
@@ -374,13 +385,25 @@ export const AccueilTroubles = () => {
                 );
               })}
             </div>
+
+            {/* The CTA lives INSIDE the pinned frame on desktop, anchored to
+                its bottom edge. Rendered after the 400vh track it could never
+                share a screen with the heading, so the reader had to scroll
+                past the deck to find it and the section never read as one
+                composition. Inside the frame, heading + fan + button are the
+                one viewport-height screen the pin holds. */}
+            <div className="absolute inset-x-0 bottom-0">
+              <TroublesCta compact />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* One CTA for the section, below the deck — not repeated on every card.
-          Sits outside both branches, so mobile and desktop share the one. */}
-      <TroublesCta />
+      {/* Below lg there is no pin, so the CTA follows the card stack in normal
+          flow. The desktop copy is inside the frame above. */}
+      <div className="lg:hidden">
+        <TroublesCta />
+      </div>
     </section>
   );
 };

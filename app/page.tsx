@@ -5,8 +5,6 @@ import { AccueilStatement } from "@/components/accueil/AccueilStatement";
 import { AccueilPourQui } from "@/components/accueil/AccueilPourQui";
 import { AccueilTroubles } from "@/components/accueil/AccueilTroubles";
 import { AccueilSteps } from "@/components/accueil/AccueilSteps";
-import { AccueilNeuroGym } from "@/components/accueil/AccueilNeuroGym";
-import { AccueilStats } from "@/components/accueil/AccueilStats";
 import { AccueilTemoignages } from "@/components/accueil/AccueilTemoignages";
 import { AccueilGalerie } from "@/components/accueil/AccueilGalerie";
 import { FaqSection } from "@/components/common/FaqSection";
@@ -38,10 +36,6 @@ export default function HomePage() {
       <AccueilTroubles />
 
       <AccueilSteps />
-
-      <AccueilNeuroGym />
-
-      <AccueilStats />
 
       <AccueilTemoignages />
 
