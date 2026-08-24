@@ -2,23 +2,16 @@
 
 import React, { useRef } from "react";
 import Image from "next/image";
-import { ChevronDown } from "lucide-react";
 
 import { CloudDrift } from "@/components/motion/CloudDrift";
-import { FadeUp } from "@/components/motion/FadeUp";
 import { GalerieTitreAnime } from "@/components/galerie/GalerieTitreAnime";
+import { PageHero } from "@/components/common/PageHero";
 import { HERO_POLAROIDS } from "@/lib/data/galerie";
 import { useHeroParallax } from "@/hooks/use-hero-parallax";
 
 /**
- * Hero de la galerie — même grammaire que MethodeHeroSection et
- * ProgrammesHeroSection : bande de couleur inclinée par `clip-path`, nuages
- * flottants, carte-titre chevauchant l'arête basse.
- *
- * Différences intentionnelles, pour que chaque page garde son identité :
- * - Bande de fond : msk-coral-400 (la méthode a sun-400, programmes blue-700)
- * - À la place de l'illustration vectorielle des deux autres, un éventail de
- *   trois photos réelles : c'est une galerie, elle s'annonce par ses images.
+ * À la place de l'illustration vectorielle des autres pages, un éventail de
+ * trois photos réelles : c'est une galerie, elle s'annonce par ses images.
  *
  * L'éventail est en `rotate` CSS statique, pas en animation : au-dessus de la
  * ligne de flottaison, une entrée décorative n'a pas de filet de sécurité (voir
@@ -42,57 +35,72 @@ export const GalerieHeroSection = () => {
   ]);
 
   return (
-    <section ref={root} className="relative flex min-h-[100dvh] w-full flex-col justify-center overflow-hidden bg-msk-cream-100 pb-16 pt-16 md:pb-20">
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 h-[75%] bg-msk-blue-400"
-        style={{ clipPath: "polygon(0 0, 100% 0, 100% 72%, 0 100%)" }}
-      />
+    <PageHero
+      rootRef={root}
+      band="bg-msk-blue-400"
+      card="bg-msk-night-900"
+      // Le `h1` et sa typographie viennent de PageHero ; ce composant n'anime
+      // que les lettres, en `span`, pour ne pas imbriquer deux titres.
+      title={<GalerieTitreAnime as="span" au="chargement" retard={0.25} texte="Nos Espaces" />}
+      titleClassName="text-white"
+      pill="Visite Virtuelle"
+      pillClassName="bg-white text-msk-night-900"
+      subtitle={
+        <>
+          Nos espaces, nos ateliers et nos petites victoires du quotidien —
+          photographiés là où ils se vivent.
+        </>
+      }
+      subtitleClassName="text-msk-blue-100"
+      anchor={{
+        href: "#galerie",
+        label: "Aller à la galerie",
+        className: "border-white/70 text-white hover:bg-white hover:text-msk-night-900",
+      }}
+      decor={
+        <>
+          <CloudDrift
+            motion="float"
+            shape="a"
+            speed={52}
+            phase={0.2}
+            className="absolute left-0 top-[52%] w-40 text-white md:w-56"
+          />
+          <CloudDrift
+            motion="float"
+            shape="b"
+            speed={38}
+            phase={0.5}
+            className="absolute left-0 top-[26%] w-48 text-msk-coral-100 md:w-72"
+          />
+          <CloudDrift
+            motion="float"
+            shape="a"
+            speed={64}
+            phase={0.8}
+            className="absolute left-0 top-[8%] hidden w-32 text-msk-cream-50 lg:block"
+          />
 
-      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        <CloudDrift
-          motion="float"
-          shape="a"
-          speed={52}
-          phase={0.2}
-          className="absolute left-0 top-[52%] w-40 text-white md:w-56"
-        />
-        <CloudDrift
-          motion="float"
-          shape="b"
-          speed={38}
-          phase={0.5}
-          className="absolute left-0 top-[26%] w-48 text-msk-coral-100 md:w-72"
-        />
-        <CloudDrift
-          motion="float"
-          shape="a"
-          speed={64}
-          phase={0.8}
-          className="absolute left-0 top-[8%] hidden w-32 text-msk-cream-50 lg:block"
-        />
-
-        {/* Octopus décoratifs */}
-        <img
-          ref={octopus1}
-          src="/My Octopus Teacher.svg"
-          alt=""
-          aria-hidden
-          className="absolute right-[2%] top-[10%] w-48 sm:w-64 md:w-80 lg:w-[28rem] opacity-90"
-        />
-        <img
-          ref={octopus2}
-          src="/My theacher octopus 2.svg"
-          alt=""
-          aria-hidden
-          className="absolute left-[2%] bottom-[15%] w-48 sm:w-64 md:w-80 lg:w-[28rem] opacity-90"
-        />
-      </div>
-
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 sm:px-10">
-        {/* Éventail de polaroids. Chaque photo est décorative : le titre lui
-            sert de légende visible, donc l'alt reste vide pour ne pas la
-            répéter aux lecteurs d'écran. */}
+          <img
+            ref={octopus1}
+            src="/My Octopus Teacher.svg"
+            alt=""
+            aria-hidden
+            className="absolute right-[2%] top-[10%] w-48 sm:w-64 md:w-80 lg:w-[28rem] opacity-90"
+          />
+          <img
+            ref={octopus2}
+            src="/My theacher octopus 2.svg"
+            alt=""
+            aria-hidden
+            className="absolute left-[2%] bottom-[15%] w-48 sm:w-64 md:w-80 lg:w-[28rem] opacity-90"
+          />
+        </>
+      }
+      media={
+        // Éventail de polaroids. Chaque photo est décorative : le titre lui
+        // sert de légende visible, donc l'alt reste vide pour ne pas la
+        // répéter aux lecteurs d'écran.
         <div className="relative mb-[-3.5rem] flex h-56 items-end justify-center sm:h-72 md:h-80">
           {HERO_POLAROIDS.map((photo, index) => (
             <figure
@@ -111,33 +119,7 @@ export const GalerieHeroSection = () => {
             </figure>
           ))}
         </div>
-
-        <FadeUp delay={0.1}>
-          <div className="mx-auto mt-4 max-w-2xl rounded-[1.75rem] bg-msk-night-900 px-8 py-10 text-center shadow-2xl md:px-12">
-
-            <GalerieTitreAnime
-              as="h1"
-              au="chargement"
-              retard={0.25}
-              texte="Nos Espaces (Visite Virtuelle)"
-              className="mt-6 font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-white sm:text-5xl md:text-6xl"
-            />
-
-            <p className="mx-auto mt-6 max-w-md text-base font-medium leading-snug text-msk-blue-100 md:text-lg">
-              Nos espaces, nos ateliers et nos petites victoires du quotidien —
-              photographiés là où ils se vivent.
-            </p>
-
-            <a
-              href="#galerie"
-              aria-label="Aller à la galerie"
-              className="mx-auto mt-8 flex h-11 w-11 items-center justify-center rounded-full border-2 border-white/70 text-white transition-colors hover:bg-white hover:text-msk-night-900"
-            >
-              <ChevronDown className="h-5 w-5" aria-hidden />
-            </a>
-          </div>
-        </FadeUp>
-      </div>
-    </section>
+      }
+    />
   );
 };

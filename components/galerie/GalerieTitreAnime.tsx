@@ -45,8 +45,11 @@ interface GalerieTitreAnimeProps {
   /** `chargement` démarre au montage ; `scroll` attend l'entrée dans le champ. */
   au?: "chargement" | "scroll";
   retard?: number;
-  as?: "h1" | "h2";
+  /** `span` sert à animer un titre dont le `h1` est déjà posé par PageHero. */
+  as?: "h1" | "h2" | "span";
 }
+
+const BALISES = { h1: motion.h1, h2: motion.h2, span: motion.span } as const;
 
 export const GalerieTitreAnime = ({
   texte,
@@ -55,7 +58,7 @@ export const GalerieTitreAnime = ({
   retard = 0.15,
   as = "h2",
 }: GalerieTitreAnimeProps) => {
-  const Balise = as === "h1" ? motion.h1 : motion.h2;
+  const Balise = BALISES[as];
 
   const declencheur =
     au === "scroll"

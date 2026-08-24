@@ -129,14 +129,7 @@ export function GalerieAlbumSection() {
   const Icone = photo.icon;
 
   return (
-    <section id="galerie" className="relative overflow-hidden bg-msk-cream-100 pb-28 pt-16 md:pb-36 md:pt-20">
-      {/* Ciel en biais, même device que le hero et /la-methode. Il ne touche
-          pas le bord haut : le raccord avec le hero reste en crème. */}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 h-[62%] bg-msk-blue-200"
-        style={{ clipPath: "polygon(0 10%, 100% 2%, 100% 70%, 0 96%)" }}
-      />
+    <section id="galerie" className="relative overflow-hidden bg-msk-blue-200 pb-28 pt-16 md:pb-36 md:pt-20">
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
         {/* Soleil du ciel. Plain <img> et non next/image : le SVG porte sa
             propre animation SMIL (les rayons tournent), que l'optimiseur

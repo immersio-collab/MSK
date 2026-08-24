@@ -235,13 +235,7 @@ export const AccueilTroubles = () => {
   const dipK = cardW * 0.014;
 
   return (
-    <section className="relative w-full overflow-hidden bg-msk-cream-50">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-[30%] h-[52%] bg-msk-blue-100"
-        style={{ clipPath: "polygon(0 9%, 100% 0, 100% 84%, 0 96%)" }}
-      />
-
+    <section className="relative w-full overflow-hidden bg-msk-blue-100">
       <div className="relative hidden h-[100svh] flex-col px-6 pb-10 pt-[6.5rem] lg:flex lg:px-16">
         <FadeUp className="shrink-0 text-center">
           <Heading />

@@ -451,13 +451,7 @@ export const AccueilTemoignages = () => {
   };
 
   return (
-    <section className="relative w-full overflow-hidden bg-msk-cream-50 py-24 md:py-32">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-[14%] h-[64%] bg-msk-sun-100"
-        style={{ clipPath: "polygon(0 7%, 100% 0, 100% 82%, 0 95%)" }}
-      />
-
+    <section className="relative w-full overflow-hidden bg-msk-sun-100 py-24 md:py-32">
       <div className="relative mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
         <FadeUp>
           <Eyebrow className="bg-msk-coral-100 text-msk-coral-700">

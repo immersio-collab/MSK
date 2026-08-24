@@ -195,16 +195,7 @@ export function TroublesGridSection() {
   const activeItem = activeIndex >= 0 ? TROUBLES[activeIndex] : null;
 
   return (
-    <section ref={root} id="troubles" className="relative overflow-hidden bg-msk-cream-100 py-24 md:py-28">
-      {/* Coin oblique posé derrière les cartes. Il ne touche jamais le bord
-          haut de la section : le raccord avec le hero reste donc en crème,
-          sans trait horizontal. Même device de clip-path que /la-methode. */}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 h-[56%] bg-msk-sun-100"
-        style={{ clipPath: "polygon(0 14%, 100% 4%, 100% 62%, 0 92%)" }}
-      />
-
+    <section ref={root} id="troubles" className="relative overflow-hidden bg-msk-sun-100 py-24 md:py-28">
       {/* Nuages : dérive latérale continue, vitesses et phases distinctes. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
         <CloudDrift

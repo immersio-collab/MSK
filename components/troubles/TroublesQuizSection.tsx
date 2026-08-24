@@ -110,18 +110,9 @@ export function TroublesQuizSection() {
   return (
     <section
       ref={root}
-      className="relative overflow-hidden bg-msk-cream-100 pb-24 pt-28 md:pb-32 md:pt-36"
+      // Même bleu que le ciel du hero : la page n'a qu'un seul ciel.
+      className="relative overflow-hidden bg-msk-blue-300 pb-24 pt-28 md:pb-32 md:pt-36"
     >
-      {/* Ciel. Même bleu que le ciel du hero : la page n'a qu'un seul ciel.
-          Il démarre en biais SOUS le bord haut des deux côtés, donc le raccord
-          avec la grille reste en crème ; il descend en revanche jusqu'au bord
-          bas, où le CTA bleu foncé prend le relais. */}
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-msk-blue-300"
-        style={{ clipPath: "polygon(0 18%, 100% 8%, 100% 100%, 0 100%)" }}
-      />
-
       {/* Soleil + nuages. Le soleil est un SVG auto-animé (plain <img> : next/image
           l'aplatirait), poussé par le scroll ; les nuages dérivent en continu. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">

@@ -97,15 +97,7 @@ export const ActualitesListSection = () => {
     cle === "tous" ? ARTICLES.length : ARTICLES.filter((a) => a.categorie === cle).length;
 
   return (
-    <section className="relative overflow-hidden bg-msk-cream-100 pb-24 md:pb-28">
-      {/* Coin bleu pâle derrière la grille — jamais collé au bord haut, le
-          raccord avec le hero reste en crème. */}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 bottom-0 top-40 bg-msk-blue-100"
-        style={{ clipPath: "polygon(0 12%, 100% 0, 100% 74%, 0 96%)" }}
-      />
-
+    <section id="articles" className="relative overflow-hidden bg-msk-blue-100 pb-24 pt-20 md:pb-28 md:pt-24">
       <div className="relative mx-auto w-full max-w-6xl px-6 sm:px-10">
         {/* Filtres : la pastille bleu nuit glisse d'une catégorie à l'autre. */}
         <div role="group" aria-label="Filtrer les articles" className="flex flex-wrap justify-center gap-2.5">

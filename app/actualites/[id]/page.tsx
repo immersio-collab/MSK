@@ -9,6 +9,7 @@ import { ArticlePartageRow } from "@/components/actualites/ArticlePartageRow";
 import { FaqSection } from "@/components/common/FaqSection";
 import { FAQ_ARTICLE } from "@/lib/data/faq";
 import { CloudDrift } from "@/components/motion/CloudDrift";
+import { HERO_BAND_CLIP } from "@/components/common/PageHero";
 import {
   ARTICLES,
   CATEGORIE_ARTICLE_BADGE,
@@ -64,7 +65,7 @@ export default function ArticlePage({ params }: PageProps) {
         <div
           aria-hidden
           className={cn("absolute inset-x-0 top-0 h-[85%]", bande)}
-          style={{ clipPath: "polygon(0 0, 100% 0, 100% 64%, 0 94%)" }}
+          style={{ clipPath: HERO_BAND_CLIP }}
         />
         <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
           <CloudDrift
