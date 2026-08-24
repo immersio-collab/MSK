@@ -19,9 +19,9 @@ import type { LucideIcon } from "lucide-react";
  * produirait un décalage de mise en page au moment où l'image arrive, et le
  * ratio des colonnes du mur serait faux.
  *
- * Note : les mêmes photos alimentent déjà `EspacesGalerieSection` et
- * `home/GallerySection`, chacun avec sa propre copie de la liste. Les
- * consolider est un chantier à part, hors du périmètre de cette page.
+ * Note : les mêmes photos alimentent déjà `EspacesGalerieSection`, avec sa
+ * propre copie de la liste. Les consolider est un chantier à part, hors du
+ * périmètre de cette page.
  */
 
 export type GalerieCategorie = "educatif" | "moteur" | "loisirs";
