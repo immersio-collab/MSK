@@ -217,21 +217,24 @@ export function TroublesGridSection() {
         />
       </div>
 
-      <div className="container relative mx-auto max-w-6xl px-4">
+      <div className="container relative mx-auto max-w-5xl px-4">
         <div className="troubles-heading mx-auto mb-14 max-w-2xl text-center">
           <Eyebrow className="bg-white text-msk-blue-700 shadow-sm">
-            8 troubles · 1 approche
+            6 situations · 1 approche
           </Eyebrow>
           <h2 className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-5xl md:text-6xl">
-            Les troubles que nous <span className="text-msk-coral-700">accompagnons</span>
+            Les situations que nous <span className="text-msk-coral-700">accueillons</span>
           </h2>
           <p className="mt-5 text-base text-msk-night-700 md:text-lg">
-            Cliquez sur une carte pour comprendre le trouble et découvrir comment MSK
+            Cliquez sur une carte pour comprendre la situation et découvrir comment MSK
             l&apos;accompagne.
           </p>
         </div>
 
-        <div className="troubles-grid grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-7">
+        {/* Trois colonnes, pas quatre : six cartes remplissent exactement deux
+            rangées. En quatre colonnes la seconde rangée n'en portait que deux
+            et la section paraissait amputée. */}
+        <div className="troubles-grid grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
           {TROUBLES.map((item, index) => (
             <TroubleStickerCard
               key={item.slug}

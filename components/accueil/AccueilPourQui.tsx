@@ -17,16 +17,16 @@ import { PROGRAMMES } from "@/lib/data/programmes";
  */
 const EXTRAS = [
   {
-    quote: "« Mon enfant ne parle pas encore comme les autres »",
+    quote: "« Aucune école n'a voulu l'inscrire »",
     description:
-      "Retard de langage, difficultés de socialisation, éveil sensoriel. Nous l'accueillons avec douceur.",
+      "Sans code Massar, diabète, épilepsie : nous l'accueillons sans condition, avec douceur.",
     card: "bg-msk-coral-100",
     tilt: "-rotate-3",
   },
   {
-    quote: "« L'école classique ne lui convient plus »",
+    quote: "« Il ne veut plus y retourner »",
     description:
-      "TDAH, dyslexie, dyscalculie, rejet scolaire. Nous reconstruisons sa confiance pas à pas.",
+      "Décrochage, refus de l'école, retard accumulé. Nous reconstruisons sa confiance pas à pas.",
     card: "bg-msk-blue-200",
     tilt: "rotate-2",
   },

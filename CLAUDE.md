@@ -194,6 +194,43 @@ Surface-specific presentation (colours, tilts, per-page copy) stays local.
 lists claims the site must never make (placeholder phone, no form backend, no
 tour embed) — read it before writing copy.
 
+**How the centre actually works** (client, 2026-08-25): children work in
+**groups of five**, formed by size and developmental level — never by real age
+or school grade — and each group **rotates from room to room** during the day
+(sensory room, Montessori space, Neuro-Gym…). Maternelle and Primaire are the
+two age brackets accepted (2–11); there are **no teenagers and no adults** —
+"de 2 ans à l'âge adulte" was wrong and is gone. Facts live in `ORGANISATION`
+(`lib/data/programmes.ts`).
+
+**MSK is a COMPLEMENT to school, not a replacement.** Children stay enrolled in
+their ordinary public or private school and come here a few days a week. Never
+write that ordinary school "shuts them out", "refuses them" or "leaves them
+behind" — the client corrected exactly that phrasing. The copy now says "en
+complément de l'école".
+
+**STILL OPEN.** Two things that phrasing does not settle: what happens to the
+déscolarisés and sans-code-Massar children, who by definition are enrolled
+nowhere; and the branding itself, which still presents MSK as the child's
+school (`École Inclusive` in the titles, the h1 "l'école où chaque enfant
+s'éveille", full-day matin/après-midi programmes). That is a positioning call
+for the client, not a copy fix. See `lib/data/programmes.ts`.
+
+**Nothing establishes any medical staffing.** The owner does not know whether
+there is a medical team; assume there is none. No copy may imply a medical act
+is performed on site — see the header of `lib/data/troubles.ts`.
+
+**The centre does NOT take in neuro-developmental disorders.** Until
+2026-08-25 the site announced TDAH, dyslexie, dyspraxie, dyscalculie, TSA,
+troubles du langage and du comportement; the client confirmed that is simply
+wrong. It welcomes the children ordinary schools shut out — décrochage
+scolaire, refus scolaire, sans code Massar, diabète, épilepsie, retard
+scolaire (`lib/data/troubles.ts`, six entries). Never reintroduce the old
+list, anywhere. Diabetes and epilepsy get an adapted SCHOOLING, never care:
+the centre applies the protocol the child's doctor wrote and decides nothing
+medical — keep that limit in any rewrite. The route stays
+`/notre-centre/troubles-accompagnes` (links already shared) while its visible
+label is "Situations accueillies".
+
 All images are local (`public/`); no hotlinked remote images —
 `next.config.mjs` has no remotePatterns. Testimonial "videos" are deliberate
 placeholders (`src: null` + a poster photo) until real footage exists.

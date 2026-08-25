@@ -129,48 +129,48 @@ export const ARTICLES: Article[] = [
     ],
   },
   {
-    id: "premiers-signes-tdah",
-    titre: "Comment reconnaître les premiers signes d'un TDAH chez l'enfant ?",
+    id: "signes-decrochage-scolaire",
+    titre: "Décrochage scolaire : les signes qui précèdent l'arrêt",
     extrait:
-      "L'inattention ou l'hyperactivité peuvent être difficiles à interpréter chez les jeunes enfants. Voici les 5 signes qui doivent vous amener à consulter.",
+      "Un enfant ne quitte pas l'école du jour au lendemain. Voici les 5 signes qui s'installent avant, et ce qu'ils appellent comme réponse.",
     categorie: "conseils",
     date: "15 oct. 2023",
     image: "/espace motricité.png",
-    legende: "Un enfant qui bouge beaucoup n'est pas forcément un enfant TDAH — et inversement.",
+    legende: "Le décrochage s'installe longtemps avant le jour où l'enfant n'y retourne plus.",
     corps: [
       {
         type: "paragraphe",
         texte:
-          "Tous les enfants bougent, rêvassent et oublient leurs affaires. La question n'est donc jamais « mon enfant est-il agité ? » mais « ces comportements le gênent-ils, lui, dans sa vie de tous les jours ? ». Voici les signes qui méritent un avis professionnel.",
+          "Aucun enfant ne décroche brutalement. Entre les premières absences et le jour où il n'y retourne plus, il se passe souvent une année entière — une année pendant laquelle les signes sont là, visibles, mais faciles à prendre pour de la paresse ou une mauvaise période.",
       },
       { type: "intertitre", texte: "Les signes qui doivent alerter" },
       {
         type: "encadre",
         titre: "Les 5 signes",
         points: [
-          "L'attention décroche en quelques minutes, même sur une activité choisie.",
-          "L'agitation est constante, à la maison comme à l'école.",
-          "L'impulsivité domine : il coupe la parole, agit avant de réfléchir.",
-          "Les consignes en plusieurs étapes se perdent en route.",
-          "L'école signale les mêmes difficultés que vous observez à la maison.",
+          "Les maux de ventre et de tête se concentrent sur les matins d'école.",
+          "Les absences s'allongent : une heure, puis une demi-journée, puis un jour.",
+          "Il ne parle plus de l'école, ni en bien ni en mal.",
+          "Les affaires restent dans le sac et les devoirs n'en sortent plus.",
+          "Un ami, un professeur ou une matière ont disparu de ses récits.",
         ],
       },
-      { type: "intertitre", texte: "Un signe isolé ne fait pas un diagnostic" },
+      { type: "intertitre", texte: "Ce n'est pas de la paresse" },
       {
         type: "paragraphe",
         texte:
-          "C'est la persistance — plus de six mois —, la présence dans plusieurs contextes et la gêne réelle qui comptent. Seul un bilan complet permet de distinguer un TDAH d'une anxiété, d'un trouble du sommeil ou simplement d'un tempérament vif.",
+          "Derrière le refus, il y a presque toujours quelque chose que l'enfant ne sait pas encore dire : une humiliation, un retard qu'il n'arrive plus à rattraper, une santé qui l'a tenu éloigné trop longtemps. Punir le symptôme accélère le décrochage ; comprendre ce qu'il protège le ralentit.",
       },
       {
         type: "citation",
-        texte: "Consulter tôt, ce n'est pas coller une étiquette : c'est comprendre comment votre enfant fonctionne.",
+        texte: "Un enfant qui refuse l'école ne refuse pas d'apprendre. Il refuse ce que l'école lui fait vivre.",
         auteur: "L'équipe pluridisciplinaire MSK",
       },
       { type: "intertitre", texte: "Que faire si vous vous reconnaissez ?" },
       {
         type: "paragraphe",
         texte:
-          "Notez des exemples concrets pendant deux semaines, échangez avec l'enseignant, puis prenez rendez-vous pour un bilan. Chez MSK, le bilan initial observe l'enfant en situation réelle — jeu, consignes, motricité — avant toute conclusion.",
+          "Notez des exemples concrets pendant deux semaines, échangez avec l'enseignant tant que le lien existe encore, puis prenez rendez-vous pour un bilan. Chez MSK, le bilan initial observe l'enfant en situation réelle — jeu, consignes, motricité — avant toute conclusion, et le retour à l'école se prépare ensuite par paliers.",
       },
     ],
   },
@@ -187,7 +187,7 @@ export const ARTICLES: Article[] = [
       {
         type: "paragraphe",
         texte:
-          "Dans une classe traditionnelle, tous les enfants font la même chose au même moment. Pour un enfant dys, TDAH ou TSA, ce rythme unique devient vite un mur. La pédagogie Montessori renverse la logique : c'est le cadre qui s'adapte à l'enfant.",
+          "Dans une classe traditionnelle, tous les enfants font la même chose au même moment. Pour un enfant qui revient après des mois d'absence, ou dont les bases n'ont jamais été posées, ce rythme unique devient vite un mur. La pédagogie Montessori renverse la logique : c'est le cadre qui s'adapte à l'enfant.",
       },
       { type: "intertitre", texte: "Chacun avance à son rythme" },
       {

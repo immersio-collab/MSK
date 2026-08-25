@@ -61,7 +61,7 @@ export default function LaMethodePage() {
       <NextStepSection
         eyebrow="Prochaine étape"
         title="La Fondatrice"
-        description="Découvrez Khadija Elabaya et son parcours dédié à l'accompagnement des enfants neuro-atypiques."
+        description="Découvrez Khadija Elabaya et son parcours dédié aux enfants que l'école seule ne suffit pas à porter."
         buttonText="Rencontrer"
         buttonHref="/notre-centre/la-fondatrice"
       />

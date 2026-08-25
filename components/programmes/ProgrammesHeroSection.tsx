@@ -22,7 +22,7 @@ export const ProgrammesHeroSection = () => {
       titleClassName="text-white"
       pill="Programmes & Classes"
       pillClassName="bg-white/15 text-msk-sun-300"
-      subtitle={<>De 2 ans à l&apos;âge adulte, un apprentissage sur-mesure.</>}
+      subtitle={<>De 2 à 11 ans, un apprentissage sur-mesure en groupes de cinq.</>}
       subtitleClassName="text-msk-blue-100"
       anchor={{
         href: "#programmes",

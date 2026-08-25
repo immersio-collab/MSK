@@ -42,7 +42,7 @@ export const FondatriceGridSection: React.FC = () => {
 
             <div className="space-y-6">
               <p className="text-lg text-msk-night-700/90 leading-relaxed">
-                Forte d&apos;une expertise pluridisciplinaire, Khadija Elabaya dédie sa carrière à l&apos;accompagnement des enfants neuro-atypiques et à leur épanouissement global.
+                Forte d&apos;une expertise pluridisciplinaire, Khadija Elabaya dédie sa carrière aux enfants que l&apos;école seule ne suffit pas à porter, et à leur épanouissement global.
               </p>
 
               <div>

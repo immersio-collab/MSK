@@ -30,23 +30,24 @@ export const TroublesHeroSection: React.FC = () => {
       card="bg-white"
       title={
         <>
-          Nous comprenons{" "}
-          <span className="text-msk-coral-700">votre enfant.</span>
+          Ici, votre enfant a{" "}
+          <span className="text-msk-coral-700">une place.</span>
         </>
       }
       titleClassName="text-msk-night-900"
-      pill="Troubles Accompagnés"
+      pill="Situations accueillies"
       pillClassName="bg-msk-night-900/10 text-msk-night-700"
       subtitle={
         <>
-          Un accompagnement sur-mesure pour les enfants avec des difficultés
-          d&apos;apprentissage, de langage ou de développement.
+          Décrochage, refus de l&apos;école, absence de code Massar, diabète,
+          épilepsie, retard : six situations que nous accompagnons quelques
+          jours par semaine, en complément de sa scolarité.
         </>
       }
       subtitleClassName="text-msk-night-800"
       anchor={{
         href: "#troubles",
-        label: "Aller aux troubles",
+        label: "Aller aux situations accueillies",
         className:
           "border-msk-night-900/20 text-msk-night-800 hover:bg-msk-night-900 hover:text-white",
       }}

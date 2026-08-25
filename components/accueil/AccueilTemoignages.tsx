@@ -42,7 +42,7 @@ const TEMOIGNAGES: Temoignage[] = [
     tag: "Primaire",
     quote: "En 6 mois, mon fils a retrouvé le sourire et l'envie d'apprendre.",
     author: "Salma B.",
-    role: "maman de Ryan (7 ans, TDAH)",
+    role: "maman de Ryan (7 ans, déscolarisé)",
   },
   {
     id: "audio-imane",
@@ -114,7 +114,7 @@ const TEMOIGNAGES: Temoignage[] = [
     tag: "Réadaptation",
     quote: "Le bilan a mis des mots sur ce que l'on vivait. On sait enfin comment l'aider.",
     author: "Sofia L.",
-    role: "maman de Ghali (6 ans, dyspraxie)",
+    role: "maman de Ghali (6 ans, sans code Massar)",
   },
   {
     id: "capture-selma",
@@ -158,7 +158,7 @@ const QUOTE_LOOKS: Record<
     role: "text-msk-night-800",
   },
   sun: {
-    card: "bg-msk-sun-400",
+    card: "bg-msk-sun-300",
     tag: "text-msk-sun-900",
     quote: "text-msk-night-900",
     footer: "text-msk-night-900",

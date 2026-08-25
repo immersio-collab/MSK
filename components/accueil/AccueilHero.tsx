@@ -205,8 +205,8 @@ export const AccueilHero = () => {
         <FadeUp delay={0.18}>
           <p className="mx-auto mt-6 max-w-lg text-base leading-relaxed text-msk-night-700 md:text-lg">
             Le seul centre thérapeutique et éducatif Montessori au Maroc.
-            Accompagnement sur-mesure pour enfants avec difficultés
-            d&apos;apprentissage, de langage ou de comportement.
+            Quelques jours par semaine, en complément de son école, pour ce
+            qu&apos;elle ne peut pas lui apporter seule.
           </p>
         </FadeUp>
 

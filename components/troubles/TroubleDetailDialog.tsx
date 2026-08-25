@@ -187,7 +187,7 @@ export function TroubleDetailDialog({
                       look.label,
                     )}
                   >
-                    Trouble accompagné · {pad(position)} / {pad(total)}
+                    Situation accueillie · {pad(position)} / {pad(total)}
                   </span>
                   <h3
                     id={titleId}

@@ -7,8 +7,9 @@ import { NextStepSection } from "@/components/common/NextStepSection";
 import { FAQ_TROUBLES } from "@/lib/data/faq";
 
 export const metadata: Metadata = {
-  title: "Troubles Accompagnés",
-  description: "Accompagnement des troubles d'apprentissage, du langage, du comportement (TDAH, DYS, TSA...) à Casablanca.",
+  title: "Situations accueillies",
+  description:
+    "Décrochage et refus scolaires, enfant sans code Massar, retard scolaire, diabète, épilepsie : le centre MSK accompagne ces situations à Casablanca, quelques jours par semaine, en complément de la scolarité de l'enfant.",
 };
 
 export default function TroublesAccompagnesPage() {

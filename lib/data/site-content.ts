@@ -15,7 +15,9 @@ export const NAV_LINKS: NavItem[] = [
     href: "/notre-centre",
     children: [
       {
-        title: "Troubles accompagnés",
+        // L'URL reste `troubles-accompagnes` : la renommer casserait les liens
+        // déjà partagés. Seul le libellé suit la liste corrigée par la cliente.
+        title: "Situations accueillies",
         href: "/notre-centre/troubles-accompagnes",
       },
       {
@@ -39,8 +41,8 @@ export const NAV_LINKS: NavItem[] = [
 
 export const PARENT_CONCERNS_FAQ = [
   {
-    question: "Mon enfant a un trouble (TDAH, DYS) : comment est-il accueilli sans être stigmatisé ?",
-    answer: "Chez MSK, aucun enfant n'est réduit à un diagnostic. Nous partons de ses forces. Nos éducateurs et thérapeutes adaptent les supports au sein du groupe, favorisant l'entraide et préservant l'estime de soi.",
+    question: "Mon enfant a été refusé ailleurs à cause de sa santé : comment est-il accueilli ici ?",
+    answer: "Un diabète ou une épilepsie ne ferme aucune porte chez MSK. Sa journée est organisée autour de ce que sa santé impose — contrôles, collations, fatigue — selon les consignes écrites de son médecin que vous nous transmettez ; le centre n'est pas un lieu de soin et ne décide rien à sa place. Dans le groupe, il est un élève comme les autres.",
   },
   {
     question: "Mon enfant ne possède pas encore de code Massar : peut-il intégrer MSK ?",
@@ -52,15 +54,15 @@ export const PARENT_CONCERNS_FAQ = [
   },
   {
     question: "À quel âge puis-je inscrire mon enfant ?",
-    answer: "Nous accueillons les enfants dès 2 ans dans notre section Maternelle, et accompagnons les élèves tout au long de leur scolarité primaire.",
+    answer: "Nous accueillons les enfants dès 2 ans, en maternelle comme en primaire, et jusqu'à 11 ans. Au-delà, le centre n'accompagne ni adolescents ni adultes.",
   },
   {
     question: "Combien coûte l'accompagnement ? Y a-t-il des facilités de paiement ?",
     answer: "Chaque parcours étant entièrement sur-mesure (scolarité, thérapies, neuro-gym), les tarifs varient selon les besoins spécifiques de votre enfant. Nous proposons des facilités de paiement pour soutenir les familles dans cet accompagnement.",
   },
   {
-    question: "Mon enfant peut-il réintégrer une école classique après MSK ?",
-    answer: "C'est l'un de nos objectifs principaux. Notre méthode est conçue pour stabiliser les apprentissages, pallier les difficultés et restaurer la confiance, afin de permettre une réinsertion scolaire classique réussie dès que l'enfant est prêt.",
+    question: "Combien de temps l'accompagnement dure-t-il ?",
+    answer: "Le temps qu'il faut pour que son école suffise à nouveau. Votre enfant garde sa scolarité et vient ici quelques jours par semaine ; notre méthode est conçue pour stabiliser les apprentissages, pallier les difficultés et restaurer la confiance. L'objectif est qu'il n'ait plus besoin de venir, pas qu'il reste.",
   },
   {
     question: "Proposez-vous un suivi pendant les vacances ?",

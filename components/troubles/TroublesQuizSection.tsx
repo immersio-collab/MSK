@@ -24,9 +24,9 @@ const ConfettiParticles = dynamic(
 type Question = { id: number; text: string };
 
 const QUESTIONS: Question[] = [
-  { id: 1, text: "Votre enfant a-t-il des difficultés à se concentrer plus de 10 minutes ou à rester en place ?" },
-  { id: 2, text: "Avez-vous remarqué des difficultés d'apprentissage (lecture, écriture, calcul) ou un retard de langage ?" },
-  { id: 3, text: "Rencontre-t-il des difficultés d'intégration scolaire, de sociabilisation, ou a-t-il été réorienté ?" },
+  { id: 1, text: "Votre enfant a-t-il quitté l'école, ou s'y rend-il de plus en plus difficilement ?" },
+  { id: 2, text: "Est-il sans code Massar, ou son niveau scolaire est-il en décalage avec son âge ?" },
+  { id: 3, text: "Une école a-t-elle refusé de l'accueillir à cause de sa santé — diabète, épilepsie ?" },
 ];
 
 type StepStatus = "done" | "current" | "todo";

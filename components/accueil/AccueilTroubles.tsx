@@ -5,12 +5,12 @@ import { motion, useInView } from "framer-motion";
 
 import { FadeUp } from "@/components/motion/FadeUp";
 import { MorphButton } from "@/components/motion/MorphButton";
-import { ICONS } from "@/components/troubles/trouble-look";
+import { ICONS, LOOKS } from "@/components/troubles/trouble-look";
 import { TROUBLES } from "@/lib/data/troubles";
 import { Eyebrow } from "@/components/common/Eyebrow";
 
 /**
- * Les troubles accompagnés, distribués comme un jeu de cartes.
+ * Les situations accueillies, distribuées comme un jeu de cartes.
  *
  * La section tient dans UN écran (`h-[100svh]`) : en-tête, éventail et CTA sont
  * les trois lignes d'une colonne flex, l'éventail prenant la place restante.
@@ -40,35 +40,16 @@ const stackRotAt = (i: number) => (((i * 37) % 7) - 3) * 0.9;
 
 const TROUBLES_HREF = "/notre-centre/troubles-accompagnes#troubles";
 
-/**
- * Un fond par carte, les huit distincts.
- *
- * Volontairement PAS `LOOKS[trouble.tone]` : cette table n'a que quatre tons
- * pour huit troubles, donc l'éventail répétait sa palette à mi-parcours et les
- * cartes de droite ressemblaient à une copie de celles de gauche. Les
- * contrastes de chaque paire ont été audités sur son fond.
- */
-const CARD_TONES = [
-  { card: "bg-msk-coral-600", title: "text-white", body: "text-msk-coral-50", icon: "text-msk-coral-600" },
-  { card: "bg-msk-sun-400", title: "text-msk-night-900", body: "text-msk-night-800", icon: "text-msk-sun-600" },
-  { card: "bg-msk-blue-500", title: "text-msk-night-900", body: "text-msk-night-800", icon: "text-msk-blue-600" },
-  { card: "bg-msk-night-800", title: "text-msk-sun-300", body: "text-msk-cream-200", icon: "text-msk-night-800" },
-  { card: "bg-msk-coral-400", title: "text-msk-night-900", body: "text-msk-night-800", icon: "text-msk-coral-600" },
-  { card: "bg-msk-sun-600", title: "text-msk-night-900", body: "text-msk-night-800", icon: "text-msk-sun-700" },
-  { card: "bg-msk-blue-700", title: "text-white", body: "text-msk-blue-50", icon: "text-msk-blue-700" },
-  { card: "bg-msk-coral-800", title: "text-white", body: "text-msk-coral-50", icon: "text-msk-coral-800" },
-];
-
 const Heading = () => (
   <>
     <Eyebrow className="bg-msk-sun-200 text-msk-night-950">
       À qui s&apos;adresse MSK ?
     </Eyebrow>
     <h2 className="mx-auto mt-4 max-w-[20ch] font-display text-[1.75rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-4xl lg:text-5xl">
-      Chaque âge, chaque profil a <span className="text-msk-coral-700">sa place</span>
+      Quand l&apos;école seule ne <span className="text-msk-coral-700">suffit pas</span>
     </h2>
     <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-msk-night-800 md:text-base">
-      Les troubles que nous accompagnons au quotidien.
+      Les situations que nous accueillons au quotidien.
     </p>
   </>
 );
@@ -80,14 +61,12 @@ const Heading = () => (
  */
 const TroubleFace = ({
   trouble,
-  index,
   compact,
 }: {
   trouble: (typeof TROUBLES)[number];
-  index: number;
   compact?: boolean;
 }) => {
-  const tone = CARD_TONES[index % CARD_TONES.length];
+  const tone = LOOKS[trouble.tone];
   const Icon = ICONS[trouble.icon];
 
   return (
@@ -130,7 +109,7 @@ const Cta = () => (
     fillClassName="bg-msk-night-950 shadow-lg shadow-msk-night-950/25"
     maxDiameter="18rem"
   >
-    Voir tous les troubles accompagnés
+    Voir toutes les situations accueillies
   </MorphButton>
 );
 
@@ -284,10 +263,10 @@ export const AccueilTroubles = () => {
                   } as CSSProperties
                 }
                 className={`absolute inset-0 m-auto flex aspect-[0.72] flex-col justify-between rounded-[1rem] p-3.5 shadow-lg shadow-msk-night-900/15 ${
-                  CARD_TONES[index % CARD_TONES.length].card
+                  LOOKS[trouble.tone].card
                 }`}
               >
-                <TroubleFace trouble={trouble} index={index} />
+                <TroubleFace trouble={trouble} />
               </motion.li>
             );
           })}
@@ -312,10 +291,10 @@ export const AccueilTroubles = () => {
                 <FadeUp
                   delay={0.06 * index}
                   className={`flex aspect-[0.72] w-[62vw] max-w-[240px] flex-col justify-between rounded-[1rem] p-5 shadow-lg shadow-msk-night-900/15 ${
-                    CARD_TONES[index % CARD_TONES.length].card
+                    LOOKS[trouble.tone].card
                   }`}
                 >
-                  <TroubleFace trouble={trouble} index={index} compact />
+                  <TroubleFace trouble={trouble} compact />
                 </FadeUp>
               </li>
             ))}

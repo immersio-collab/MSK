@@ -11,7 +11,7 @@ import { FAQ_PROGRAMMES } from "@/lib/data/faq";
 
 export const metadata: Metadata = {
   title: "Programmes & Classes",
-  description: "Découvrez nos programmes adaptés de la Petite Enfance à l'âge adulte. Pédagogie Montessori, Neuro-Gym et accompagnement personnalisé.",
+  description: "Découvrez nos programmes adaptés, de la maternelle au primaire (2 à 11 ans). Pédagogie Montessori, Neuro-Gym et accompagnement personnalisé en groupes de cinq.",
 };
 
 export default function ProgrammesPage() {

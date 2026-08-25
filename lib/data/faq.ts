@@ -57,12 +57,12 @@ export const FAQ_PROGRAMMES: FaqItem[] = [
   {
     question: "Comment choisir entre le programme Maternelle et le Primaire ?",
     answer:
-      "L'âge donne le point de départ : la Maternelle accueille les enfants de 2 à 5 ans, le Primaire ceux de 6 à 11 ans. Le bilan initial avec notre fondatrice précise ensuite le programme sur-mesure qui convient à votre enfant.",
+      "L'âge donne le point de départ : la Maternelle accueille les enfants de 2 à 5 ans, le Primaire ceux de 6 à 11 ans — le centre ne va pas au-delà. À l'intérieur, en revanche, l'âge ne décide plus de rien : les groupes de travail sont formés par taille et par niveau de développement. Le bilan initial avec notre fondatrice précise le programme sur-mesure qui convient à votre enfant.",
   },
   {
-    question: "Comment se déroule une journée en Maternelle et en Primaire ?",
+    question: "Comment les groupes sont-ils formés, et comment se déroule la journée ?",
     answer:
-      "En Maternelle, la matinée est consacrée au travail Montessori structuré et l'après-midi à la sieste et aux jeux libres. En Primaire, le matin porte sur les apprentissages cognitifs, l'après-midi sur les ateliers thérapeutiques et créatifs.",
+      "Les enfants travaillent par groupes de cinq, constitués par taille et par niveau de développement — jamais par âge réel ni par classe d'origine. Chaque groupe tourne ensuite d'une salle à l'autre : pendant que l'un est en salle sensorielle, un autre est en espace Montessori, un autre en Neuro-Gym. En Maternelle, la matinée reste consacrée au travail Montessori structuré et l'après-midi à la sieste et aux jeux libres ; en Primaire, le matin porte sur les apprentissages cognitifs, l'après-midi sur les ateliers thérapeutiques et créatifs.",
   },
   {
     question: "Quelles thérapies sont incluses dans les deux programmes ?",
@@ -70,9 +70,9 @@ export const FAQ_PROGRAMMES: FaqItem[] = [
       "La pédagogie Montessori, les séances de Neuro-Gym et l'orthophonie font partie des deux programmes, intégrées à la journée plutôt que renvoyées à l'extérieur. Le soutien psychologique accompagne les parents en Maternelle, l'enfant comme les parents en Primaire.",
   },
   {
-    question: "Mon enfant a un TDAH ou une dyslexie : quel programme choisir ?",
+    question: "Mon enfant est déscolarisé depuis un an : dans quel programme entre-t-il ?",
     answer:
-      "Les deux programmes accompagnent des profils différents : en Primaire, notamment le TDAH, la dyslexie et la dysorthographie, la dyspraxie et la dyscalculie ; en Maternelle, les retards de langage, les TSA légers et l'hyperactivité précoce. C'est l'âge qui oriente d'abord, pas le diagnostic, et les supports sont adaptés au sein du groupe.",
+      "Dans celui de son âge, pas de son niveau : le Primaire à partir de 6 ans, la Maternelle avant. Le décrochage, le retard accumulé et l'absence de code Massar ne changent pas le point d'entrée — ils changent ce que l'on reprend en premier. Les bases manquantes sont retravaillées à l'intérieur du groupe, avec du matériel concret, sans le renvoyer chez les plus jeunes.",
   },
   {
     question: "Pourquoi l'intégration scolaire n'apparaît-elle qu'en Primaire ?",
@@ -81,32 +81,32 @@ export const FAQ_PROGRAMMES: FaqItem[] = [
   },
 ];
 
-/** /notre-centre/troubles-accompagnes — the eight troubles and the quiz. */
+/** /notre-centre/troubles-accompagnes — the six situations and the quiz. */
 export const FAQ_TROUBLES: FaqItem[] = [
   {
-    question: "Faut-il un diagnostic avant de venir vous voir ?",
+    question: "Faut-il un dossier scolaire ou un diagnostic avant de venir vous voir ?",
     answer:
-      "Non. La première étape de notre méthode est l'observation, pas l'étiquette. Le bilan initial regarde votre enfant en situation réelle — jeu, consignes, motricité — avant toute conclusion, et il part de ce que vous constatez à la maison comme de ce que signale l'école.",
+      "Non, ni l'un ni l'autre. La première étape de notre méthode est l'observation, pas le dossier. Le bilan initial regarde votre enfant en situation réelle — jeu, consignes, motricité — avant toute conclusion, et il part de ce que vous constatez à la maison. Un enfant sans code Massar ni certificat de scolarité peut être accueilli.",
   },
   {
-    question: "Et si mon enfant cumule plusieurs troubles à la fois ?",
+    question: "Et si plusieurs de ces situations se cumulent chez mon enfant ?",
     answer:
-      "Nous ne travaillons pas un trouble à la fois. Les huit fiches de cette page suivent la même démarche : observer, adapter, accompagner. Le bilan global sert justement à identifier la cause réelle derrière les difficultés, et le parcours est ensuite construit autour de votre enfant.",
+      "C'est le cas le plus fréquent : un enfant sans code Massar a souvent pris du retard, un enfant écarté pour sa santé finit par décrocher. Les six fiches de cette page suivent la même démarche — observer, adapter, accompagner — et le parcours est construit autour de votre enfant, pas autour d'une case.",
   },
   {
-    question: "Le test en trois questions suffit-il à repérer un trouble ?",
+    question: "Le test en trois questions suffit-il à décider quoi que ce soit ?",
     answer:
-      "Non. Il indique seulement si notre approche peut aider votre enfant, rien de plus. Un signe isolé ne fait pas un diagnostic : c'est la persistance, la présence dans plusieurs contextes et la gêne réelle qui comptent, et seul un bilan complet permet de faire la part des choses.",
+      "Non. Il indique seulement si notre approche peut aider votre enfant, rien de plus. Ce qui décide vraiment, c'est le bilan initial : il regarde où il en est, ce qu'il sait faire et ce qui le bloque, puis c'est de là que part le programme.",
   },
   {
-    question: "L'orthophonie et la psychomotricité ont-elles lieu sur place ?",
+    question: "Mon enfant est diabétique ou épileptique : qui s'occupe de sa santé pendant la journée ?",
     answer:
-      "Oui. La Neuro-Gym, l'orthophonie et la psychomotricité sont intégrées dans les mêmes lieux et la même journée que la classe. Votre enfant ne sort pas de son groupe pour ses séances : elles font partie de sa vie de classe.",
+      "Son médecin. Le centre n'est pas un lieu de soin et ne se substitue à personne. Ce que nous prenons en charge, c'est la scolarité : contrôles, collations, fatigue et horaires sont inscrits dans l'emploi du temps plutôt que traités comme des exceptions, selon les consignes écrites que vous nous transmettez, et nous vous joignons immédiatement si quelque chose sort de l'ordinaire. Pour tout ce qui relève du geste médical, parlons-en ensemble avant l'inscription.",
   },
   {
-    question: "Ces huit troubles sont-ils les seuls que vous accompagnez ?",
+    question: "Ces six situations sont-elles les seules que vous accueillez ?",
     answer:
-      "Ce sont ceux que nous rencontrons le plus souvent, présentés ici pour vous aider à situer ce que vous observez. Si le profil de votre enfant n'entre dans aucune de ces fiches, cela ne change rien à la démarche : le bilan part de ce qu'il sait faire et de ce qui le gêne, pas d'une case à cocher.",
+      "Ce sont celles que nous rencontrons le plus souvent, présentées ici pour vous aider à situer la vôtre. Si celle de votre enfant n'entre dans aucune de ces fiches, cela ne change rien à la démarche : le bilan part de ce qu'il sait faire et de ce qui le gêne. Écrivez-nous, nous vous dirons franchement si nous sommes le bon endroit.",
   },
 ];
 

@@ -3,12 +3,12 @@
 import { useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { Check, MoonStar, Sunrise } from "lucide-react";
+import { Check, MoonStar, Repeat, Sunrise, Users } from "lucide-react";
 
 import { FadeUp } from "@/components/motion/FadeUp";
 import { cn } from "@/lib/utils";
 import { Eyebrow } from "@/components/common/Eyebrow";
-import { PROGRAMMES } from "@/lib/data/programmes";
+import { ORGANISATION, PROGRAMMES } from "@/lib/data/programmes";
 
 /**
  * Sélecteur Maternelle / Primaire — version allégée.
@@ -238,6 +238,26 @@ export const ProgrammesSelectorSection = () => {
                   <MoonStar className="h-5 w-5 text-msk-blue-700" aria-hidden />
                   <span>
                     <strong className="font-semibold">Après-midi</strong> · {prog.apresMidi}
+                  </span>
+                </span>
+              </div>
+
+              {/* Le point qui distingue vraiment le centre : la composition des
+                  groupes ne suit pas l'âge. Faits partagés, donc lus depuis
+                  lib/data/programmes.ts et non réécrits ici. */}
+              <div className="mt-3 flex flex-col gap-2.5 text-sm text-msk-night-800 sm:flex-row sm:gap-6">
+                <span className="inline-flex items-center gap-2">
+                  <Users className="h-5 w-5 text-msk-coral-600" aria-hidden />
+                  <span>
+                    <strong className="font-semibold">Groupes de {ORGANISATION.tailleGroupe}</strong> ·{" "}
+                    {ORGANISATION.critere}
+                  </span>
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <Repeat className="h-5 w-5 text-msk-blue-700" aria-hidden />
+                  <span>
+                    <strong className="font-semibold">Rotation des salles</strong> ·{" "}
+                    {ORGANISATION.rotation}
                   </span>
                 </span>
               </div>

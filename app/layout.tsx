@@ -53,12 +53,13 @@ export const metadata: Metadata = {
     template: "%s | MSK Montessori School Casablanca",
   },
   description:
-    "Centre scolaire inclusif à Casablanca (Maroc). Pédagogie Montessori, réadaptation comportementale, Neuro-Gym et insertion scolaire pour enfants de 2 ans à l'âge adulte.",
+    "Centre scolaire inclusif à Casablanca (Maroc). Pédagogie Montessori, réadaptation comportementale, Neuro-Gym et insertion scolaire pour les enfants de 2 à 11 ans, en maternelle et en primaire.",
   keywords: [
     "école inclusive Casablanca",
     "Montessori éducation inclusive",
     "insertion scolaire enfant Maroc",
-    "TDA TDAH accompagnement Casablanca",
+    "décrochage scolaire Casablanca",
+    "école enfant sans code Massar",
     "neuro gym Casablanca",
   ],
   openGraph: {
