@@ -3,13 +3,29 @@
 import Image from "next/image";
 
 import { FadeUp } from "@/components/motion/FadeUp";
+import { AccueilStepsRibbon } from "@/components/accueil/AccueilStepsRibbon";
 import { METHODE_STEPS } from "@/lib/data/methode-steps";
 
 /**
- * The method as full-bleed sticky bands, alternating cream / pale-blue so the
- * boundary between steps is the colour change itself — no rule or gap needed.
- * L'alternance est chaud/froid et non deux crèmes : six écrans successifs de
- * la même famille faisaient basculer toute la page dans le crème.
+ * The method as a column of cards that stack against a heading which stays put.
+ *
+ * The heading column is `sticky` and holds its place for the whole section,
+ * while each card on the right is itself `sticky` with a slightly larger `top`
+ * than the one before it. So a card pins, the next slides up and covers all but
+ * its top edge, and the offsets leave a visible ledge for every card already
+ * dealt — the stack builds downward as you read.
+ *
+ * There is no JavaScript here. Later siblings paint over earlier ones, which is
+ * what does the covering; the tilts and offsets are static CSS.
+ *
+ * Two things it depends on: the cards must be opaque, or the one underneath
+ * shows through, and no ancestor may be a scroll container — `overflow: hidden`
+ * anywhere above silently kills sticky. `app/page.tsx` uses `overflow-x-clip`
+ * because `clip` does not create one.
+ *
+ * Cool, not cream: AccueilTroubles above it is msk-cream-100 and this was
+ * msk-cream-50 — near-identical neighbours that read as one long cream run.
+ * The page alternates warm and cold deliberately (see d429c86).
  *
  * Step identity (number + verb) comes from METHODE_STEPS; titles, copy and
  * presentation are this surface's own.
@@ -20,7 +36,6 @@ const DETAILS = [
     description:
       "Identifier avec précision les forces, le profil sensoriel et le style d'apprentissage sans jugement ni étiquette.",
     image: "/Cute baby Peek a boo.svg",
-    band: "bg-msk-cream-50",
     panel: "bg-msk-coral-100",
   },
   {
@@ -28,7 +43,6 @@ const DETAILS = [
     description:
       "Croiser les regards des éducateurs, psychomotriciens, orthophonistes et de la famille pour cibler les besoins.",
     image: "/Parenting.svg",
-    band: "bg-msk-blue-50",
     panel: "bg-msk-blue-200",
   },
   {
@@ -36,7 +50,6 @@ const DETAILS = [
     description:
       "Ajuster le matériel sensoriel Montessori, les rythmes et les supports pédagogiques au profil unique de l'enfant.",
     image: "/Colorful abacus with wooden frame.svg",
-    band: "bg-msk-cream-50",
     panel: "bg-msk-sun-200",
   },
   {
@@ -44,7 +57,6 @@ const DETAILS = [
     description:
       "Stimuler les connexions neuro-motrices, réguler l'attention et libérer le potentiel cognitif de l'apprenant.",
     image: "/kid swing.svg",
-    band: "bg-msk-blue-50",
     panel: "bg-msk-coral-200",
   },
   {
@@ -52,7 +64,6 @@ const DETAILS = [
     description:
       "Un dialogue transparent et des bilans réguliers pour co-construire chaque progrès au quotidien.",
     image: "/kids playing - kidcare.svg",
-    band: "bg-msk-cream-50",
     panel: "bg-msk-blue-100",
   },
   {
@@ -60,117 +71,111 @@ const DETAILS = [
     description:
       "Développer l'autonomie et la confiance en soi pour une intégration sereine et pérenne.",
     image: "/Graduation.svg",
-    band: "bg-msk-blue-50",
     panel: "bg-msk-sun-100",
   },
 ];
 
-const STEPS = METHODE_STEPS.map((step, index) => ({ ...step, ...DETAILS[index] }));
+const STEPS = METHODE_STEPS.map((step, index) => ({
+  ...step,
+  ...DETAILS[index],
+}));
+
+/**
+ * Resting tilt per card, so the stack reads as dealt rather than filed. Small
+ * and alternating; the first sits square so the section does not open crooked.
+ */
+const TILTS = [0, 2.2, -2.4, 1.8, -1.6, 2];
+
+/** Extra `top` per card, in rem. This is what leaves each ledge visible. */
+const LEDGE_REM = 0.75;
 
 export const AccueilSteps = () => {
   return (
-    <div id="methode">
+    <section
+      id="methode"
+      className="relative w-full overflow-x-clip bg-msk-blue-50 py-24 md:py-32"
+    >
       {/*
-        Pinned header: `sticky top-0` keeps it docked at the viewport top for
-        as long as ANY step below is still scrolling past, and `z-10` is what
-        keeps it on top of them — without an explicit z-index it would lose to
-        whichever step comes later in paint order, which is exactly how the
-        steps are meant to cover EACH OTHER (see the comment below). Giving the
-        header the only explicit z-index in this stack makes it win against
-        every step while leaving the steps' own mutual stacking untouched.
+        Decorative ribbon behind the section, drawn on scroll.
 
-        Kept to its natural (non-`min-h-screen`) height so it reads as a
-        compact docked bar, not a full screen — each step reserves matching
-        top space (`lg:pt-[19rem]` etc.) so its own centred content clears it.
+        Deliberately NOT `overflow-hidden` on the section: that creates a scroll
+        container and silently kills every sticky card inside. `overflow-x-clip`
+        is safe — `clip` never creates one — and is enough, since the Lottie's
+        strands run wider than its own comp.
       */}
-      <section className="flex min-h-[100dvh] w-full flex-col justify-center bg-msk-cream-50 py-20">
-        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
-          <FadeUp>
-            <span className="inline-block rounded-[0.4rem] bg-msk-sun-200 px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950">
-              Notre pédagogie
-            </span>
-            <h2 className="mt-6 max-w-3xl font-display text-[1.875rem] font-bold uppercase leading-[1.05] text-msk-night-950 sm:text-[2.5rem] lg:text-[3rem]">
-              La méthode en 6 étapes
-            </h2>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-msk-night-800 md:text-lg">
-              Un cheminement structuré pour accompagner l&apos;enfant de ses
-              premiers blocages jusqu&apos;à son autonomie.
-            </p>
-          </FadeUp>
-        </div>
-      </section>
+      <AccueilStepsRibbon className="pointer-events-none absolute inset-0 z-0 h-full w-full" />
 
-      {/*
-        The steps stack rather than scroll past: every band is `sticky top-0`
-        inside this one container, so each pins at the top of the viewport and
-        the next slides up and covers it. Later siblings paint over earlier
-        ones, which is what makes the covering work — no z-index needed among
-        them, and no JavaScript at all. The pinned header above always wins
-        against all of them (see its own z-index comment).
+      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
+        {/*
+          `--stack-top` is the offset the first card pins at, and every card
+          derives its own from it. A custom property rather than a literal
+          because the value has to differ by breakpoint — the cards' `top` is an
+          inline style, and inline styles cannot carry a media query.
+        */}
+        <div className="grid grid-cols-1 gap-12 [--stack-top:6rem] lg:grid-cols-[1fr_27.8125rem] lg:gap-16 lg:[--stack-top:9rem]">
+          {/* `self-start` matters: a stretched grid item is as tall as the row
+              and would have nothing left to scroll within, so it never sticks. */}
+          <div className="lg:sticky lg:top-36 lg:self-start">
+            <FadeUp>
+              <span className="inline-block rounded-[0.4rem] bg-msk-sun-200 px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950">
+                Notre pédagogie
+              </span>
+              <h2 className="mt-6 max-w-2xl font-display text-[1.875rem] font-bold uppercase leading-[1.05] text-msk-night-950 sm:text-[2.5rem] lg:text-[3rem]">
+                La méthode en 6 étapes
+              </h2>
+              <p className="mt-6 max-w-md text-base leading-relaxed text-msk-night-800 md:text-lg">
+                Un cheminement structuré pour accompagner l&apos;enfant de ses
+                premiers blocages jusqu&apos;à son autonomie.
+              </p>
+            </FadeUp>
+          </div>
 
-        Two things this depends on:
-        - each band must be viewport-tall, or the next one starts covering
-          before the current is fully read;
-        - each band must have an OPAQUE background. A transparent one would let
-          the pinned band underneath show through.
-
-        It also needs no ancestor to be a scroll container: `overflow: hidden`
-        anywhere above would silently kill the sticky. `app/page.tsx` uses
-        `overflow-x-clip` precisely because `clip` does not create one.
-      */}
-      {STEPS.map((step) => (
-        <section
-          key={step.number}
-          className={`sticky top-0 w-full ${step.band}`}
-        >
-          <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
-            {/*
-              Top padding clears the pinned header above (measured, not
-              guessed: 345px by default, 298px at sm, 344px at md, 353px from
-              lg up — stable beyond that) with roughly 30–45px of breathing
-              room at each step, so a future edit to the header copy has slack
-              before it needs retuning.
-
-              `items-start`, not `items-center`: centering a row taller than
-              its content splits the LEFTOVER height evenly above and below —
-              on top of the padding already reserved for the header, adding a
-              second, much bigger gap on top of it (166px measured on top of
-              the intended ~40px). Starting the content at the padding's edge
-              is the one placement that doesn't compound.
-            */}
-            <div className="grid min-h-screen grid-cols-1 items-center gap-10 py-16 lg:grid-cols-2 lg:gap-16">
-              <FadeUp>
-                <div>
-                  <span className="inline-block rounded-[0.4rem] bg-white px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950 shadow-sm">
+          <ol className="flex flex-col gap-8">
+            {STEPS.map((step, index) => (
+              /*
+                The sticky element must be the DIRECT child of the tall column,
+                not wrapped: a sticky box sticks within its containing block,
+                and a wrapper that is exactly card-height leaves it nothing to
+                travel in, so it just scrolls away. Wrapping these in <li>
+                elements did exactly that.
+              */
+              <li
+                key={step.number}
+                className="sticky rounded-[1.5rem] border border-msk-cream-300 bg-white p-7 shadow-sm sm:p-9"
+                style={{
+                  top: `calc(var(--stack-top) + ${index * LEDGE_REM}rem)`,
+                  rotate: `${TILTS[index]}deg`,
+                }}
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <span
+                    className={`flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-[1rem] sm:h-20 sm:w-20 ${step.panel}`}
+                  >
+                    <Image
+                      src={step.image}
+                      alt=""
+                      aria-hidden
+                      width={80}
+                      height={80}
+                      className="h-full w-full object-contain p-2"
+                    />
+                  </span>
+                  <span className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-700">
                     Étape {step.number} · {step.verb}
                   </span>
-                  <h3 className="mt-5 max-w-xl font-display text-[1.625rem] font-bold uppercase leading-[1.05] text-msk-night-950 sm:text-[2rem] lg:text-[2.25rem]">
-                    {step.title}
-                  </h3>
-                  <p className="mt-6 max-w-lg text-base leading-relaxed text-msk-night-800 md:text-lg">
-                    {step.description}
-                  </p>
                 </div>
-              </FadeUp>
 
-              <FadeUp delay={0.12}>
-                <div
-                  className={`relative flex h-[18rem] items-center justify-center overflow-hidden rounded-[1.25rem] md:h-[22rem] ${step.panel}`}
-                >
-                  <Image
-                    src={step.image}
-                    alt=""
-                    aria-hidden
-                    width={420}
-                    height={420}
-                    className="h-full w-full object-contain p-10"
-                  />
-                </div>
-              </FadeUp>
-            </div>
-          </div>
-        </section>
-      ))}
-    </div>
+                <h3 className="mt-6 font-display text-[1.375rem] font-bold uppercase leading-[1.1] text-msk-night-950 sm:text-[1.625rem]">
+                  {step.title}
+                </h3>
+                <p className="mt-4 text-base leading-relaxed text-msk-night-800">
+                  {step.description}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </section>
   );
 };
