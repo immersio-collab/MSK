@@ -43,11 +43,11 @@ export const GalerieTourSection = () => {
   return (
     <section
       id="tour-virtuel"
-      className="relative w-full overflow-hidden bg-msk-cream-100 px-4 py-10 sm:px-8 md:py-12"
+      className="relative w-full overflow-hidden bg-white px-4 py-10 sm:px-8 md:py-12"
     >
       {/* En-tête compact : une pill, un titre, une phrase. */}
       <div className="mx-auto mb-6 max-w-4xl text-center md:mb-7">
-        <Eyebrow className="bg-white text-msk-coral-700 shadow-sm">
+        <Eyebrow className="bg-msk-blue-50 text-msk-blue-700 shadow-sm">
           Tour virtuel · 360°
         </Eyebrow>
         <GalerieTitreAnime

@@ -4,9 +4,11 @@ import { Eyebrow } from "@/components/common/Eyebrow";
 
 export const FondatricePhilosophieSection: React.FC = () => {
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    // coral-50 : la respiration signature de la page — la citation est le
+    // temps fort de la fondatrice.
+    <section className="py-24 bg-msk-coral-50 relative overflow-hidden">
       {/* Decorative large quote mark */}
-      <div className="absolute top-10 left-10 text-[20rem] leading-none text-msk-cream-100 font-serif z-0 select-none">
+      <div className="absolute top-10 left-10 text-[20rem] leading-none text-msk-coral-100 font-serif z-0 select-none">
         &ldquo;
       </div>
 
@@ -24,7 +26,7 @@ export const FondatricePhilosophieSection: React.FC = () => {
               </h2>
             </div>
             
-            <blockquote className="text-xl md:text-2xl text-msk-night-700/80 italic border-l-4 border-msk-sun-400 pl-6 leading-relaxed">
+            <blockquote className="text-xl md:text-2xl text-msk-night-700/80 italic border-l-4 border-msk-coral-400 pl-6 leading-relaxed">
               &laquo;&nbsp;L&apos;école classique demande à l&apos;enfant de s&apos;adapter à une méthode unique. Chez MSK, c&apos;est notre méthode qui s&apos;adapte à l&apos;enfant. Nous croyons profondément qu&apos;avec le bon environnement, chaque étincelle peut devenir une grande lumière.&nbsp;&raquo;
             </blockquote>
             

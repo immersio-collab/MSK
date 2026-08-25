@@ -61,7 +61,7 @@ const CARD_TONES = [
 
 const Heading = () => (
   <>
-    <Eyebrow className="bg-msk-blue-100 text-msk-blue-800">
+    <Eyebrow className="bg-msk-sun-200 text-msk-night-950">
       À qui s&apos;adresse MSK ?
     </Eyebrow>
     <h2 className="mx-auto mt-4 max-w-[20ch] font-display text-[1.75rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-4xl lg:text-5xl">
@@ -235,7 +235,7 @@ export const AccueilTroubles = () => {
   const dipK = cardW * 0.014;
 
   return (
-    <section className="relative w-full overflow-hidden bg-msk-blue-100">
+    <section className="relative w-full overflow-hidden bg-msk-cream-100">
       <div className="relative hidden h-[100svh] flex-col px-6 pb-10 pt-[6.5rem] lg:flex lg:px-16">
         <FadeUp className="shrink-0 text-center">
           <Heading />

@@ -33,7 +33,7 @@ export const AccueilGalerie = () => {
         <FadeUp>
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
-              <span className="inline-block rounded-[0.4rem] bg-msk-coral-300 px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950">
+              <span className="inline-block rounded-[0.4rem] bg-msk-sun-300 px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950">
                 Nos espaces
               </span>
               <h2 className="mt-6 max-w-2xl font-display text-[1.75rem] font-bold uppercase leading-[1.05] text-white sm:text-[2.25rem] lg:text-[2.75rem]">

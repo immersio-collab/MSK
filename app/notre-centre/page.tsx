@@ -7,10 +7,12 @@ export const metadata: Metadata = {
 };
 
 export default function NotreCentrePage() {
+  // Fond en nuance 50 pleine, pas de `bg-white` + teinte /40 : deux utilitaires
+  // background sur le même élément laissent l'ordre de la feuille décider.
   const sections = [
-    { id: "hero", title: "Présentation Générale — Notre Centre", color: "text-msk-coral-600 border-msk-coral-200 bg-msk-coral-50/40" },
-    { id: "mission", title: "Notre Mission & Nos Valeurs", color: "text-msk-sun-600 border-msk-sun-200 bg-msk-sun-50/40" },
-    { id: "cta", title: "Prendre Rendez-vous / Bilan", color: "text-msk-blue-600 border-msk-blue-200 bg-msk-blue-50/40" },
+    { id: "hero", title: "Présentation Générale — Notre Centre", color: "text-msk-coral-600 border-msk-coral-200 bg-msk-coral-50" },
+    { id: "mission", title: "Notre Mission & Nos Valeurs", color: "text-msk-sun-600 border-msk-sun-200 bg-msk-sun-50" },
+    { id: "cta", title: "Prendre Rendez-vous / Bilan", color: "text-msk-blue-600 border-msk-blue-200 bg-msk-blue-50" },
   ];
 
   return (
@@ -28,7 +30,7 @@ export default function NotreCentrePage() {
         {sections.map((section, idx) => (
           <div
             key={section.id}
-            className={`rounded-3xl border-2 border-dashed p-12 text-center bg-white ${section.color}`}
+            className={`rounded-3xl border-2 border-dashed p-12 text-center ${section.color}`}
           >
             <span className="text-xs font-bold uppercase tracking-widest block mb-2 opacity-80">
               Section {idx + 1}

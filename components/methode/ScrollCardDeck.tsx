@@ -17,8 +17,6 @@ export interface DeckCard {
   card: string;
   titleTone: string;
   bodyTone: string;
-  /** Fill of the section behind the deck while this card is in front. */
-  stage: string;
   /** Animated mark for this card, from public/methode/lottie. */
   lottie: string;
 }

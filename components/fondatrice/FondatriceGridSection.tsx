@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export const FondatriceGridSection: React.FC = () => {
   return (
-    <section id="suite" className="py-20 bg-[#FAF8F5]">
+    <section id="suite" className="py-20 bg-msk-cream-50">
       <div className="container mx-auto px-4 max-w-5xl relative">
         {/* Decorative SVGs */}
         <img 

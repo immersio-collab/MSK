@@ -116,18 +116,26 @@ const p = (fanFamily: string, near: number, mid: number, square: string): Palett
   square: token(square),
 });
 
+/*
+ * Les familles d'éventails suivent la SIGNATURE de chaque page (système de
+ * couleurs 2026-08-25) : coral = méthode, fondatrice, actualités ·
+ * blue = troubles, galerie, programmes · sun = accueil. Le balayage annonce
+ * ainsi réellement la couleur de la page d'arrivée.
+ */
 const ROUTE_PALETTES: ReadonlyArray<readonly [string, Palette]> = [
   ["/notre-centre/la-methode", p("coral", 100, 300, "blue-500")],
-  ["/notre-centre/troubles-accompagnes", p("sun", 200, 400, "blue-700")],
+  ["/notre-centre/troubles-accompagnes", p("blue", 50, 300, "sun-400")],
   ["/notre-centre/la-fondatrice", p("coral", 200, 400, "sun-300")],
   ["/notre-centre/galerie", p("blue", 100, 300, "coral-600")],
   ["/notre-centre", p("blue", 50, 200, "sun-500")],
-  ["/programmes", p("sun", 100, 400, "blue-400")],
-  ["/actualites", p("blue", 200, 400, "sun-400")],
-  ["/contact", p("coral", 100, 400, "blue-600")],
+  ["/programmes", p("blue", 200, 400, "coral-400")],
+  ["/actualites", p("coral", 100, 400, "blue-400")],
+  // /contact et l'accueil ont le même ciel bleu-100 en tête de page : leurs
+  // éventails sont bleus, seuls leurs carrés les distinguent.
+  ["/contact", p("blue", 100, 400, "coral-700")],
 ];
 
-const HOME_PALETTE: Palette = p("sun", 100, 300, "coral-500");
+const HOME_PALETTE: Palette = p("blue", 100, 300, "coral-500");
 
 function paletteFor(pathname: string): Palette {
   for (const [prefix, palette] of ROUTE_PALETTES) {

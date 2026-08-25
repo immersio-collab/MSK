@@ -42,7 +42,7 @@ export const AccueilPourQui = () => {
     <section id="programmes" className="w-full bg-msk-blue-50 py-24 md:py-32">
       <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
         <FadeUp>
-          <span className="inline-block rounded-[0.4rem] bg-msk-coral-200 px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950">
+          <span className="inline-block rounded-[0.4rem] bg-msk-sun-200 px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950">
             Maternelle &amp; Primaire
           </span>
           <h2 className="mt-6 max-w-3xl font-display text-[1.875rem] font-bold uppercase leading-[1.05] text-msk-night-950 sm:text-[2.5rem] lg:text-[3rem]">

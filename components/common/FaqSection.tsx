@@ -15,9 +15,10 @@ import { cn } from "@/lib/utils";
  * right that open one at a time.
  *
  * Every route carries one, sitting immediately before that page's closing CTA,
- * so the structure lives here exactly once. Only the palette and the copy
- * change per page — pages pick a `tone` plus a `button` and pass their own
- * questions from lib/data/faq.ts.
+ * so the structure lives here exactly once. Seul le contenu change de page en
+ * page — la palette est FIXE depuis le système de couleurs 2026-08-25 : toutes
+ * les pages se terminent par la même séquence FAQ cream-100 → CTA night-800 →
+ * footer night-900. Les questions viennent de lib/data/faq.ts.
  *
  * Visual vocabulary is the /notre-centre one: white rounded-full pill with a
  * coral label, `font-display` uppercase heading with a single accented word,
@@ -33,133 +34,45 @@ export interface FaqItem {
 }
 
 /**
- * The field a section sits on: background plus every colour that has to be
- * legible against it.
+ * Palette FIXE — l'ancien système de `tones` par page a été retiré avec le
+ * système de couleurs 2026-08-25. Le champ est cream-100 partout : c'est la
+ * teinte que la page-référence /contact (restée intacte) utilisait déjà.
  *
  * Written out in full, never composed from fragments: Tailwind v4 only emits
  * the classes it reads literally in the source, so a template-built class name
  * produces no CSS and the element silently inherits its parent's colour.
  *
- * Two rules govern every entry, both learned from an audit of the real seams:
- *
- * 1. A tone is picked so its background differs in LIGHTNESS, not only hue,
- *    from the section above and the CTA below. Two pale fields at the same
- *    luminance (cream-200 against blue-100 measures 1.01:1) read as one
- *    continuous band to anyone with reduced colour discrimination.
- * 2. `accent` is `coral-800`, never `coral-700`. The accented word renders
- *    inside the `<h2>`, so it is heading text and has to clear 7:1 — coral-700
- *    clears only 5.7–6.3:1 on every background used here. `icon` may stay at
- *    coral-700: a glyph needs 3:1.
- *
- * Keys are deliberately NOT named after colour families. `msk-sky` and
- * `msk-rose` are among the invented family names this codebase had to purge,
- * and a tone called `sky` invites the next reader to write `bg-msk-sky-100`,
- * which would emit no CSS at all.
+ * Décisions héritées de l'audit des coutures, toujours valables :
+ * - `accent` est coral-800, jamais coral-700 : le mot accentué vit dans le
+ *   <h2>, donc texte de titre qui doit tenir 7:1 — coral-700 plafonne sous
+ *   6.3:1. `icon` peut rester coral-700 : un glyphe n'exige que 3:1.
+ * - La couture HAUTE (souvent white ou cream-50 contre cream-100) est douce,
+ *   et c'est assumé : c'est l'alternance neutre du socle. La rupture forte
+ *   arrive juste en dessous, avec la bande night-800 de la CTA finale.
  */
-const TONES = {
-  /** blue-50 — palest sky. */
-  blueLight: {
-    background: "bg-msk-blue-50",
-    pillBg: "bg-white",
-    pillText: "text-msk-coral-700",
-    heading: "text-msk-night-900",
-    accent: "text-msk-coral-800",
-    body: "text-msk-night-700",
-    rule: "border-msk-night-900/15",
-    icon: "text-msk-coral-700",
-  },
-  /** blue-100 — one step deeper, for pages that arrive off a long cream run. */
-  blueMid: {
-    background: "bg-msk-blue-100",
-    pillBg: "bg-white",
-    pillText: "text-msk-coral-700",
-    heading: "text-msk-night-900",
-    accent: "text-msk-coral-800",
-    body: "text-msk-night-700",
-    rule: "border-msk-night-900/15",
-    icon: "text-msk-coral-700",
-  },
-  /** blue-200 — deep enough to break a seam against cream by lightness. */
-  blueDeep: {
-    background: "bg-msk-blue-200",
-    pillBg: "bg-white",
-    pillText: "text-msk-coral-700",
-    heading: "text-msk-night-900",
-    accent: "text-msk-coral-800",
-    body: "text-msk-night-700",
-    rule: "border-msk-night-900/15",
-    icon: "text-msk-coral-700",
-  },
-  /** sun-100 — the warm field, for the pages whose accent story is yellow. */
-  sunLight: {
-    background: "bg-msk-sun-100",
-    pillBg: "bg-white",
-    pillText: "text-msk-coral-700",
-    heading: "text-msk-night-900",
-    accent: "text-msk-coral-800",
-    body: "text-msk-night-700",
-    rule: "border-msk-night-900/15",
-    icon: "text-msk-coral-700",
-  },
-  /**
-   * coral-100 — pink field. The pill label turns night-900: a coral label on a
-   * coral ground goes monochrome and the pill stops reading as a pill.
-   */
-  coralLight: {
-    background: "bg-msk-coral-100",
-    pillBg: "bg-white",
-    pillText: "text-msk-night-900",
-    heading: "text-msk-night-900",
-    accent: "text-msk-coral-800",
-    body: "text-msk-night-700",
-    rule: "border-msk-night-900/15",
-    icon: "text-msk-coral-700",
-  },
-  /** cream-100 — the site's warm neutral, for a page with no CTA after it. */
-  creamLight: {
-    background: "bg-msk-cream-100",
-    pillBg: "bg-white",
-    pillText: "text-msk-coral-700",
-    heading: "text-msk-night-900",
-    accent: "text-msk-coral-800",
-    body: "text-msk-night-700",
-    rule: "border-msk-night-900/15",
-    icon: "text-msk-coral-700",
-  },
+const TONE = {
+  background: "bg-msk-cream-100",
+  pillBg: "bg-white",
+  pillText: "text-msk-coral-700",
+  heading: "text-msk-night-900",
+  accent: "text-msk-coral-800",
+  body: "text-msk-night-700",
+  rule: "border-msk-night-900/15",
+  icon: "text-msk-coral-700",
 } as const;
 
 /**
- * The CTA fill, chosen separately from the field.
- *
- * It has to differ from whatever button the CTA section directly below fires,
- * or the two stack up as duplicates and the FAQ's button reads as the page's
- * real call to action. Hover is baked into the same string: the render site
- * passes this straight to MorphButton's `fillClassName`, and a separate hover
- * key would simply never be read.
+ * Le bouton — coral-600, l'accent primaire, blanc dessus (4.9:1). La règle
+ * historique tient toujours : il doit différer du bouton PRINCIPAL de la CTA
+ * juste en dessous, qui est désormais blanc partout. Hover baked into the same
+ * string: the render site passes this straight to MorphButton's
+ * `fillClassName`, and a separate hover key would simply never be read.
  */
-const BUTTONS = {
-  /** White on coral-600 — 4.9:1. The site default. */
-  coral: {
-    fill: "bg-msk-coral-600 group-hover:bg-msk-coral-700",
-    shadow: "shadow-lg shadow-msk-coral-600/25",
-    text: "text-white",
-  },
-  /** White on night-900 — 16:1. For pages whose CTA below is already coral. */
-  night: {
-    fill: "bg-msk-night-900 group-hover:bg-msk-night-800",
-    shadow: "shadow-lg shadow-msk-night-900/20",
-    text: "text-white",
-  },
-  /** White on blue-700 — 5.1:1. Matches the buttons on /la-methode. */
-  blue: {
-    fill: "bg-msk-blue-700 group-hover:bg-msk-blue-800",
-    shadow: "shadow-lg shadow-msk-blue-900/20",
-    text: "text-white",
-  },
+const BUTTON = {
+  fill: "bg-msk-coral-600 group-hover:bg-msk-coral-700",
+  shadow: "shadow-lg shadow-msk-coral-600/25",
+  text: "text-white",
 } as const;
-
-type FaqTone = keyof typeof TONES;
-type FaqButton = keyof typeof BUTTONS;
 
 interface FaqSectionProps {
   /** Small pill above the heading. */
@@ -173,8 +86,6 @@ interface FaqSectionProps {
   items: FaqItem[];
   ctaLabel: string;
   ctaHref: string;
-  tone?: FaqTone;
-  button?: FaqButton;
   /** Anchor target, when a page needs to link to its own FAQ. */
   id?: string;
 }
@@ -187,14 +98,12 @@ export const FaqSection = ({
   items,
   ctaLabel,
   ctaHref,
-  tone = "blueLight",
-  button = "coral",
   id,
 }: FaqSectionProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const panelId = useId();
-  const t = TONES[tone];
-  const b = BUTTONS[button];
+  const t = TONE;
+  const b = BUTTON;
 
   return (
     <section id={id} className={cn("w-full py-24 md:py-32", t.background)}>

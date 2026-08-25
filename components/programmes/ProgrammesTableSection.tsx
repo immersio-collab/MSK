@@ -115,12 +115,14 @@ export const ProgrammesTableSection = () => {
     return () => ctx.revert();
   }, []);
 
+  // blue-50 : la respiration signature de la page — les fiches blanches et
+  // leurs bandeaux coral/sun se détachent mieux que sur crème.
   return (
-    <section ref={root} className="relative overflow-hidden bg-msk-cream-100 py-24">
+    <section ref={root} className="relative overflow-hidden bg-msk-blue-50 py-24">
       <div className="mx-auto max-w-4xl px-6 sm:px-10">
         <FadeUp>
           <div className="mb-12 text-center">
-            <Eyebrow className="bg-white text-msk-coral-700 shadow-sm">
+            <Eyebrow className="bg-white text-msk-blue-700 shadow-sm">
               Vue d&apos;ensemble
             </Eyebrow>
             <h2 className="mt-4 font-display text-3xl font-bold uppercase leading-[0.95] text-msk-night-900 md:text-4xl">

@@ -35,8 +35,10 @@ const PROCESS = [
 ];
 
 export const MethodeProcessSection = () => {
+  // coral-50, pas blanc ni crème : le panneau intérieur est blanc et a besoin
+  // d'un fond teinté pour se détacher — et le corail est la signature de la page.
   return (
-    <section className="w-full bg-msk-cream-200 pb-24 md:pb-32">
+    <section className="w-full bg-msk-coral-50 pb-24 md:pb-32">
       <div className="mx-auto w-full max-w-7xl px-6 sm:px-10">
         <div className="grid grid-cols-1 gap-12 rounded-[2rem] bg-white px-8 py-14 md:px-14 md:py-20 lg:grid-cols-2 lg:gap-20">
           <FadeUp className="flex h-full flex-col justify-center">
@@ -49,7 +51,7 @@ export const MethodeProcessSection = () => {
                 href="/contact"
                 size="sm"
                 className="mt-8 px-7 font-display text-sm font-semibold uppercase tracking-[0.14em] text-white"
-                fillClassName="bg-msk-blue-700 group-hover:bg-msk-blue-800"
+                fillClassName="bg-msk-coral-600 group-hover:bg-msk-coral-700"
               >
                 Commencer
               </MorphButton>

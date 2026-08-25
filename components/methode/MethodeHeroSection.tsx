@@ -19,7 +19,7 @@ export const MethodeHeroSection = () => {
   return (
     <PageHero
       rootRef={root}
-      band="bg-msk-sun-400"
+      band="bg-msk-coral-400"
       card="bg-msk-coral-600"
       title="Une méthode en 6 étapes, pensée pour votre enfant"
       titleClassName="text-msk-sun-200"

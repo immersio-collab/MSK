@@ -17,6 +17,10 @@ import { FadeUp } from "@/components/motion/FadeUp";
  * band, surrounded by hand-drawn SVG characters (smiling clouds, a sun, a
  * coral caterpillar peeking from the right edge).
  *
+ * Le ciel bleu-100 est la première image du site et son moment d'accroche : il
+ * ne suit PAS le fond crème-100 des héros intérieurs, et c'est délibéré
+ * (/contact, l'autre héros sur mesure, partage ce même ciel).
+ *
  * Motion is layered per decoration: an outer wrapper carries the scroll
  * parallax (useScroll/useTransform, each element at its own rate) and an inner
  * wrapper carries the infinite idle loop (sun bob/tilt, cloud drift, wandering
@@ -180,7 +184,9 @@ export const AccueilHero = () => {
 
       <div className="relative z-10 mx-auto max-w-3xl text-center">
         <FadeUp>
-          <p className="font-display text-xs font-semibold uppercase tracking-[0.08em] text-msk-coral-600 sm:text-sm">
+          {/* coral-700 et non 600 : sur le bleu-100, le 600 ne tient que
+              4.2:1 pour un texte de 12-14px. */}
+          <p className="font-display text-xs font-semibold uppercase tracking-[0.08em] text-msk-coral-700 sm:text-sm">
             +200 familles · 15 ans d&apos;expérience · Casablanca
           </p>
         </FadeUp>

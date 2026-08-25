@@ -18,8 +18,9 @@ import { cn } from "@/lib/utils";
 
 /**
  * Le tableau d'affichage : filtres par catégorie, article « À la une » en
- * grande carte inclinée, puis grille de cartes polaroid. Un coin bleu pâle en
- * biais derrière la grille — la page traverse coral → crème → bleu → jaune.
+ * grande carte inclinée, puis grille de cartes polaroid, sur coral-50 — la
+ * teinte signature de la page (bande du hero, sticker « À la une »,
+ * « Lire l'article »). Les badges de catégorie gardent leurs quatre couleurs.
  *
  * Tout le mouvement est en framer-motion : entrées au montage et transitions
  * de filtre — rien de scroll-driven ici.
@@ -97,7 +98,7 @@ export const ActualitesListSection = () => {
     cle === "tous" ? ARTICLES.length : ARTICLES.filter((a) => a.categorie === cle).length;
 
   return (
-    <section id="articles" className="relative overflow-hidden bg-msk-blue-100 pb-24 pt-20 md:pb-28 md:pt-24">
+    <section id="articles" className="relative overflow-hidden bg-msk-coral-50 pb-24 pt-20 md:pb-28 md:pt-24">
       <div className="relative mx-auto w-full max-w-6xl px-6 sm:px-10">
         {/* Filtres : la pastille bleu nuit glisse d'une catégorie à l'autre. */}
         <div role="group" aria-label="Filtrer les articles" className="flex flex-wrap justify-center gap-2.5">
@@ -110,7 +111,7 @@ export const ActualitesListSection = () => {
                 aria-pressed={actif}
                 onClick={() => setFiltre(cat.cle)}
                 className={cn(
-                  "relative inline-flex h-10 items-center gap-2 rounded-full px-4 font-display text-[0.7rem] font-semibold uppercase tracking-[0.13em] transition-colors focus-visible:outline-hidden focus-visible:ring-4 focus-visible:ring-msk-blue-300",
+                  "relative inline-flex h-10 items-center gap-2 rounded-full px-4 font-display text-[0.7rem] font-semibold uppercase tracking-[0.13em] transition-colors focus-visible:outline-hidden focus-visible:ring-4 focus-visible:ring-msk-coral-300",
                   actif ? "text-white" : "text-msk-night-900 hover:text-msk-coral-700",
                 )}
               >

@@ -116,7 +116,7 @@ export const ARTICLES: Article[] = [
         titre: "Infos pratiques",
         points: [
           "Samedi 25 novembre, 9h – 17h, entrée libre.",
-          "Quartier Oasis / Val Fleuri, Casablanca.",
+          "Rue Sabou, Gauthier, Casablanca.",
           "Les enfants sont les bienvenus — des ateliers leur sont réservés.",
         ],
       },

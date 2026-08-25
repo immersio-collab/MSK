@@ -28,7 +28,7 @@ export const MethodeStatementSection = () => {
       button={{
         href: "/notre-centre/troubles-accompagnes",
         label: "Troubles accompagnés",
-        fillClassName: "bg-msk-blue-700",
+        fillClassName: "bg-msk-coral-600",
       }}
       image={{ src: "/accompagnement.jpeg", alt: "Séance d'accompagnement" }}
     />

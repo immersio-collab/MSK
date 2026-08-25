@@ -99,7 +99,15 @@ export const PageHero = ({
       ) : null}
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 sm:px-10">
-        {media}
+        {/*
+          Emplacement du visuel, de hauteur FIXE et toujours rendu, même vide.
+          C'est lui qui garantit que la carte tombe au même endroit partout :
+          mesuré avant, les visuels occupaient de 0 à 461 px selon la page et
+          décalaient la carte de 210 px d'une page à l'autre. Les illustrations
+          gardent leur taille propre et débordent vers le haut sur la bande —
+          `items-end` les cale par le bas, au plus près de la carte.
+        */}
+        <div className="flex h-40 items-end justify-center md:h-48">{media}</div>
 
         {/* `mount` et non `view` : la carte est au-dessus de la ligne de
             flottaison, où un déclencheur au scroll n'a aucun filet — l'élément
@@ -107,24 +115,37 @@ export const PageHero = ({
         <FadeUp mode="mount" delay={0.1}>
           <div
             className={cn(
-              "mx-auto mt-4 max-w-2xl rounded-[1.75rem] px-8 py-10 text-center shadow-2xl md:px-12",
+              // Hauteur minimale commune, mesurée et non devinée : à 1280px,
+              // la carte la plus haute (la-methode, titre sur 3 lignes) occupe
+              // 381px. 25rem la couvre avec ~19px de marge, de quoi absorber un
+              // report de mot sans qu'une carte ressorte au-dessus des autres.
+              // Le total tient dans 100dvh (64 + 192 + 16 + 400 + 80 = 752),
+              // condition pour que le `justify-center` de la section centre
+              // vraiment le bloc au lieu de le laisser déborder.
+              // `justify-center` ici répartit le contenu plus court au lieu de
+              // le laisser coller en haut.
+              "mx-auto mt-4 flex min-h-[25rem] max-w-2xl flex-col justify-center rounded-[1.75rem] px-8 py-8 text-center shadow-2xl md:px-12",
               card,
             )}
           >
             <h1
               className={cn(
-                "font-display text-[2.25rem] font-bold uppercase leading-[0.9] sm:text-5xl md:text-6xl",
+                "font-display text-[1.75rem] font-bold uppercase leading-[0.95] sm:text-4xl md:text-5xl",
                 titleClassName,
               )}
             >
               {title}
             </h1>
 
-            <Eyebrow className={cn("mt-6", pillClassName)}>{pill}</Eyebrow>
+            {/* Enveloppé : en enfant direct de la colonne flex, la pastille
+                s'étirerait sur toute la largeur et perdrait sa forme. */}
+            <div>
+              <Eyebrow className={cn("mt-5", pillClassName)}>{pill}</Eyebrow>
+            </div>
 
             <p
               className={cn(
-                "mx-auto mt-6 max-w-md text-base font-medium leading-snug md:text-lg",
+                "mx-auto mt-5 max-w-md text-base font-medium leading-snug",
                 subtitleClassName,
               )}
             >
@@ -135,7 +156,7 @@ export const PageHero = ({
               href={anchor.href}
               aria-label={anchor.label}
               className={cn(
-                "mx-auto mt-8 flex h-11 w-11 items-center justify-center rounded-full border-2 transition-colors",
+                "mx-auto mt-6 flex h-11 w-11 items-center justify-center rounded-full border-2 transition-colors",
                 anchor.className,
               )}
             >

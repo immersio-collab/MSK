@@ -3,7 +3,7 @@
 import { MorphButton } from "@/components/motion/MorphButton";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Mail, Phone, MapPin, Clock, HeartHandshake } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, HeartHandshake, Instagram, Facebook, MessageCircle } from "lucide-react";
 
 import { SCHOOL_INFO } from "@/lib/data/site-content";
 
@@ -163,6 +163,42 @@ export const ContactMainSection: React.FC = () => {
                     {SCHOOL_INFO.hours}
                   </p>
                 </div>
+              </div>
+            </div>
+
+            {/* Social & WhatsApp direct channels */}
+            <div className="pt-2">
+              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">
+                Réseaux & Échanges directs
+              </p>
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href={SCHOOL_INFO.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 rounded-xl border border-msk-cream-300 bg-[#fbfdfd] px-3.5 py-2.5 text-sm font-semibold text-msk-night-900 transition-all hover:border-green-400 hover:bg-green-50/50 hover:text-green-700 shadow-2xs"
+                >
+                  <MessageCircle className="h-4 w-4 text-green-600" />
+                  <span>WhatsApp</span>
+                </a>
+                <a
+                  href={SCHOOL_INFO.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 rounded-xl border border-msk-cream-300 bg-[#fbfdfd] px-3.5 py-2.5 text-sm font-semibold text-msk-night-900 transition-all hover:border-msk-coral-300 hover:bg-msk-coral-50/50 hover:text-msk-coral-700 shadow-2xs"
+                >
+                  <Instagram className="h-4 w-4 text-msk-coral-600" />
+                  <span>Instagram</span>
+                </a>
+                <a
+                  href={SCHOOL_INFO.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 rounded-xl border border-msk-cream-300 bg-[#fbfdfd] px-3.5 py-2.5 text-sm font-semibold text-msk-night-900 transition-all hover:border-msk-blue-300 hover:bg-msk-blue-50/50 hover:text-msk-blue-700 shadow-2xs"
+                >
+                  <Facebook className="h-4 w-4 text-msk-blue-600" />
+                  <span>Facebook</span>
+                </a>
               </div>
             </div>
           </div>

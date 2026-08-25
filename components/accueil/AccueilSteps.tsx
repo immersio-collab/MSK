@@ -8,6 +8,8 @@ import { METHODE_STEPS } from "@/lib/data/methode-steps";
 /**
  * The method as full-bleed sticky bands, alternating cream / pale-blue so the
  * boundary between steps is the colour change itself — no rule or gap needed.
+ * L'alternance est chaud/froid et non deux crèmes : six écrans successifs de
+ * la même famille faisaient basculer toute la page dans le crème.
  *
  * Step identity (number + verb) comes from METHODE_STEPS; titles, copy and
  * presentation are this surface's own.

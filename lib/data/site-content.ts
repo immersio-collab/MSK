@@ -97,12 +97,18 @@ export const SCHOOL_INFO = {
   tagline: "Centre Scolaire Inclusif & Réadaptation",
   city: "Casablanca",
   country: "Maroc",
-  phone: "+212 5 22 00 00 00",
-  /** Lien WhatsApp complet — numéro placeholder, à remplacer ici et nulle part ailleurs. */
-  whatsapp: "https://wa.me/212600000000",
-  email: "contact@mskmontessori.ma",
-  address: "Quartier Oasis / Val Fleuri, Casablanca, Maroc",
+  postalCode: "20060",
+  district: "Gauthier",
+  phone: "+212 633-620016",
+  phoneRaw: "+212633620016",
+  whatsapp: "https://wa.me/212633620016",
+  email: "contact@mskmontessori.com",
+  address: "Rue Sabou, Gauthier, 20060 Casablanca, Maroc",
+  streetAddress: "Rue Sabou, Gauthier",
+  instagram: "https://www.instagram.com/mskschool.ma/",
+  facebook: "https://web.facebook.com/p/MsK-Center-100091341511573/?_rdc=1&_rdr#",
   hours: "Du Lundi au Vendredi : 8h00 - 18h00",
   coreQuote: "MSK ne cherche pas à faire entrer tous les enfants dans le même cadre : c'est le cadre qui s'adapte à l'enfant.",
   baseline: "Observer. Comprendre. Adapter. Rééduquer. Accompagner. Insérer.",
 };
+

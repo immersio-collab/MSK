@@ -25,11 +25,7 @@ export default function GaleriePage() {
 
       <GaleriePelliculeSection />
 
-      {/* Bleu-200, la couleur exacte de la bande des albums : c'est le ciel de
-          la page revenu à hauteur de lecture. Bleu-100 aurait la même clarté
-          que le crème-200 au-dessus (1,01:1) et la couture disparaîtrait. */}
       <FaqSection
-        tone="blueDeep"
         title="Avant de visiter nos"
         titleAccent="espaces"
         description="Une question qui n'est pas là ? Écrivez-nous, nous répondons à chacune."
@@ -44,11 +40,6 @@ export default function GaleriePage() {
         description="Une approche en 6 étapes pour observer, comprendre et accompagner votre enfant."
         buttonText="Découvrir"
         buttonHref="/notre-centre/la-methode"
-        bgColor="bg-msk-night-800"
-        cloudColor="text-white/50"
-        textColor="text-msk-cream-100"
-        buttonTextColor="text-msk-night-900"
-        eyebrowColor="text-msk-sun-300"
       />
     </div>
   );

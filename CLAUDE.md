@@ -63,6 +63,44 @@ Conventions: headings `text-msk-night-900`, body `text-msk-night-700` or
 `text-slate-600`, eyebrows via the `Eyebrow` component, card borders
 `border-msk-cream-200`.
 
+## Colour logic — one signature per page (2026-08-25)
+
+Section backgrounds follow a fixed grammar. Content-level colour (stickers,
+`LOOKS`, category badges, programme cards, deck cards) keeps the full trio —
+the system governs the fields, not the toys.
+
+- **Signatures**: coral = `/la-methode`, `/la-fondatrice`, `/actualites` ·
+  blue = `/programmes`, `/galerie`, `/troubles-accompagnes`. The home page is
+  the OVERTURE and carries all three (blue sky → sun statement → sun
+  testimonials → coral accents); `/contact`'s body stays off-system mint
+  (`#cff2f1`) below its hero.
+- **The two bespoke heroes — accueil and `/contact` — sit on `blue-100`**, not
+  `cream-100`. That opening sky is the site's first impression and is
+  deliberate; do not "harmonise" it back to cream. Only `PageHero` (the six
+  inner pages) uses `cream-100` + a signature band.
+- **The home page runs louder than the inner pages** — it is the shop window,
+  so it gets a saturated band (`sun-300` statement) where an inner page would
+  take a tint. Six near-identical pale screens in a row is the failure mode to
+  avoid: alternate warm/cool (`cream-50` ↔ `blue-50`), never cream on cream.
+- **Page skeleton** (inner pages): hero on `cream-100` with its bande in
+  signature-300/400 →
+  content alternates neutrals (`white` / `cream-50` / `cream-100` /
+  `cream-200`; never two identical adjacent) → at most one or two signature
+  "temps forts" (tint or dark band) → FAQ `cream-100` → `NextStepSection`
+  `night-800` → footer `night-900`. The FAQ + CTA finale palettes are FIXED
+  (their colour props were removed), and `NextStepSection` is always the LAST
+  section of a page.
+- **Text**: light bg → headings `night-900`, body `night-700`; saturated mid
+  bg → `night-900`/`night-800`; dark bg → title `white`, body `cream-100`,
+  accent `sun-300`. Section eyebrows take the page signature (`coral-600/700`,
+  `blue-700`, `sun-800` on light — sun needs its 800 to pass AA); heading
+  accent words stay coral site-wide, like the FAQ's.
+- Signatures were bent to real constraints, not symmetry: the troubles duck
+  bitmap is only legible on blue (never yellow), the quiz shares the hero's
+  blue-300 sky, actualites declares coral in its own hero.
+- `PageTransition`'s fan families mirror the signatures — keep them in sync
+  when a page's signature changes.
+
 ## Verifying a class actually compiles
 
 ```bash

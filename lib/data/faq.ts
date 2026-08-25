@@ -275,7 +275,7 @@ export const FAQ_CONTACT: FaqItem[] = [
   {
     question: "Où se trouve le centre, et à quelles heures ?",
     answer:
-      "Le centre est situé dans le quartier Oasis / Val Fleuri, à Casablanca, et il est ouvert du lundi au vendredi de 8h00 à 18h00. Le plan d'accès se trouve juste au-dessus.",
+      "Le centre est situé Rue Sabou, dans le quartier Gauthier à Casablanca (20060), et il est ouvert du lundi au vendredi de 8h00 à 18h00. Le plan d'accès se trouve juste au-dessus.",
   },
   {
     question: "Que deviennent les informations que je vous confie ?",

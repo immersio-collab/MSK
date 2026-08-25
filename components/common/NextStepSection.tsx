@@ -1,6 +1,5 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { ArrowRight, MessageCircle } from "lucide-react";
 
 import { CloudDrift } from "@/components/motion/CloudDrift";
@@ -14,18 +13,18 @@ interface NextStepSectionProps {
   description: string;
   buttonText: string;
   buttonHref: string;
-  bgColor: string;
-  cloudColor: string;
-  textColor: string;
-  buttonTextColor: string;
-  eyebrowColor?: string;
-  titleColor?: string;
-  buttonBgColor?: string;
 }
 
 /**
- * A reusable CTA section that closes each page by handing the reader the next one.
- * Includes decorative clouds and a large floating SVG at the bottom.
+ * La CTA qui clôt chaque page en tendant la suivante — toujours la DERNIÈRE
+ * section avant le footer.
+ *
+ * Habillage fixe (système de couleurs 2026-08-25) : bande night-800, titre
+ * blanc, corps cream-100, eyebrow sun-300, nuages white/50, bouton principal
+ * blanc. Avec la FAQ cream-100 au-dessus et le footer night-900 en dessous,
+ * chaque page se termine par la même séquence — c'est le repère de cohérence
+ * le plus fort du site. Les anciennes props de couleur ont été retirées :
+ * l'uniformité est la règle, pas un défaut à surcharger.
  */
 export const NextStepSection = ({
   eyebrow,
@@ -33,21 +32,9 @@ export const NextStepSection = ({
   description,
   buttonText,
   buttonHref,
-  bgColor,
-  cloudColor,
-  textColor,
-  buttonTextColor,
-  eyebrowColor = "text-msk-sun-300",
-  titleColor = "text-white",
-  buttonBgColor = "bg-white",
 }: NextStepSectionProps) => {
   return (
-    <section
-      className={cn(
-        "relative w-full overflow-hidden py-20 text-center md:py-24",
-        bgColor
-      )}
-    >
+    <section className="relative w-full overflow-hidden bg-msk-night-800 py-20 text-center md:py-24">
       {/* Decorative clouds */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <CloudDrift
@@ -55,7 +42,7 @@ export const NextStepSection = ({
           motion="float"
           speed={120}
           phase={0.2}
-          className={cn("absolute top-[10%] w-44 xl:w-60", cloudColor)}
+          className="absolute top-[10%] w-44 text-white/50 xl:w-60"
         />
         <CloudDrift
           shape="b"
@@ -63,55 +50,36 @@ export const NextStepSection = ({
           speed={160}
           phase={0.6}
           delay={0.2}
-          className={cn(
-            "absolute top-[40%] w-48 xl:w-64",
-            cloudColor
-          )}
+          className="absolute top-[40%] w-48 text-white/50 xl:w-64"
         />
         <CloudDrift
           shape="d"
           motion="float"
           speed={100}
           phase={0.9}
-          className={cn(
-            "absolute bottom-[10%] w-32 xl:w-48 opacity-70",
-            cloudColor
-          )}
+          className="absolute bottom-[10%] w-32 text-white/50 opacity-70 xl:w-48"
         />
       </div>
 
       <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center justify-center px-6 sm:px-10">
         <FadeUp className="relative z-20">
-          <span
-            className={cn(
-              "font-display text-sm font-semibold uppercase tracking-[0.2em]",
-              eyebrowColor
-            )}
-          >
+          <span className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-msk-sun-300">
             {eyebrow}
           </span>
 
-          <h2 className={cn("mt-4 font-display text-[2.5rem] font-bold uppercase leading-[0.9] sm:text-6xl md:text-7xl", titleColor)}>
+          <h2 className="mt-4 font-display text-[2.5rem] font-bold uppercase leading-[0.9] text-white sm:text-6xl md:text-7xl">
             {title}
           </h2>
 
-          <p
-            className={cn(
-              "mx-auto mt-4 max-w-xl text-lg font-medium leading-snug",
-              textColor
-            )}
-          >
+          <p className="mx-auto mt-4 max-w-xl text-lg font-medium leading-snug text-msk-cream-100">
             {description}
           </p>
           <FadeUp delay={0.3}>
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <MorphButton
                 href={buttonHref}
-                className={cn(
-                  "text-sm font-semibold uppercase tracking-[0.14em]",
-                  buttonTextColor
-                )}
-                fillClassName={buttonBgColor}
+                className="text-sm font-semibold uppercase tracking-[0.14em] text-msk-night-900"
+                fillClassName="bg-white shadow-md group-hover:bg-msk-cream-100"
               >
                 {buttonText}
                 <ArrowRight className="h-4 w-4" />

@@ -24,7 +24,6 @@ const CARDS = [
     card: "bg-msk-coral-700",
     titleTone: "text-msk-sun-300",
     bodyTone: "text-msk-cream-100",
-    stage: "bg-msk-cream-100",
     lottie: "/methode/lottie/card1.json",
   },
   {
@@ -33,7 +32,6 @@ const CARDS = [
     card: "bg-msk-blue-800",
     titleTone: "text-msk-sun-300",
     bodyTone: "text-white",
-    stage: "bg-msk-blue-50",
     lottie: "/methode/lottie/card2.json",
   },
   {
@@ -46,7 +44,6 @@ const CARDS = [
     card: "bg-msk-night-950",
     titleTone: "text-msk-sun-300",
     bodyTone: "text-msk-cream-100",
-    stage: "bg-msk-cream-200",
     lottie: "/methode/lottie/card3.json",
   },
   {
@@ -55,7 +52,6 @@ const CARDS = [
     card: "bg-msk-coral-900",
     titleTone: "text-msk-sun-400",
     bodyTone: "text-msk-cream-100",
-    stage: "bg-msk-coral-50",
     lottie: "/methode/lottie/card4.json",
   },
   {
@@ -64,7 +60,6 @@ const CARDS = [
     card: "bg-msk-blue-900",
     titleTone: "text-msk-sun-400",
     bodyTone: "text-msk-cream-100",
-    stage: "bg-msk-cream-100",
     lottie: "/methode/lottie/card5.json",
   },
   {
@@ -74,7 +69,6 @@ const CARDS = [
     card: "bg-msk-blue-200",
     titleTone: "text-msk-coral-700",
     bodyTone: "text-msk-night-900",
-    stage: "bg-msk-sun-50",
     lottie: "/methode/lottie/card6.json",
   },
 ];

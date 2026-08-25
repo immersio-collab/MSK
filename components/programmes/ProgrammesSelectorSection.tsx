@@ -107,7 +107,7 @@ export const ProgrammesSelectorSection = () => {
       <div className="mx-auto max-w-6xl px-6 sm:px-10">
         <FadeUp>
           <div className="mb-10 text-center">
-            <Eyebrow className="bg-white text-msk-coral-700 shadow-sm">
+            <Eyebrow className="bg-white text-msk-blue-700 shadow-sm">
               Nos niveaux
             </Eyebrow>
             <h2 className="mt-4 font-display text-3xl font-bold uppercase leading-[0.95] text-msk-night-900 md:text-4xl">

@@ -87,11 +87,13 @@ export default function RootLayout({
     email: SCHOOL_INFO.email,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Quartier Oasis / Val Fleuri",
-      addressLocality: "Casablanca",
+      streetAddress: SCHOOL_INFO.streetAddress,
+      postalCode: SCHOOL_INFO.postalCode,
+      addressLocality: SCHOOL_INFO.city,
       addressRegion: "Grand Casablanca",
       addressCountry: "MA",
     },
+    sameAs: [SCHOOL_INFO.instagram, SCHOOL_INFO.facebook, SCHOOL_INFO.whatsapp],
     slogan: SCHOOL_INFO.coreQuote,
   };
 
@@ -103,7 +105,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-msk-cream-50 text-[#223242] antialiased selection:bg-msk-coral-100 selection:text-msk-coral-900">
+      <body className="min-h-screen flex flex-col bg-msk-cream-50 text-msk-night-800 antialiased selection:bg-msk-coral-100 selection:text-msk-coral-900">
         <ScrollProgressBar />
         <Navbar />
         <main className="flex-1 flex flex-col">

@@ -4,9 +4,9 @@ import { CloudDrift } from "@/components/motion/CloudDrift";
 import { PageHero } from "@/components/common/PageHero";
 
 /**
- * Hero des actualités, en CORAL : chaque page garde sa dominante (méthode =
- * sun, galerie = blue-400, programmes = blue-700), et celle-ci n'était pas
- * encore prise.
+ * Hero des actualités, en CORAL — la signature de la page (système de couleurs
+ * 2026-08-25) : bande coral-400, accents et pastille coral, la liste en
+ * dessous sur coral-50.
  */
 export const ActualitesHeroSection = () => {
   return (
@@ -21,7 +21,7 @@ export const ActualitesHeroSection = () => {
       }
       titleClassName="text-msk-night-900"
       pill="Actualités · Blog"
-      pillClassName="bg-msk-sun-300 text-msk-night-900"
+      pillClassName="bg-msk-coral-100 text-msk-coral-700"
       subtitle={
         <>
           Découvrez nos derniers articles éducatifs, les événements à venir, et

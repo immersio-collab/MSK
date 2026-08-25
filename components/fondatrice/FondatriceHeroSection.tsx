@@ -15,7 +15,7 @@ export const FondatriceHeroSection = () => {
   return (
     <PageHero
       rootRef={root}
-      band="bg-msk-sun-400"
+      band="bg-msk-coral-300"
       card="bg-white"
       title={
         <>
@@ -53,7 +53,7 @@ export const FondatriceHeroSection = () => {
             shape="b"
             speed={38}
             phase={0.5}
-            className="absolute left-0 top-[26%] w-48 text-msk-sun-100 md:w-72"
+            className="absolute left-0 top-[26%] w-48 text-msk-coral-100 md:w-72"
           />
           <CloudDrift
             motion="float"

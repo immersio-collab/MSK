@@ -140,7 +140,7 @@ export function TroublesQuizSection() {
 
       <div className="container relative mx-auto max-w-3xl px-4">
         <div className="quiz-heading mx-auto mb-10 max-w-2xl text-center">
-          <Eyebrow className="bg-white text-msk-coral-700 shadow-sm">
+          <Eyebrow className="bg-white text-msk-blue-700 shadow-sm">
             Petit test · 3 questions
           </Eyebrow>
           <h2 className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-5xl md:text-6xl">

@@ -25,7 +25,7 @@ export default function ProgrammesPage() {
 
       {/* Photo pleine-largeur à bord incliné */}
       <MediaBand
-        sectionBg="bg-msk-cream-200"
+        sectionBg="bg-msk-cream-50"
         src="/neuro-gym.jpg"
         alt="Séance Neuro-Gym en classe"
         overlay={
@@ -44,11 +44,7 @@ export default function ProgrammesPage() {
       {/* Tableau comparatif des programmes */}
       <ProgrammesTableSection />
 
-      {/* Questions de parents sur les deux programmes. Fond bleu : la page
-          arrive ici après trois plages crème, et le bleu est déjà sa couleur
-          (bande du hero, carte-titre, titre de la déclaration). */}
       <FaqSection
-        tone="blueMid"
         title="Choisir le bon"
         titleAccent="programme"
         description="Une question qui n'est pas là ? Écrivez-nous, nous répondons à chacune."
@@ -64,11 +60,6 @@ export default function ProgrammesPage() {
         description="Prêt à faire le premier pas ? Contactez-nous pour échanger sur les besoins de votre enfant."
         buttonText="Nous contacter"
         buttonHref="/contact"
-        bgColor="bg-msk-coral-700"
-        cloudColor="text-msk-coral-900"
-        textColor="text-msk-coral-100"
-        buttonTextColor="text-msk-coral-800"
-        eyebrowColor="text-msk-sun-300"
       />
     </div>
   );

@@ -27,9 +27,12 @@ export default function HomePage() {
     <div className="flex min-h-screen flex-col overflow-x-clip">
       <AccueilHero />
 
+      {/* Jaune plein, seule bande saturée de la moitié haute : c'est le
+          contrepoint chaud du ciel bleu juste au-dessus, et l'accroche de la
+          page. Les pages intérieures gardent, elles, des fonds discrets. */}
       <AccueilStatement
         quote="Chaque enfant a son rythme. Nous lui créons son chemin."
-        background="bg-msk-coral-50"
+        background="bg-msk-sun-300"
       />
 
       <AccueilPourQui />
@@ -41,7 +44,6 @@ export default function HomePage() {
       <AccueilTemoignages />
 
       <FaqSection
-        tone="blueLight"
         title="Ce que les parents nous"
         titleAccent="demandent"
         description="Une question qui n'est pas là ? Écrivez-nous, nous répondons à chacune."
@@ -50,22 +52,17 @@ export default function HomePage() {
         ctaHref="/contact"
       />
 
+      {/* La galerie sombre passe AVANT la CTA : NextStepSection est la
+          dernière section de chaque page du site, l'accueil compris. */}
+      <AccueilGalerie />
+
       <NextStepSection
         eyebrow="Le centre"
         title="Parlons de votre enfant"
         description={SCHOOL_INFO.coreQuote}
         buttonText="Réserver un bilan gratuit"
         buttonHref="/contact"
-        bgColor="bg-msk-blue-200"
-        cloudColor="text-white/60"
-        textColor="text-msk-night-700"
-        titleColor="text-msk-night-950"
-        buttonTextColor="text-white"
-        buttonBgColor="bg-msk-night-950 shadow-md group-hover:bg-msk-night-800"
-        eyebrowColor="text-msk-blue-800"
       />
-
-      <AccueilGalerie />
     </div>
   );
 }

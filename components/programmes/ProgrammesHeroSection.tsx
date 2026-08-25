@@ -6,7 +6,7 @@ import { CloudDrift } from "@/components/motion/CloudDrift";
 import { PageHero } from "@/components/common/PageHero";
 import { useHeroParallax } from "@/hooks/use-hero-parallax";
 
-/** Teintes propres à la page : bande blue-700, carte blue-800. */
+/** Signature blue de la page : bande blue-400, carte blue-800 par-dessus. */
 export const ProgrammesHeroSection = () => {
   const root = useRef<HTMLElement>(null);
   const kid = useRef<HTMLImageElement>(null);
@@ -16,7 +16,7 @@ export const ProgrammesHeroSection = () => {
   return (
     <PageHero
       rootRef={root}
-      band="bg-msk-blue-700"
+      band="bg-msk-blue-400"
       card="bg-msk-blue-800"
       title="Un programme pour chaque âge"
       titleClassName="text-white"

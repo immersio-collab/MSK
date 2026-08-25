@@ -186,8 +186,11 @@
 
 @layer base {
   :root {
-    --background: oklch(1 0 0); /* msk-cream-50 */
-    --foreground: oklch(0.145 0 0);    /* msk-night-900 */
+    /* Variables shadcn, neutres et sans lien avec la palette msk-* : le <body>
+       porte ses propres utilitaires (bg-msk-cream-50, text-msk-night-800) qui
+       gagnent sur bg-background/text-foreground. */
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
     /* --font-jakarta / --font-inter are supplied by next/font in app/layout.tsx.
        Do not redeclare them here: a literal family name shadows the hashed one
        next/font generates and silently bypasses the self-hosted font. */
@@ -225,8 +228,8 @@
 
   html {
     scroll-behavior: smooth;
-    color: #223242;
-    background-color: #FDFBF7;
+    color: var(--color-msk-night-800);
+    background-color: var(--color-msk-cream-50);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     @apply font-sans;

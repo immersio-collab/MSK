@@ -20,12 +20,7 @@ export default function TroublesAccompagnesPage() {
       
       <TroublesQuizSection />
 
-      {/* Fond jaune : le ciel du quiz au-dessus descend jusqu'au bord bas en
-          bleu-300 et la CTA en dessous est bleu-800 — un fond bleu ferait trois
-          bandes bleues d'affilée. Le jaune est déjà la couleur de la bande
-          oblique derrière les huit cartes. */}
       <FaqSection
-        tone="sunLight"
         title="Comprendre les"
         titleAccent="troubles"
         description="Une question qui n'est pas là ? Écrivez-nous, nous répondons à chacune."
@@ -40,10 +35,6 @@ export default function TroublesAccompagnesPage() {
         description="Découvrez notre approche sur-mesure combinant pédagogie Montessori, neuro-gym et thérapies intégrées."
         buttonText="Découvrir"
         buttonHref="/notre-centre/la-methode"
-        bgColor="bg-msk-blue-800"
-        cloudColor="text-white/50"
-        textColor="text-msk-blue-50"
-        buttonTextColor="text-msk-blue-900"
       />
     </div>
   );

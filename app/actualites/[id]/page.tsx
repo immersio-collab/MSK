@@ -259,14 +259,7 @@ export default function ArticlePage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Bleu très pâle : c'est le registre calme de la page (l'encadré « À
-          retenir » du corps d'article est en bleu-100), et c'est la seule
-          valeur claire qui se détache à la fois du crème-200 au-dessus et du
-          jaune de la CTA en dessous. Bouton encre, la CTA suivante étant
-          corail. */}
       <FaqSection
-        tone="blueLight"
-        button="night"
         title="Après cette"
         titleAccent="lecture"
         description="Une question qui n'est pas là ? Écrivez-nous, nous répondons à chacune."
@@ -281,13 +274,6 @@ export default function ArticlePage({ params }: PageProps) {
         description="Nos articles ne remplacent pas un avis professionnel. Le bilan initial avec notre fondatrice est le vrai premier pas."
         buttonText="Prendre RDV pour un bilan gratuit"
         buttonHref="/contact"
-        bgColor="bg-msk-sun-300"
-        cloudColor="text-white/60"
-        textColor="text-msk-sun-900"
-        buttonTextColor="text-white"
-        eyebrowColor="text-msk-coral-700"
-        titleColor="text-msk-night-900"
-        buttonBgColor="bg-msk-coral-600 shadow-lg shadow-msk-coral-700/30 group-hover:bg-msk-coral-700"
       />
     </div>
   );

@@ -85,7 +85,7 @@ function TroubleStickerCard({ item, index, state, onOpen, buttonRef }: TroubleSt
         style={{ borderRadius: 28 }}
         className={cn(
           "group relative flex min-h-[18rem] w-full flex-col p-6 text-left shadow-xl shadow-msk-night-900/10",
-          "has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-msk-cream-100",
+          "has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-msk-blue-50",
           look.card,
           look.ring,
         )}
@@ -194,8 +194,11 @@ export function TroublesGridSection() {
   const activeIndex = TROUBLES.findIndex((t) => t.slug === activeSlug);
   const activeItem = activeIndex >= 0 ? TROUBLES[activeIndex] : null;
 
+  // blue-50 : la teinte signature de la page (le ciel du hero et du quiz est
+  // bleu — le canard jaune du hero interdit le jaune ici). Les huit stickers
+  // colorés portent le reste.
   return (
-    <section ref={root} id="troubles" className="relative overflow-hidden bg-msk-sun-100 py-24 md:py-28">
+    <section ref={root} id="troubles" className="relative overflow-hidden bg-msk-blue-50 py-24 md:py-28">
       {/* Nuages : dérive latérale continue, vitesses et phases distinctes. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
         <CloudDrift
@@ -216,7 +219,7 @@ export function TroublesGridSection() {
 
       <div className="container relative mx-auto max-w-6xl px-4">
         <div className="troubles-heading mx-auto mb-14 max-w-2xl text-center">
-          <Eyebrow className="bg-white text-msk-coral-700 shadow-sm">
+          <Eyebrow className="bg-white text-msk-blue-700 shadow-sm">
             8 troubles · 1 approche
           </Eyebrow>
           <h2 className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-5xl md:text-6xl">

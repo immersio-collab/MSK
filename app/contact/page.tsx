@@ -28,7 +28,6 @@ export default function ContactPage() {
           pâle s'y serait fondu. Le bouton renvoie au formulaire plus haut, pas
           à /contact. */}
       <FaqSection
-        tone="creamLight"
         title="Avant de nous"
         titleAccent="écrire"
         description="Les questions que l'on nous pose le plus souvent avant un premier contact."

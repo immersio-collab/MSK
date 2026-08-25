@@ -49,8 +49,6 @@ interface GalerieTitreAnimeProps {
   as?: "h1" | "h2" | "span";
 }
 
-const BALISES = { h1: motion.h1, h2: motion.h2, span: motion.span } as const;
-
 export const GalerieTitreAnime = ({
   texte,
   className,
@@ -58,7 +56,7 @@ export const GalerieTitreAnime = ({
   retard = 0.15,
   as = "h2",
 }: GalerieTitreAnimeProps) => {
-  const Balise = BALISES[as];
+  const Balise = as === "h1" ? motion.h1 : as === "span" ? motion.span : motion.h2;
 
   const declencheur =
     au === "scroll"

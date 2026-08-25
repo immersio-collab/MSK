@@ -205,8 +205,12 @@ const ContactForeground = ({ className }: { className?: string }) => {
 };
 
 /**
- * Contact scene, laid out as in the reference: a fixed-height band on a mint
- * field, with four stacked layers.
+ * Contact scene, laid out as in the reference: a fixed-height band with four
+ * stacked layers.
+ *
+ * Le champ est bleu-100 — le même ciel que le héros de l'accueil, les deux
+ * seuls héros sur mesure du site. Le menthe #cff2f1 reste la couleur du CORPS
+ * de la page (app/contact/page.tsx), sous la scène.
  *
  * Order matters and is the whole trick — the animated figure sits *between* two
  * vector layers, so the hill and tree overlap it while the big cloud stays
@@ -221,7 +225,7 @@ export const ContactHeroSection: React.FC = () => {
   // at every width is what pushed the whole scene down and left a band of empty
   // mint above it.
   return (
-    <section className="w-full overflow-hidden bg-[#cff2f1] max-lg:pt-[4.0625rem]">
+    <section className="w-full overflow-hidden bg-msk-blue-100 max-lg:pt-[4.0625rem]">
       <div className="w-full lg:h-[35.5625rem]">
         <div className="relative h-auto w-full overflow-hidden lg:h-full lg:w-auto">
           {/* 1 — cloud behind the figure */}

@@ -454,7 +454,7 @@ export const AccueilTemoignages = () => {
     <section className="relative w-full overflow-hidden bg-msk-sun-100 py-24 md:py-32">
       <div className="relative mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
         <FadeUp>
-          <Eyebrow className="bg-msk-coral-100 text-msk-coral-700">
+          <Eyebrow className="bg-white text-msk-sun-800 shadow-sm">
             Paroles de parents
           </Eyebrow>
           <h2 className="mt-5 max-w-3xl font-display text-[2rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-4xl md:text-5xl">
