@@ -22,6 +22,7 @@ import { MoveHorizontal, ZoomIn } from "lucide-react";
 import { PELLICULE } from "@/lib/data/galerie";
 import { PolaroidCard } from "@/components/common/PolaroidCard";
 import { GalerieTitreAnime } from "@/components/galerie/GalerieTitreAnime";
+import { cn } from "@/lib/utils";
 
 /**
  * Pellicule horizontale à défilement continu.
@@ -55,7 +56,12 @@ const VITESSE = 42;
 /** Trois copies de la liste : une visible, une de chaque côté pour la boucle. */
 const COPIES = [0, 1, 2];
 
-export const GaleriePelliculeSection = () => {
+interface GaleriePelliculeSectionProps {
+  variant?: "page" | "home";
+  header?: React.ReactNode;
+}
+
+export const GaleriePelliculeSection = ({ variant = "page", header }: GaleriePelliculeSectionProps = {}) => {
   const reduceMotion = useReducedMotion();
   const rail = useRef<HTMLDivElement>(null);
   const premiereListe = useRef<HTMLUListElement>(null);
@@ -180,43 +186,47 @@ export const GaleriePelliculeSection = () => {
   };
 
   return (
-    <section className="w-full overflow-hidden bg-msk-cream-200 py-12 md:py-16">
-      <div className="mx-auto mb-8 flex w-full max-w-6xl items-center justify-between gap-8 px-6 sm:px-10">
-        <div>
-          <GalerieTitreAnime
-            au="scroll"
-            texte="Chaque jour, de nouvelles découvertes"
-            className="max-w-[18ch] font-display text-3xl font-bold uppercase leading-tight text-msk-night-900 md:text-4xl lg:text-5xl"
-          />
-          <p className="mt-4 max-w-lg text-base leading-relaxed text-msk-night-700 md:text-lg">
-            La pellicule défile toute seule. Survolez-la pour l&apos;arrêter.
-          </p>
+    <section className={cn("w-full overflow-hidden py-12 md:py-16", variant === "home" ? "bg-msk-night-700 py-24 md:py-32" : "bg-msk-cream-200")}>
+      <div className="mx-auto mb-8 flex w-full max-w-[1400px] items-center justify-between gap-8 px-6 sm:px-10 lg:px-16">
+        {header ? header : (
+          <>
+            <div>
+              <GalerieTitreAnime
+                au="scroll"
+                texte="Chaque jour, de nouvelles découvertes"
+                className="max-w-[18ch] font-display text-3xl font-bold uppercase leading-tight text-msk-night-900 md:text-4xl lg:text-5xl"
+              />
+              <p className="mt-4 max-w-lg text-base leading-relaxed text-msk-night-700 md:text-lg">
+                La pellicule défile toute seule. Survolez-la pour l&apos;arrêter.
+              </p>
 
-          {/* Le glissement est invisible par nature : sans repère explicite,
-              personne ne devine qu'on peut attraper la bande. */}
-          <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 font-display text-xs font-semibold uppercase tracking-[0.14em] text-msk-night-800 shadow-sm">
-            <MoveHorizontal
-              className="h-4 w-4 text-msk-coral-600"
+              {/* Le glissement est invisible par nature : sans repère explicite,
+                  personne ne devine qu'on peut attraper la bande. */}
+              <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 font-display text-xs font-semibold uppercase tracking-[0.14em] text-msk-night-800 shadow-sm">
+                <MoveHorizontal
+                  className="h-4 w-4 text-msk-coral-600"
+                  aria-hidden
+                />
+                Glissez pour parcourir · cliquez pour agrandir
+              </p>
+            </div>
+
+            {/* Illustration décorative, à droite du titre. Plain <img> : l'optimiseur
+                d'images refuse les SVG locaux (400) et aplatirait l'animation SMIL.
+                Masquée sous md, où la colonne de texte prend toute la largeur. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/Camera - Copie.svg"
+              alt=""
               aria-hidden
+              width={400}
+              height={300}
+              loading="lazy"
+              decoding="async"
+              className="hidden w-72 shrink-0 rotate-6 md:block lg:w-96"
             />
-            Glissez pour parcourir · cliquez pour agrandir
-          </p>
-        </div>
-
-        {/* Illustration décorative, à droite du titre. Plain <img> : l'optimiseur
-            d'images refuse les SVG locaux (400) et aplatirait l'animation SMIL.
-            Masquée sous md, où la colonne de texte prend toute la largeur. */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/Camera - Copie.svg"
-          alt=""
-          aria-hidden
-          width={400}
-          height={300}
-          loading="lazy"
-          decoding="async"
-          className="hidden w-72 shrink-0 rotate-6 md:block lg:w-96"
-        />
+          </>
+        )}
       </div>
 
       {/* Conteneur relatif : il porte les dégradés de bord, qui montrent que la
@@ -224,11 +234,11 @@ export const GaleriePelliculeSection = () => {
       <div className="relative">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-linear-to-r from-msk-cream-200 to-transparent sm:w-16"
+          className={cn("pointer-events-none absolute inset-y-0 left-0 z-10 w-10 sm:w-16", variant === "home" ? "bg-linear-to-r from-msk-night-700 to-transparent" : "bg-linear-to-r from-msk-cream-200 to-transparent")}
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-linear-to-l from-msk-cream-200 to-transparent sm:w-16"
+          className={cn("pointer-events-none absolute inset-y-0 right-0 z-10 w-10 sm:w-16", variant === "home" ? "bg-linear-to-l from-msk-night-700 to-transparent" : "bg-linear-to-l from-msk-cream-200 to-transparent")}
         />
 
         <div

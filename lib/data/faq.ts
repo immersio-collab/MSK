@@ -77,7 +77,7 @@ export const FAQ_PROGRAMMES: FaqItem[] = [
   {
     question: "Pourquoi l'intégration scolaire n'apparaît-elle qu'en Primaire ?",
     answer:
-      "En Maternelle, le travail porte d'abord sur la motricité, l'éveil sensoriel, le langage oral et la socialisation. L'inclusion en milieu ordinaire devient un objectif du programme Primaire, préparée progressivement une fois ces bases posées.",
+      "En Maternelle, le travail porte d'abord sur la motricité, l'éveil sensoriel, le langage oral et la socialisation. En Primaire, l'enjeu devient explicite : tenir sa place dans sa classe ordinaire, suivre ce qui s'y fait et y retrouver sa confiance. C'est là que le travail sur l'intégration se formalise, une fois ces bases posées.",
   },
 ];
 
@@ -120,17 +120,17 @@ export const FAQ_METHODE: FaqItem[] = [
   {
     question: "Que se passe-t-il concrètement pendant l'étape Observer ?",
     answer:
-      "Il n'y a pas de tests standardisés froids. Nos éducateurs passent du temps avec votre enfant dans un environnement naturel, pour identifier ses forces, ses sensibilités sensorielles et son style d'apprentissage.",
+      "Il n'y a pas de tests standardisés froids. Nos éducateurs passent du temps avec votre enfant en situation réelle — jeu, consignes, travail — pour voir ce qu'il sait faire et ce qui le bloque. Nous reprenons aussi son parcours scolaire avec vous : ce qui s'est passé, ce qui a été manqué, ce qui n'a jamais été posé.",
   },
   {
     question: "Qui accompagnera mon enfant à chaque étape ?",
     answer:
-      "Une équipe pluridisciplinaire : éducateurs Montessori, psychomotriciens, orthophonistes. À l'étape Comprendre, ils croisent leurs observations avec votre témoignage de parent, et vous restez associés ensuite par des bilans réguliers et un dialogue transparent.",
+      "Une équipe pluridisciplinaire, autour d'éducateurs Montessori. À l'étape Comprendre, ils croisent leurs observations avec votre témoignage de parent, et vous restez associés ensuite par des bilans réguliers et un dialogue transparent. Sur place, votre enfant travaille dans un groupe de cinq, constitué par taille et par niveau de développement plutôt que par âge, qui tourne d'une salle à l'autre.",
   },
   {
     question: "« Rééduquer » : cela veut-il dire corriger mon enfant ?",
     answer:
-      "Non. Notre méthode ne corrige pas l'enfant : elle ajuste ce qui l'entoure, l'environnement, le matériel et le rythme. Rééduquer désigne un travail ciblé, la Neuro-Gym notamment, qui stimule les connexions neuro-motrices, régule l'attention et libère le potentiel cognitif.",
+      "Non. Notre méthode ne corrige pas l'enfant : elle ajuste ce qui l'entoure, l'environnement, le matériel et le rythme. Rééduquer désigne ici la remédiation scolaire — reprendre une à une les bases qui manquent, avec du matériel concret avant l'abstraction. La Neuro-Gym vient en appui : un parcours moteur qui travaille l'attention et la régulation émotionnelle, pour que l'enfant tienne l'effort demandé.",
   },
   {
     question: "Comment commence-t-on, concrètement ?",

@@ -34,44 +34,50 @@ const DETAILS = [
   {
     title: "L'observation bienveillante",
     description:
-      "Identifier avec précision les forces, le profil sensoriel et le style d'apprentissage sans jugement ni étiquette.",
+      "Observer l'enfant en situation réelle et reprendre son parcours scolaire, sans jugement ni étiquette.",
     image: "/Cute baby Peek a boo.svg",
     panel: "bg-msk-coral-100",
+    bg: "bg-msk-coral-50",
   },
   {
     title: "L'analyse pluridisciplinaire",
     description:
-      "Croiser les regards des éducateurs, psychomotriciens, orthophonistes et de la famille pour cibler les besoins.",
+      "Croiser les regards de l'équipe et le vôtre, pour cerner son niveau réel et les contraintes à respecter.",
     image: "/Parenting.svg",
     panel: "bg-msk-blue-200",
+    bg: "bg-msk-blue-50",
   },
   {
-    title: "L'environnement sur-mesure",
+    title: "Le groupe sur-mesure",
     description:
-      "Ajuster le matériel sensoriel Montessori, les rythmes et les supports pédagogiques au profil unique de l'enfant.",
+      "Un groupe de cinq formé par taille et niveau de développement, jamais par âge, qui tourne d'une salle à l'autre.",
     image: "/Colorful abacus with wooden frame.svg",
     panel: "bg-msk-sun-200",
+    bg: "bg-msk-sun-50",
   },
   {
-    title: "La Neuro-Gym & la remédiation",
+    title: "La remédiation & la Neuro-Gym",
     description:
-      "Stimuler les connexions neuro-motrices, réguler l'attention et libérer le potentiel cognitif de l'apprenant.",
+      "Reprendre les bases manquantes avec du matériel concret ; la Neuro-Gym soutient l'attention et la régulation.",
     image: "/kid swing.svg",
     panel: "bg-msk-coral-200",
+    bg: "bg-msk-coral-50",
   },
   {
     title: "Le lien continu avec la famille",
     description:
-      "Un dialogue transparent et des bilans réguliers pour co-construire chaque progrès au quotidien.",
+      "Des bilans réguliers, et selon les cas le suivi des démarches ou la journée organisée autour de sa santé.",
     image: "/kids playing - kidcare.svg",
     panel: "bg-msk-blue-100",
+    bg: "bg-msk-blue-50",
   },
   {
-    title: "L'insertion scolaire et sociale",
+    title: "Reprendre sa place",
     description:
-      "Développer l'autonomie et la confiance en soi pour une intégration sereine et pérenne.",
+      "Tenir sa place dans sa classe et parmi les autres, jusqu'au jour où son école lui suffit.",
     image: "/Graduation.svg",
     panel: "bg-msk-sun-100",
+    bg: "bg-msk-sun-50",
   },
 ];
 
@@ -112,10 +118,10 @@ export const AccueilSteps = () => {
           because the value has to differ by breakpoint — the cards' `top` is an
           inline style, and inline styles cannot carry a media query.
         */}
-        <div className="grid grid-cols-1 gap-12 [--stack-top:6rem] lg:grid-cols-[1fr_27.8125rem] lg:gap-16 lg:[--stack-top:9rem]">
+        <div className="grid grid-cols-1 gap-12 [--stack-top:6rem] lg:grid-cols-[1fr_27.8125rem] lg:gap-16 lg:[--stack-top:35vh]">
           {/* `self-start` matters: a stretched grid item is as tall as the row
               and would have nothing left to scroll within, so it never sticks. */}
-          <div className="lg:sticky lg:top-36 lg:self-start">
+          <div className="lg:sticky lg:top-[35vh] lg:self-start">
             <FadeUp>
               <span className="inline-block rounded-[0.4rem] bg-msk-sun-200 px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950">
                 Notre pédagogie
@@ -141,7 +147,7 @@ export const AccueilSteps = () => {
               */
               <li
                 key={step.number}
-                className="sticky rounded-[1.5rem] border border-msk-cream-300 bg-white p-7 shadow-sm sm:p-9"
+                className={`sticky rounded-[1.5rem] border border-msk-cream-300 p-7 shadow-sm sm:p-9 ${step.bg}`}
                 style={{
                   top: `calc(var(--stack-top) + ${index * LEDGE_REM}rem)`,
                   rotate: `${TILTS[index]}deg`,

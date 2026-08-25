@@ -20,7 +20,7 @@ import { METHODE_STEPS } from "@/lib/data/methode-steps";
 const CARDS = [
   {
     description:
-      "Avant toute chose, nous observons. Pas de tests standardisés froids. Nos éducateurs passent du temps avec votre enfant dans un environnement naturel pour identifier ses forces, ses sensibilités sensorielles et son style d'apprentissage unique.",
+      "Avant toute chose, nous observons. Pas de tests standardisés froids : nos éducateurs passent du temps avec votre enfant en situation réelle — jeu, consignes, travail — et reprennent avec vous son parcours scolaire, pour voir ce qu'il sait faire, ce qui le bloque et ce qui n'a jamais été posé.",
     card: "bg-msk-coral-700",
     titleTone: "text-msk-sun-300",
     bodyTone: "text-msk-cream-100",
@@ -28,7 +28,7 @@ const CARDS = [
   },
   {
     description:
-      "Notre équipe pluridisciplinaire — éducateurs Montessori, psychomotriciens, orthophonistes — croise ses observations avec votre témoignage de parent. Ensemble, nous construisons un portrait complet et bienveillant de votre enfant.",
+      "Notre équipe pluridisciplinaire croise ses observations avec votre témoignage de parent et ce que vous rapportez de son école. Deux choses en sortent : son niveau réel, et les contraintes à respecter — fatigue, santé, angoisse du matin, démarches en cours.",
     card: "bg-msk-blue-800",
     titleTone: "text-msk-sun-300",
     bodyTone: "text-white",
@@ -36,7 +36,7 @@ const CARDS = [
   },
   {
     description:
-      "L'environnement, le matériel, le rythme : tout est ajusté. Le matériel sensoriel Montessori est personnalisé, les séances sont calibrées, les supports pédagogiques sont conçus sur-mesure.",
+      "Votre enfant rejoint un groupe de cinq, constitué par taille et par niveau de développement — jamais par âge ni par classe d'origine. Le groupe tourne d'une salle à l'autre dans la journée, et le matériel Montessori est choisi pour ce qu'il a réellement à reprendre.",
     // Dark: this mark is yellow and red. An earlier area measurement read it
     // as black-dominant, but that black path's bbox (4M px²) is far larger than
     // the whole visible artwork (810x604) — it is an invisible backdrop, not
@@ -48,7 +48,7 @@ const CARDS = [
   },
   {
     description:
-      "Grâce à la Neuro-Gym et à la rééducation ciblée, nous stimulons les connexions neuro-motrices, régulons l'attention et libérons le potentiel cognitif. Des exercices concrets, mesurables, qui changent la vie.",
+      "Reprendre les bases manquantes une par une, avec du matériel concret avant l'abstraction — et non refaire au pas de charge l'année perdue. La Neuro-Gym vient en appui : un parcours moteur qui travaille l'attention et la régulation émotionnelle, pour qu'il tienne l'effort demandé.",
     card: "bg-msk-coral-900",
     titleTone: "text-msk-sun-400",
     bodyTone: "text-msk-cream-100",
@@ -56,7 +56,7 @@ const CARDS = [
   },
   {
     description:
-      "Vous n'êtes jamais seuls. Des bilans réguliers, un dialogue transparent, une équipe disponible. Nous co-construisons chaque progrès avec vous, au quotidien.",
+      "Vous n'êtes jamais seuls. Des bilans réguliers, un dialogue transparent, et selon les cas le suivi des démarches administratives ou l'organisation de la journée autour des consignes de son médecin. Chaque progrès se construit avec vous.",
     card: "bg-msk-blue-900",
     titleTone: "text-msk-sun-400",
     bodyTone: "text-msk-cream-100",
@@ -64,7 +64,7 @@ const CARDS = [
   },
   {
     description:
-      "L'objectif final : l'autonomie. Que ce soit l'intégration dans une école classique, une formation professionnelle ou simplement la confiance en soi — nous préparons votre enfant à voler de ses propres ailes.",
+      "L'objectif n'est pas qu'il reste ici : c'est qu'il tienne sa place dans sa classe et qu'il n'ait plus besoin de venir. Retour par paliers pour ceux qui s'étaient arrêtés, inscription officielle pour ceux qui n'en avaient pas — jusqu'au jour où son école lui suffit.",
     // Light: this mark really is black-dominant (verified against its art bounds).
     card: "bg-msk-blue-200",
     titleTone: "text-msk-coral-700",

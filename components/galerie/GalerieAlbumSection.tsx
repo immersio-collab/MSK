@@ -60,7 +60,12 @@ const CARTE: Variants = {
 
 const SEUIL_BALAYAGE = 60;
 
-export function GalerieAlbumSection() {
+interface GalerieAlbumSectionProps {
+  variant?: "page" | "home";
+  header?: React.ReactNode;
+}
+
+export function GalerieAlbumSection({ variant = "page", header }: GalerieAlbumSectionProps = {}) {
   const reduceMotion = useReducedMotion();
   const [filtre, setFiltre] = useState<Filtre>("tous");
   const [index, setIndex] = useState(0);
@@ -129,43 +134,55 @@ export function GalerieAlbumSection() {
   const Icone = photo.icon;
 
   return (
-    <section id="galerie" className="relative overflow-hidden bg-msk-blue-200 pb-28 pt-16 md:pb-36 md:pt-20">
-      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        {/* Soleil du ciel. Plain <img> et non next/image : le SVG porte sa
-            propre animation SMIL (les rayons tournent), que l'optimiseur
-            d'images aplatirait. */}
-        <img
-          src="/Sunny.svg"
-          alt=""
-          className="absolute right-[1%] top-[3%] w-24 sm:w-32 lg:right-[4%] lg:w-44"
-        />
-        <CloudDrift
-          motion="float"
-          shape="a"
-          speed={54}
-          phase={0.3}
-          className="absolute left-0 top-[12%] w-40 text-white md:w-56"
-        />
-        <CloudDrift
-          motion="float"
-          shape="b"
-          speed={42}
-          phase={0.75}
-          className="absolute left-0 top-[40%] hidden w-36 text-white lg:block"
-        />
-      </div>
+    <section
+      id="galerie"
+      className={cn(
+        "relative overflow-hidden pb-28 pt-16 md:pb-36 md:pt-20",
+        variant === "home" ? "bg-msk-night-700 py-24 md:py-32" : "bg-msk-blue-200"
+      )}
+    >
+      {variant === "page" && (
+        <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+          {/* Soleil du ciel. Plain <img> et non next/image : le SVG porte sa
+              propre animation SMIL (les rayons tournent), que l'optimiseur
+              d'images aplatirait. */}
+          <img
+            src="/Sunny.svg"
+            alt=""
+            className="absolute right-[1%] top-[3%] w-24 sm:w-32 lg:right-[4%] lg:w-44"
+          />
+          <CloudDrift
+            motion="float"
+            shape="a"
+            speed={54}
+            phase={0.3}
+            className="absolute left-0 top-[12%] w-40 text-white md:w-56"
+          />
+          <CloudDrift
+            motion="float"
+            shape="b"
+            speed={42}
+            phase={0.75}
+            className="absolute left-0 top-[40%] hidden w-36 text-white lg:block"
+          />
+        </div>
+      )}
 
-      <div className="relative mx-auto w-full max-w-4xl px-4 sm:px-8">
-        {/* En-tête volontairement réduit au titre : l'album doit tenir dans
-            la hauteur d'écran avec son rail de vignettes. */}
-        <div className="mx-auto mb-4 max-w-3xl text-center">
+      {header ? (
+        <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16 mb-14">
+          {header}
+        </div>
+      ) : (
+        <div className="mx-auto mb-4 max-w-3xl text-center px-4 sm:px-8">
           <GalerieTitreAnime
             au="scroll"
             texte="Nos espaces, mille moments"
             className="font-display text-[2rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-4xl md:text-5xl"
           />
         </div>
+      )}
 
+      <div className="relative mx-auto w-full max-w-4xl px-4 sm:px-8">
         {/* Filtres : la pastille coral glisse d'un filtre à l'autre. */}
         <div role="group" aria-label="Filtrer la galerie" className="mb-5 flex flex-wrap justify-center gap-2">
           {CATEGORIES.map((cat) => {

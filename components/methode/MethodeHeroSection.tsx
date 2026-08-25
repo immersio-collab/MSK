@@ -27,8 +27,8 @@ export const MethodeHeroSection = () => {
       pillClassName="bg-white text-msk-coral-700"
       subtitle={
         <>
-          De l&apos;observation initiale à l&apos;insertion scolaire réussie :
-          un chemin structuré, humain et scientifique.
+          De la première observation au jour où son école lui suffit :
+          un chemin structuré, humain et concret.
         </>
       }
       subtitleClassName="text-white"
