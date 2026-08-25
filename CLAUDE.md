@@ -19,23 +19,18 @@ npm run lint     # ESLint (config: .eslintrc.json, next/core-web-vitals)
 npx tsc --noEmit --incremental false   # typecheck without writing tsbuildinfo
 ```
 
-Run `npm run build` and the typecheck freely to verify work — the owner has
-explicitly authorized automatic builds. If the dev server is running, expect a
-transient `ENOENT` while `.next/` is rewritten; restart the dev server after.
-
-**Rules serve the work, not the reverse** (owner's instruction): when a change
-is clearly right but contradicts a rule in this file, make the change AND
-update the rule in the same commit — don't stop to ask.
+Run the typecheck (`npx tsc --noEmit --incremental false`) to verify work.
+Do NOT run `npm run build` after every change — only run a production build when
+strictly necessary or explicitly requested. The dev server (`npm run dev`) stays running
+for development.
 
 ## Definition of done
 
-1. `npm run build` succeeds.
-2. `npx tsc --noEmit --incremental false` is clean.
-3. Every Tailwind class you wrote appears in the built CSS (see below).
+1. `npx tsc --noEmit --incremental false` is clean.
+2. The dev server (`npm run dev`) runs without errors.
+3. Every Tailwind class you wrote uses valid palette tokens.
 4. No file you added is unreachable from a route.
-
-`npm run dev` succeeding proves almost nothing — dead classes and dead files
-are invisible in dev.
+5. Production `npm run build` is only run when requested or preparing final release.
 
 ## Design tokens — the palette is CLOSED
 

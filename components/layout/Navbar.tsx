@@ -8,13 +8,67 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { NAV_LINKS } from "@/lib/data/site-content";
 import { BrandLogo } from "@/components/common/BrandLogo";
 
+// Unique hand-drawn underline shapes for each navbar item
+const UNDERLINE_SHAPES = [
+  // 0: Accueil - Double bouncy curve
+  {
+    viewBox: "0 0 100 12",
+    d: "M 2 8 C 18 2, 34 11, 50 6 C 66 1, 82 10, 98 4",
+    height: "h-2.5",
+    bottom: "-bottom-1",
+    strokeWidth: 4.5, // Bolder
+  },
+  // 1: Notre centre - Cursive loop doodle (from user ref)
+  {
+    viewBox: "0 0 100 18",
+    d: "M 2 6 C 24 5.5, 46 5.5, 64 5 C 76 4.5, 85 9, 80 14 C 75 18, 58 15, 63 8 C 66 4, 78 5.5, 98 6.5",
+    height: "h-3.5",
+    bottom: "-bottom-2",
+    strokeWidth: 4.0, // Bolder
+  },
+  // 2: Programmes - Smooth gentle wave (from user ref)
+  {
+    viewBox: "0 0 100 12",
+    d: "M 2 7 C 22 2, 48 11, 74 5 C 86 2, 94 6, 98 5.5",
+    height: "h-2.5",
+    bottom: "-bottom-1",
+    strokeWidth: 4.5, // Bolder
+  },
+  // 3: Actualités - Sharp zigzag folded lightning line (from user ref)
+  {
+    viewBox: "0 0 100 14",
+    d: "M 3 11 C 15 11, 28 11, 40 11 C 43 11, 44 9, 39 7 L 18 3.5 C 13 2.5, 16 1.5, 22 1.5 L 97 2.5",
+    height: "h-3",
+    bottom: "-bottom-1.5",
+    strokeWidth: 4.2, // Bolder
+  },
+  // 4: Contact - Multi-wave ripple squiggle (from user ref)
+  {
+    viewBox: "0 0 100 10",
+    d: "M 2 5 C 9 1, 15 9, 22 5 C 29 1, 35 9, 42 5 C 49 1, 55 9, 62 5 C 69 1, 75 9, 82 5 C 89 1, 95 9, 98 5",
+    height: "h-2.5",
+    bottom: "-bottom-1",
+    strokeWidth: 4.5, // Bolder
+  },
+];
+
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const [activeShapes, setActiveShapes] = useState<Record<string, number>>({});
   const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+
+  const handleMouseEnter = (label: string) => {
+    setHoveredLink(label);
+    // Assign a new random shape index whenever hovered
+    setActiveShapes((prev) => ({
+      ...prev,
+      [label]: Math.floor(Math.random() * UNDERLINE_SHAPES.length),
+    }));
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,8 +111,10 @@ export const Navbar: React.FC = () => {
           {NAV_LINKS.map((link, lIdx) => {
             const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
             const isHovered = hoveredLink === link.label;
+            // Use randomly assigned shape from hover, fallback to lIdx for initial render
+            const shape = UNDERLINE_SHAPES[activeShapes[link.label] ?? (lIdx % UNDERLINE_SHAPES.length)];
 
-            // Alternating joyful squiggle colors
+            // Alternating joyful squiggle colors (kept exactly as before)
             const squiggleColor =
               lIdx % 3 === 0
                 ? "text-msk-coral-500"
@@ -74,7 +130,7 @@ export const Navbar: React.FC = () => {
                   className="relative"
                   onMouseEnter={() => {
                     setDropdownOpen(true);
-                    setHoveredLink(link.label);
+                    handleMouseEnter(link.label);
                   }}
                   onMouseLeave={() => {
                     setDropdownOpen(false);
@@ -92,23 +148,34 @@ export const Navbar: React.FC = () => {
                       }`}
                     />
 
-                    {/* Playful squiggle underline */}
-                    {(isActive || isHovered || dropdownOpen) && (
-                      <motion.svg
-                        layoutId="navSquiggle"
-                        className={`absolute -bottom-1 left-0 w-full h-2.5 ${squiggleColor}`}
-                        viewBox="0 0 50 6"
-                        fill="none"
-                        preserveAspectRatio="none"
-                      >
-                        <path
-                          d="M1 3.5C8 1 15 6 22 3.5C29 1 36 6 43 3.5C46 2.5 48 3.5 49 3.5"
-                          stroke="currentColor"
-                          strokeWidth="2.8"
-                          strokeLinecap="round"
-                        />
-                      </motion.svg>
-                    )}
+                    {/* Playful distinct squiggle underline */}
+                    <AnimatePresence>
+                      {(isActive || isHovered || dropdownOpen) && (
+                        <motion.svg
+                          key={`nav-underline-${link.label}`}
+                          className={`absolute ${shape.bottom} left-0 w-full ${shape.height} ${squiggleColor} pointer-events-none`}
+                          viewBox={shape.viewBox}
+                          fill="none"
+                          preserveAspectRatio="none"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.15 }}
+                        >
+                          <motion.path
+                            d={shape.d}
+                            stroke="currentColor"
+                            strokeWidth={shape.strokeWidth}
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            initial={{ pathLength: 0 }}
+                            animate={{ pathLength: 1 }}
+                            exit={{ pathLength: 0 }}
+                            transition={{ duration: 0.28, ease: "easeOut" }}
+                          />
+                        </motion.svg>
+                      )}
+                    </AnimatePresence>
                   </button>
 
                   {/* Soft & Floating Dropdown */}
@@ -149,29 +216,40 @@ export const Navbar: React.FC = () => {
               <Link
                 key={link.label}
                 href={link.href}
-                onMouseEnter={() => setHoveredLink(link.label)}
+                onMouseEnter={() => handleMouseEnter(link.label)}
                 onMouseLeave={() => setHoveredLink(null)}
                 className="relative text-base lg:text-[17px] font-semibold text-msk-night-900 hover:text-msk-coral-600 transition-colors py-1.5 group"
               >
                 <span>{link.label}</span>
 
-                {/* Playful squiggle underline */}
-                {(isActive || isHovered) && (
-                  <motion.svg
-                    layoutId="navSquiggle"
-                    className={`absolute -bottom-1 left-0 w-full h-2.5 ${squiggleColor}`}
-                    viewBox="0 0 50 6"
-                    fill="none"
-                    preserveAspectRatio="none"
-                  >
-                    <path
-                      d="M1 3.5C8 1 15 6 22 3.5C29 1 36 6 43 3.5C46 2.5 48 3.5 49 3.5"
-                      stroke="currentColor"
-                      strokeWidth="2.8"
-                      strokeLinecap="round"
-                    />
-                  </motion.svg>
-                )}
+                {/* Playful distinct squiggle underline */}
+                <AnimatePresence>
+                  {(isActive || isHovered) && (
+                    <motion.svg
+                      key={`nav-underline-${link.label}`}
+                      className={`absolute ${shape.bottom} left-0 w-full ${shape.height} ${squiggleColor} pointer-events-none`}
+                      viewBox={shape.viewBox}
+                      fill="none"
+                      preserveAspectRatio="none"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.15 }}
+                    >
+                      <motion.path
+                        d={shape.d}
+                        stroke="currentColor"
+                        strokeWidth={shape.strokeWidth}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        exit={{ pathLength: 0 }}
+                        transition={{ duration: 0.28, ease: "easeOut" }}
+                      />
+                    </motion.svg>
+                  )}
+                </AnimatePresence>
               </Link>
             );
           })}

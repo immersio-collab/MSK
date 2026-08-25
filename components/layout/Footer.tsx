@@ -4,13 +4,13 @@ import { Instagram, Facebook, Mail, Phone, MapPin } from "lucide-react";
 import { WhatsAppIcon } from "@/components/common/WhatsAppIcon";
 import { BrandLogo } from "@/components/common/BrandLogo";
 import { SCHOOL_INFO } from "@/lib/data/site-content";
+import { FooterOceanBackground } from "./FooterOceanBackground";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-msk-night-900 text-white border-t border-msk-night-800 py-16 md:py-20 relative overflow-hidden">
-      {/* Soft warm magical ambient glows */}
-      <div className="absolute top-0 right-1/4 h-72 w-72 rounded-full bg-msk-sun-500/10 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-10 h-72 w-72 rounded-full bg-msk-coral-500/10 blur-3xl pointer-events-none" />
+    <footer className="bg-msk-night-950 text-white border-t border-msk-night-800/80 py-16 md:py-20 relative overflow-hidden">
+      {/* Full-width responsive deep night ocean Lottie animation */}
+      <FooterOceanBackground />
 
       <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
         <div className="flex flex-col md:flex-row items-start justify-between gap-12 lg:gap-16 pb-12 border-b border-msk-night-800/80">

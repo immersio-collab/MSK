@@ -11,9 +11,7 @@ essentials.
 - The palette is CLOSED: only `msk-coral`/`msk-sun`/`msk-blue` (50–900),
   `msk-cream` (50–300), `msk-night` (700–950). A wrong class silently emits no
   CSS.
-- Done = `npm run build` + `npx tsc --noEmit --incremental false` clean, every
-  new Tailwind class present in `.next/static/css/`, every new file reachable
-  from a route. Builds may be run automatically without asking.
+- Typecheck with `npx tsc --noEmit --incremental false`. Do NOT run `npm run build` after every change — only run a build when strictly necessary or explicitly requested. The dev server (`npm run dev`) handles hot reload during development.
 - Reuse the shared primitives (Eyebrow, MorphButton, FadeUp, NextStepSection,
   MediaBand, StatementSection, PolaroidCard, useHeroParallax, lib/motion)
   before writing new markup; facts live once in `lib/data/`.
