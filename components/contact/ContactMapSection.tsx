@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { AssetSlot } from "@/components/common/AssetSlot";
 import { FadeUp } from "@/components/motion/FadeUp";
 
 export const ContactMapSection: React.FC = () => {
@@ -8,7 +9,14 @@ export const ContactMapSection: React.FC = () => {
     // `lg:screen-section` : la carte occupe exactement une fenêtre à partir de
     // lg. Pas de marge haute — c'est le `pb` du panneau de formulaire juste
     // au-dessus qui fait l'espace, en ajouter une ici doublerait l'écart.
-    <section className="w-full bg-transparent px-5 pb-16 lg:px-8">
+    <section className="relative w-full bg-transparent px-5 pb-16 lg:px-8">
+      {/* « Posé » sur le coin haut du cadre blanc — dans la section, pas dans
+          le cadre (son overflow-hidden le couperait). */}
+      <AssetSlot
+        label="Pin de localisation"
+        tone="bg-white text-msk-blue-800"
+        className="pointer-events-none absolute right-[8%] top-0 z-10 hidden w-32 -translate-y-1/2 rotate-3 sm:flex"
+      />
       {/* Framed card wrapper matching website design system */}
       <div className="mx-auto w-full max-w-[1400px] overflow-hidden rounded-[1.5rem] border border-msk-cream-300 bg-white p-3 shadow-xl md:p-4">
         <FadeUp>

@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 
+import { AssetSlot } from "@/components/common/AssetSlot";
 import { CloudDrift } from "@/components/motion/CloudDrift";
 import { PageHero } from "@/components/common/PageHero";
 import { useHeroParallax } from "@/hooks/use-hero-parallax";
@@ -62,14 +63,27 @@ export const FondatriceHeroSection = () => {
             phase={0.8}
             className="absolute left-0 top-[8%] hidden w-32 text-msk-cream-50 lg:block"
           />
+
+          {/* Triangle crème bas-droit, sous la diagonale — zone calme, jamais
+              traversée par les nuages. */}
+          <AssetSlot
+            label="Papillon"
+            hint="SVG animé"
+            tone="bg-white/70 text-msk-coral-800"
+            className="absolute bottom-[6%] right-[5%] hidden w-32 rotate-3 lg:flex"
+          />
         </>
       }
       media={
+        // Contrat des héros : h-full dans la boîte média commune, zéro hack.
+        // L'ancien scale 1.5/1.8 + translate faisait déborder l'illustration de
+        // 478px sur un écran de 375px (scroll horizontal mobile mesuré : 24px).
         <img
           ref={image}
           src="/children playing.svg"
-          alt="Illustration enfants"
-          className="mx-auto h-auto w-full max-w-3xl md:h-64 object-contain scale-[1.5] md:scale-[1.8] translate-y-20 md:translate-y-36 origin-bottom relative z-10 pointer-events-none"
+          alt=""
+          aria-hidden
+          className="pointer-events-none h-full w-auto object-contain"
         />
       }
     />

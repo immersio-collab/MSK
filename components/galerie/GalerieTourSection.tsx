@@ -7,6 +7,7 @@ import { AlertTriangle, Maximize2, Play } from "lucide-react";
 
 import { VIRTUAL_TOUR } from "@/lib/data/site-content";
 import { GalerieTitreAnime } from "@/components/galerie/GalerieTitreAnime";
+import { AssetSlot } from "@/components/common/AssetSlot";
 import { MorphButton } from "@/components/motion/MorphButton";
 import { Eyebrow } from "@/components/common/Eyebrow";
 
@@ -45,6 +46,13 @@ export const GalerieTourSection = () => {
       id="tour-virtuel"
       className="relative w-full overflow-hidden bg-white px-4 py-10 sm:px-8 md:py-12"
     >
+      {/* Flanc de l'en-tête centré. Règle du fichier : le cadre du tour reste
+          NU — le décor vit hors du cadre, jamais dessus. */}
+      <AssetSlot
+        label="Étoiles"
+        tone="bg-msk-blue-50 text-msk-blue-800"
+        className="pointer-events-none absolute right-[4%] top-10 hidden w-28 rotate-3 lg:flex"
+      />
       {/* En-tête compact : une pill, un titre, une phrase. */}
       <div className="mx-auto mb-6 max-w-4xl text-center md:mb-7">
         <Eyebrow className="bg-msk-blue-50 text-msk-blue-700 shadow-sm">

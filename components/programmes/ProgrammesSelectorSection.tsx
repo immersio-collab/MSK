@@ -5,6 +5,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, MoonStar, Repeat, Sunrise, Users } from "lucide-react";
 
+import { AssetSlot } from "@/components/common/AssetSlot";
 import { FadeUp } from "@/components/motion/FadeUp";
 import { cn } from "@/lib/utils";
 import { Eyebrow } from "@/components/common/Eyebrow";
@@ -108,8 +109,15 @@ export const ProgrammesSelectorSection = () => {
       // `lg:screen-section` : une fenêtre pile. La section mesurait 868px, dont
       // 420px pour la seule photo de la fiche — c'est elle, pas le texte, qui
       // portait le dépassement (voir plus bas).
-      className="overflow-hidden bg-msk-cream-200 py-[clamp(1.5rem,3.75svh,4.5rem)] lg:screen-section"
+      className="relative overflow-hidden bg-msk-cream-200 py-[clamp(1.5rem,3.75svh,4.5rem)] lg:screen-section"
     >
+      {/* Flanc du titre centré — section pincée à l'écran : absolu strict. */}
+      <AssetSlot
+        label="Formes géométriques"
+        hint="SVG animé"
+        tone="bg-white/80 text-msk-blue-800"
+        className="pointer-events-none absolute left-[4%] top-[9%] hidden w-36 -rotate-3 lg:flex"
+      />
       <div className="mx-auto max-w-6xl px-6 sm:px-10">
         <FadeUp>
           <div className="mb-[clamp(1rem,2.75svh,2.5rem)] text-center">

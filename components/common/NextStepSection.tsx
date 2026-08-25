@@ -34,7 +34,7 @@ export const NextStepSection = ({
   buttonHref,
 }: NextStepSectionProps) => {
   return (
-    <section className="relative w-full overflow-hidden bg-msk-night-800 py-20 text-center md:py-24">
+    <section className="relative w-full overflow-hidden bg-msk-night-800 pt-24 pb-40 text-center md:pt-32 md:pb-56">
       {/* Decorative sparkling animated stars (soft & discreet shimmer) */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
         <LottieMark
@@ -65,7 +65,7 @@ export const NextStepSection = ({
             {eyebrow}
           </span>
 
-          <h2 className="mt-4 font-display text-[2.5rem] font-bold uppercase leading-[0.9] text-white sm:text-6xl md:text-7xl">
+          <h2 className="mt-4 font-display text-4xl font-bold uppercase leading-[0.9] text-white sm:text-5xl md:text-6xl">
             {title}
           </h2>
 

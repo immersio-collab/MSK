@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Instagram, Facebook, Mail, Phone, MapPin } from "lucide-react";
 import { WhatsAppIcon } from "@/components/common/WhatsAppIcon";
+import { AssetSlot } from "@/components/common/AssetSlot";
 import { BrandLogo } from "@/components/common/BrandLogo";
 import { SCHOOL_INFO } from "@/lib/data/site-content";
 import { FooterOceanBackground } from "./FooterOceanBackground";
@@ -15,6 +16,15 @@ export const Footer: React.FC = () => {
 
       {/* Full-width responsive deep night ocean Lottie animation */}
       <FooterOceanBackground />
+
+      {/* Poissons à venir : posés ENTRE l'océan (z-0) et le contenu (z-10),
+          côté droit, là où les colonnes de liens laissent du vide. */}
+      <AssetSlot
+        label="Poissons"
+        hint="2-3 silhouettes"
+        tone="bg-msk-night-800/70 text-msk-cream-100"
+        className="pointer-events-none absolute bottom-8 right-4 z-0 w-40 rotate-2 md:right-10"
+      />
 
       <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
         <div className="flex flex-col md:flex-row items-start justify-between gap-12 lg:gap-16 pb-12 border-b border-msk-night-800/80">

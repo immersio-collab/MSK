@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { AssetSlot } from "@/components/common/AssetSlot";
 
 export const FondatriceGridSection: React.FC = () => {
   return (
@@ -11,12 +12,15 @@ export const FondatriceGridSection: React.FC = () => {
     // plus bas) — c'est lui, pas le texte, qui portait le surplus.
     <section id="suite" className="bg-msk-cream-50 py-[clamp(2.5rem,6svh,5rem)] lg:screen-section">
       <div className="container mx-auto px-4 max-w-5xl relative">
-        {/* Decorative SVGs */}
-        <img 
-          src="/Graduation.svg" 
-          alt="" 
-          aria-hidden="true" 
-          className="absolute -top-10 -right-6 md:-right-12 w-28 md:w-40 lg:w-48 pointer-events-none z-20" 
+        {/* Remplace l'ancien Graduation.svg : couleurs hors charte (turquoise,
+            bleus génériques) + débord viewport mobile de ~24px (la section n'a
+            pas d'overflow-hidden). Le principe du sticker débordant du coin est
+            gardé ; `right-0` sur mobile pour ne plus créer de scroll horizontal. */}
+        <AssetSlot
+          label="Diplôme"
+          hint="SVG animé"
+          tone="bg-white/80 text-msk-coral-700"
+          className="absolute -top-8 right-2 z-20 w-28 rotate-3 pointer-events-none md:-right-10 md:w-36"
         />
 
         <div className="bg-white rounded-3xl overflow-hidden shadow-xl border border-msk-cream-200 flex flex-col md:flex-row relative z-10">

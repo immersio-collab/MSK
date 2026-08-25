@@ -55,11 +55,13 @@ export const ProgrammesHeroSection = () => {
         </>
       }
       media={
+        // Contrat des héros : h-full dans la boîte média commune, zéro hack.
         <img
           ref={kid}
           src="/kids playing - kidcare.svg"
-          alt="Illustration enfants qui jouent"
-          className="mx-auto h-auto w-full max-w-xl md:h-64 object-contain scale-105 md:scale-110 translate-y-6 origin-bottom relative z-10 pointer-events-none"
+          alt=""
+          aria-hidden
+          className="pointer-events-none h-full w-auto object-contain"
         />
       }
     />

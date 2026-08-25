@@ -3,6 +3,7 @@
 import { ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/common/WhatsAppIcon";
 
+import { AssetSlot } from "@/components/common/AssetSlot";
 import { FadeUp } from "@/components/motion/FadeUp";
 import { MorphButton } from "@/components/motion/MorphButton";
 import { SCHOOL_INFO } from "@/lib/data/site-content";
@@ -27,7 +28,19 @@ export const AccueilStatement = ({
   cta,
 }: AccueilStatementProps) => {
   return (
-    <section className={`w-full py-20 text-center md:py-24 ${background}`}>
+    <section className={`relative w-full py-20 text-center md:py-24 ${background}`}>
+      {/* Gouttières latérales hors du bloc max-w-5xl — lg only, la bande reste
+          courte : absolu, zéro hauteur ajoutée. */}
+      <AssetSlot
+        label="Étoile"
+        tone="bg-white/70 text-msk-sun-800"
+        className="pointer-events-none absolute left-[4%] top-1/2 hidden w-28 -translate-y-1/2 -rotate-6 lg:flex"
+      />
+      <AssetSlot
+        label="Étoile"
+        tone="bg-white/70 text-msk-sun-800"
+        className="pointer-events-none absolute right-[4%] top-1/2 hidden w-28 -translate-y-1/2 rotate-6 lg:flex"
+      />
       <div className="mx-auto w-full max-w-5xl px-6 sm:px-10">
         <FadeUp>
           <p className="font-display text-[1.75rem] font-bold uppercase leading-[1.1] text-msk-night-950 sm:text-[2.25rem] lg:text-[2.75rem]">

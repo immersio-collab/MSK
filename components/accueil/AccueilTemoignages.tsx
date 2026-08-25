@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import { Mic, Pause, Play } from "lucide-react";
+import { AssetSlot } from "@/components/common/AssetSlot";
 import { FadeUp } from "@/components/motion/FadeUp";
 import { MorphButton } from "@/components/motion/MorphButton";
 import { cn } from "@/lib/utils";
@@ -619,6 +620,14 @@ export const AccueilTemoignages = () => {
 
   return (
     <section className="relative w-full overflow-hidden bg-msk-sun-100 py-24 md:py-32">
+      {/* Tiers droit de l'en-tête (titre calé à gauche). Ancré en px depuis le
+          haut : la hauteur de la section varie avec « Voir plus ». */}
+      <AssetSlot
+        label="Bulle de dialogue"
+        hint="SVG animé"
+        tone="bg-white/80 text-msk-sun-800"
+        className="pointer-events-none absolute right-[6%] top-28 hidden w-40 rotate-3 lg:flex"
+      />
       <div className="relative mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
         <FadeUp>
           <Eyebrow className="bg-white text-msk-sun-800 shadow-sm">

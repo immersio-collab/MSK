@@ -24,13 +24,15 @@ export const ConfettiParticles: React.FC<ConfettiParticlesProps> = ({
     let width = (canvas.width = canvas.offsetWidth);
     let height = (canvas.height = canvas.offsetHeight);
 
-    // Warm, child-friendly pastel colors matching the MSK palette
+    // Palette fermée uniquement — l'ancien jeu contenait un sage et un
+    // terracotta, deux familles bannies de la charte (passés en rgba ils
+    // échappaient au garde-fou Tailwind).
     const colors = [
-      "rgba(223, 91, 133, 0.25)", // Coral/Pink soft
-      "rgba(88, 156, 219, 0.25)",  // Blue soft
-      "rgba(242, 208, 134, 0.3)",  // Sun/Yellow soft
-      "rgba(141, 199, 149, 0.25)", // Sage/Green soft
-      "rgba(229, 140, 107, 0.25)", // Terracotta soft
+      "rgba(223, 91, 133, 0.25)", // msk-coral-500
+      "rgba(106, 174, 224, 0.25)", // msk-blue-500
+      "rgba(249, 210, 119, 0.3)", // msk-sun-300
+      "rgba(241, 164, 188, 0.25)", // msk-coral-300
+      "rgba(155, 203, 236, 0.25)", // msk-blue-300
     ];
 
     interface Particle {

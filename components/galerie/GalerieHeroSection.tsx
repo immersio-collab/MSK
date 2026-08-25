@@ -81,19 +81,21 @@ export const GalerieHeroSection = () => {
             className="absolute left-0 top-[8%] hidden w-32 text-msk-cream-50 lg:block"
           />
 
+          {/* w-36 mobile : à w-48 les deux pieuvres se disputaient un écran de
+              375px avec la carte-titre quasi pleine largeur. */}
           <img
             ref={octopus1}
             src="/My Octopus Teacher.svg"
             alt=""
             aria-hidden
-            className="absolute right-[2%] top-[10%] w-48 sm:w-64 md:w-80 lg:w-[28rem] opacity-90"
+            className="absolute right-[2%] top-[10%] w-36 sm:w-64 md:w-80 lg:w-[28rem] opacity-90"
           />
           <img
             ref={octopus2}
             src="/My theacher octopus 2.svg"
             alt=""
             aria-hidden
-            className="absolute left-[2%] bottom-[15%] w-48 sm:w-64 md:w-80 lg:w-[28rem] opacity-90"
+            className="absolute left-[2%] bottom-[12%] w-36 sm:w-64 sm:bottom-[15%] md:w-80 lg:w-[28rem] opacity-90"
           />
         </>
       }

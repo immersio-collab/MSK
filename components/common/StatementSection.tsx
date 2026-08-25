@@ -68,11 +68,14 @@ export const StatementSection = ({
               aria-hidden
               className="pointer-events-none absolute -right-6 -top-16 z-0 w-40 sm:w-52 lg:-right-12 lg:-top-24 lg:w-64"
             />
+            {/* Bridé sur mobile : à 26rem le chat (416px) débordait d'un écran
+                de 375px et pouvait glisser sous le paragraphe suivant en
+                empilement 1 colonne. */}
             <img
               src="/methode/running-cat.svg"
               alt=""
               aria-hidden
-              className="pointer-events-none absolute -bottom-28 -left-24 z-0 w-[26rem] sm:w-[34rem] lg:-bottom-44 lg:-left-40 lg:w-[44rem]"
+              className="pointer-events-none absolute -bottom-16 -left-10 z-0 w-64 sm:-bottom-28 sm:-left-24 sm:w-[34rem] lg:-bottom-44 lg:-left-40 lg:w-[44rem]"
             />
           </div>
         </FadeUp>

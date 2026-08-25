@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 
+import { AssetSlot } from "@/components/common/AssetSlot";
 import { CloudDrift } from "@/components/motion/CloudDrift";
 import { PageHero } from "@/components/common/PageHero";
 import { useHeroParallax } from "@/hooks/use-hero-parallax";
@@ -97,6 +98,15 @@ export const TroublesHeroSection: React.FC = () => {
             className="absolute -bottom-16 left-[2%] w-56 md:w-72 lg:left-[6%] lg:w-80"
           />
         </>
+      }
+      media={
+        // Contrat des héros : boîte média commune, jusqu'ici vide sur cette page.
+        <AssetSlot
+          label="Oiseau"
+          hint="SVG animé"
+          tone="bg-white/60 text-msk-blue-800"
+          className="h-full max-h-full rotate-2 aspect-[4/3]"
+        />
       }
     />
   );

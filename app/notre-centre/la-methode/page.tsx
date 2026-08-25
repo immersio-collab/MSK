@@ -36,12 +36,24 @@ export default function LaMethodePage() {
         alt="Enfant en séance, plein cadre"
         priority
         overlay={
-          <img
-            src="/Bird pair love and flying sky.svg"
-            alt=""
-            aria-hidden="true"
-            className="absolute bottom-8 right-6 h-auto w-64 object-contain md:right-14 md:w-80"
-          />
+          <>
+            {/* w-40 mobile : à w-64 les oiseaux couvraient 2/3 d'un écran de
+                375px. */}
+            <img
+              src="/Bird pair love and flying sky.svg"
+              alt=""
+              aria-hidden="true"
+              className="absolute bottom-6 right-4 h-auto w-40 object-contain sm:w-56 md:bottom-8 md:right-14 md:w-80"
+            />
+            {/* Pendant bas-gauche des oiseaux. Le halo drop-shadow est ce qui le
+                garde lisible quelle que soit la photo derrière. */}
+            <img
+              src="/Sunny.svg"
+              alt=""
+              aria-hidden="true"
+              className="absolute bottom-6 left-4 h-auto w-24 object-contain drop-shadow-[0_0_16px_rgba(253,251,247,0.6)] md:left-10 md:w-32"
+            />
+          </>
         }
       />
 

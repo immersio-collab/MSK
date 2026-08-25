@@ -5,6 +5,7 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight } from "lucide-react";
+import { AssetSlot } from "@/components/common/AssetSlot";
 import { CloudDrift } from "@/components/motion/CloudDrift";
 import { TROUBLES, type TroubleItem } from "@/lib/data/troubles";
 import { cn } from "@/lib/utils";
@@ -201,19 +202,28 @@ export function TroublesGridSection() {
     <section ref={root} id="troubles" className="relative overflow-hidden bg-msk-blue-50 py-24 md:py-28">
       {/* Nuages : dérive latérale continue, vitesses et phases distinctes. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        {/* blue-200, pas white : blanc sur blue-50 était quasi invisible. */}
         <CloudDrift
           motion="float"
           shape="a"
           speed={52}
           phase={0.2}
-          className="absolute left-0 top-[5%] w-40 text-white md:w-56"
+          className="absolute left-0 top-[5%] w-40 text-msk-blue-200 md:w-56"
         />
         <CloudDrift
           motion="float"
           shape="b"
           speed={40}
           phase={0.65}
-          className="absolute left-0 top-[24%] w-36 text-white md:w-52"
+          className="absolute left-0 top-[24%] w-36 text-msk-blue-200 md:w-52"
+        />
+
+        {/* Marge latérale hors du max-w-5xl — n'existe qu'en très large. */}
+        <AssetSlot
+          label="Ballon"
+          hint="SVG animé"
+          tone="bg-white/80 text-msk-blue-800"
+          className="absolute right-[2%] top-[40%] hidden w-32 rotate-3 xl:flex"
         />
       </div>
 

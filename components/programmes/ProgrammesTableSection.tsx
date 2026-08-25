@@ -13,6 +13,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+import { AssetSlot } from "@/components/common/AssetSlot";
 import { FadeUp } from "@/components/motion/FadeUp";
 import { cn } from "@/lib/utils";
 import { Eyebrow } from "@/components/common/Eyebrow";
@@ -131,6 +132,19 @@ export const ProgrammesTableSection = () => {
       // en-tête et interlignes du tableau suivent maintenant la fenêtre.
       className="relative overflow-hidden bg-msk-blue-50 py-[clamp(2rem,5svh,4rem)] lg:screen-section"
     >
+      {/* Marges latérales hors du max-w-4xl — la meilleure zone vide de la
+          page, mais elle n'existe qu'en très large : xl only. Fond blue-50 :
+          jamais de blanc ici (invisible). */}
+      <AssetSlot
+        label="Crayon"
+        tone="bg-white/80 text-msk-blue-800"
+        className="pointer-events-none absolute left-[2%] top-[42%] hidden w-28 -rotate-6 xl:flex"
+      />
+      <AssetSlot
+        label="Règle"
+        tone="bg-white/80 text-msk-blue-800"
+        className="pointer-events-none absolute right-[2%] top-[38%] hidden w-28 rotate-6 xl:flex"
+      />
       <div className="mx-auto max-w-4xl px-6 sm:px-10">
         <FadeUp>
           <div className="mb-[clamp(1.5rem,4svh,3rem)] text-center">

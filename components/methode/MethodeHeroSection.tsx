@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 
+import { AssetSlot } from "@/components/common/AssetSlot";
 import { CloudDrift } from "@/components/motion/CloudDrift";
 import { PageHero } from "@/components/common/PageHero";
 import { useHeroParallax } from "@/hooks/use-hero-parallax";
@@ -64,14 +65,27 @@ export const MethodeHeroSection = () => {
             phase={0.8}
             className="absolute left-0 top-[8%] hidden w-32 text-msk-cream-50 lg:block"
           />
+
+          {/* Flanc gauche de la carte-titre, sur le triangle crème — la zone
+              calme du héros (les nuages restent dans la bande haute). */}
+          <AssetSlot
+            label="Livre ouvert"
+            hint="SVG animé"
+            tone="bg-white/70 text-msk-coral-800"
+            className="absolute bottom-[16%] left-[4%] hidden w-36 -rotate-3 lg:flex"
+          />
         </>
       }
       media={
+        // Contrat des héros (2026-08-25) : le visuel REMPLIT la boîte média de
+        // PageHero (h-full), sans scale/translate — le fichier est recadré à son
+        // dessin (viewBox croppé), c'est lui qui a été corrigé, pas la mise en page.
         <img
           ref={kid}
           src="/kid swing.svg"
-          alt="Illustration méthode"
-          className="mx-auto h-auto w-full max-w-2xl md:h-64 object-contain scale-[1.3] md:scale-[1.6] translate-y-12 md:translate-y-24 origin-bottom relative z-10 pointer-events-none"
+          alt=""
+          aria-hidden
+          className="pointer-events-none h-full w-auto object-contain"
         />
       }
     />

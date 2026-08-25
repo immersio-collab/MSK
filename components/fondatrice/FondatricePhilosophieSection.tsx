@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { AssetSlot } from "@/components/common/AssetSlot";
 import { Eyebrow } from "@/components/common/Eyebrow";
 
 export const FondatricePhilosophieSection: React.FC = () => {
@@ -17,6 +18,13 @@ export const FondatricePhilosophieSection: React.FC = () => {
       <div className="absolute top-10 left-10 text-[20rem] leading-none text-msk-coral-100 font-serif z-0 select-none">
         &ldquo;
       </div>
+
+      {/* Coin haut-droit — le guillemet occupe déjà le haut-gauche. */}
+      <AssetSlot
+        label="Soleil"
+        tone="bg-white/80 text-msk-coral-700"
+        className="pointer-events-none absolute right-[4%] top-8 z-0 hidden w-28 rotate-3 sm:flex"
+      />
 
       <div className="container mx-auto px-4 relative z-10 max-w-5xl">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">

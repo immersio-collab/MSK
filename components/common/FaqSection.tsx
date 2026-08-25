@@ -4,6 +4,7 @@ import { useId, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Plus } from "lucide-react";
 
+import { AssetSlot } from "@/components/common/AssetSlot";
 import { FadeUp } from "@/components/motion/FadeUp";
 import { MorphButton } from "@/components/motion/MorphButton";
 import { Eyebrow } from "@/components/common/Eyebrow";
@@ -141,6 +142,15 @@ export const FaqSection = ({
                   <ArrowRight className="h-4 w-4" />
                 </MorphButton>
               </div>
+
+              {/* Décor « école » du système ciel→océan, une décision pour les
+                  6 pages. DANS le rail sticky, sous le bouton : il défile avec
+                  lui et ne peut donc jamais être recouvert au scroll. */}
+              <AssetSlot
+                label="Crayon ou boulier"
+                hint="SVG animé"
+                className="mt-10 hidden w-44 -rotate-2 lg:flex"
+              />
             </div>
           </FadeUp>
 

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
+import { AssetSlot } from "@/components/common/AssetSlot";
 import { FadeUp } from "@/components/motion/FadeUp";
 import { PROGRAMMES } from "@/lib/data/programmes";
 
@@ -44,8 +45,17 @@ export const AccueilPourQui = () => {
       // `lg:screen-section` : une fenêtre pile. La section mesurait 1106px, dont
       // 256px de marge et 320px pour la seule photo de chaque carte. Marge,
       // rythme et photo suivent maintenant la fenêtre.
-      className="w-full bg-msk-blue-50 py-[clamp(1.25rem,3svh,4rem)] lg:screen-section"
+      className="relative w-full bg-msk-blue-50 py-[clamp(1.25rem,3svh,4rem)] lg:screen-section"
     >
+      {/* Moitié droite de l'en-tête (titre calé à gauche) — section pincée à
+          l'écran : absolu strict, et à distance des cartes inclinées (~12px de
+          débord de transform). */}
+      <AssetSlot
+        label="Cubes ABC"
+        hint="SVG animé"
+        tone="bg-white/80 text-msk-blue-800"
+        className="pointer-events-none absolute right-[6%] top-[9%] hidden w-36 rotate-2 lg:flex"
+      />
       <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
         <FadeUp>
           <span className="inline-block rounded-[0.4rem] bg-msk-sun-200 px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950">

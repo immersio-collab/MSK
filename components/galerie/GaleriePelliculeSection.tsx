@@ -9,6 +9,7 @@ import {
 import Image from "next/image";
 import { useReducedMotion } from "framer-motion";
 import gsap from "gsap";
+import { AssetSlot } from "@/components/common/AssetSlot";
 import Lightbox from "yet-another-react-lightbox";
 import Captions from "yet-another-react-lightbox/plugins/captions";
 import Counter from "yet-another-react-lightbox/plugins/counter";
@@ -192,12 +193,22 @@ export const GaleriePelliculeSection = ({ variant = "page", header }: GaleriePel
     // décider laquelle gagne.
     <section
       className={cn(
-        "w-full overflow-hidden flex flex-col justify-center",
+        "relative w-full overflow-hidden flex flex-col justify-center",
         variant === "home"
           ? "bg-msk-night-700 py-20 sm:py-24 md:py-32 lg:py-36 min-h-[85vh] lg:min-h-screen"
           : "bg-msk-cream-200 py-16 md:py-24",
       )}
     >
+      {variant === "home" ? (
+        // Première bande nocturne du site — la transition jour→nuit du système
+        // ciel→océan : la lune apparaît ici, les étoiles sur la CTA en dessous.
+        <AssetSlot
+          label="Lune"
+          hint="croissant, SVG"
+          tone="bg-msk-night-800/80 text-msk-cream-100"
+          className="pointer-events-none absolute right-[5%] top-[7%] hidden w-32 rotate-2 lg:flex"
+        />
+      ) : null}
       <div className="mx-auto mb-10 sm:mb-12 md:mb-16 flex w-full max-w-[1400px] items-center justify-between gap-8 px-6 sm:px-10 lg:px-16">
         {header ? header : (
           <>
@@ -235,6 +246,13 @@ export const GaleriePelliculeSection = ({ variant = "page", header }: GaleriePel
               loading="lazy"
               decoding="async"
               className="hidden w-72 shrink-0 rotate-6 md:block lg:w-96"
+            />
+            {/* Sous md la Camera disparaît et l'en-tête mobile était nu — le
+                seul emplacement mobile-first du chantier décor. */}
+            <AssetSlot
+              label="Appareil photo"
+              tone="bg-white/80 text-msk-blue-800"
+              className="w-28 shrink-0 rotate-6 md:hidden"
             />
           </>
         )}

@@ -45,7 +45,18 @@ export const MethodeProcessSection = () => {
     // le reste.
     <section className="w-full bg-msk-coral-50 py-[clamp(2rem,5svh,4rem)] lg:screen-section">
       <div className="mx-auto w-full max-w-7xl px-6 sm:px-10">
-        <div className="grid grid-cols-1 gap-12 rounded-[2rem] bg-white px-8 py-[clamp(2rem,6svh,3.5rem)] md:px-14 md:py-[clamp(2.5rem,8svh,5rem)] lg:grid-cols-2 lg:gap-20">
+        <div className="relative grid grid-cols-1 gap-12 rounded-[2rem] bg-white px-8 py-[clamp(2rem,6svh,3.5rem)] md:px-14 md:py-[clamp(2.5rem,8svh,5rem)] lg:grid-cols-2 lg:gap-20">
+          {/* Sticker à cheval sur l'angle du panneau. -top-7 (28px) reste sous le
+              padding minimal de la section (py clamp ≥ 32px) : sans overflow-hidden
+              ici, un débord plus haut fuirait sur la Statement au-dessus. lg only —
+              sous lg le panneau colle aux bords et le débord droit créerait un
+              scroll horizontal. */}
+          <img
+            src="/methode/class-board.svg"
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-6 -top-7 hidden w-36 rotate-3 select-none lg:block xl:w-40"
+          />
           <FadeUp className="flex h-full flex-col justify-center">
             <div>
               <h2 className="max-w-md font-display text-3xl font-bold leading-[1.1] text-msk-night-900 md:text-4xl">
