@@ -38,9 +38,14 @@ export const MethodeProcessSection = () => {
   // coral-50, pas blanc ni crème : le panneau intérieur est blanc et a besoin
   // d'un fond teinté pour se détacher — et le corail est la signature de la page.
   return (
-    <section className="w-full bg-msk-coral-50 pb-24 md:pb-32">
+    // `lg:screen-section` : une fenêtre pile, panneau centré dedans. La section
+    // ne portait qu'une marge BASSE — le panneau collait donc au haut de l'écran
+    // et la section ne faisait que 608px. Les marges sont maintenant symétriques
+    // et suivent la fenêtre, et c'est le centrage de l'utilitaire qui répartit
+    // le reste.
+    <section className="w-full bg-msk-coral-50 py-[clamp(2rem,5svh,4rem)] lg:screen-section">
       <div className="mx-auto w-full max-w-7xl px-6 sm:px-10">
-        <div className="grid grid-cols-1 gap-12 rounded-[2rem] bg-white px-8 py-14 md:px-14 md:py-20 lg:grid-cols-2 lg:gap-20">
+        <div className="grid grid-cols-1 gap-12 rounded-[2rem] bg-white px-8 py-[clamp(2rem,6svh,3.5rem)] md:px-14 md:py-[clamp(2.5rem,8svh,5rem)] lg:grid-cols-2 lg:gap-20">
           <FadeUp className="flex h-full flex-col justify-center">
             <div>
               <h2 className="max-w-md font-display text-3xl font-bold leading-[1.1] text-msk-night-900 md:text-4xl">

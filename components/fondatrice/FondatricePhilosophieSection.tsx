@@ -6,7 +6,13 @@ export const FondatricePhilosophieSection: React.FC = () => {
   return (
     // coral-50 : la respiration signature de la page — la citation est le
     // temps fort de la fondatrice.
-    <section className="py-24 bg-msk-coral-50 relative overflow-hidden">
+    //
+    // `lg:screen-section` : à partir de lg la section fait exactement une
+    // fenêtre, contenu centré dedans. Mesurée à 741px avec ses 96px de marge
+    // haut/bas, elle dépassait de 21px un écran de 720. La marge suit donc la
+    // fenêtre — sous hauteur fixe, une marge figée ne respire plus, elle vole
+    // de la place au contenu.
+    <section className="relative overflow-hidden bg-msk-coral-50 py-[clamp(3rem,7svh,6rem)] lg:screen-section">
       {/* Decorative large quote mark */}
       <div className="absolute top-10 left-10 text-[20rem] leading-none text-msk-coral-100 font-serif z-0 select-none">
         &ldquo;

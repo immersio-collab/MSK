@@ -5,7 +5,11 @@ import Image from "next/image";
 
 export const FondatriceGridSection: React.FC = () => {
   return (
-    <section id="suite" className="py-20 bg-msk-cream-50">
+    // `lg:screen-section` : une fenêtre pile. La fiche mesurait 794px avec ses
+    // 80px de marge haut/bas ; la marge suit désormais la fenêtre, et le
+    // rembourrage interne de la colonne droite se resserre en même temps (voir
+    // plus bas) — c'est lui, pas le texte, qui portait le surplus.
+    <section id="suite" className="bg-msk-cream-50 py-[clamp(2.5rem,6svh,5rem)] lg:screen-section">
       <div className="container mx-auto px-4 max-w-5xl relative">
         {/* Decorative SVGs */}
         <img 
@@ -32,15 +36,15 @@ export const FondatriceGridSection: React.FC = () => {
           </div>
 
           {/* Right: Info */}
-          <div className="md:w-3/5 p-8 md:p-12 lg:p-16 flex flex-col justify-center">
-            <div className="hidden md:block mb-8">
+          <div className="flex flex-col justify-center p-8 md:p-12 lg:px-16 lg:py-[clamp(2rem,5svh,4rem)] md:w-3/5">
+            <div className="hidden md:block mb-[clamp(1rem,3svh,2rem)]">
               <h3 className="text-4xl font-bold text-msk-night-900 mb-2">Khadija Elabaya</h3>
               <p className="text-lg text-msk-coral-500 font-bold uppercase tracking-wider">
                 Fondatrice du centre MSK Thérapie
               </p>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-[clamp(1rem,3svh,1.5rem)]">
               <p className="text-lg text-msk-night-700/90 leading-relaxed">
                 Forte d&apos;une expertise pluridisciplinaire, Khadija Elabaya dédie sa carrière aux enfants que l&apos;école seule ne suffit pas à porter, et à leur épanouissement global.
               </p>
@@ -49,7 +53,7 @@ export const FondatriceGridSection: React.FC = () => {
                 <h4 className="text-sm font-bold uppercase tracking-widest text-slate-600 mb-4 border-b border-msk-cream-200 pb-2">
                   Ses Domaines d&apos;Expertise
                 </h4>
-                <ul className="space-y-3">
+                <ul className="space-y-[clamp(0.5rem,1.5svh,0.75rem)]">
                   {[
                     "Thérapeute spécialisée en réadaptation du comportement",
                     "Spécialiste en intégration scolaire",

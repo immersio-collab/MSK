@@ -82,7 +82,13 @@ export const PageHero = ({
     <section
       ref={rootRef}
       className={cn(
-        "relative flex min-h-[100dvh] w-full flex-col justify-center overflow-hidden pb-16 pt-16 md:pb-20",
+        // `min-h` et non `h` : le héros doit REMPLIR l'écran sans jamais le
+        // dépasser, et c'est le contenu élastique en dessous qui garantit le
+        // second point. Si un jour une traduction plus longue le dépassait
+        // quand même, la section grandit — elle ne rogne pas le titre.
+        // `svh` et non `dvh` : la valeur stable, celle qui tient aussi quand la
+        // barre du navigateur mobile est visible.
+        "relative flex min-h-[100svh] w-full flex-col justify-center overflow-hidden py-[clamp(3rem,6svh,5rem)]",
         background,
       )}
     >
@@ -100,14 +106,19 @@ export const PageHero = ({
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 sm:px-10">
         {/*
-          Emplacement du visuel, de hauteur FIXE et toujours rendu, même vide.
-          C'est lui qui garantit que la carte tombe au même endroit partout :
-          mesuré avant, les visuels occupaient de 0 à 461 px selon la page et
-          décalaient la carte de 210 px d'une page à l'autre. Les illustrations
-          gardent leur taille propre et débordent vers le haut sur la bande —
-          `items-end` les cale par le bas, au plus près de la carte.
+          Emplacement du visuel, toujours rendu même vide : c'est lui qui garantit
+          que la carte tombe au même endroit sur les six pages. Mesuré avant, les
+          visuels occupaient de 0 à 461 px selon la page et décalaient la carte de
+          210 px d'une page à l'autre. Les illustrations gardent leur taille propre
+          et débordent vers le haut sur la bande — `items-end` les cale par le bas,
+          au plus près de la carte.
+
+          La hauteur est la MÊME sur toutes les pages mais suit la fenêtre
+          (17svh, bornée 6–12rem) au lieu des 10/12rem figés : à 160/192 px fixes,
+          le héros totalisait 752 px et débordait de tout écran plus court —
+          c'était le cas de tous les portables 1366×768.
         */}
-        <div className="flex h-40 items-end justify-center md:h-48">{media}</div>
+        <div className="flex h-[clamp(6rem,17svh,12rem)] items-end justify-center">{media}</div>
 
         {/* `mount` et non `view` : la carte est au-dessus de la ligne de
             flottaison, où un déclencheur au scroll n'a aucun filet — l'élément
@@ -115,16 +126,16 @@ export const PageHero = ({
         <FadeUp mode="mount" delay={0.1}>
           <div
             className={cn(
-              // Hauteur minimale commune, mesurée et non devinée : à 1280px,
-              // la carte la plus haute (la-methode, titre sur 3 lignes) occupe
-              // 381px. 25rem la couvre avec ~19px de marge, de quoi absorber un
-              // report de mot sans qu'une carte ressorte au-dessus des autres.
-              // Le total tient dans 100dvh (64 + 192 + 16 + 400 + 80 = 752),
-              // condition pour que le `justify-center` de la section centre
-              // vraiment le bloc au lieu de le laisser déborder.
+              // Hauteur minimale commune : elle égalise les six cartes, dont la
+              // plus haute (la-methode, titre sur 3 lignes) occupe 381px à
+              // 1280px de large. 25rem la couvrait avec ~19px de marge, mais en
+              // valeur figée elle poussait le héros à 752px — plus haut que
+              // l'écran d'un portable courant. Elle suit donc la fenêtre
+              // (44svh, bornée 17–25rem) : le plafond garde l'aspect d'origine
+              // sur grand écran, le plancher garde les six cartes alignées.
               // `justify-center` ici répartit le contenu plus court au lieu de
               // le laisser coller en haut.
-              "mx-auto mt-4 flex min-h-[25rem] max-w-2xl flex-col justify-center rounded-[1.75rem] px-8 py-8 text-center shadow-2xl md:px-12",
+              "mx-auto mt-4 flex min-h-[clamp(17rem,44svh,25rem)] max-w-2xl flex-col justify-center rounded-[1.75rem] px-8 py-8 text-center shadow-2xl md:px-12",
               card,
             )}
           >

@@ -103,10 +103,16 @@ export const ProgrammesSelectorSection = () => {
   const teinte = TEINTES[prog.id];
 
   return (
-    <section id="programmes" className="overflow-hidden bg-msk-cream-200 py-20">
+    <section
+      id="programmes"
+      // `lg:screen-section` : une fenêtre pile. La section mesurait 868px, dont
+      // 420px pour la seule photo de la fiche — c'est elle, pas le texte, qui
+      // portait le dépassement (voir plus bas).
+      className="overflow-hidden bg-msk-cream-200 py-[clamp(1.5rem,3.75svh,4.5rem)] lg:screen-section"
+    >
       <div className="mx-auto max-w-6xl px-6 sm:px-10">
         <FadeUp>
-          <div className="mb-10 text-center">
+          <div className="mb-[clamp(1rem,2.75svh,2.5rem)] text-center">
             <Eyebrow className="bg-white text-msk-blue-700 shadow-sm">
               Nos niveaux
             </Eyebrow>
@@ -122,7 +128,7 @@ export const ProgrammesSelectorSection = () => {
           qui glisse d'un onglet à l'autre, et il vit en absolu DANS le bouton.
           Le remplissage absolu de MorphButton se battrait avec lui.
         */}
-        <div className="mb-10 flex flex-col justify-center gap-2 md:flex-row">
+        <div className="mb-[clamp(1rem,2.75svh,2.5rem)] flex flex-col justify-center gap-2 md:flex-row">
           {programs.map((p) => {
             const actif = activeTab === p.id;
             return (
@@ -168,10 +174,10 @@ export const ProgrammesSelectorSection = () => {
             whileHover={{ rotate: 0 }}
             transition={{ type: "spring", stiffness: 280, damping: 26 }}
             style={{ borderRadius: 28 }}
-            className="grid gap-3 bg-white p-3 shadow-2xl shadow-msk-night-900/15 lg:grid-cols-[1.05fr_0.95fr]"
+            className="grid gap-3 bg-white p-3 shadow-2xl shadow-msk-night-900/15 lg:grid-cols-[1.2fr_0.8fr]"
           >
             {/* Texte */}
-            <div className="flex flex-col justify-center px-5 py-6 md:px-8 md:py-8">
+            <div className="flex flex-col justify-center px-5 py-6 md:px-8 md:py-[clamp(0.75rem,2.5svh,2rem)]">
               <div className="flex flex-wrap items-center gap-3">
                 <h3 className="font-display text-3xl font-bold uppercase leading-none text-msk-night-900">
                   {prog.title}
@@ -181,12 +187,12 @@ export const ProgrammesSelectorSection = () => {
                 </span>
               </div>
 
-              <p className="mt-4 max-w-md text-base leading-relaxed text-msk-night-700">
+              <p className="mt-[clamp(0.5rem,2svh,1rem)] max-w-md text-base leading-relaxed text-msk-night-700">
                 {prog.description}
               </p>
 
               {/* Objectifs : quatre vignettes compactes, deux par deux. */}
-              <ul className="mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+              <ul className="mt-[clamp(0.75rem,2.5svh,1.5rem)] grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                 {prog.objectives.map((objectif, idx) => (
                   <motion.li
                     key={objectif}
@@ -194,7 +200,7 @@ export const ProgrammesSelectorSection = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.15 + idx * 0.06 }}
                     className={cn(
-                      "flex items-center gap-3 rounded-2xl px-3.5 py-2.5 text-sm font-medium text-msk-night-900",
+                      "flex items-center gap-3 rounded-2xl px-3.5 py-[clamp(0.5rem,1.25svh,0.625rem)] text-sm font-medium text-msk-night-900",
                       teinte.vignette,
                     )}
                   >
@@ -212,7 +218,7 @@ export const ProgrammesSelectorSection = () => {
                 ))}
               </ul>
 
-              <p className={cn("mt-6 font-display text-xs font-semibold uppercase tracking-[0.16em]", teinte.label)}>
+              <p className={cn("mt-[clamp(0.75rem,2.5svh,1.5rem)] font-display text-xs font-semibold uppercase tracking-[0.16em]", teinte.label)}>
                 Profils accompagnés
               </p>
               <div className="mt-2.5 flex flex-wrap gap-2">
@@ -227,7 +233,7 @@ export const ProgrammesSelectorSection = () => {
               </div>
 
               {/* Rythme : une ligne Matin / Après-midi, icônes à l'appui. */}
-              <div className="mt-6 flex flex-col gap-2.5 text-sm text-msk-night-800 sm:flex-row sm:gap-6">
+              <div className="mt-[clamp(0.75rem,2.5svh,1.5rem)] flex flex-col gap-2.5 text-sm text-msk-night-800 sm:flex-row sm:gap-6">
                 <span className="inline-flex items-center gap-2">
                   <Sunrise className="h-5 w-5 text-msk-sun-600" aria-hidden />
                   <span>
@@ -245,7 +251,7 @@ export const ProgrammesSelectorSection = () => {
               {/* Le point qui distingue vraiment le centre : la composition des
                   groupes ne suit pas l'âge. Faits partagés, donc lus depuis
                   lib/data/programmes.ts et non réécrits ici. */}
-              <div className="mt-3 flex flex-col gap-2.5 text-sm text-msk-night-800 sm:flex-row sm:gap-6">
+              <div className="mt-[clamp(0.375rem,1.5svh,0.75rem)] flex flex-col gap-2.5 text-sm text-msk-night-800 sm:flex-row sm:gap-6">
                 <span className="inline-flex items-center gap-2">
                   <Users className="h-5 w-5 text-msk-coral-600" aria-hidden />
                   <span>
@@ -264,7 +270,10 @@ export const ProgrammesSelectorSection = () => {
             </div>
 
             {/* Photo : dans le cadre, coins arrondis, sans voile de couleur. */}
-            <div className="relative min-h-[280px] overflow-hidden rounded-[1.25rem] bg-msk-cream-200 lg:min-h-[420px]">
+            {/* La photo est la plus haute chose de la fiche : à 420px figés elle
+                poussait la section à 868px, une fenêtre de 720 plus 148px. Elle
+                suit maintenant la fenêtre — 26rem sur grand écran, comme avant. */}
+            <div className="relative min-h-[280px] overflow-hidden rounded-[1.25rem] bg-msk-cream-200 lg:min-h-[clamp(16rem,42svh,26rem)]">
               <Image
                 src={prog.image}
                 alt={`Programme ${prog.title}`}

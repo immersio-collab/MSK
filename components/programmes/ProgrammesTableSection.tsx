@@ -118,10 +118,16 @@ export const ProgrammesTableSection = () => {
   // blue-50 : la respiration signature de la page — les fiches blanches et
   // leurs bandeaux coral/sun se détachent mieux que sur crème.
   return (
-    <section ref={root} className="relative overflow-hidden bg-msk-blue-50 py-24">
+    <section
+      ref={root}
+      // `lg:screen-section` : une fenêtre pile. Les deux fiches mesuraient 815px
+      // avec 96px de marge haut/bas — une fenêtre de 720 plus 95px. Marge,
+      // en-tête et interlignes du tableau suivent maintenant la fenêtre.
+      className="relative overflow-hidden bg-msk-blue-50 py-[clamp(2rem,5svh,4rem)] lg:screen-section"
+    >
       <div className="mx-auto max-w-4xl px-6 sm:px-10">
         <FadeUp>
-          <div className="mb-12 text-center">
+          <div className="mb-[clamp(1.5rem,4svh,3rem)] text-center">
             <Eyebrow className="bg-white text-msk-blue-700 shadow-sm">
               Vue d&apos;ensemble
             </Eyebrow>
@@ -160,7 +166,7 @@ export const ProgrammesTableSection = () => {
                     <li
                       key={critere.label}
                       className={cn(
-                        "flex items-center justify-between gap-4 py-3.5",
+                        "flex items-center justify-between gap-4 py-[clamp(0.5rem,1.6svh,0.875rem)]",
                         index < CRITERES.length - 1 && "border-b-2 border-dashed border-msk-cream-200",
                       )}
                     >

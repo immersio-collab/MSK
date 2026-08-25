@@ -30,8 +30,12 @@ type PolaroidCardProps = {
 export function PolaroidCard(props: PolaroidCardProps) {
   const { index, caption, media, className } = props;
 
+  // Le terme `34svh` n'est là que pour les écrans courts : au-dessus de ~1000px
+  // de hauteur c'est toujours le plafond de 340px qui gagne, la carte garde sa
+  // taille d'origine. En dessous, elle rétrécit doucement — c'est ce qui permet
+  // à la pellicule de tenir dans une fenêtre sans rogner son en-tête.
   const frame = cn(
-    "block w-[min(46vw,340px)] bg-white p-2 pb-3 shadow-xl",
+    "block w-[min(46vw,34svh,340px)] bg-white p-2 pb-3 shadow-xl",
     index % 2
       ? "mt-6 rotate-2 rounded-[6px_20px_8px_18px]"
       : "-rotate-2 rounded-[18px_6px_20px_8px]",

@@ -186,8 +186,19 @@ export const GaleriePelliculeSection = ({ variant = "page", header }: GaleriePel
   };
 
   return (
-    <section className={cn("w-full overflow-hidden py-12 md:py-16", variant === "home" ? "bg-msk-night-700 py-24 md:py-32" : "bg-msk-cream-200")}>
-      <div className="mx-auto mb-8 flex w-full max-w-[1400px] items-center justify-between gap-8 px-6 sm:px-10 lg:px-16">
+    // `lg:screen-section` : une fenêtre pile, en-tête et pellicule centrés
+    // dedans. La marge verticale est portée par UNE seule classe par variante —
+    // deux `py-*` sur le même élément laisseraient l'ordre de la feuille
+    // décider laquelle gagne.
+    <section
+      className={cn(
+        "w-full overflow-hidden lg:screen-section",
+        variant === "home"
+          ? "bg-msk-night-700 py-[clamp(3rem,7svh,6rem)]"
+          : "bg-msk-cream-200 py-[clamp(2rem,5svh,4rem)]",
+      )}
+    >
+      <div className="mx-auto mb-[clamp(1rem,3svh,2rem)] flex w-full max-w-[1400px] items-center justify-between gap-8 px-6 sm:px-10 lg:px-16">
         {header ? header : (
           <>
             <div>

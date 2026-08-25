@@ -111,7 +111,11 @@ export function TroublesQuizSection() {
     <section
       ref={root}
       // Même bleu que le ciel du hero : la page n'a qu'un seul ciel.
-      className="relative overflow-hidden bg-msk-blue-300 pb-24 pt-28 md:pb-32 md:pt-36"
+      //
+      // `lg:screen-section` : une fenêtre pile. La section mesurait 865px, dont
+      // 272px de marge haut/bas — la marge la plus large du site, et à elle
+      // seule le dépassement. Elle suit maintenant la fenêtre.
+      className="relative overflow-hidden bg-msk-blue-300 py-[clamp(2.5rem,7svh,4.5rem)] lg:screen-section"
     >
       {/* Soleil + nuages. Le soleil est un SVG auto-animé (plain <img> : next/image
           l'aplatirait), poussé par le scroll ; les nuages dérivent en continu. */}
@@ -139,7 +143,7 @@ export function TroublesQuizSection() {
       </div>
 
       <div className="container relative mx-auto max-w-3xl px-4">
-        <div className="quiz-heading mx-auto mb-10 max-w-2xl text-center">
+        <div className="quiz-heading mx-auto mb-[clamp(1.25rem,3.5svh,2.5rem)] max-w-2xl text-center">
           <Eyebrow className="bg-white text-msk-blue-700 shadow-sm">
             Petit test · 3 questions
           </Eyebrow>

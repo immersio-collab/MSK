@@ -39,23 +39,29 @@ const PROFILES = PROGRAMMES.map((programme, index) => ({
 
 export const AccueilPourQui = () => {
   return (
-    <section id="programmes" className="w-full bg-msk-blue-50 py-24 md:py-32">
+    <section
+      id="programmes"
+      // `lg:screen-section` : une fenêtre pile. La section mesurait 1106px, dont
+      // 256px de marge et 320px pour la seule photo de chaque carte. Marge,
+      // rythme et photo suivent maintenant la fenêtre.
+      className="w-full bg-msk-blue-50 py-[clamp(1.25rem,3svh,4rem)] lg:screen-section"
+    >
       <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
         <FadeUp>
           <span className="inline-block rounded-[0.4rem] bg-msk-sun-200 px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950">
             Maternelle &amp; Primaire
           </span>
-          <h2 className="mt-6 max-w-3xl font-display text-[1.875rem] font-bold uppercase leading-[1.05] text-msk-night-950 sm:text-[2.5rem] lg:text-[3rem]">
+          <h2 className="mt-[clamp(0.75rem,3svh,1.5rem)] max-w-3xl font-display text-[1.875rem] font-bold uppercase leading-[1.05] text-msk-night-950 sm:text-[2.5rem] lg:text-[3rem]">
             Nos programmes
           </h2>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-msk-night-800 md:text-lg">
+          <p className="mt-[clamp(0.75rem,3svh,1.5rem)] max-w-xl text-base leading-relaxed text-msk-night-800 md:text-lg">
             Deux parcours, un même principe : le cadre s&apos;adapte à
             l&apos;enfant, jamais l&apos;inverse. Chacun avance à son rythme,
             avec les thérapies dont il a besoin intégrées à sa journée.
           </p>
         </FadeUp>
 
-        <ul className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-8">
+        <ul className="mt-[clamp(1.25rem,4svh,4rem)] grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-8">
           {PROFILES.map((profile, index) => (
             <li key={profile.id}>
               <FadeUp delay={0.12 * index}>
@@ -63,7 +69,7 @@ export const AccueilPourQui = () => {
                   href="/programmes"
                   className={`group flex h-full flex-col overflow-hidden rounded-[1.5rem] transition-[rotate,box-shadow] duration-300 hover:rotate-0 hover:shadow-xl ${profile.tilt} ${profile.card}`}
                 >
-                  <div className="relative h-[16rem] w-full sm:h-[20rem]">
+                  <div className="relative h-[16rem] w-full sm:h-[clamp(10rem,24svh,20rem)]">
                     <Image
                       src={profile.image}
                       alt={`Programme ${profile.title}`}
@@ -73,7 +79,7 @@ export const AccueilPourQui = () => {
                     />
                   </div>
 
-                  <div className="flex flex-1 flex-col p-8">
+                  <div className="flex flex-1 flex-col p-[clamp(1.25rem,3.5svh,2rem)]">
                     <div className="flex flex-wrap items-center gap-3">
                       <h3 className="font-display text-[1.5rem] font-bold uppercase leading-tight text-msk-night-950">
                         {profile.title}
@@ -83,14 +89,14 @@ export const AccueilPourQui = () => {
                       </span>
                     </div>
 
-                    <p className="mt-4 font-display text-base font-semibold uppercase leading-snug text-msk-coral-700">
+                    <p className="mt-[clamp(0.5rem,2svh,1rem)] font-display text-base font-semibold uppercase leading-snug text-msk-coral-700">
                       {profile.quote}
                     </p>
-                    <p className="mt-4 text-base leading-relaxed text-msk-night-800">
+                    <p className="mt-[clamp(0.5rem,2svh,1rem)] text-base leading-relaxed text-msk-night-800">
                       {profile.description}
                     </p>
 
-                    <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-msk-night-950">
+                    <span className="mt-[clamp(1rem,3svh,2rem)] inline-flex items-center gap-2 text-sm font-semibold text-msk-night-950">
                       Découvrir le programme
                       <ArrowRight
                         className="h-4 w-4 transition-transform group-hover:translate-x-1"

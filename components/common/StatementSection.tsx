@@ -35,7 +35,12 @@ export const StatementSection = ({
   // scroll container, which `hidden` would — and a scroll container here would
   // break the sticky and scroll-triggered work elsewhere on the page.
   return (
-    <section className="flex min-h-[100dvh] w-full items-center overflow-x-clip bg-msk-cream-200 py-16 md:py-20">
+    // `min-h`, not `h`: the section must fill the screen without exceeding it,
+    // and it is the elastic photo cap below that enforces the second half. If
+    // content ever outgrew it anyway, the section grows rather than clipping.
+    // Padding follows the window instead of a flat 64/80px — at a fixed 80px
+    // the section measured 791-820px and overflowed every 720px viewport.
+    <section className="flex min-h-[100svh] w-full items-center overflow-x-clip bg-msk-cream-200 py-[clamp(2.5rem,5svh,5rem)]">
       <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-14 px-6 sm:px-10 lg:grid-cols-[1.15fr_1fr] lg:gap-20">
         <FadeUp className="flex h-full flex-col justify-center">
           <div className="relative">
@@ -72,7 +77,7 @@ export const StatementSection = ({
           </div>
         </FadeUp>
 
-        <div className="flex h-full flex-col justify-center gap-10">
+        <div className="flex h-full flex-col justify-center gap-[clamp(1.5rem,3svh,2.5rem)]">
           <FadeUp delay={0.1}>
             <p className="text-lg font-medium leading-relaxed text-msk-night-800">
               {paragraph}
@@ -92,13 +97,18 @@ export const StatementSection = ({
           {/*
             Capped, because the duo is the section's height driver: it is a
             10/7 box, so its height tracks the column width and at full width it
-            pushed the section past the viewport. The cap holds the whole
-            section to roughly 730px, which fits a standard laptop viewport.
+            pushed the section past the viewport.
+
+            The cap now tracks the WINDOW, not a flat 34rem. At 34rem the duo
+            stood 381px tall whatever the screen, and the section measured
+            791-820px — one full screen plus 70-100px on any 720px viewport.
+            58svh keeps the original size on a tall monitor and shrinks the
+            photos, rather than the copy, on a short laptop.
           */}
           <TiltedDuo
             src={image.src}
             alt={image.alt}
-            className="mx-auto mt-4 w-full max-w-[34rem]"
+            className="mx-auto mt-4 w-full max-w-[clamp(20rem,58svh,34rem)]"
           />
         </div>
       </div>

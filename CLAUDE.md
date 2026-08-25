@@ -187,6 +187,49 @@ six method steps (`methode-steps.ts`), school identity incl. the WhatsApp link
 **Never redeclare a local constant that shadows a `lib/data` export.**
 Surface-specific presentation (colours, tilts, per-page copy) stays local.
 
+## One-screen sections (2026-08-25)
+
+Most sections fill exactly one screen and no more, so a visitor reads a whole
+beat without scrolling. The rule is `lg:screen-section` (`@utility` in
+`globals.css`: `min-height:100svh` + column flex + `justify-content:safe
+center`). **Always with a breakpoint variant, never bare** — below `lg` the
+columns stack and a phone has ~660px of usable height; there the section keeps
+its natural height. `AccueilTroubles` shipped that split first (two trees, one
+per size).
+
+Applying the utility is half the job. The other half:
+
+- **Shrink the vertical padding, elastically.** Once a height is pinned, padding
+  stops being breathing room and starts stealing content space. `py-24 md:py-32`
+  is 256px — a third of a 720px screen. Replace with `py-[clamp(2rem,5svh,4rem)]`
+  or similar: the cap keeps the original look on a tall monitor, the `svh` term
+  bites only on short ones. **One `py-*` per element** — two let the sheet's
+  order decide the winner.
+- **Make the tallest element elastic**, never a fixed px: `flex-1 min-h-0` for a
+  filler (the contact map), or a clamp on `svh` for a media box (the programme
+  photo, the `PageHero` title card, the `StatementSection` photo duo,
+  `PolaroidCard`'s frame). Fixed px is what broke every one of these: 640px of
+  map, 420px of photo, a 400px title card.
+- **Budget against 720px of viewport** (a 1366×768 laptop, the shortest screen
+  the site meets) and remember the navbar is `fixed` and opaque: it eats the top
+  74px. Then verify — sum the in-flow children, don't trust `scrollHeight`,
+  which equals the box height when nothing overflows and hides the answer.
+- **Check every state.** The quiz swells 155px between question and result; the
+  programme selector's Primaire tab is taller than Maternelle. That is why the
+  utility uses `min-height` and not `height`: sections below it are
+  `overflow-hidden`, and a clipped CTA is worse than a section 50px too tall.
+
+Watch for **rotated cards**: `AccueilPourQui`'s tilt spills ~12px past the
+layout box, and a transform counts as overflow. Budget the clearance or the
+corner bites the next section — the old 128px padding used to hide it.
+
+Sections deliberately NOT on one screen, and why: the news list (grows with the
+content), the parent testimonials, the contact form (7 fields — compressing it
+hurts to fill), `AccueilSteps` (the drawn ribbon IS the scroll), the album grid
+and the six situation cards (would need content cuts, not spacing). Bands
+(`AccueilStatement`, `MethodeKineticBanner`, `MediaBand`, `NextStepSection`) are
+breathing space between sections and must stay short — the owner's call.
+
 ## Content and data
 
 `lib/data/site-content.ts` is the source of truth for `NAV_LINKS`,

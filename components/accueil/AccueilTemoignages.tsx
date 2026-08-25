@@ -45,6 +45,189 @@ const FILTRES: Array<{ cle: TemoignageFiltre; label: string }> = [
 ];
 
 const TEMOIGNAGES: Temoignage[] = [
+  // --- VIDÉOS (Déroulement des séances réelles) ---
+  {
+    id: "video-orthophonie",
+    type: "video",
+    tag: "Séance en vidéo",
+    title: "PPT (séance d’orthophonie)",
+    poster: "/temoignages/posters/seance-orthophonie.jpg",
+    duration: "1:25",
+    src: "/temoignages/video/seance-orthophonie-fahd.mp4",
+    author: "Séance avec Fahd",
+    role: "Déroulement de séance — Orthophonie",
+  },
+  {
+    id: "video-concentration",
+    type: "video",
+    tag: "Séance en vidéo",
+    title: "Concentration et coordination",
+    poster: "/temoignages/posters/concentration-coordination.jpg",
+    duration: "0:49",
+    src: "/temoignages/video/concentration-coordination.mp4",
+    author: "Atelier sensoriel",
+    role: "Déroulement de séance — Neuro-gym",
+  },
+  {
+    id: "video-montessori",
+    type: "video",
+    tag: "Séance en vidéo",
+    title: "Séance Montessori et adaptation scolaire",
+    poster: "/temoignages/posters/seance-montessori.jpg",
+    duration: "1:00",
+    src: "/temoignages/video/seance-montessori.mp4",
+    author: "Classe inclusive",
+    role: "Déroulement de séance — Pédagogie Montessori",
+  },
+  {
+    id: "video-comportement",
+    type: "video",
+    tag: "Séance en vidéo",
+    title: "Trouble du comportement & régulation",
+    poster: "/temoignages/posters/trouble-comportement.jpg",
+    duration: "1:00",
+    src: "/temoignages/video/trouble-comportement.mp4",
+    author: "Accompagnement individualisé",
+    role: "Déroulement de séance — Éducation spécialisée",
+  },
+  {
+    id: "video-coordination",
+    type: "video",
+    tag: "Séance en vidéo",
+    title: "Coordination physique",
+    poster: "/temoignages/posters/coordination-physique.jpg",
+    duration: "0:22",
+    src: "/temoignages/video/coordination-physique-adam.mp4",
+    author: "Séance avec Adam",
+    role: "Déroulement de séance — Psychomotricité",
+  },
+  {
+    id: "video-apprentissage",
+    type: "video",
+    tag: "Séance en vidéo",
+    title: "Séance d’apprentissage & mémorisation",
+    poster: "/temoignages/posters/seance-apprentissage.jpg",
+    duration: "0:40",
+    src: "/temoignages/video/seance-apprentissage-hissa.mp4",
+    author: "Séance avec Hissa",
+    role: "Déroulement de séance — Apprentissage guidé",
+  },
+
+  // --- AUDIOS (Messages vocaux WhatsApp réels) ---
+  {
+    id: "audio-1",
+    type: "audio",
+    tag: "Message vocal WhatsApp",
+    quote: "« L'évolution et les progrès de mon enfant au centre sont remarquables, merci infiniment. »",
+    duration: "0:47",
+    src: "/temoignages/audio/whatsapp-audio-1.ogg",
+    author: "Maman d'élève",
+    role: "Témoignage audio vérifié",
+  },
+  {
+    id: "audio-2",
+    type: "audio",
+    tag: "Message vocal WhatsApp",
+    quote: "« Il communique beaucoup mieux et a repris confiance en lui depuis son intégration. »",
+    duration: "1:46",
+    src: "/temoignages/audio/whatsapp-audio-2.ogg",
+    author: "Parent d'élève",
+    role: "Témoignage audio vérifié",
+  },
+  {
+    id: "audio-3",
+    type: "audio",
+    tag: "Message vocal WhatsApp",
+    quote: "« Nous avons enfin trouvé un cadre bienveillant et structuré, adapté à son rythme. »",
+    duration: "0:38",
+    src: "/temoignages/audio/whatsapp-audio-3.ogg",
+    author: "Papa d'élève",
+    role: "Témoignage audio vérifié",
+  },
+  {
+    id: "audio-4",
+    type: "audio",
+    tag: "Message vocal WhatsApp",
+    quote: "« Un suivi personnalisé et une équipe dévouée dès le premier bilan. »",
+    duration: "0:10",
+    src: "/temoignages/audio/whatsapp-audio-4.ogg",
+    author: "Maman d'élève",
+    role: "Témoignage audio vérifié",
+  },
+
+  // --- CAPTURES D'ÉCRAN WHATSAPP ---
+  {
+    id: "capture-1",
+    type: "screenshot",
+    tag: "Reçu sur WhatsApp",
+    message: "Retour d'expérience après le premier trimestre au centre.",
+    time: "14:22",
+    image: "/temoignages/captures/whatsapp-1.webp",
+    author: "Maman d'élève",
+    role: "",
+  },
+  {
+    id: "capture-2",
+    type: "screenshot",
+    tag: "Reçu sur WhatsApp",
+    message: "Message de remerciement pour les progrès en lecture et autonomie.",
+    time: "18:05",
+    image: "/temoignages/captures/whatsapp-2.webp",
+    author: "Famille MSK",
+    role: "",
+  },
+  {
+    id: "capture-3",
+    type: "screenshot",
+    tag: "Reçu sur WhatsApp",
+    message: "Évolution du comportement et enthousiasme le matin pour aller en classe.",
+    time: "20:30",
+    image: "/temoignages/captures/whatsapp-3.webp",
+    author: "Parent d'élève",
+    role: "",
+  },
+  {
+    id: "capture-4",
+    type: "screenshot",
+    tag: "Reçu sur WhatsApp",
+    message: "Autonomie et épanouissement au sein des ateliers éducatifs.",
+    time: "11:15",
+    image: "/temoignages/captures/whatsapp-4.webp",
+    author: "Maman d'élève",
+    role: "",
+  },
+  {
+    id: "capture-5",
+    type: "screenshot",
+    tag: "Reçu sur WhatsApp",
+    message: "Félicitations pour l'approche douce et individualisée.",
+    time: "16:40",
+    image: "/temoignages/captures/whatsapp-5.webp",
+    author: "Papa d'élève",
+    role: "",
+  },
+  {
+    id: "capture-6",
+    type: "screenshot",
+    tag: "Reçu sur WhatsApp",
+    message: "Rapport et retour d'expérience après le bilan initial.",
+    time: "09:12",
+    image: "/temoignages/captures/whatsapp-6.webp",
+    author: "Parent d'élève",
+    role: "",
+  },
+  {
+    id: "capture-7",
+    type: "screenshot",
+    tag: "Reçu sur WhatsApp",
+    message: "Remerciements à l'équipe pédagogique et de réadaptation.",
+    time: "19:50",
+    image: "/temoignages/captures/whatsapp-7.webp",
+    author: "Famille MSK",
+    role: "",
+  },
+
+  // --- CITATIONS STICKERS ---
   {
     id: "salma",
     type: "quote",
@@ -53,16 +236,6 @@ const TEMOIGNAGES: Temoignage[] = [
     quote: "En 6 mois, mon fils a retrouvé le sourire et l'envie d'apprendre.",
     author: "Salma B.",
     role: "maman de Ryan (7 ans, déscolarisé)",
-  },
-  {
-    id: "audio-imane",
-    type: "audio",
-    tag: "Témoignage audio",
-    quote: "« Elle nous raconte sa journée, ça n'était jamais arrivé. »",
-    duration: "0:47",
-    src: null,
-    author: "Imane R.",
-    role: "maman de Yassine (5 ans)",
   },
   {
     id: "karim-yasmine",
@@ -75,28 +248,6 @@ const TEMOIGNAGES: Temoignage[] = [
     role: "parents de Lina (4 ans)",
   },
   {
-    id: "video-sara",
-    type: "video",
-    tag: "Témoignage vidéo",
-    title: "La rentrée de Sara",
-    poster: "/primaire.jpg",
-    duration: "1:12",
-    src: null,
-    author: "Mehdi K.",
-    role: "papa de Sara (6 ans)",
-  },
-  {
-    id: "capture-rayan",
-    type: "screenshot",
-    tag: "Reçu sur WhatsApp",
-    message:
-      "Merci pour tout ce que vous faites. Rayan a lu sa première phrase hier soir, on a pleuré de joie.",
-    time: "21:34",
-    image: null,
-    author: "maman de Rayan (8 ans)",
-    role: "",
-  },
-  {
     id: "nadia",
     type: "quote",
     tone: "sun",
@@ -107,27 +258,6 @@ const TEMOIGNAGES: Temoignage[] = [
     role: "maman de Adam (9 ans)",
   },
   {
-    id: "audio-tariq",
-    type: "audio",
-    tag: "Témoignage audio",
-    quote: "« L'équipe a tout de suite compris ses blocages sans jamais porter de jugement. »",
-    duration: "1:04",
-    src: null,
-    author: "Tariq F.",
-    role: "papa de Zineb (6 ans)",
-  },
-  {
-    id: "video-neurogym",
-    type: "video",
-    tag: "Témoignage vidéo",
-    title: "Une séance au neuro-gym",
-    poster: "/neuro-gym.jpg",
-    duration: "0:58",
-    src: null,
-    author: "Ahmed B.",
-    role: "papa d'Omar (5 ans)",
-  },
-  {
     id: "sofia",
     type: "quote",
     tone: "blue",
@@ -135,36 +265,6 @@ const TEMOIGNAGES: Temoignage[] = [
     quote: "Le bilan a mis des mots sur ce que l'on vivait. On sait enfin comment l'aider.",
     author: "Sofia L.",
     role: "maman de Ghali (6 ans, sans code Massar)",
-  },
-  {
-    id: "capture-selma",
-    type: "screenshot",
-    tag: "Reçu sur WhatsApp",
-    message: "Il nous a demandé quand est-ce qu'on retourne à l'école… un dimanche matin !",
-    time: "09:12",
-    image: null,
-    author: "papa de Selma (4 ans)",
-    role: "",
-  },
-  {
-    id: "audio-leila",
-    type: "audio",
-    tag: "Témoignage audio",
-    quote: "« En 3 mois à peine, les angoisses du matin ont totalement disparu. »",
-    duration: "0:52",
-    src: null,
-    author: "Leïla M.",
-    role: "maman de Sami (4 ans)",
-  },
-  {
-    id: "capture-adam",
-    type: "screenshot",
-    tag: "Reçu sur WhatsApp",
-    message: "Adam a terminé tous ses ateliers sans aucune frustration aujourd'hui. On est tellement reconnaissants !",
-    time: "17:40",
-    image: null,
-    author: "maman d'Adam (6 ans)",
-    role: "",
   },
 ];
 
@@ -457,7 +557,19 @@ function ScreenshotCard({
         POLAROID_FOCUS,
       )}
     >
-      <TemoignageChatMock message={item.message} time={item.time} />
+      {item.image ? (
+        <span className="relative block aspect-[4/3] overflow-hidden rounded-[12px] bg-msk-cream-200">
+          <Image
+            src={item.image}
+            alt={`Message WhatsApp de ${item.author}`}
+            fill
+            sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 92vw"
+            className="object-cover object-top"
+          />
+        </span>
+      ) : (
+        <TemoignageChatMock message={item.message} time={item.time} />
+      )}
       <span className="mt-2.5 block font-display text-sm font-semibold text-msk-night-800">
         {item.tag}
       </span>

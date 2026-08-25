@@ -150,6 +150,42 @@
   }
 }
 
+/*
+  One-screen section. Always used with a breakpoint variant — `lg:screen-section`
+  — never bare: below `lg` the columns stack and a phone has ~660px of usable
+  height, far too little, so the section must keep its natural height there or
+  copy gets clipped. AccueilTroubles has shipped this split (two trees, one per
+  size) since 2026-08-24; this utility generalises it.
+
+  `svh`, not `dvh`: the smallest viewport, i.e. the value that also holds while
+  the mobile browser bar is on screen. `dvh` would resize the section mid-scroll.
+
+  `min-height`, NOT `height`. The two are identical whenever the content fits —
+  which is the whole point, and what every consumer is tuned for. They diverge
+  only when content outgrows the screen, and there `height` clips (the sections
+  below are `overflow-hidden`) while `min-height` lets the section grow. That
+  case is real, not hypothetical: the quiz on /troubles-accompagnes swells 155px
+  when it swaps its question for its result, more than any padding could absorb.
+  A rogné CTA is a worse failure than a section 55px too tall.
+
+  `safe center` is the matching safety net: if content outgrows the box,
+  alignment falls back to the top rather than overflowing upward under the fixed
+  74px navbar.
+
+  Whoever applies this must ALSO shrink the section's vertical padding and make
+  its tallest element elastic (`flex-1 min-h-0`, or a clamp on `svh`) — once a
+  height is pinned, padding stops being breathing room and starts stealing
+  content space. Measure after, at 720px of viewport: that is a 1366×768 laptop,
+  the shortest screen the site actually meets, and every overflow found so far
+  showed up there first.
+*/
+@utility screen-section {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center;
+}
+
 @utility glass-card {
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(12px);

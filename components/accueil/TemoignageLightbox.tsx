@@ -211,12 +211,12 @@ export function TemoignageLightbox({ item, onClose }: TemoignageLightboxProps) {
 
             {item.type === "screenshot" &&
               (item.image ? (
-                <div className="relative mx-auto aspect-[3/4] w-full overflow-hidden rounded-[1.5rem] bg-msk-cream-200">
+                <div className="relative mx-auto aspect-[9/16] max-h-[75vh] w-auto max-w-sm overflow-hidden rounded-[1.5rem] bg-msk-night-900 shadow-2xl">
                   <Image
                     src={item.image}
                     alt={`Message envoyé par ${item.author}`}
                     fill
-                    sizes="(min-width: 640px) 28rem, 92vw"
+                    sizes="(min-width: 640px) 24rem, 90vw"
                     className="object-contain"
                   />
                 </div>
