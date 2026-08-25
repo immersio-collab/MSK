@@ -288,9 +288,11 @@ Adding a route means updating **three** places, or the page is orphaned:
 
 Plus: give the route its palette in `PageTransition`'s `ROUTE_PALETTES`.
 There is deliberately no `/admissions` route — admissions links point to
-`/contact`. If the page is ever built, its FAQ (`FAQ_ADMISSIONS`) and four
-quarantined Lotties (`_unused/methode-lottie/{dialog,card7,card8,star}.json`)
-are waiting.
+`/contact`. If the page is ever built, its FAQ (`FAQ_ADMISSIONS`) is waiting.
+The Lotties once earmarked for it are no longer all free: `dialog` and `star`
+serve /la-methode's deck since 2026-08-25; `card7` and `card8` are still in
+quarantine, but they are the same generic `ICON_*` icons that deck just
+dropped — reach for a mark that says what the page says instead.
 
 ## Fonts
 

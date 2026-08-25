@@ -6,7 +6,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const routes = [
     "",
-    "/notre-centre",
     "/notre-centre/la-methode",
     "/notre-centre/troubles-accompagnes",
     "/notre-centre/la-fondatrice",

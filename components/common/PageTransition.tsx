@@ -127,7 +127,6 @@ const ROUTE_PALETTES: ReadonlyArray<readonly [string, Palette]> = [
   ["/notre-centre/troubles-accompagnes", p("blue", 50, 300, "sun-400")],
   ["/notre-centre/la-fondatrice", p("coral", 200, 400, "sun-300")],
   ["/notre-centre/galerie", p("blue", 100, 300, "coral-600")],
-  ["/notre-centre", p("blue", 50, 200, "sun-500")],
   ["/programmes", p("blue", 200, 400, "coral-400")],
   ["/actualites", p("coral", 100, 400, "blue-400")],
   // /contact et l'accueil ont le même ciel bleu-100 en tête de page : leurs

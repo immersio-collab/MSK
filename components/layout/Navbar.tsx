@@ -200,13 +200,19 @@ export const Navbar: React.FC = () => {
             <div className="space-y-5">
               {NAV_LINKS.map((link) => (
                 <div key={link.label}>
-                  <Link
-                    href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="block text-xl font-bold text-msk-night-900 hover:text-msk-coral-600 py-1"
-                  >
-                    {link.label}
-                  </Link>
+                  {link.children ? (
+                    <span className="block text-xl font-bold text-msk-night-900 py-1">
+                      {link.label}
+                    </span>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block text-xl font-bold text-msk-night-900 hover:text-msk-coral-600 py-1"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                   {link.children && (
                     <div className="pl-4 pt-2 space-y-2.5 border-l-2 border-msk-coral-200 ml-1">
                       {link.children.map((child) => (

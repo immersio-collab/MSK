@@ -73,8 +73,13 @@ export const Footer: React.FC = () => {
               </span>
               <ul className="space-y-2.5">
                 <li>
-                  <Link href="/notre-centre" className="text-base font-medium text-slate-200 hover:text-msk-coral-300 transition-colors">
-                    Notre centre
+                  <Link href="/notre-centre/la-methode" className="text-base font-medium text-slate-200 hover:text-msk-coral-300 transition-colors">
+                    La méthode
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/notre-centre/troubles-accompagnes" className="text-base font-medium text-slate-200 hover:text-msk-coral-300 transition-colors">
+                    Situations accueillies
                   </Link>
                 </li>
                 <li>

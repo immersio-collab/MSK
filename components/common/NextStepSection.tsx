@@ -3,7 +3,7 @@
 import { ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/common/WhatsAppIcon";
 
-import { CloudDrift } from "@/components/motion/CloudDrift";
+import { LottieMark } from "@/components/motion/LottieMark";
 import { FadeUp } from "@/components/motion/FadeUp";
 import { MorphButton } from "@/components/motion/MorphButton";
 import { SCHOOL_INFO } from "@/lib/data/site-content";
@@ -21,11 +21,10 @@ interface NextStepSectionProps {
  * section avant le footer.
  *
  * Habillage fixe (système de couleurs 2026-08-25) : bande night-800, titre
- * blanc, corps cream-100, eyebrow sun-300, nuages white/50, bouton principal
+ * blanc, corps cream-100, eyebrow sun-300, étoiles dorées animées, bouton principal
  * blanc. Avec la FAQ cream-100 au-dessus et le footer night-900 en dessous,
  * chaque page se termine par la même séquence — c'est le repère de cohérence
- * le plus fort du site. Les anciennes props de couleur ont été retirées :
- * l'uniformité est la règle, pas un défaut à surcharger.
+ * le plus fort du site.
  */
 export const NextStepSection = ({
   eyebrow,
@@ -36,29 +35,27 @@ export const NextStepSection = ({
 }: NextStepSectionProps) => {
   return (
     <section className="relative w-full overflow-hidden bg-msk-night-800 py-20 text-center md:py-24">
-      {/* Decorative clouds */}
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <CloudDrift
-          shape="a"
-          motion="float"
-          speed={120}
-          phase={0.2}
-          className="absolute top-[10%] w-44 text-white/50 xl:w-60"
+      {/* Decorative sparkling animated stars (soft & discreet shimmer) */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <LottieMark
+          src="/stars-sparkle.json"
+          fit={false}
+          className="absolute -top-4 left-[6%] w-36 sm:w-44 md:w-56 opacity-45 pointer-events-none"
         />
-        <CloudDrift
-          shape="b"
-          motion="float"
-          speed={160}
-          phase={0.6}
-          delay={0.2}
-          className="absolute top-[40%] w-48 text-white/50 xl:w-64"
+        <LottieMark
+          src="/stars-sparkle.json"
+          fit={false}
+          className="absolute top-[14%] right-[8%] w-32 sm:w-40 md:w-52 opacity-40 pointer-events-none -scale-x-100"
         />
-        <CloudDrift
-          shape="d"
-          motion="float"
-          speed={100}
-          phase={0.9}
-          className="absolute bottom-[10%] w-32 text-white/50 opacity-70 xl:w-48"
+        <LottieMark
+          src="/stars-sparkle.json"
+          fit={false}
+          className="absolute bottom-[6%] left-[10%] w-28 sm:w-36 md:w-44 opacity-35 pointer-events-none"
+        />
+        <LottieMark
+          src="/stars-sparkle.json"
+          fit={false}
+          className="absolute -bottom-4 right-[12%] w-36 sm:w-48 md:w-56 opacity-45 pointer-events-none"
         />
       </div>
 

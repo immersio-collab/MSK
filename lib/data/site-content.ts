@@ -12,7 +12,7 @@ export const NAV_LINKS: NavItem[] = [
   { label: "Accueil", href: "/" },
   {
     label: "Notre centre",
-    href: "/notre-centre",
+    href: "/notre-centre/troubles-accompagnes",
     children: [
       {
         // L'URL reste `troubles-accompagnes` : la renommer casserait les liens
