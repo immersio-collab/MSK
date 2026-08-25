@@ -72,8 +72,9 @@ the system governs the fields, not the toys.
 - **Signatures**: coral = `/la-methode`, `/la-fondatrice`, `/actualites` ·
   blue = `/programmes`, `/galerie`, `/troubles-accompagnes`. The home page is
   the OVERTURE and carries all three (blue sky → sun statement → sun
-  testimonials → coral accents); `/contact`'s body stays off-system mint
-  (`#cff2f1`) below its hero.
+  testimonials → coral accents); `/contact` is `blue-100` end to end — hero,
+  body behind the form and the map, all one field (the old mint `#cff2f1`
+  survives only as the form's own input fills).
 - **The two bespoke heroes — accueil and `/contact` — sit on `blue-100`**, not
   `cream-100`. That opening sky is the site's first impression and is
   deliberate; do not "harmonise" it back to cream. Only `PageHero` (the six
@@ -90,6 +91,11 @@ the system governs the fields, not the toys.
   `night-800` → footer `night-900`. The FAQ + CTA finale palettes are FIXED
   (their colour props were removed), and `NextStepSection` is always the LAST
   section of a page.
+- **Dark bands descend, never zigzag.** Where several dark sections run
+  together at the end of a page they must get progressively DARKER toward the
+  footer — home is `night-700` (galerie) → `night-800` (CTA) → `night-900`
+  (footer); every other page is simply `night-800` → `night-900`. Reserve
+  `night-950` for cards and scrims, not for a band sitting above a lighter one.
 - **Text**: light bg → headings `night-900`, body `night-700`; saturated mid
   bg → `night-900`/`night-800`; dark bg → title `white`, body `cream-100`,
   accent `sun-300`. Section eyebrows take the page signature (`coral-600/700`,

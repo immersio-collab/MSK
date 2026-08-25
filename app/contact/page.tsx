@@ -11,11 +11,12 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  // Mint carries the whole page, as the reference does on <main>. The form panel
-  // is pulled up over the scene and must stay transparent, so the field behind
-  // it has to come from here.
+  // Le bleu-100 porte toute la page, comme la référence le fait sur <main> : le
+  // panneau du formulaire remonte par-dessus la scène et doit rester
+  // transparent, donc le champ derrière lui vient d'ici. Même valeur que le
+  // héros au-dessus — la page est d'un seul tenant, sans couture.
   return (
-    <div className="flex min-h-screen flex-col bg-[#cff2f1]">
+    <div className="flex min-h-screen flex-col bg-msk-blue-100">
       <ContactHeroSection />
       
       <ContactMainSection />
@@ -23,10 +24,9 @@ export default function ContactPage() {
       <ContactMapSection />
 
       {/* Cette page n'a pas de section CTA : la FAQ est le dernier bloc avant
-          le pied de page. Fond crème — chaud et deux crans plus clair que le
-          menthe #cff2f1 de la page, donc la couture se voit, là où un bleu très
-          pâle s'y serait fondu. Le bouton renvoie au formulaire plus haut, pas
-          à /contact. */}
+          le pied de page. Son fond crème est fixé pour tout le site et tranche
+          ici sur le bleu de la page. Le bouton renvoie au formulaire plus haut,
+          pas à /contact. */}
       <FaqSection
         title="Avant de nous"
         titleAccent="écrire"

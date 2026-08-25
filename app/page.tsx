@@ -60,7 +60,7 @@ export default function HomePage() {
         eyebrow="Le centre"
         title="Parlons de votre enfant"
         description={SCHOOL_INFO.coreQuote}
-        buttonText="Réserver un bilan gratuit"
+        buttonText="Nous contacter"
         buttonHref="/contact"
       />
     </div>

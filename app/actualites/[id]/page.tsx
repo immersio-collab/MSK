@@ -272,7 +272,7 @@ export default function ArticlePage({ params }: PageProps) {
         eyebrow="Un doute ? Une question ?"
         title="Parlons de votre enfant"
         description="Nos articles ne remplacent pas un avis professionnel. Le bilan initial avec notre fondatrice est le vrai premier pas."
-        buttonText="Prendre RDV pour un bilan gratuit"
+        buttonText="Nous contacter"
         buttonHref="/contact"
       />
     </div>

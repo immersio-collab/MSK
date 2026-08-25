@@ -28,7 +28,11 @@ import { PELLICULE } from "@/lib/data/galerie";
  */
 export const AccueilGalerie = () => {
   return (
-    <section className="w-full overflow-hidden bg-msk-night-950 py-24 md:py-32">
+    // night-700 : cette bande ouvre la zone sombre qui ferme la page, et les
+    // trois fonds doivent s'ASSOMBRIR régulièrement jusqu'au pied de page
+    // (700 → CTA 800 → footer 900). En night-950 elle était plus sombre que
+    // les deux suivantes et la fin de page paraissait montée au hasard.
+    <section className="w-full overflow-hidden bg-msk-night-700 py-24 md:py-32">
       <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
         <FadeUp>
           <div className="flex flex-wrap items-end justify-between gap-6">

@@ -78,29 +78,38 @@ export const NextStepSection = ({
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <MorphButton
                 href={buttonHref}
-                className="text-sm font-semibold uppercase tracking-[0.14em] text-msk-night-900"
-                fillClassName="bg-white shadow-md group-hover:bg-msk-cream-100"
+                className={
+                  buttonHref === "/contact"
+                    ? "text-sm font-semibold uppercase tracking-[0.14em] text-white"
+                    : "text-sm font-semibold uppercase tracking-[0.14em] text-msk-night-900"
+                }
+                fillClassName={
+                  buttonHref === "/contact"
+                    ? "bg-msk-coral-600 shadow-md group-hover:bg-msk-coral-700"
+                    : "bg-white shadow-md group-hover:bg-msk-cream-100"
+                }
               >
                 {buttonText}
                 <ArrowRight className="h-4 w-4" />
               </MorphButton>
-              {buttonHref !== "/contact" && (
+              {buttonHref !== "/contact" ? (
                 <MorphButton
                   href="/contact"
                   className="text-sm font-semibold uppercase tracking-[0.14em] text-white"
-                  fillClassName="bg-msk-coral-500 shadow-md group-hover:bg-msk-coral-400"
+                  fillClassName="bg-msk-coral-600 shadow-md group-hover:bg-msk-coral-700"
                 >
                   Nous contacter
                 </MorphButton>
+              ) : (
+                <MorphButton
+                  href={SCHOOL_INFO.whatsapp}
+                  className="text-sm font-semibold uppercase tracking-[0.14em] text-msk-night-900"
+                  fillClassName="bg-white shadow-md group-hover:bg-msk-cream-100"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  WhatsApp
+                </MorphButton>
               )}
-              <MorphButton
-                href={SCHOOL_INFO.whatsapp}
-                className="text-sm font-semibold uppercase tracking-[0.14em] text-msk-night-900"
-                fillClassName="bg-white shadow-md group-hover:bg-msk-cream-100"
-              >
-                <MessageCircle className="h-4 w-4" />
-                WhatsApp
-              </MorphButton>
             </div>
           </FadeUp>
         </FadeUp>
