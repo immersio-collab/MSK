@@ -51,7 +51,7 @@ export const MethodeProcessSection = () => {
                 href="/contact"
                 size="sm"
                 className="mt-8 px-7 font-display text-sm font-semibold uppercase tracking-[0.14em] text-white"
-                fillClassName="bg-msk-coral-600 group-hover:bg-msk-coral-700"
+                fillClassName="bg-msk-coral-600"
               >
                 Commencer
               </MorphButton>

@@ -26,6 +26,13 @@ import { cn } from "@/lib/utils";
   in JS: `<span className="@container">` is absolutely positioned, so giving it
   `container-type: inline-size` costs nothing (its width comes from the button,
   never from its contents) while making the button's own width queryable.
+
+  THE FILL COLOUR NEVER CHANGES ON HOVER — only the shape animates. A
+  `group-hover:bg-*` in `fillClassName` shipped once and made a label vanish:
+  the fill turned white under a label that stayed white. And the label cannot
+  compensate, because `className` lands on the ROOT, which is itself the
+  `group`: a `group-hover:*` written there never matches anything, `.group:hover
+  .x` being a descendant selector. Silent, like every Tailwind mistake here.
 */
 
 /** Wind-up → snap → overshoot ~8% past the circle. */
@@ -49,9 +56,12 @@ interface MorphButtonProps {
   type?: "button" | "submit";
   disabled?: boolean;
   size?: keyof typeof SIZES;
-  /** Typography and label colour — the component owns layout and motion only. */
+  /**
+   * Typography and label colour — the component owns layout and motion only.
+   * No `group-hover:*` here: this lands on the group itself and never applies.
+   */
   className?: string;
-  /** Background, border and shadow of the morphing shape. */
+  /** Background, border and shadow of the morphing shape. No hover colour. */
   fillClassName?: string;
   /**
    * Caps the circle diameter, e.g. `"14rem"`. Needed whenever the button can

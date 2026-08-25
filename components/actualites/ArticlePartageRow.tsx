@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Facebook, Link2, MessageCircle } from "lucide-react";
+import { Check, Facebook, Link2 } from "lucide-react";
+import { WhatsAppIcon } from "@/components/common/WhatsAppIcon";
 
 /**
  * Rangée de partage d'un article : WhatsApp, Facebook, copier le lien.
@@ -45,7 +46,7 @@ export function ArticlePartageRow({ titre }: { titre: string }) {
           )
         }
       >
-        <MessageCircle className="h-5 w-5" aria-hidden />
+        <WhatsAppIcon className="h-5 w-5" aria-hidden />
       </button>
       <button
         type="button"

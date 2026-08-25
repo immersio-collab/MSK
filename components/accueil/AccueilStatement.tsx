@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { WhatsAppIcon } from "@/components/common/WhatsAppIcon";
 
 import { FadeUp } from "@/components/motion/FadeUp";
 import { MorphButton } from "@/components/motion/MorphButton";
@@ -40,7 +41,7 @@ export const AccueilStatement = ({
               <MorphButton
                 href={cta.href}
                 className="text-sm font-semibold text-white"
-                fillClassName="bg-msk-night-950 group-hover:bg-msk-night-800"
+                fillClassName="bg-msk-night-950"
               >
                 {cta.label}
                 <ArrowRight className="h-4 w-4" aria-hidden />
@@ -48,9 +49,9 @@ export const AccueilStatement = ({
               <MorphButton
                 href={SCHOOL_INFO.whatsapp}
                 className="text-sm font-semibold text-msk-night-900"
-                fillClassName="bg-white shadow-sm group-hover:bg-msk-cream-100"
+                fillClassName="bg-white shadow-sm"
               >
-                <MessageCircle className="h-4 w-4" aria-hidden />
+                <WhatsAppIcon className="h-4 w-4" aria-hidden />
                 WhatsApp
               </MorphButton>
             </div>

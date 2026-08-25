@@ -69,7 +69,7 @@ const TONE = {
  * `fillClassName`, and a separate hover key would simply never be read.
  */
 const BUTTON = {
-  fill: "bg-msk-coral-600 group-hover:bg-msk-coral-700",
+  fill: "bg-msk-coral-600",
   shadow: "shadow-lg shadow-msk-coral-600/25",
   text: "text-white",
 } as const;

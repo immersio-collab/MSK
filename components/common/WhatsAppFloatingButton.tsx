@@ -13,9 +13,10 @@ export default function WhatsAppFloatingButton() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Nous écrire sur WhatsApp"
+        className="rounded-full focus-visible:outline-hidden focus-visible:ring-4 focus-visible:ring-green-300 focus-visible:ring-offset-2 inline-flex"
       >
         <motion.div
-          className="relative flex drop-shadow-lg focus:outline-hidden focus:ring-4 focus:ring-green-300 rounded-full"
+          className="relative flex drop-shadow-lg rounded-full"
           animate={{
             y: [0, -10, 0],
           }}

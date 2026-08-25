@@ -215,7 +215,7 @@ export const AccueilHero = () => {
             href="/contact"
             size="sm"
             className="mt-8 text-sm font-semibold text-white"
-            fillClassName="bg-msk-night-950 group-hover:bg-msk-night-800"
+            fillClassName="bg-msk-night-950"
           >
             Prendre rendez-vous
             <ArrowRight className="h-4 w-4" aria-hidden />

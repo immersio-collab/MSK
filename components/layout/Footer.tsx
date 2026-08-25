@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Instagram, Facebook, MessageCircle, Mail, Phone, MapPin } from "lucide-react";
+import { Instagram, Facebook, Mail, Phone, MapPin } from "lucide-react";
+import { WhatsAppIcon } from "@/components/common/WhatsAppIcon";
 import { BrandLogo } from "@/components/common/BrandLogo";
 import { SCHOOL_INFO } from "@/lib/data/site-content";
 
@@ -52,7 +53,7 @@ export const Footer: React.FC = () => {
                 aria-label="MSK sur WhatsApp"
                 className="flex h-10 w-10 items-center justify-center rounded-xl bg-msk-night-800 text-slate-300 hover:text-green-400 hover:bg-msk-night-700 transition-colors border border-msk-night-700"
               >
-                <MessageCircle className="h-5 w-5" />
+                <WhatsAppIcon className="h-5 w-5" />
               </a>
               <a
                 href={`mailto:${SCHOOL_INFO.email}`}

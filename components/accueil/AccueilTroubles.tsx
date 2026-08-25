@@ -127,7 +127,7 @@ const Cta = () => (
   <MorphButton
     href={TROUBLES_HREF}
     className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-white"
-    fillClassName="bg-msk-night-950 shadow-lg shadow-msk-night-950/25 group-hover:bg-msk-night-800"
+    fillClassName="bg-msk-night-950 shadow-lg shadow-msk-night-950/25"
     maxDiameter="18rem"
   >
     Voir tous les troubles accompagnés

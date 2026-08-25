@@ -221,7 +221,7 @@ export function TroublesQuizSection() {
                         onClick={() => answer(true)}
                         maxDiameter="13rem"
                         className="font-semibold text-white"
-                        fillClassName="bg-msk-coral-600 shadow-lg shadow-msk-coral-600/25 group-hover:bg-msk-coral-700"
+                        fillClassName="bg-msk-coral-600 shadow-lg shadow-msk-coral-600/25"
                       >
                         Oui, tout à fait
                       </MorphButton>
@@ -229,7 +229,7 @@ export function TroublesQuizSection() {
                         onClick={() => answer(false)}
                         maxDiameter="13rem"
                         className="font-semibold text-msk-night-900"
-                        fillClassName="border-2 border-msk-cream-300 bg-msk-cream-100 group-hover:bg-msk-cream-200"
+                        fillClassName="border-2 border-msk-cream-300 bg-msk-cream-100"
                       >
                         Non / Pas vraiment
                       </MorphButton>
@@ -285,7 +285,7 @@ export function TroublesQuizSection() {
                       <MorphButton
                         href="/contact"
                         className="font-semibold text-white"
-                        fillClassName="bg-msk-coral-600 shadow-lg shadow-msk-coral-600/25 group-hover:bg-msk-coral-700"
+                        fillClassName="bg-msk-coral-600 shadow-lg shadow-msk-coral-600/25"
                       >
                         Prendre RDV pour un bilan gratuit
                         <ArrowRight className="h-4 w-4" />

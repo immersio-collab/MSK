@@ -48,8 +48,11 @@ export const AccueilGalerie = () => {
             <MorphButton
               href="/notre-centre/galerie"
               size="sm"
-              className="text-sm font-semibold text-white transition-colors group-hover:text-msk-night-950"
-              fillClassName="border-2 border-white/70 bg-transparent group-hover:bg-white"
+              // Bouton fantôme : l'anneau blanc s'ouvre en cercle, le fond ne
+              // se remplit jamais. Il devenait blanc au survol sous un label
+              // resté blanc — illisible.
+              className="text-sm font-semibold text-white"
+              fillClassName="border-2 border-white/70 bg-transparent"
             >
               Voir la galerie
               <ArrowRight className="h-4 w-4" aria-hidden />

@@ -3,7 +3,8 @@
 import { MorphButton } from "@/components/motion/MorphButton";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Mail, Phone, MapPin, Clock, HeartHandshake, Instagram, Facebook, MessageCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, HeartHandshake, Instagram, Facebook } from "lucide-react";
+import { WhatsAppIcon } from "@/components/common/WhatsAppIcon";
 
 import { SCHOOL_INFO } from "@/lib/data/site-content";
 
@@ -178,7 +179,7 @@ export const ContactMainSection: React.FC = () => {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 rounded-xl border border-msk-cream-300 bg-[#fbfdfd] px-3.5 py-2.5 text-sm font-semibold text-msk-night-900 transition-all hover:border-green-400 hover:bg-green-50/50 hover:text-green-700 shadow-2xs"
                 >
-                  <MessageCircle className="h-4 w-4 text-green-600" />
+                  <WhatsAppIcon className="h-4 w-4 text-green-600" />
                   <span>WhatsApp</span>
                 </a>
                 <a

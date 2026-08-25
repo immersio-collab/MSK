@@ -491,7 +491,7 @@ export const AccueilTemoignages = () => {
               <MorphButton
                 onClick={() => setShowAll(true)}
                 className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-msk-night-900"
-                fillClassName="border-2 border-msk-cream-200 bg-white shadow-sm group-hover:bg-msk-cream-100"
+                fillClassName="border-2 border-msk-cream-200 bg-white shadow-sm"
               >
                 Voir plus de témoignages
               </MorphButton>
@@ -499,7 +499,7 @@ export const AccueilTemoignages = () => {
             <MorphButton
               href="/contact"
               className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-white"
-              fillClassName="bg-msk-coral-600 shadow-lg shadow-msk-coral-600/25 group-hover:bg-msk-coral-700"
+              fillClassName="bg-msk-coral-600 shadow-lg shadow-msk-coral-600/25"
             >
               Partager votre histoire
             </MorphButton>

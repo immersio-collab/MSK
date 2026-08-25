@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { WhatsAppIcon } from "@/components/common/WhatsAppIcon";
 
 import { CloudDrift } from "@/components/motion/CloudDrift";
 import { FadeUp } from "@/components/motion/FadeUp";
@@ -85,8 +86,8 @@ export const NextStepSection = ({
                 }
                 fillClassName={
                   buttonHref === "/contact"
-                    ? "bg-msk-coral-600 shadow-md group-hover:bg-msk-coral-700"
-                    : "bg-white shadow-md group-hover:bg-msk-cream-100"
+                    ? "bg-msk-coral-600 shadow-md"
+                    : "bg-white shadow-md"
                 }
               >
                 {buttonText}
@@ -96,7 +97,7 @@ export const NextStepSection = ({
                 <MorphButton
                   href="/contact"
                   className="text-sm font-semibold uppercase tracking-[0.14em] text-white"
-                  fillClassName="bg-msk-coral-600 shadow-md group-hover:bg-msk-coral-700"
+                  fillClassName="bg-msk-coral-600 shadow-md"
                 >
                   Nous contacter
                 </MorphButton>
@@ -104,9 +105,9 @@ export const NextStepSection = ({
                 <MorphButton
                   href={SCHOOL_INFO.whatsapp}
                   className="text-sm font-semibold uppercase tracking-[0.14em] text-msk-night-900"
-                  fillClassName="bg-white shadow-md group-hover:bg-msk-cream-100"
+                  fillClassName="bg-white shadow-md"
                 >
-                  <MessageCircle className="h-4 w-4" />
+                  <WhatsAppIcon className="h-4 w-4" />
                   WhatsApp
                 </MorphButton>
               )}

@@ -134,7 +134,7 @@ export const GalerieTourSection = () => {
             size="sm"
             onClick={pleinEcran}
             className="font-semibold text-msk-night-900"
-            fillClassName="border-2 border-msk-cream-300 bg-white group-hover:bg-msk-cream-100"
+            fillClassName="border-2 border-msk-cream-300 bg-white"
           >
             <Maximize2 className="h-4 w-4" aria-hidden />
             Plein écran
