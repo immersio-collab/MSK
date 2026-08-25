@@ -105,7 +105,7 @@ export const TiltedDuo = ({
       {/* Top-left window: at the scene origin, so it offsets by the bleed alone. */}
       <div
         data-tilt-frame="a"
-        className="absolute left-0 top-0 aspect-square w-[58%] overflow-hidden rounded-[2rem] shadow-xl shadow-msk-night-900/15"
+        className="absolute left-0 top-0 z-0 aspect-square w-[58%] overflow-hidden rounded-[2rem] bg-white shadow-xl shadow-msk-night-900/15"
         style={{ transform: "rotate(-14deg)" }}
       >
         <div
@@ -128,7 +128,7 @@ export const TiltedDuo = ({
       {/* Bottom-right window: same picture, pulled back by its own position. */}
       <div
         data-tilt-frame="b"
-        className="absolute bottom-0 right-0 aspect-square w-[54%] overflow-hidden rounded-[2rem] shadow-xl shadow-msk-night-900/15"
+        className="absolute bottom-0 right-0 z-10 aspect-square w-[54%] overflow-hidden rounded-[2rem] bg-white shadow-2xl shadow-msk-night-900/20"
         style={{ transform: "rotate(12deg)" }}
       >
         <div

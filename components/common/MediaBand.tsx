@@ -7,7 +7,15 @@ import { cn } from "@/lib/utils";
 interface MediaBandProps {
   src: string;
   alt: string;
-  /** Fond de la section, visible dans le triangle laissé par la coupe inclinée. */
+  /**
+   * Fond de la section, visible dans le triangle laissé par la coupe inclinée.
+   *
+   * Il doit reprendre EXACTEMENT le fond de la section juste au-dessus, sinon
+   * le triangle se lit comme un coin clair posé derrière la photo au lieu du
+   * prolongement de la section précédente. Les deux appels portaient cream-50
+   * sous des sections en cream-200 et cream-100 : ça donnait un liseré blanc
+   * en biais sur toute la largeur.
+   */
   sectionBg: string;
   priority?: boolean;
   /** Props vectoriels décoratifs posés sur la photo (positionnés en absolu). */

@@ -26,9 +26,12 @@ export default function LaMethodePage() {
       {/* The 6 steps as a scroll-pinned fanned deck */}
       <MethodeStepsSection />
 
-      {/* Full-bleed photography, slanted top edge */}
+      {/* Full-bleed photography, slanted top edge. `sectionBg` reprend le fond
+          du deck des 6 étapes juste au-dessus : c'est ce fond que montre le
+          triangle laissé par la coupe. En cream-50 il se lisait comme un coin
+          blanc. */}
       <MediaBand
-        sectionBg="bg-msk-cream-50"
+        sectionBg="bg-msk-cream-100"
         src="/parcours.jpeg"
         alt="Enfant en séance, plein cadre"
         priority

@@ -56,10 +56,16 @@ interface FicheTeinte {
   pastille: string;
 }
 
-/** Titres et âges viennent de PROGRAMMES ; ici seulement l'habillage. */
+/**
+ * Titres et âges viennent de PROGRAMMES ; ici seulement l'habillage.
+ *
+ * L'inclinaison est dans le vocabulaire des stickers du site (STICKER_TILTS va
+ * de 1.5 à 2.5°). Elle était à 1°, invisible à l'œil sur des fiches aussi
+ * larges — les deux paraissaient parfaitement droites.
+ */
 const HABILLAGES: { tilt: string; teinte: FicheTeinte }[] = [
   {
-    tilt: "lg:rotate-[-1deg]",
+    tilt: "lg:rotate-[-2deg]",
     teinte: {
       bandeau: "bg-msk-coral-500",
       bandeauTitre: "text-white",
@@ -70,7 +76,7 @@ const HABILLAGES: { tilt: string; teinte: FicheTeinte }[] = [
     },
   },
   {
-    tilt: "lg:rotate-[1deg]",
+    tilt: "lg:rotate-[2deg]",
     teinte: {
       bandeau: "bg-msk-sun-400",
       bandeauTitre: "text-msk-night-900",

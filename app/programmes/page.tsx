@@ -23,9 +23,11 @@ export default function ProgrammesPage() {
       {/* Onglets de sélection du programme (Maternelle / Primaire) */}
       <ProgrammesSelectorSection />
 
-      {/* Photo pleine-largeur à bord incliné */}
+      {/* Photo pleine-largeur à bord incliné. `sectionBg` reprend le fond du
+          sélecteur juste au-dessus : c'est ce fond que montre le triangle
+          laissé par la coupe. En cream-50 il se lisait comme un coin blanc. */}
       <MediaBand
-        sectionBg="bg-msk-cream-50"
+        sectionBg="bg-msk-cream-200"
         src="/neuro-gym.jpg"
         alt="Séance Neuro-Gym en classe"
         overlay={

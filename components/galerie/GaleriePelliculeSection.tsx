@@ -192,13 +192,13 @@ export const GaleriePelliculeSection = ({ variant = "page", header }: GaleriePel
     // décider laquelle gagne.
     <section
       className={cn(
-        "w-full overflow-hidden lg:screen-section",
+        "w-full overflow-hidden flex flex-col justify-center",
         variant === "home"
-          ? "bg-msk-night-700 py-[clamp(3rem,7svh,6rem)]"
-          : "bg-msk-cream-200 py-[clamp(2rem,5svh,4rem)]",
+          ? "bg-msk-night-700 py-20 sm:py-24 md:py-32 lg:py-36 min-h-[85vh] lg:min-h-screen"
+          : "bg-msk-cream-200 py-16 md:py-24",
       )}
     >
-      <div className="mx-auto mb-[clamp(1rem,3svh,2rem)] flex w-full max-w-[1400px] items-center justify-between gap-8 px-6 sm:px-10 lg:px-16">
+      <div className="mx-auto mb-10 sm:mb-12 md:mb-16 flex w-full max-w-[1400px] items-center justify-between gap-8 px-6 sm:px-10 lg:px-16">
         {header ? header : (
           <>
             <div>
