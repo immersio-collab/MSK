@@ -5,10 +5,14 @@ import { WhatsAppIcon } from "@/components/common/WhatsAppIcon";
 import { BrandLogo } from "@/components/common/BrandLogo";
 import { SCHOOL_INFO } from "@/lib/data/site-content";
 import { FooterOceanBackground } from "./FooterOceanBackground";
+import { FooterWaveTransition } from "./FooterWaveTransition";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-msk-night-950 text-white border-t border-msk-night-800/80 py-16 md:py-20 relative overflow-hidden">
+    <footer className="bg-msk-night-950 text-white pt-20 pb-16 md:pb-20 relative">
+      {/* Subtly animated ocean wave surface transition */}
+      <FooterWaveTransition />
+
       {/* Full-width responsive deep night ocean Lottie animation */}
       <FooterOceanBackground />
 
@@ -144,7 +148,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-400">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-slate-400">
           <p>
             © {new Date().getFullYear()} MSK Montessori. Réalisé par{" "}
             <a
@@ -156,14 +160,6 @@ export const Footer: React.FC = () => {
               immersio.ma
             </a>
           </p>
-          <div className="flex items-center gap-6">
-            <Link href="/contact" className="hover:text-white transition-colors">
-              Inscriptions
-            </Link>
-            <Link href="/contact" className="hover:text-white transition-colors">
-              Plan d&apos;accès
-            </Link>
-          </div>
         </div>
       </div>
     </footer>
