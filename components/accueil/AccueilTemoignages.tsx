@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import { Mic, Pause, Play } from "lucide-react";
@@ -33,6 +33,16 @@ type Temoignage = { id: string; tag: string } & (
   | { type: "audio"; quote: string; duration: string; src: string | null; author: string; role: string }
   | TemoignageMedia
 );
+
+export type TemoignageFiltre = "tout" | "audio" | "video" | "image" | "citation";
+
+const FILTRES: Array<{ cle: TemoignageFiltre; label: string }> = [
+  { cle: "tout", label: "Tout" },
+  { cle: "audio", label: "Audio" },
+  { cle: "video", label: "Vidéo" },
+  { cle: "image", label: "Images" },
+  { cle: "citation", label: "Citations" },
+];
 
 const TEMOIGNAGES: Temoignage[] = [
   {
@@ -97,6 +107,16 @@ const TEMOIGNAGES: Temoignage[] = [
     role: "maman de Adam (9 ans)",
   },
   {
+    id: "audio-tariq",
+    type: "audio",
+    tag: "Témoignage audio",
+    quote: "« L'équipe a tout de suite compris ses blocages sans jamais porter de jugement. »",
+    duration: "1:04",
+    src: null,
+    author: "Tariq F.",
+    role: "papa de Zineb (6 ans)",
+  },
+  {
     id: "video-neurogym",
     type: "video",
     tag: "Témoignage vidéo",
@@ -124,6 +144,26 @@ const TEMOIGNAGES: Temoignage[] = [
     time: "09:12",
     image: null,
     author: "papa de Selma (4 ans)",
+    role: "",
+  },
+  {
+    id: "audio-leila",
+    type: "audio",
+    tag: "Témoignage audio",
+    quote: "« En 3 mois à peine, les angoisses du matin ont totalement disparu. »",
+    duration: "0:52",
+    src: null,
+    author: "Leïla M.",
+    role: "maman de Sami (4 ans)",
+  },
+  {
+    id: "capture-adam",
+    type: "screenshot",
+    tag: "Reçu sur WhatsApp",
+    message: "Adam a terminé tous ses ateliers sans aucune frustration aujourd'hui. On est tellement reconnaissants !",
+    time: "17:40",
+    image: null,
+    author: "maman d'Adam (6 ans)",
     role: "",
   },
 ];
@@ -427,10 +467,29 @@ function ScreenshotCard({
 }
 
 export const AccueilTemoignages = () => {
+  const [filtre, setFiltre] = useState<TemoignageFiltre>("tout");
   const [showAll, setShowAll] = useState(false);
   const [lightbox, setLightbox] = useState<TemoignageMedia | null>(null);
   const openerRef = useRef<HTMLElement | null>(null);
   const firstNewCardRef = useRef<HTMLLIElement>(null);
+
+  const filtered = useMemo(() => {
+    if (filtre === "tout") return TEMOIGNAGES;
+    if (filtre === "audio") return TEMOIGNAGES.filter((t) => t.type === "audio");
+    if (filtre === "video") return TEMOIGNAGES.filter((t) => t.type === "video");
+    if (filtre === "image") return TEMOIGNAGES.filter((t) => t.type === "screenshot");
+    if (filtre === "citation") return TEMOIGNAGES.filter((t) => t.type === "quote");
+    return TEMOIGNAGES;
+  }, [filtre]);
+
+  const compte = (cle: TemoignageFiltre) => {
+    if (cle === "tout") return TEMOIGNAGES.length;
+    if (cle === "audio") return TEMOIGNAGES.filter((t) => t.type === "audio").length;
+    if (cle === "video") return TEMOIGNAGES.filter((t) => t.type === "video").length;
+    if (cle === "image") return TEMOIGNAGES.filter((t) => t.type === "screenshot").length;
+    if (cle === "citation") return TEMOIGNAGES.filter((t) => t.type === "quote").length;
+    return 0;
+  };
 
   // « Voir plus » se démonte au clic : sans cible de repli, le focus clavier
   // retomberait sur <body>.
@@ -438,7 +497,7 @@ export const AccueilTemoignages = () => {
     if (showAll) firstNewCardRef.current?.focus();
   }, [showAll]);
 
-  const visible = showAll ? TEMOIGNAGES : TEMOIGNAGES.slice(0, VISIBLE_COUNT);
+  const visible = showAll ? filtered : filtered.slice(0, VISIBLE_COUNT);
 
   const openLightbox = (media: TemoignageMedia, opener: HTMLElement) => {
     openerRef.current = opener;
@@ -465,15 +524,68 @@ export const AccueilTemoignages = () => {
           </p>
         </FadeUp>
 
-        <ul className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Filtres des témoignages */}
+        <FadeUp delay={0.1} className="mt-8">
+          <div
+            role="group"
+            aria-label="Filtrer les témoignages"
+            className="flex flex-wrap gap-2.5"
+          >
+            {FILTRES.map((f) => {
+              const actif = filtre === f.cle;
+              return (
+                <button
+                  key={f.cle}
+                  type="button"
+                  aria-pressed={actif}
+                  onClick={() => {
+                    setFiltre(f.cle);
+                    setShowAll(false);
+                  }}
+                  className={cn(
+                    "relative inline-flex h-10 items-center gap-2 rounded-full px-4 font-display text-[0.7rem] font-semibold uppercase tracking-[0.13em] transition-colors focus-visible:outline-hidden focus-visible:ring-4 focus-visible:ring-msk-coral-300",
+                    actif ? "text-white" : "text-msk-night-900 hover:text-msk-coral-700",
+                  )}
+                >
+                  {actif ? (
+                    <motion.span
+                      layoutId="temoignages-filtre-actif"
+                      aria-hidden
+                      transition={SPRING}
+                      className="absolute inset-0 rounded-full bg-msk-night-900 shadow-lg shadow-msk-night-900/30"
+                    />
+                  ) : (
+                    <span
+                      aria-hidden
+                      className="absolute inset-0 rounded-full border-2 border-msk-cream-300 bg-white"
+                    />
+                  )}
+                  <span className="relative">{f.label}</span>
+                  <span
+                    className={cn(
+                      "relative rounded-full px-1.5 py-0.5 text-[0.65rem]",
+                      actif
+                        ? "bg-msk-sun-300 text-msk-night-900"
+                        : "bg-msk-cream-100 text-msk-night-700",
+                    )}
+                  >
+                    {compte(f.cle)}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </FadeUp>
+
+        <ul className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((t, index) => (
             <li
-              key={t.id}
+              key={`${filtre}-${t.id}`}
               ref={index === VISIBLE_COUNT ? firstNewCardRef : undefined}
               tabIndex={index === VISIBLE_COUNT ? -1 : undefined}
               className="flex"
             >
-              <FadeUp delay={0.1 * (index % 3)} className="flex h-full w-full">
+              <FadeUp delay={0.06 * (index % 3)} className="flex h-full w-full">
                 {t.type === "quote" && <QuoteCard item={t} index={index} />}
                 {t.type === "audio" && <AudioCard item={t} index={index} />}
                 {t.type === "video" && <VideoCard item={t} index={index} onOpen={openLightbox} />}
@@ -487,7 +599,7 @@ export const AccueilTemoignages = () => {
 
         <FadeUp className="mt-16">
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            {!showAll && TEMOIGNAGES.length > VISIBLE_COUNT && (
+            {!showAll && filtered.length > VISIBLE_COUNT && (
               <MorphButton
                 onClick={() => setShowAll(true)}
                 className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-msk-night-900"
