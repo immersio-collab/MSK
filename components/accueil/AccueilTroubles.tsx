@@ -3,7 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { motion, useInView } from "framer-motion";
 
-import { AssetSlot } from "@/components/common/AssetSlot";
+
 import { FadeUp } from "@/components/motion/FadeUp";
 import { MorphButton } from "@/components/motion/MorphButton";
 import { ICONS, LOOKS } from "@/components/troubles/trouble-look";
@@ -218,11 +218,11 @@ export const AccueilTroubles = () => {
     <section className="relative w-full overflow-hidden bg-msk-cream-100">
       {/* Coin haut-gauche, à côté de l'en-tête centré — h-100svh dur : absolu
           obligatoire, jamais dans le flux. */}
-      <AssetSlot
-        label="Cœur"
-        hint="SVG animé"
-        tone="bg-white/80 text-msk-coral-700"
-        className="pointer-events-none absolute left-[5%] top-[7%] z-10 hidden w-32 -rotate-6 lg:flex"
+      <img
+        src="/Burn calories.svg"
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute left-[5%] top-[7%] z-10 hidden w-32 -rotate-6 lg:block"
       />
       <div className="relative hidden h-[100svh] flex-col px-6 pb-10 pt-[6.5rem] lg:flex lg:px-16">
         <FadeUp className="shrink-0 text-center">

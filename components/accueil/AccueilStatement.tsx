@@ -3,7 +3,6 @@
 import { ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/common/WhatsAppIcon";
 
-import { AssetSlot } from "@/components/common/AssetSlot";
 import { FadeUp } from "@/components/motion/FadeUp";
 import { MorphButton } from "@/components/motion/MorphButton";
 import { SCHOOL_INFO } from "@/lib/data/site-content";
@@ -12,8 +11,7 @@ import { SCHOOL_INFO } from "@/lib/data/site-content";
  * An oversized statement on a flat colour field — the reference's way of
  * letting one line hold a whole screen.
  *
- * Used twice on the home page with different backgrounds, so the colour and the
- * optional CTA are props rather than baked in.
+ * Used with Birds.svg animated background silhouettes against the sun-300 midday sky.
  */
 interface AccueilStatementProps {
   quote: string;
@@ -28,20 +26,20 @@ export const AccueilStatement = ({
   cta,
 }: AccueilStatementProps) => {
   return (
-    <section className={`relative w-full py-20 text-center md:py-24 ${background}`}>
-      {/* Gouttières latérales hors du bloc max-w-5xl — lg only, la bande reste
-          courte : absolu, zéro hauteur ajoutée. */}
-      <AssetSlot
-        label="Étoile"
-        tone="bg-white/70 text-msk-sun-800"
-        className="pointer-events-none absolute left-[4%] top-1/2 hidden w-28 -translate-y-1/2 -rotate-6 lg:flex"
-      />
-      <AssetSlot
-        label="Étoile"
-        tone="bg-white/70 text-msk-sun-800"
-        className="pointer-events-none absolute right-[4%] top-1/2 hidden w-28 -translate-y-1/2 rotate-6 lg:flex"
-      />
-      <div className="mx-auto w-full max-w-5xl px-6 sm:px-10">
+    <section className={`relative w-full overflow-hidden py-20 text-center md:py-24 ${background}`}>
+      {/* Arrière-plan animé : silhouettes d'oiseaux en plein vol (Birds.svg) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden"
+      >
+        <img
+          src="/Birds.svg"
+          alt=""
+          className="h-full w-full object-cover opacity-80"
+        />
+      </div>
+
+      <div className="relative z-10 mx-auto w-full max-w-5xl px-6 sm:px-10">
         <FadeUp>
           <p className="font-display text-[1.75rem] font-bold uppercase leading-[1.1] text-msk-night-950 sm:text-[2.25rem] lg:text-[2.75rem]">
             {quote}

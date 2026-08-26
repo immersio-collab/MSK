@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Instagram, Facebook, Mail, Phone, MapPin } from "lucide-react";
 import { WhatsAppIcon } from "@/components/common/WhatsAppIcon";
-import { AssetSlot } from "@/components/common/AssetSlot";
+
 import { BrandLogo } from "@/components/common/BrandLogo";
 import { SCHOOL_INFO } from "@/lib/data/site-content";
 import { FooterOceanBackground } from "./FooterOceanBackground";
@@ -19,10 +19,9 @@ export const Footer: React.FC = () => {
 
       {/* Poissons à venir : posés ENTRE l'océan (z-0) et le contenu (z-10),
           côté droit, là où les colonnes de liens laissent du vide. */}
-      <AssetSlot
-        label="Poissons"
-        hint="2-3 silhouettes"
-        tone="bg-msk-night-800/70 text-msk-cream-100"
+      <img
+        src="/Alone in the dark.svg"
+        alt=""
         className="pointer-events-none absolute bottom-8 right-4 z-0 w-40 rotate-2 md:right-10"
       />
 

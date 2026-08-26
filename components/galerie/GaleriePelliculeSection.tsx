@@ -202,10 +202,9 @@ export const GaleriePelliculeSection = ({ variant = "page", header }: GaleriePel
       {variant === "home" ? (
         // Première bande nocturne du site — la transition jour→nuit du système
         // ciel→océan : la lune apparaît ici, les étoiles sur la CTA en dessous.
-        <AssetSlot
-          label="Lune"
-          hint="croissant, SVG"
-          tone="bg-msk-night-800/80 text-msk-cream-100"
+        <img
+          src="/Weather-night.svg"
+          alt=""
           className="pointer-events-none absolute right-[5%] top-[7%] hidden w-32 rotate-2 lg:flex"
         />
       ) : null}

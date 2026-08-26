@@ -14,16 +14,25 @@ export const AssetSlot = ({
   hint,
   className,
   tone = "bg-msk-cream-200 text-msk-night-700",
+  padding = "px-6 py-8",
 }: {
   label: string;
   hint?: string;
   className?: string;
   tone?: string;
+  /**
+   * Rembourrage interne, surchargeable. Il ne peut PAS l'être depuis
+   * `className` : deux `py-*` sur le même élément laissent l'ordre de la
+   * feuille décider du gagnant, et `py-8` bat `py-2` quoi qu'on écrive. Les
+   * slots posés dans une boîte à hauteur fixe (le média des héros, 122px) le
+   * réduisent pour tenir dedans.
+   */
+  padding?: string;
 }) => (
   <div
     role="img"
     aria-label={`Emplacement visuel : ${label}`}
-    className={`flex flex-col items-center justify-center gap-1 rounded-[1.5rem] border-2 border-dashed border-current/25 px-6 py-8 text-center ${tone} ${className ?? ""}`}
+    className={`flex flex-col items-center justify-center gap-1 overflow-hidden rounded-[1.5rem] border-2 border-dashed border-current/25 text-center ${padding} ${tone} ${className ?? ""}`}
   >
     <span className="font-display text-sm font-semibold uppercase tracking-[0.18em]">
       {label}

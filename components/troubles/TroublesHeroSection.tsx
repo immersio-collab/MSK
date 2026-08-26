@@ -105,7 +105,8 @@ export const TroublesHeroSection: React.FC = () => {
           label="Oiseau"
           hint="SVG animé"
           tone="bg-white/60 text-msk-blue-800"
-          className="h-full max-h-full rotate-2 aspect-[4/3]"
+          padding="px-4 py-2"
+          className="h-full w-44 rotate-2"
         />
       }
     />

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-import { AssetSlot } from "@/components/common/AssetSlot";
+
 import { FadeUp } from "@/components/motion/FadeUp";
 import { PROGRAMMES } from "@/lib/data/programmes";
 
@@ -50,11 +50,11 @@ export const AccueilPourQui = () => {
       {/* Moitié droite de l'en-tête (titre calé à gauche) — section pincée à
           l'écran : absolu strict, et à distance des cartes inclinées (~12px de
           débord de transform). */}
-      <AssetSlot
-        label="Cubes ABC"
-        hint="SVG animé"
-        tone="bg-white/80 text-msk-blue-800"
-        className="pointer-events-none absolute right-[6%] top-[9%] hidden w-36 rotate-2 lg:flex"
+      <img
+        src="/ABC Blocks.svg"
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute right-[6%] top-[9%] hidden w-36 rotate-2 lg:block"
       />
       <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
         <FadeUp>
