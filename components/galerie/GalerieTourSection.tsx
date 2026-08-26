@@ -6,9 +6,10 @@ import { motion, useReducedMotion } from "framer-motion";
 import { AlertTriangle, Maximize2, Play } from "lucide-react";
 
 import { VIRTUAL_TOUR } from "@/lib/data/site-content";
-import { GalerieTitreAnime } from "@/components/galerie/GalerieTitreAnime";
+import { TitreAnime } from "@/components/motion/TitreAnime";
 
 import { MorphButton } from "@/components/motion/MorphButton";
+import { Reveal } from "@/components/motion/Reveal";
 import { Eyebrow } from "@/components/common/Eyebrow";
 
 /**
@@ -51,7 +52,7 @@ export const GalerieTourSection = () => {
         <Eyebrow className="bg-msk-blue-50 text-msk-blue-700 shadow-sm">
           Tour virtuel · 360°
         </Eyebrow>
-        <GalerieTitreAnime
+        <TitreAnime
           au="scroll"
           texte="Visitez le centre depuis votre canapé"
           className="mt-4 font-display text-[1.75rem] font-bold uppercase leading-[0.95] text-msk-night-900 sm:text-3xl md:text-4xl"
@@ -63,7 +64,11 @@ export const GalerieTourSection = () => {
 
       {/* Cadre polaroid, légèrement penché au repos ; il se redresse dès que la
           visite démarre, pour que la navigation se fasse bien droite. La largeur
-          est bornée par la hauteur d'écran restante (ratio 16:9 conservé). */}
+          est bornée par la hauteur d'écran restante (ratio 16:9 conservé).
+          Le tampon d'entrée vit sur un wrapper Reveal : le cadre lui-même est
+          déjà un motion.div (redressement au lancement) — deux responsabilités,
+          deux éléments. */}
+      <Reveal effect="stamp">
       <motion.div
         ref={cadre}
         initial={false}
@@ -127,6 +132,7 @@ export const GalerieTourSection = () => {
           )}
         </div>
       </motion.div>
+      </Reveal>
 
       {/* Plein écran : sous le cadre, jamais dessus. */}
       {lance && configure ? (

@@ -6,6 +6,7 @@ import { motion, type Variants } from "framer-motion";
 import { Mic, Pause, Play } from "lucide-react";
 import { LottieMark } from "@/components/motion/LottieMark";
 import { FadeUp } from "@/components/motion/FadeUp";
+import { Reveal } from "@/components/motion/Reveal";
 import { MorphButton } from "@/components/motion/MorphButton";
 import { cn } from "@/lib/utils";
 import { SPRING, useTilt } from "@/lib/motion";
@@ -627,30 +628,39 @@ export const AccueilTemoignages = () => {
         className="pointer-events-none absolute right-[6%] top-44 hidden w-40 rotate-3 lg:block"
       />
       <div className="relative mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
-        <FadeUp>
+        {/* Badge en pop, titre en plongeon, texte en montée. */}
+        <Reveal effect="pop" as="span">
           <Eyebrow className="bg-white text-msk-sun-800 shadow-sm">
             Paroles de parents
           </Eyebrow>
+        </Reveal>
+        <Reveal effect="drop" delay={0.08}>
           <h2 className="mt-5 max-w-3xl font-display text-[2rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-4xl md:text-5xl">
             Ce que les familles <span className="text-msk-coral-700">racontent</span>
           </h2>
+        </Reveal>
+        <FadeUp delay={0.16}>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-msk-night-800 md:text-lg">
             Des mots, des voix et des messages de parents, tels qu&apos;ils nous arrivent.
           </p>
         </FadeUp>
 
-        {/* Filtres des témoignages */}
-        <FadeUp delay={0.1} className="mt-8">
-          <div
-            role="group"
-            aria-label="Filtrer les témoignages"
-            className="flex flex-wrap gap-2.5"
-          >
-            {FILTRES.map((f) => {
-              const actif = filtre === f.cle;
+        {/* Filtres : farandole de pops — chaque pilule gonfle à son tour. */}
+        <div
+          role="group"
+          aria-label="Filtrer les témoignages"
+          className="mt-8 flex flex-wrap gap-2.5"
+        >
+          {FILTRES.map((f, indexFiltre) => {
+            const actif = filtre === f.cle;
               return (
-                <button
+                <Reveal
                   key={f.cle}
+                  as="span"
+                  effect="pop"
+                  delay={0.05 * indexFiltre}
+                >
+                <button
                   type="button"
                   aria-pressed={actif}
                   onClick={() => {
@@ -689,10 +699,10 @@ export const AccueilTemoignages = () => {
                     {compte(f.cle)}
                   </span>
                 </button>
+                </Reveal>
               );
             })}
           </div>
-        </FadeUp>
 
         <ul className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((t, index) => (
@@ -702,14 +712,21 @@ export const AccueilTemoignages = () => {
               tabIndex={index === VISIBLE_COUNT ? -1 : undefined}
               className="flex"
             >
-              <FadeUp delay={0.06 * (index % 3)} className="flex h-full w-full">
+              {/* Deux mouvements selon la matière : les cartes de texte (citations,
+                  audio) gonflent en pop, les polaroïds photo (vidéo, capture) se
+                  collent en tampon. Le delay fait la farandole par rangée. */}
+              <Reveal
+                effect={t.type === "quote" || t.type === "audio" ? "pop" : "stamp"}
+                delay={0.06 * (index % 3)}
+                className="flex h-full w-full"
+              >
                 {t.type === "quote" && <QuoteCard item={t} index={index} />}
                 {t.type === "audio" && <AudioCard item={t} index={index} />}
                 {t.type === "video" && <VideoCard item={t} index={index} onOpen={openLightbox} />}
                 {t.type === "screenshot" && (
                   <ScreenshotCard item={t} index={index} onOpen={openLightbox} />
                 )}
-              </FadeUp>
+              </Reveal>
             </li>
           ))}
         </ul>

@@ -1,8 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/motion/Reveal";
 
 interface FadeUpProps {
   children: ReactNode;
@@ -18,6 +17,12 @@ interface FadeUpProps {
   mode?: "view" | "mount";
 }
 
+/**
+ * Alias historique de `Reveal effect="rise"` — la montée douce des textes.
+ * L'implémentation vit dans la boîte à mouvements (`Reveal`) ; ce fichier ne
+ * subsiste que pour les ~29 sites d'appel existants. Les nouveaux effets
+ * (glissade, pop, plongeon, tampon) s'appellent directement via `Reveal`.
+ */
 export function FadeUp({
   children,
   className,
@@ -26,17 +31,16 @@ export function FadeUp({
   y = 40,
   mode = "view",
 }: FadeUpProps) {
-  const target = { opacity: 1, y: 0 };
   return (
-    <motion.div
-      initial={{ opacity: 0, y }}
-      animate={mode === "mount" ? target : undefined}
-      whileInView={mode === "view" ? target : undefined}
-      viewport={mode === "view" ? { once: true, margin: "-50px" } : undefined}
-      transition={{ duration, delay, ease: "easeOut" }}
-      className={cn(className)}
+    <Reveal
+      effect="rise"
+      delay={delay}
+      duration={duration}
+      y={y}
+      mode={mode}
+      className={className}
     >
       {children}
-    </motion.div>
+    </Reveal>
   );
 }

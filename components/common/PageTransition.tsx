@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
+import { openCurtain, raiseCurtain } from "@/lib/curtain";
+
 /**
  * Balayage de page en trois calques.
  *
@@ -167,6 +169,9 @@ export default function PageTransition({ children }: { children: React.ReactNode
     running.current.forEach((animation) => {
       if (animation.playState === "paused") animation.play();
     });
+    // Le retrait commence : libère les apparitions que la nouvelle page
+    // retenait (héros en mode mount, sections déjà dans le viewport).
+    openCurtain();
   }, []);
 
   const run = useCallback(
@@ -175,6 +180,8 @@ export default function PageTransition({ children }: { children: React.ReactNode
       if (busy.current || layers.some((el) => el === null)) return false;
       busy.current = true;
       awaiting.current = true;
+      // Les apparitions de la page d'arrivée attendront l'ouverture du rideau.
+      raiseCurtain();
 
       const palette = paletteFor(target);
       nearFan.current!.style.background = palette.near;
@@ -260,6 +267,9 @@ export default function PageTransition({ children }: { children: React.ReactNode
       awaiting.current = false;
       running.current.forEach((animation) => animation.cancel());
       timers.current.forEach((id) => window.clearTimeout(id));
+      // Ne jamais laisser le drapeau levé derrière soi : des apparitions
+      // resteraient en attente d'une ouverture qui ne viendra plus.
+      openCurtain();
     },
     [],
   );

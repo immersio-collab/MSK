@@ -1,8 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   Brain,
   Check,
@@ -15,11 +12,10 @@ import {
 
 
 import { FadeUp } from "@/components/motion/FadeUp";
+import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/utils";
 import { Eyebrow } from "@/components/common/Eyebrow";
 import { PROGRAMMES } from "@/lib/data/programmes";
-
-gsap.registerPlugin(ScrollTrigger);
 
 /**
  * Comparatif des programmes — deux fiches au lieu d'un tableau.
@@ -97,36 +93,11 @@ const FICHES = PROGRAMMES.map((programme, index) => ({
 }));
 
 export const ProgrammesTableSection = () => {
-  const root = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const el = root.current;
-    if (!el) return;
-
-    const ctx = gsap.context(() => {
-      // Les fiches se posent comme des stickers. `from` + immediateRender:false :
-      // si le tween ne part jamais, elles restent simplement visibles.
-      gsap.from(".comparatif-fiche", {
-        y: 48,
-        rotate: (i: number) => (i % 2 ? 4 : -4),
-        scale: 0.94,
-        opacity: 0,
-        duration: 0.75,
-        ease: "back.out(1.6)",
-        stagger: 0.12,
-        immediateRender: false,
-        scrollTrigger: { trigger: ".comparatif-grille", start: "top 82%" },
-      });
-    }, el);
-
-    return () => ctx.revert();
-  }, []);
 
   // blue-50 : la respiration signature de la page — les fiches blanches et
   // leurs bandeaux coral/sun se détachent mieux que sur crème.
   return (
     <section
-      ref={root}
       // `lg:screen-section` : une fenêtre pile. Les deux fiches mesuraient 815px
       // avec 96px de marge haut/bas — une fenêtre de 720 plus 95px. Marge,
       // en-tête et interlignes du tableau suivent maintenant la fenêtre.
@@ -137,18 +108,20 @@ export const ProgrammesTableSection = () => {
             que l'écart au tableau soit identique des deux côtés — en % de
             section, il variait avec la largeur d'écran. Les deux fichiers
             partagent désormais le même viewBox, donc le même cadrage. */}
-        <img
-          src="/Pencil Smart.svg"
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none absolute -left-44 top-1/2 hidden w-40 -translate-y-1/2 -rotate-6 xl:block"
-        />
-        <img
-          src="/Strong Pencil.svg"
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-44 top-1/2 hidden w-40 -translate-y-1/2 rotate-6 xl:block"
-        />
+        <Reveal
+          effect="pop"
+          delay={0.2}
+          className="pointer-events-none absolute -left-44 top-1/2 hidden -translate-y-1/2 xl:block"
+        >
+          <img src="/Pencil Smart.svg" alt="" aria-hidden="true" className="w-40 -rotate-6" />
+        </Reveal>
+        <Reveal
+          effect="pop"
+          delay={0.3}
+          className="pointer-events-none absolute -right-44 top-1/2 hidden -translate-y-1/2 xl:block"
+        >
+          <img src="/Strong Pencil.svg" alt="" aria-hidden="true" className="w-40 rotate-6" />
+        </Reveal>
         <FadeUp>
           <div className="mb-[clamp(1.5rem,4svh,3rem)] text-center">
             <Eyebrow className="bg-white text-msk-blue-700 shadow-sm">
@@ -163,12 +136,14 @@ export const ProgrammesTableSection = () => {
           </div>
         </FadeUp>
 
-        <div className="comparatif-grille grid grid-cols-1 gap-7 lg:grid-cols-2">
-          {FICHES.map((fiche) => (
+        <div className="grid grid-cols-1 gap-7 lg:grid-cols-2">
+          {FICHES.map((fiche, indexFiche) => (
+            // Tampon en farandole — Reveal plutôt que gsap : l'état caché est
+            // posé dès le rendu serveur, plus de « flash » contenu-puis-animation.
+            <Reveal key={fiche.id} effect="stamp" delay={indexFiche * 0.12}>
             <article
-              key={fiche.id}
               className={cn(
-                "comparatif-fiche overflow-hidden rounded-[1.5rem] bg-white shadow-2xl shadow-msk-night-900/15 transition-transform duration-300 hover:rotate-0 hover:-translate-y-1.5",
+                "overflow-hidden rounded-[1.5rem] bg-white shadow-2xl shadow-msk-night-900/15 transition-transform duration-300 hover:rotate-0 hover:-translate-y-1.5",
                 fiche.tilt,
               )}
             >
@@ -236,6 +211,7 @@ export const ProgrammesTableSection = () => {
                 })}
               </ul>
             </article>
+            </Reveal>
           ))}
         </div>
       </div>

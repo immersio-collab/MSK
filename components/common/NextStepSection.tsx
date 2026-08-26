@@ -5,6 +5,7 @@ import { WhatsAppIcon } from "@/components/common/WhatsAppIcon";
 
 import { LottieMark } from "@/components/motion/LottieMark";
 import { FadeUp } from "@/components/motion/FadeUp";
+import { Reveal } from "@/components/motion/Reveal";
 import { MorphButton } from "@/components/motion/MorphButton";
 import { SCHOOL_INFO } from "@/lib/data/site-content";
 
@@ -60,19 +61,28 @@ export const NextStepSection = ({
       </div>
 
       <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center justify-center px-6 sm:px-10">
-        <FadeUp className="relative z-20">
-          <span className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-msk-sun-300">
-            {eyebrow}
-          </span>
+        {/* Badge en pop, titre en plongeon, texte en montée, boutons en pop
+            l'un après l'autre — le final de chaque page suit la même grammaire
+            que ses sections. */}
+        <div className="relative z-20">
+          <Reveal effect="pop" as="span">
+            <span className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-msk-sun-300">
+              {eyebrow}
+            </span>
+          </Reveal>
 
-          <h2 className="mt-4 font-display text-4xl font-bold uppercase leading-[0.9] text-white sm:text-5xl md:text-6xl">
-            {title}
-          </h2>
+          <Reveal effect="drop" delay={0.08}>
+            <h2 className="mt-4 font-display text-4xl font-bold uppercase leading-[0.9] text-white sm:text-5xl md:text-6xl">
+              {title}
+            </h2>
+          </Reveal>
 
-          <p className="mx-auto mt-4 max-w-xl text-lg font-medium leading-snug text-msk-cream-100">
-            {description}
-          </p>
-          <FadeUp delay={0.3}>
+          <FadeUp delay={0.16}>
+            <p className="mx-auto mt-4 max-w-xl text-lg font-medium leading-snug text-msk-cream-100">
+              {description}
+            </p>
+          </FadeUp>
+          <Reveal effect="pop" delay={0.28}>
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <MorphButton
                 href={buttonHref}
@@ -109,8 +119,8 @@ export const NextStepSection = ({
                 </MorphButton>
               )}
             </div>
-          </FadeUp>
-        </FadeUp>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

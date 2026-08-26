@@ -4,6 +4,7 @@ import { ProgrammesHeroSection } from "@/components/programmes/ProgrammesHeroSec
 
 import { ProgrammesSelectorSection } from "@/components/programmes/ProgrammesSelectorSection";
 import { MediaBand } from "@/components/common/MediaBand";
+import { Reveal } from "@/components/motion/Reveal";
 import { ProgrammesStatementSection } from "@/components/programmes/ProgrammesStatementSection";
 import { ProgrammesTableSection } from "@/components/programmes/ProgrammesTableSection";
 import { FaqSection } from "@/components/common/FaqSection";
@@ -34,12 +35,14 @@ export default function ProgrammesPage() {
         overlay={
           // Le crayon a pris la place du joystick, parti sur la photo de
           // /la-methode. Halo clair : lisibilité quelle que soit la photo.
-          <img
-            src="/Walking Pencil.svg"
-            alt=""
-            aria-hidden="true"
-            className="pointer-events-none absolute bottom-4 left-2 w-28 -rotate-2 drop-shadow-[0_0_16px_rgba(253,251,247,0.6)] md:bottom-8 md:left-10 md:w-36"
-          />
+          <Reveal effect="pop" delay={0.3} className="pointer-events-none absolute bottom-4 left-2 md:bottom-8 md:left-10">
+            <img
+              src="/Walking Pencil.svg"
+              alt=""
+              aria-hidden="true"
+              className="w-28 -rotate-2 drop-shadow-[0_0_16px_rgba(253,251,247,0.6)] md:w-36"
+            />
+          </Reveal>
         }
       />
 

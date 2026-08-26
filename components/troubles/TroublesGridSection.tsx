@@ -2,19 +2,16 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight } from "lucide-react";
 
 import { CloudDrift } from "@/components/motion/CloudDrift";
+import { Reveal } from "@/components/motion/Reveal";
 import { TROUBLES, type TroubleItem } from "@/lib/data/troubles";
 import { cn } from "@/lib/utils";
 import { SPRING, useTilt } from "@/lib/motion";
 import { TroubleDetailDialog } from "./TroubleDetailDialog";
 import { ICONS, LOOKS } from "./trouble-look";
 import { Eyebrow } from "@/components/common/Eyebrow";
-
-gsap.registerPlugin(ScrollTrigger);
 
 type CardState = "rest" | "hover" | "dimmed";
 
@@ -67,11 +64,13 @@ function TroubleStickerCard({ item, index, state, onOpen, buttonRef }: TroubleSt
   const animateTo: CardState = state === "dimmed" ? "dimmed" : keyboardFocus ? "hover" : "rest";
 
   return (
-    // Wrapper neutre : c'est LUI que gsap anime à l'entrée. L'article en
-    // dessous appartient à framer-motion (inclinaison, survol, expansion vers
-    // la fiche) — la règle du projet interdit d'animer un même élément avec
-    // les deux bibliothèques.
-    <div className="troubles-card flex">
+    // Wrapper neutre : c'est LUI qui porte l'entrée (pop en farandole par
+    // rangée de trois). L'article en dessous garde inclinaison, survol et
+    // expansion vers la fiche — jamais deux animations sur le même élément.
+    // Reveal plutôt que gsap : framer pose l'état caché dès le rendu serveur,
+    // là où gsap laissait les stickers visibles jusqu'au chargement du JS —
+    // le « flash » contenu-puis-animation que la cliente a vu.
+    <Reveal effect="pop" delay={(index % 3) * 0.08} className="flex">
       <motion.article
         layoutId={`trouble-${item.slug}`}
         custom={tilt}
@@ -135,7 +134,7 @@ function TroubleStickerCard({ item, index, state, onOpen, buttonRef }: TroubleSt
           className="absolute inset-0 cursor-pointer rounded-[1.75rem] focus-visible:outline-hidden"
         />
       </motion.article>
-    </div>
+    </Reveal>
   );
 }
 
@@ -157,40 +156,6 @@ export function TroublesGridSection() {
     previousSlug.current = activeSlug;
   }, [activeSlug]);
 
-  useEffect(() => {
-    const el = root.current;
-    if (!el) return;
-
-    const ctx = gsap.context(() => {
-      // Un seul ScrollTrigger pour toute la grille, le stagger fait la
-      // séquence. `from` + immediateRender:false : l'état de départ n'est
-      // écrit qu'au déclenchement — si gsap ne part jamais, les stickers
-      // restent simplement visibles au lieu d'être bloqués à opacity 0.
-      gsap.from(".troubles-card", {
-        y: 56,
-        rotate: (i: number) => (i % 2 ? 5 : -5),
-        scale: 0.9,
-        opacity: 0,
-        duration: 0.8,
-        ease: "back.out(1.7)",
-        stagger: 0.07,
-        immediateRender: false,
-        scrollTrigger: { trigger: ".troubles-grid", start: "top 82%" },
-      });
-
-      gsap.from(".troubles-heading > *", {
-        y: 28,
-        opacity: 0,
-        duration: 0.6,
-        ease: "power3.out",
-        stagger: 0.1,
-        immediateRender: false,
-        scrollTrigger: { trigger: ".troubles-heading", start: "top 88%" },
-      });
-    }, el);
-
-    return () => ctx.revert();
-  }, []);
 
   const activeIndex = TROUBLES.findIndex((t) => t.slug === activeSlug);
   const activeItem = activeIndex >= 0 ? TROUBLES[activeIndex] : null;
@@ -219,31 +184,36 @@ export function TroublesGridSection() {
         />
 
         {/* Marge latérale hors du max-w-5xl — n'existe qu'en très large. */}
-        <img
-          src="/Ballon.svg"
-          alt=""
-          className="absolute right-[2%] top-[40%] hidden w-32 rotate-3 xl:flex"
-        />
+        <Reveal effect="pop" className="absolute right-[2%] top-[40%] hidden xl:block">
+          <img src="/Ballon.svg" alt="" className="w-32 rotate-3" />
+        </Reveal>
       </div>
 
       <div className="container relative mx-auto max-w-5xl px-4">
-        <div className="troubles-heading mx-auto mb-14 max-w-2xl text-center">
-          <Eyebrow className="bg-white text-msk-blue-700 shadow-sm">
-            6 situations · 1 approche
-          </Eyebrow>
-          <h2 className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-5xl md:text-6xl">
-            Les situations que nous <span className="text-msk-coral-700">accueillons</span>
-          </h2>
-          <p className="mt-5 text-base text-msk-night-700 md:text-lg">
-            Cliquez sur une carte pour comprendre la situation et découvrir comment MSK
-            l&apos;accompagne.
-          </p>
+        {/* Badge en pop, titre en plongeon, texte en montée. */}
+        <div className="mx-auto mb-14 max-w-2xl text-center">
+          <Reveal effect="pop" as="span">
+            <Eyebrow className="bg-white text-msk-blue-700 shadow-sm">
+              6 situations · 1 approche
+            </Eyebrow>
+          </Reveal>
+          <Reveal effect="drop" delay={0.08}>
+            <h2 className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-5xl md:text-6xl">
+              Les situations que nous <span className="text-msk-coral-700">accueillons</span>
+            </h2>
+          </Reveal>
+          <Reveal effect="rise" delay={0.16}>
+            <p className="mt-5 text-base text-msk-night-700 md:text-lg">
+              Cliquez sur une carte pour comprendre la situation et découvrir comment MSK
+              l&apos;accompagne.
+            </p>
+          </Reveal>
         </div>
 
         {/* Trois colonnes, pas quatre : six cartes remplissent exactement deux
             rangées. En quatre colonnes la seconde rangée n'en portait que deux
             et la section paraissait amputée. */}
-        <div className="troubles-grid grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
           {TROUBLES.map((item, index) => (
             <TroubleStickerCard
               key={item.slug}

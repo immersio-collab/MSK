@@ -3,6 +3,8 @@
 import React from "react";
 import Image from "next/image";
 
+import { Reveal } from "@/components/motion/Reveal";
+
 
 export const FondatriceGridSection: React.FC = () => {
   return (
@@ -16,13 +18,16 @@ export const FondatriceGridSection: React.FC = () => {
             bleus génériques) + débord viewport mobile de ~24px (la section n'a
             pas d'overflow-hidden). Le principe du sticker débordant du coin est
             gardé ; `right-0` sur mobile pour ne plus créer de scroll horizontal. */}
-        <img
-          src="/diploma.svg"
-          alt=""
-          className="absolute -top-8 right-2 z-20 hidden w-28 rotate-3 pointer-events-none md:block md:-right-10 md:w-36"
-        />
+        <Reveal effect="pop" delay={0.2} className="pointer-events-none absolute -top-8 right-2 z-20 hidden md:block md:-right-10">
+          <img src="/diploma.svg" alt="" className="w-28 rotate-3 md:w-36" />
+        </Reveal>
 
-        <div className="bg-white rounded-3xl overflow-hidden shadow-xl border border-msk-cream-200 flex flex-col md:flex-row relative z-10">
+        {/* La fiche entière se colle en tampon — c'est le grand polaroid de la
+            page. Les lignes d'expertise font ensuite leur farandole dedans. */}
+        <Reveal
+          effect="stamp"
+          className="bg-white rounded-3xl overflow-hidden shadow-xl border border-msk-cream-200 flex flex-col md:flex-row relative z-10"
+        >
           {/* Left: Photo */}
           <div className="md:w-2/5 relative h-[400px] md:h-auto">
             <Image 
@@ -65,20 +70,30 @@ export const FondatriceGridSection: React.FC = () => {
                     "Spécialisée en éducation inclusive",
                     "Formatrice en psycho-neuro-éducation"
                   ].map((specialty, idx) => (
-                    <li key={idx} className="flex items-start gap-3">
+                    // Le <li> reste un <li> (un div dans un <ul> est invalide) ;
+                    // la farandole vit sur un wrapper Reveal à l'intérieur.
+                    <li key={idx}>
+                    <Reveal
+                      effect="rise"
+                      y={16}
+                      duration={0.4}
+                      delay={0.25 + idx * 0.07}
+                      className="flex items-start gap-3"
+                    >
                       <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-[6px] bg-msk-coral-500 text-white shadow-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                           <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
                       </div>
                       <span className="text-msk-night-800 font-medium text-lg leading-snug">{specialty}</span>
+                    </Reveal>
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

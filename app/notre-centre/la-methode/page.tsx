@@ -3,6 +3,7 @@ import { MethodeHeroSection } from "@/components/methode/MethodeHeroSection";
 import { MethodeKineticBanner } from "@/components/methode/MethodeKineticBanner";
 import { MethodeStepsSection } from "@/components/methode/MethodeStepsSection";
 import { MediaBand } from "@/components/common/MediaBand";
+import { Reveal } from "@/components/motion/Reveal";
 import { MethodeStatementSection } from "@/components/methode/MethodeStatementSection";
 import { MethodeProcessSection } from "@/components/methode/MethodeProcessSection";
 import { FaqSection } from "@/components/common/FaqSection";
@@ -39,12 +40,14 @@ export default function LaMethodePage() {
           <>
             {/* Le joystick a pris la place des oiseaux, partis animer « Nos
                 niveaux » sur /programmes. Halo clair : lisibilité sur photo. */}
-            <img
-              src="/Joystick.svg"
-              alt=""
-              aria-hidden="true"
-              className="absolute bottom-6 right-4 h-auto w-36 object-contain drop-shadow-[0_0_16px_rgba(253,251,247,0.6)] sm:w-44 md:bottom-8 md:right-14 md:w-52"
-            />
+            <Reveal effect="pop" delay={0.3} className="absolute bottom-6 right-4 md:bottom-8 md:right-14">
+              <img
+                src="/Joystick.svg"
+                alt=""
+                aria-hidden="true"
+                className="h-auto w-36 object-contain drop-shadow-[0_0_16px_rgba(253,251,247,0.6)] sm:w-44 md:w-52"
+              />
+            </Reveal>
             {/* Le Sunny en pendant a été retiré (retour client : doublon de
                 décor sur une même photo, et 4e occurrence du soleil sur le
                 site). Les oiseaux — recolorés charte — suffisent. */}

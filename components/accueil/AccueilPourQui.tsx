@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 
 
 import { FadeUp } from "@/components/motion/FadeUp";
+import { Reveal } from "@/components/motion/Reveal";
 import { PROGRAMMES } from "@/lib/data/programmes";
 
 /**
@@ -50,20 +51,23 @@ export const AccueilPourQui = () => {
       {/* Moitié droite de l'en-tête (titre calé à gauche) — section pincée à
           l'écran : absolu strict, et à distance des cartes inclinées (~12px de
           débord de transform). */}
-      <img
-        src="/ABC Blocks.svg"
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute right-[6%] top-[17%] hidden w-36 rotate-2 lg:block"
-      />
+      <Reveal effect="pop" className="pointer-events-none absolute right-[6%] top-[17%] hidden lg:block">
+        <img src="/ABC Blocks.svg" alt="" aria-hidden="true" className="w-36 rotate-2" />
+      </Reveal>
       <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
-        <FadeUp>
+        {/* La grammaire de la boîte : badge en pop, titre en plongeon, texte
+            en montée — trois éléments, trois mouvements, jamais le même. */}
+        <Reveal effect="pop" as="span">
           <span className="inline-block rounded-[0.4rem] bg-msk-sun-200 px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950">
             Maternelle &amp; Primaire
           </span>
+        </Reveal>
+        <Reveal effect="drop" delay={0.08}>
           <h2 className="mt-[clamp(0.75rem,3svh,1.5rem)] max-w-3xl font-display text-[1.875rem] font-bold uppercase leading-[1.05] text-msk-night-950 sm:text-[2.5rem] lg:text-[3rem]">
             Nos programmes
           </h2>
+        </Reveal>
+        <FadeUp delay={0.16}>
           <p className="mt-[clamp(0.75rem,3svh,1.5rem)] max-w-xl text-base leading-relaxed text-msk-night-800 md:text-lg">
             Deux parcours, un même principe : le cadre s&apos;adapte à
             l&apos;enfant, jamais l&apos;inverse. Chacun avance à son rythme,
@@ -74,7 +78,12 @@ export const AccueilPourQui = () => {
         <ul className="mt-[clamp(1.25rem,4svh,4rem)] grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-8">
           {PROFILES.map((profile, index) => (
             <li key={profile.id}>
-              <FadeUp delay={0.12 * index}>
+              {/* Glissade opposée : la carte de gauche entre par la gauche,
+                  celle de droite par la droite — elles se rejoignent au milieu. */}
+              <Reveal
+                effect={index === 0 ? "slide-left" : "slide-right"}
+                delay={0.1 * index}
+              >
                 <Link
                   href="/programmes"
                   className={`group flex h-full flex-col overflow-hidden rounded-[1.5rem] transition-[rotate,box-shadow] duration-300 hover:rotate-0 hover:shadow-xl ${profile.tilt} ${profile.card}`}
@@ -115,7 +124,7 @@ export const AccueilPourQui = () => {
                     </span>
                   </div>
                 </Link>
-              </FadeUp>
+              </Reveal>
             </li>
           ))}
         </ul>

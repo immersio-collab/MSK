@@ -20,8 +20,9 @@ import {
   GALERIE_PHOTOS,
   type GalerieCategorie,
 } from "@/lib/data/galerie";
-import { GalerieTitreAnime } from "@/components/galerie/GalerieTitreAnime";
+import { TitreAnime } from "@/components/motion/TitreAnime";
 import { CloudDrift } from "@/components/motion/CloudDrift";
+import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/utils";
 
 /**
@@ -146,11 +147,9 @@ export function GalerieAlbumSection({ variant = "page", header }: GalerieAlbumSe
           {/* Soleil du ciel. Plain <img> et non next/image : le SVG porte sa
               propre animation SMIL (les rayons tournent), que l'optimiseur
               d'images aplatirait. */}
-          <img
-            src="/Sunny.svg"
-            alt=""
-            className="absolute right-[1%] top-[15%] w-24 sm:w-32 lg:right-[4%] lg:w-44"
-          />
+          <Reveal effect="pop" className="absolute right-[1%] top-[15%] lg:right-[4%]">
+            <img src="/Sunny.svg" alt="" className="w-24 sm:w-32 lg:w-44" />
+          </Reveal>
           <CloudDrift
             motion="float"
             shape="a"
@@ -174,7 +173,7 @@ export function GalerieAlbumSection({ variant = "page", header }: GalerieAlbumSe
         </div>
       ) : (
         <div className="mx-auto mb-4 max-w-3xl text-center px-4 sm:px-8">
-          <GalerieTitreAnime
+          <TitreAnime
             au="scroll"
             texte="Nos espaces, mille moments"
             className="font-display text-[2rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-4xl md:text-5xl"
@@ -185,11 +184,12 @@ export function GalerieAlbumSection({ variant = "page", header }: GalerieAlbumSe
       <div className="relative mx-auto w-full max-w-4xl px-4 sm:px-8">
         {/* Filtres : la pastille coral glisse d'un filtre à l'autre. */}
         <div role="group" aria-label="Filtrer la galerie" className="mb-5 flex flex-wrap justify-center gap-2">
-          {CATEGORIES.map((cat) => {
+          {CATEGORIES.map((cat, indexCat) => {
             const actif = filtre === cat.cle;
             return (
+              // Farandole de pops sur les filtres.
+              <Reveal key={cat.cle} as="span" effect="pop" delay={0.05 * indexCat}>
               <button
-                key={cat.cle}
                 type="button"
                 aria-pressed={actif}
                 onClick={() => changerFiltre(cat.cle)}
@@ -220,10 +220,14 @@ export function GalerieAlbumSection({ variant = "page", header }: GalerieAlbumSe
                   {compte(cat.cle)}
                 </span>
               </button>
+              </Reveal>
             );
           })}
         </div>
 
+        {/* L'album entier se colle en tampon — le grand polaroid de la page.
+            Les changements de photo restent gérés par AnimatePresence dedans. */}
+        <Reveal effect="stamp" delay={0.1}>
         <div
           role="region"
           aria-roledescription="carrousel"
@@ -373,7 +377,12 @@ export function GalerieAlbumSection({ variant = "page", header }: GalerieAlbumSe
             </button>
           </div>
         </div>
+        </Reveal>
 
+        {/* Le rail de vignettes monte d'un bloc — pas de farandole par vignette :
+            la moitié est hors écran HORIZONTALEMENT et un whileInView par
+            vignette les laisserait invisibles (leçon d'AccueilTroubles). */}
+        <Reveal effect="rise" y={32} delay={0.2}>
         <div ref={rail} className="hide-scrollbar relative -mx-4 mt-5 overflow-x-auto px-4 pb-4 pt-3 sm:-mx-8 sm:px-8">
           <ul className="flex w-max items-end gap-4" aria-label="Vignettes">
             {photos.map((p, i) => {
@@ -425,6 +434,7 @@ export function GalerieAlbumSection({ variant = "page", header }: GalerieAlbumSe
             })}
           </ul>
         </div>
+        </Reveal>
       </div>
 
       {/* Plein écran : monté seulement à l'ouverture — `index` n'est lu qu'au

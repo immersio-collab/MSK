@@ -1,6 +1,7 @@
 "use client";
 
 import { MorphButton } from "@/components/motion/MorphButton";
+import { Reveal } from "@/components/motion/Reveal";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Mail, Phone, MapPin, Clock, HeartHandshake, Instagram, Facebook } from "lucide-react";
@@ -90,7 +91,9 @@ export const ContactMainSection: React.FC = () => {
     <div className="relative z-20 -mt-8 w-full bg-transparent px-5 pb-[4.1875rem] lg:-mt-12 lg:px-[2rem]">
       <div className="relative grid grid-cols-12 gap-5 rounded-[0.625rem] bg-white px-5 py-[1.5625rem] lg:px-0 lg:py-20">
         <div className="col-span-12 flex flex-col justify-between max-lg:mb-12 lg:col-start-2 lg:col-span-4 lg:pr-6">
-          <div className="space-y-8">
+          {/* Le bloc coordonnées glisse par la gauche ; en face, les champs du
+              formulaire font leur farandole. */}
+          <Reveal effect="slide-left" className="space-y-8">
             <div className="space-y-3">
               <span className="inline-flex items-center gap-2 rounded-full border border-msk-coral-200 bg-msk-coral-50 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-msk-coral-600">
                 <HeartHandshake className="h-3.5 w-3.5" />
@@ -203,7 +206,7 @@ export const ContactMainSection: React.FC = () => {
                 </a>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
 
         {/* `id` is the anchor the FAQ at the foot of the page sends the reader
@@ -214,7 +217,7 @@ export const ContactMainSection: React.FC = () => {
             noValidate
             className="grid grid-cols-2 gap-x-5 gap-y-10"
           >
-            <div className="col-span-2 lg:col-span-1">
+            <Reveal effect="rise" y={24} duration={0.45} className="col-span-2 lg:col-span-1">
               <label htmlFor="fullName" className={LABEL}>
                 Nom complet du parent*
               </label>
@@ -225,9 +228,9 @@ export const ContactMainSection: React.FC = () => {
                 aria-invalid={!!errors.fullName}
                 {...register("fullName", { required: true })}
               />
-            </div>
+            </Reveal>
 
-            <div className="col-span-2 lg:col-span-1">
+            <Reveal effect="rise" y={24} duration={0.45} delay={0.06} className="col-span-2 lg:col-span-1">
               <label htmlFor="phone" className={LABEL}>
                 Téléphone
               </label>
@@ -237,9 +240,9 @@ export const ContactMainSection: React.FC = () => {
                 className={`${FIELD} h-[4.375rem]`}
                 {...register("phone")}
               />
-            </div>
+            </Reveal>
 
-            <div className="col-span-2">
+            <Reveal effect="rise" y={24} duration={0.45} delay={0.12} className="col-span-2">
               <label htmlFor="email" className={LABEL}>
                 Adresse email*
               </label>
@@ -250,9 +253,9 @@ export const ContactMainSection: React.FC = () => {
                 aria-invalid={!!errors.email}
                 {...register("email", { required: true })}
               />
-            </div>
+            </Reveal>
 
-            <div className="col-span-2">
+            <Reveal effect="rise" y={24} duration={0.45} delay={0.18} className="col-span-2">
               <label htmlFor="childAge" className={LABEL}>
                 Âge de l&apos;enfant
               </label>
@@ -274,9 +277,9 @@ export const ContactMainSection: React.FC = () => {
                   ))}
                 </select>
               </div>
-            </div>
+            </Reveal>
 
-            <div className="col-span-2">
+            <Reveal effect="rise" y={24} duration={0.45} delay={0.24} className="col-span-2">
               <label htmlFor="subject" className={LABEL}>
                 Objet*
               </label>
@@ -299,9 +302,9 @@ export const ContactMainSection: React.FC = () => {
                   ))}
                 </select>
               </div>
-            </div>
+            </Reveal>
 
-            <div className="col-span-2">
+            <Reveal effect="rise" y={24} duration={0.45} delay={0.3} className="col-span-2">
               <label htmlFor="message" className={LABEL}>
                 Message*
               </label>
@@ -317,9 +320,9 @@ export const ContactMainSection: React.FC = () => {
                   target.style.height = `${Math.max(120, target.scrollHeight)}px`;
                 }}
               />
-            </div>
+            </Reveal>
 
-            <div className="relative z-10 col-span-2">
+            <Reveal effect="rise" y={24} duration={0.45} delay={0.36} className="relative z-10 col-span-2">
               <label className="flex cursor-pointer items-start gap-3">
                 <input
                   type="checkbox"
@@ -331,9 +334,9 @@ export const ContactMainSection: React.FC = () => {
                   demande.
                 </span>
               </label>
-            </div>
+            </Reveal>
 
-            <div className="col-span-2 mt-5 flex items-center gap-5">
+            <Reveal effect="rise" y={24} duration={0.45} delay={0.42} className="col-span-2 mt-5 flex items-center gap-5">
               <MorphButton
                 type="submit"
                 className="h-[3.625rem] px-7 text-[1.0625rem] font-medium leading-[120%] tracking-[-0.02em] text-white lg:text-[1.25rem]"
@@ -350,7 +353,7 @@ export const ContactMainSection: React.FC = () => {
                   Message envoyé, merci.
                 </p>
               ) : null}
-            </div>
+            </Reveal>
           </form>
         </div>
       </div>

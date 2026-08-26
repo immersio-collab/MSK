@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -26,6 +27,11 @@ interface MediaBandProps {
  * Bande photographique pleine largeur à bord supérieur incliné — la coupe du
  * site entre une section de texte et de la photographie. Une seule définition :
  * la-méthode et programmes en déclaraient chacune une copie identique.
+ *
+ * Apparition : la photo « se pose » en dézoomant (scale 1.12 → 1), SANS
+ * opacité — une bande pleine largeur qui part de transparent laisserait un
+ * trou de la couleur du fond si l'animation ne se jouait jamais ; ici l'état
+ * de départ reste une photo visible, juste un peu zoomée.
  */
 export const MediaBand = ({ src, alt, sectionBg, priority = false, overlay }: MediaBandProps) => {
   return (
@@ -34,14 +40,22 @@ export const MediaBand = ({ src, alt, sectionBg, priority = false, overlay }: Me
         className="relative min-h-[26rem] w-full overflow-hidden bg-msk-cream-300 md:min-h-[34rem]"
         style={{ clipPath: "polygon(0 6%, 100% 0, 100% 100%, 0 100%)" }}
       >
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          className="object-cover"
-          sizes="100vw"
-          priority={priority}
-        />
+        <motion.div
+          className="absolute inset-0"
+          initial={{ scale: 1.12 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.1, ease: [0.2, 0.7, 0.3, 1] }}
+        >
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority={priority}
+          />
+        </motion.div>
         {overlay ? (
           <div className="pointer-events-none absolute inset-0">{overlay}</div>
         ) : null}

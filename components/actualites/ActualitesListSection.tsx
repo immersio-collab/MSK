@@ -15,6 +15,7 @@ import {
   type Article,
   type ArticleCategorie,
 } from "@/lib/data/actualites";
+import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/utils";
 
 /**
@@ -37,9 +38,15 @@ const TILTS = [-1.6, 1.3, -1.2, 1.6, -1.4, 1.2];
 function CarteArticle({ article, index }: { article: Article; index: number }) {
   const tilt = TILTS[index % TILTS.length] ?? 0;
   return (
+    // `whileInView`, plus `animate` : l'ancienne entrée se jouait AU MONTAGE,
+    // sous le hero, hors écran — personne ne la voyait jamais. Elle part
+    // maintenant quand la carte arrive en vue ; le `key={filtre}` de la grille
+    // remonte les cartes à chaque filtre, donc le changement de filtre rejoue
+    // la même farandole.
     <motion.article
       initial={{ opacity: 0, y: 24, rotate: tilt }}
-      animate={{ opacity: 1, y: 0, rotate: tilt }}
+      whileInView={{ opacity: 1, y: 0, rotate: tilt }}
+      viewport={{ once: true, margin: "-50px" }}
       exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.15 } }}
       whileHover={{ rotate: 0, y: -8 }}
       transition={{ ...SPRING, delay: index * 0.05 }}
@@ -103,11 +110,12 @@ export const ActualitesListSection = () => {
       <div className="relative mx-auto w-full max-w-6xl px-6 sm:px-10">
         {/* Filtres : la pastille bleu nuit glisse d'une catégorie à l'autre. */}
         <div role="group" aria-label="Filtrer les articles" className="flex flex-wrap justify-center gap-2.5">
-          {CATEGORIES_ARTICLES.map((cat) => {
+          {CATEGORIES_ARTICLES.map((cat, indexCat) => {
             const actif = filtre === cat.cle;
             return (
+              // Farandole de pops sur les filtres.
+              <Reveal key={cat.cle} as="span" effect="pop" delay={0.05 * indexCat}>
               <button
-                key={cat.cle}
                 type="button"
                 aria-pressed={actif}
                 onClick={() => setFiltre(cat.cle)}
@@ -138,17 +146,22 @@ export const ActualitesListSection = () => {
                   {compte(cat.cle)}
                 </span>
               </button>
+              </Reveal>
             );
           })}
         </div>
 
-        {/* À la une : le premier article de la liste filtrée, en grand. */}
-        <AnimatePresence mode="wait" initial={false}>
+        {/* À la une : le premier article de la liste filtrée, en grand.
+            Tampon en `whileInView` — l'ancien `animate` + `initial={false}`
+            sur AnimatePresence faisait qu'aucune entrée ne se jouait jamais au
+            premier montage. Le remontage par filtre rejoue le tampon. */}
+        <AnimatePresence mode="wait">
           {aLaUne ? (
             <motion.div
               key={`${filtre}-${aLaUne.id}`}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 1.06, rotate: 1.5 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
               exit={{ opacity: 0, scale: 0.97, transition: { duration: 0.15 } }}
               transition={SPRING}
               className="relative mt-12"
@@ -204,12 +217,13 @@ export const ActualitesListSection = () => {
                   pendant du sticker « À la une » qui tient le coin droit. Elle
                   flottait auparavant dans la gouttière de la section, sans rien
                   à quoi se rattacher. */}
-              <img
-                src="/news error.svg"
-                alt=""
-                aria-hidden="true"
-                className="pointer-events-none absolute -left-6 -top-8 hidden w-28 -rotate-6 sm:block md:-left-10 md:w-36"
-              />
+              <Reveal
+                effect="pop"
+                delay={0.2}
+                className="pointer-events-none absolute -left-6 -top-8 hidden sm:block md:-left-10"
+              >
+                <img src="/news error.svg" alt="" aria-hidden="true" className="w-28 -rotate-6 md:w-36" />
+              </Reveal>
 
               {/* Sticker « À la une », posé sur le coin. */}
               <span

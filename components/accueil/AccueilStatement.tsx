@@ -5,6 +5,7 @@ import { WhatsAppIcon } from "@/components/common/WhatsAppIcon";
 
 import { FadeUp } from "@/components/motion/FadeUp";
 import { MorphButton } from "@/components/motion/MorphButton";
+import { RevealWords } from "@/components/motion/RevealWords";
 import { SCHOOL_INFO } from "@/lib/data/site-content";
 
 /**
@@ -40,11 +41,12 @@ export const AccueilStatement = ({
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-5xl px-6 sm:px-10">
-        <FadeUp>
-          <p className="font-display text-[1.75rem] font-bold uppercase leading-[1.1] text-msk-night-950 sm:text-[2.25rem] lg:text-[2.75rem]">
-            {quote}
-          </p>
-        </FadeUp>
+        {/* Farandole de mots : la déclaration se pose mot par mot, au lieu de
+            monter d'un bloc — c'est le beat « déclaration », il mérite mieux
+            qu'une montée standard. */}
+        <p className="font-display text-[1.75rem] font-bold uppercase leading-[1.1] text-msk-night-950 sm:text-[2.25rem] lg:text-[2.75rem]">
+          <RevealWords>{quote}</RevealWords>
+        </p>
 
         {cta ? (
           <FadeUp delay={0.15}>

@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Check, MoonStar, Repeat, Sunrise, Users } from "lucide-react";
 
 
-import { FadeUp } from "@/components/motion/FadeUp";
+import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/utils";
 import { Eyebrow } from "@/components/common/Eyebrow";
 import { ORGANISATION, PROGRAMMES } from "@/lib/data/programmes";
@@ -114,23 +114,23 @@ export const ProgrammesSelectorSection = () => {
       {/* Flanc du titre centré — section pincée à l'écran : absolu strict.
           Les oiseaux viennent de la photo de /la-methode ; ils remplacent le
           crayon, parti à leur place sur la photo neuro-gym juste en dessous. */}
-      <img
-        src="/Bird pair love and flying sky.svg"
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute left-[4%] top-[22%] z-10 hidden w-44 -rotate-3 lg:block"
-      />
+      <Reveal effect="pop" className="pointer-events-none absolute left-[4%] top-[22%] z-10 hidden lg:block">
+        <img src="/Bird pair love and flying sky.svg" alt="" aria-hidden="true" className="w-44 -rotate-3" />
+      </Reveal>
       <div className="mx-auto max-w-6xl px-6 sm:px-10">
-        <FadeUp>
-          <div className="mb-[clamp(1rem,2.75svh,2.5rem)] text-center">
+        {/* Badge en pop, titre en plongeon. */}
+        <div className="mb-[clamp(1rem,2.75svh,2.5rem)] text-center">
+          <Reveal effect="pop" as="span">
             <Eyebrow className="bg-white text-msk-blue-700 shadow-sm">
               Nos niveaux
             </Eyebrow>
+          </Reveal>
+          <Reveal effect="drop" delay={0.08}>
             <h2 className="mt-4 font-display text-3xl font-bold uppercase leading-[0.95] text-msk-night-900 md:text-4xl">
               Choisissez le programme de votre enfant
             </h2>
-          </div>
-        </FadeUp>
+          </Reveal>
+        </div>
 
         {/*
           Onglets — la seule place qui garde son propre bouton plutôt que
@@ -139,11 +139,12 @@ export const ProgrammesSelectorSection = () => {
           Le remplissage absolu de MorphButton se battrait avec lui.
         */}
         <div className="mb-[clamp(1rem,2.75svh,2.5rem)] flex flex-col justify-center gap-2 md:flex-row">
-          {programs.map((p) => {
+          {programs.map((p, indexOnglet) => {
             const actif = activeTab === p.id;
             return (
+              // Pop l'un après l'autre — la farandole des onglets.
+              <Reveal key={p.id} as="span" effect="pop" delay={0.1 * indexOnglet}>
               <button
-                key={p.id}
                 type="button"
                 aria-pressed={actif}
                 onClick={() => setActiveTab(p.id)}
@@ -172,11 +173,16 @@ export const ProgrammesSelectorSection = () => {
                   {p.age}
                 </span>
               </button>
+              </Reveal>
             );
           })}
         </div>
 
-        {/* La carte : polaroid blanc, légèrement incliné, qui se redresse au survol. */}
+        {/* La carte : polaroid blanc, légèrement incliné, qui se redresse au
+            survol. La PREMIÈRE apparition est une glissade par la gauche (le
+            wrapper Reveal) ; les changements d'onglet restent gérés par
+            AnimatePresence à l'intérieur — deux étages, deux responsabilités. */}
+        <Reveal effect="slide-left" delay={0.15}>
         <AnimatePresence mode="wait" initial={false}>
           <motion.article
             key={prog.id}
@@ -299,6 +305,7 @@ export const ProgrammesSelectorSection = () => {
             </div>
           </motion.article>
         </AnimatePresence>
+        </Reveal>
       </div>
     </section>
   );

@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 
 import { CloudDrift } from "@/components/motion/CloudDrift";
-import { GalerieTitreAnime } from "@/components/galerie/GalerieTitreAnime";
+import { TitreAnime } from "@/components/motion/TitreAnime";
 import { PageHero } from "@/components/common/PageHero";
 import { HERO_POLAROIDS } from "@/lib/data/galerie";
 
@@ -34,7 +34,7 @@ export const GalerieHeroSection = () => {
       card="bg-msk-night-900"
       // Le `h1` et sa typographie viennent de PageHero ; ce composant n'anime
       // que les lettres, en `span`, pour ne pas imbriquer deux titres.
-      title={<GalerieTitreAnime as="span" au="chargement" retard={0.25} texte="Nos Espaces" />}
+      title={<TitreAnime as="span" au="chargement" retard={0.25} texte="Nos Espaces" />}
       titleClassName="text-white"
       pill="Visite Virtuelle"
       pillClassName="bg-white text-msk-night-900"

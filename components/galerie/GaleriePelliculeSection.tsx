@@ -21,7 +21,8 @@ import { MoveHorizontal, ZoomIn } from "lucide-react";
 
 import { PELLICULE } from "@/lib/data/galerie";
 import { PolaroidCard } from "@/components/common/PolaroidCard";
-import { GalerieTitreAnime } from "@/components/galerie/GalerieTitreAnime";
+import { Reveal } from "@/components/motion/Reveal";
+import { TitreAnime } from "@/components/motion/TitreAnime";
 import { cn } from "@/lib/utils";
 
 /**
@@ -201,17 +202,15 @@ export const GaleriePelliculeSection = ({ variant = "page", header }: GaleriePel
       {variant === "home" ? (
         // Première bande nocturne du site — la transition jour→nuit du système
         // ciel→océan : la lune apparaît ici, les étoiles sur la CTA en dessous.
-        <img
-          src="/Weather-night.svg"
-          alt=""
-          className="pointer-events-none absolute right-[5%] top-[16%] hidden w-32 rotate-2 lg:block"
-        />
+        <Reveal effect="pop" className="pointer-events-none absolute right-[5%] top-[16%] hidden lg:block">
+          <img src="/Weather-night.svg" alt="" className="w-32 rotate-2" />
+        </Reveal>
       ) : null}
       <div className="mx-auto mb-10 sm:mb-12 md:mb-16 flex w-full max-w-[1400px] items-center justify-between gap-8 px-6 sm:px-10 lg:px-16">
         {header ? header : (
           <>
             <div>
-              <GalerieTitreAnime
+              <TitreAnime
                 au="scroll"
                 texte="Chaque jour, de nouvelles découvertes"
                 className="max-w-[18ch] font-display text-3xl font-bold uppercase leading-tight text-msk-night-900 md:text-4xl lg:text-5xl"
@@ -235,23 +234,28 @@ export const GaleriePelliculeSection = ({ variant = "page", header }: GaleriePel
                 d'images refuse les SVG locaux (400) et aplatirait l'animation SMIL.
                 Masquée sous md, où la colonne de texte prend toute la largeur. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/Camera - Copie.svg"
-              alt=""
-              aria-hidden
-              width={400}
-              height={300}
-              loading="lazy"
-              decoding="async"
-              className="hidden w-72 shrink-0 rotate-6 md:block lg:w-96"
-            />
+            <Reveal effect="pop" className="hidden shrink-0 md:block">
+              <img
+                src="/Camera - Copie.svg"
+                alt=""
+                aria-hidden
+                width={400}
+                height={300}
+                loading="lazy"
+                decoding="async"
+                className="w-72 rotate-6 lg:w-96"
+              />
+            </Reveal>
           </>
         )}
       </div>
 
       {/* Conteneur relatif : il porte les dégradés de bord, qui montrent que la
-          bande se poursuit hors cadre au lieu de s'arrêter net. */}
-      <div className="relative">
+          bande se poursuit hors cadre au lieu de s'arrêter net. La bande entière
+          arrive en montée — les vignettes ne s'animent pas une à une : la moitié
+          est hors écran HORIZONTALEMENT et un whileInView par vignette les
+          laisserait invisibles (leçon du carrousel mobile d'AccueilTroubles). */}
+      <Reveal effect="rise" y={48} duration={0.7} className="relative">
         <div
           aria-hidden
           className={cn("pointer-events-none absolute inset-y-0 left-0 z-10 w-10 sm:w-16", variant === "home" ? "bg-linear-to-r from-msk-night-700 to-transparent" : "bg-linear-to-r from-msk-cream-200 to-transparent")}
@@ -330,7 +334,7 @@ export const GaleriePelliculeSection = ({ variant = "page", header }: GaleriePel
             </ul>
           ))}
         </div>
-      </div>
+      </Reveal>
 
       {/* Montée seulement à l'ouverture : `index` n'est lu qu'au montage par la
           visionneuse — la garder montée rouvrirait toujours la même photo. */}

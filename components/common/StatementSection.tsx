@@ -4,6 +4,8 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { TiltedDuo } from "@/components/motion/TiltedDuo";
 import { FadeUp } from "@/components/motion/FadeUp";
+import { Reveal } from "@/components/motion/Reveal";
+import { RevealWords } from "@/components/motion/RevealWords";
 import { MorphButton } from "@/components/motion/MorphButton";
 
 interface StatementSectionProps {
@@ -42,15 +44,19 @@ export const StatementSection = ({
     // the section measured 791-820px and overflowed every 720px viewport.
     <section className="flex min-h-[100svh] w-full items-center overflow-x-clip bg-msk-cream-200 py-[clamp(2.5rem,5svh,5rem)]">
       <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-14 px-6 sm:px-10 lg:grid-cols-[1.15fr_1fr] lg:gap-20">
-        <FadeUp className="flex h-full flex-col justify-center">
+        <div className="flex h-full flex-col justify-center">
           <div className="relative">
+            {/* Farandole de mots : la déclaration se pose mot par mot — c'est le
+                beat le plus théâtral du site, il porte le mouvement le plus
+                théâtral de la boîte. Les stickers SMIL restent statiques : ils
+                s'animent déjà tout seuls. */}
             <h2
               className={cn(
                 "relative z-20 text-balance font-display font-bold leading-[1.25] tracking-[-0.02em]",
                 headingClassName
               )}
             >
-              {heading}
+              <RevealWords>{heading}</RevealWords>
             </h2>
 
             {/*
@@ -62,23 +68,35 @@ export const StatementSection = ({
               block: in front they would land mid-sentence, and the sun in
               particular ate a word whole.
             */}
-            <img
-              src="/methode/sun-cloud.svg"
-              alt=""
-              aria-hidden
-              className="pointer-events-none absolute -right-10 -top-20 z-0 w-40 sm:w-52 lg:-right-24 lg:-top-36 lg:w-64"
-            />
+            <Reveal
+              effect="pop"
+              delay={0.25}
+              className="pointer-events-none absolute -right-10 -top-20 z-0 lg:-right-24 lg:-top-36"
+            >
+              <img
+                src="/methode/sun-cloud.svg"
+                alt=""
+                aria-hidden
+                className="w-40 sm:w-52 lg:w-64"
+              />
+            </Reveal>
             {/* Bridé sur mobile : à 26rem le chat (416px) débordait d'un écran
                 de 375px et pouvait glisser sous le paragraphe suivant en
                 empilement 1 colonne. */}
-            <img
-              src="/methode/running-cat.svg"
-              alt=""
-              aria-hidden
-              className="pointer-events-none absolute -bottom-24 -left-16 z-0 w-64 sm:-bottom-36 sm:-left-32 sm:w-[34rem] lg:-bottom-60 lg:-left-56 lg:w-[44rem]"
-            />
+            <Reveal
+              effect="pop"
+              delay={0.35}
+              className="pointer-events-none absolute -bottom-24 -left-16 z-0 sm:-bottom-36 sm:-left-32 lg:-bottom-60 lg:-left-56"
+            >
+              <img
+                src="/methode/running-cat.svg"
+                alt=""
+                aria-hidden
+                className="w-64 sm:w-[34rem] lg:w-[44rem]"
+              />
+            </Reveal>
           </div>
-        </FadeUp>
+        </div>
 
         <div className="flex h-full flex-col justify-center gap-[clamp(1.5rem,3svh,2.5rem)]">
           <FadeUp delay={0.1}>
@@ -87,7 +105,7 @@ export const StatementSection = ({
             </p>
           </FadeUp>
 
-          <FadeUp delay={0.2}>
+          <Reveal effect="pop" delay={0.2} className="w-full sm:w-fit">
             <MorphButton
               href={button.href}
               className="w-full sm:w-fit font-display text-sm font-semibold uppercase tracking-[0.14em] text-white"
@@ -95,7 +113,7 @@ export const StatementSection = ({
             >
               {button.label}
             </MorphButton>
-          </FadeUp>
+          </Reveal>
 
           {/*
             Capped, because the duo is the section's height driver: it is a
@@ -108,11 +126,17 @@ export const StatementSection = ({
             58svh keeps the original size on a tall monitor and shrinks the
             photos, rather than the copy, on a short laptop.
           */}
-          <TiltedDuo
-            src={image.src}
-            alt={image.alt}
+          {/* Tampon sur le WRAPPER, jamais sur les cadres : gsap scrubbe déjà
+              la rotation des cadres à l'intérieur — deux bibliothèques sur le
+              même élément est interdit. Wrapper framer + enfants gsap, chacun
+              son élément. */}
+          <Reveal
+            effect="stamp"
+            delay={0.15}
             className="mx-auto mt-4 w-full max-w-[clamp(20rem,58svh,34rem)]"
-          />
+          >
+            <TiltedDuo src={image.src} alt={image.alt} className="w-full" />
+          </Reveal>
         </div>
       </div>
     </section>

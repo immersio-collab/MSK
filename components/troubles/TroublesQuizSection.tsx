@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Check, HeartHandshake, RotateCcw, Sprout } from "lucide-react";
 
 import { CloudDrift } from "@/components/motion/CloudDrift";
+import { Reveal } from "@/components/motion/Reveal";
 import { MorphButton } from "@/components/motion/MorphButton";
 import { cn } from "@/lib/utils";
 import { Eyebrow } from "@/components/common/Eyebrow";
@@ -50,32 +51,10 @@ export function TroublesQuizSection() {
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      // La carte elle-même n'est animée par personne d'autre : ses enfants
-      // framer-motion (badges, panneaux AnimatePresence) sont des éléments
-      // distincts, donc aucun conflit de bibliothèque.
-      //
-      // `from` + immediateRender:false : si le tween ne part jamais, la carte
-      // reste droite et pleine taille plutôt que bloquée à scale 0.94 / opacity 0.
-      gsap.from(".quiz-card", {
-        y: 48,
-        rotate: -2.2,
-        scale: 0.94,
-        opacity: 0,
-        duration: 0.8,
-        ease: "back.out(1.4)",
-        immediateRender: false,
-        scrollTrigger: { trigger: ".quiz-card", start: "top 85%" },
-      });
-
-      gsap.from(".quiz-heading > *", {
-        y: 26,
-        opacity: 0,
-        duration: 0.6,
-        ease: "power3.out",
-        stagger: 0.1,
-        immediateRender: false,
-        scrollTrigger: { trigger: ".quiz-heading", start: "top 88%" },
-      });
+      // Les entrées (carte, en-tête) sont passées à Reveal/framer : gsap
+      // laissait le contenu visible jusqu'au chargement du JS, puis le
+      // rejouait — le « flash » signalé par la cliente. gsap ne garde ici
+      // que le scroll-driven.
 
       // Parallaxe du soleil : `to` depuis sa position naturelle, donc rien
       // n'est déplacé tant que le scroll ne commence pas. Ses rayons tournent
@@ -143,22 +122,29 @@ export function TroublesQuizSection() {
       </div>
 
       <div className="container relative mx-auto max-w-3xl px-4">
-        <div className="quiz-heading mx-auto mb-[clamp(1.25rem,3.5svh,2.5rem)] max-w-2xl text-center">
-          <Eyebrow className="bg-white text-msk-blue-700 shadow-sm">
-            Petit test · 3 questions
-          </Eyebrow>
-          <h2 className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-5xl md:text-6xl">
-            {/* coral-800 et non 700 : ce titre est posé sur le ciel, pas sur
-                le crème — 5:1 au lieu de 3.9:1. */}
-            Mon enfant a-t-il besoin de <span className="text-msk-coral-800">MSK</span> ?
-          </h2>
-          <p className="mt-5 text-base text-msk-night-800 md:text-lg">
-            Trois questions rapides pour savoir si notre approche peut aider votre enfant.
-          </p>
+        {/* Badge en pop, titre en plongeon, texte en montée. */}
+        <div className="mx-auto mb-[clamp(1.25rem,3.5svh,2.5rem)] max-w-2xl text-center">
+          <Reveal effect="pop" as="span">
+            <Eyebrow className="bg-white text-msk-blue-700 shadow-sm">
+              Petit test · 3 questions
+            </Eyebrow>
+          </Reveal>
+          <Reveal effect="drop" delay={0.08}>
+            <h2 className="mt-5 font-display text-[2.25rem] font-bold uppercase leading-[0.9] text-msk-night-900 sm:text-5xl md:text-6xl">
+              {/* coral-800 et non 700 : ce titre est posé sur le ciel, pas sur
+                  le crème — 5:1 au lieu de 3.9:1. */}
+              Mon enfant a-t-il besoin de <span className="text-msk-coral-800">MSK</span> ?
+            </h2>
+          </Reveal>
+          <Reveal effect="rise" delay={0.16}>
+            <p className="mt-5 text-base text-msk-night-800 md:text-lg">
+              Trois questions rapides pour savoir si notre approche peut aider votre enfant.
+            </p>
+          </Reveal>
         </div>
 
-        <div className="relative">
-          <div className="quiz-card relative overflow-hidden rounded-[1.75rem] bg-white px-6 py-8 shadow-2xl shadow-msk-night-900/15 md:px-12 md:py-10">
+        <Reveal effect="stamp" delay={0.1} className="relative">
+          <div className="relative overflow-hidden rounded-[1.75rem] bg-white px-6 py-8 shadow-2xl shadow-msk-night-900/15 md:px-12 md:py-10">
             {isFinished ? <ConfettiParticles count={28} className="opacity-90" /> : null}
 
             <div className="relative">
@@ -322,7 +308,7 @@ export function TroublesQuizSection() {
               className="aspect-square w-full"
             />
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

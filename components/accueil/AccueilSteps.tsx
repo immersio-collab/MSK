@@ -1,6 +1,9 @@
 "use client";
 
+import { motion } from "framer-motion";
+
 import { FadeUp } from "@/components/motion/FadeUp";
+import { Reveal } from "@/components/motion/Reveal";
 import {
   Dumbbell,
   Eye,
@@ -22,8 +25,9 @@ import { METHODE_STEPS } from "@/lib/data/methode-steps";
  * its top edge, and the offsets leave a visible ledge for every card already
  * dealt — the stack builds downward as you read.
  *
- * There is no JavaScript here. Later siblings paint over earlier ones, which is
- * what does the covering; the tilts and offsets are static CSS.
+ * L'empilement lui-même est 100 % CSS : later siblings paint over earlier ones,
+ * which is what does the covering; the tilts and offsets are static CSS. Le seul
+ * JavaScript est l'entrée « tampon » de chaque carte (framer-motion, une fois).
  *
  * Two things it depends on: the cards must be opaque, or the one underneath
  * shows through, and no ancestor may be a scroll container — `overflow: hidden`
@@ -143,13 +147,18 @@ export const AccueilSteps = () => {
           {/* `self-start` matters: a stretched grid item is as tall as the row
               and would have nothing left to scroll within, so it never sticks. */}
           <div className="lg:sticky lg:top-[35vh] lg:self-start">
-            <FadeUp>
+            {/* Badge en pop, titre en plongeon, texte en montée. */}
+            <Reveal effect="pop" as="span">
               <span className="inline-block rounded-[0.4rem] bg-msk-sun-200 px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-950">
                 Notre pédagogie
               </span>
+            </Reveal>
+            <Reveal effect="drop" delay={0.08}>
               <h2 className="mt-6 max-w-2xl font-display text-[1.875rem] font-bold uppercase leading-[1.05] text-msk-night-950 sm:text-[2.5rem] lg:text-[3rem]">
                 La méthode en 6 étapes
               </h2>
+            </Reveal>
+            <FadeUp delay={0.16}>
               <p className="mt-6 max-w-md text-base leading-relaxed text-msk-night-800 md:text-lg">
                 Un cheminement structuré pour accompagner l&apos;enfant de ses
                 premiers blocages jusqu&apos;à son autonomie.
@@ -166,8 +175,20 @@ export const AccueilSteps = () => {
                 travel in, so it just scrolls away. Wrapping these in <li>
                 elements did exactly that.
               */
-              <li
+              /*
+                Tampon léger à l'arrivée — directement sur le <li> sticky, sans
+                wrapper (un wrapper le priverait de sa course, voir plus haut).
+                framer n'écrit que `transform` (scale/y) : l'inclinaison vit
+                dans la propriété CSS `rotate`, indépendante, et n'est jamais
+                touchée. Le tampon se joue quand la carte entre par le bas,
+                avant qu'elle ne s'épingle.
+              */
+              <motion.li
                 key={step.number}
+                initial={{ opacity: 0, scale: 1.06, y: 28 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ type: "spring", stiffness: 300, damping: 24 }}
                 className={`sticky flex min-h-[20rem] flex-col rounded-[1.5rem] border border-msk-cream-300 p-7 shadow-sm sm:min-h-[21rem] sm:p-9 ${step.bg}`}
                 style={{
                   top: `calc(var(--stack-top) + ${index * LEDGE_REM}rem)`,
@@ -192,7 +213,7 @@ export const AccueilSteps = () => {
                 <p className="mt-4 text-base leading-relaxed text-msk-night-800">
                   {step.description}
                 </p>
-              </li>
+              </motion.li>
             ))}
           </ol>
         </div>

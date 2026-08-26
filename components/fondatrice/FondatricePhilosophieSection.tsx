@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 
 import { Eyebrow } from "@/components/common/Eyebrow";
+import { Reveal } from "@/components/motion/Reveal";
 
 export const FondatricePhilosophieSection: React.FC = () => {
   return (
@@ -20,17 +21,16 @@ export const FondatricePhilosophieSection: React.FC = () => {
       </div>
 
       {/* Coin haut-droit — le guillemet occupe déjà le haut-gauche. */}
-      <img
-        src="/Sunny.svg"
-        alt=""
-        className="pointer-events-none absolute right-[6%] top-[16%] z-0 hidden w-44 rotate-3 sm:block lg:w-52"
-      />
+      <Reveal effect="pop" className="pointer-events-none absolute right-[6%] top-[16%] z-0 hidden sm:block">
+        <img src="/Sunny.svg" alt="" className="w-44 rotate-3 lg:w-52" />
+      </Reveal>
 
       <div className="container mx-auto px-4 relative z-10 max-w-5xl">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
           
-          {/* Left side: Text & Quote */}
-          <div className="flex-1 space-y-8">
+          {/* Left side: Text & Quote — glissade par la gauche ; la vidéo entre
+              par la droite : les deux colonnes se rejoignent au milieu. */}
+          <Reveal effect="slide-left" className="flex-1 space-y-8">
             <div>
               <Eyebrow variant="bare" className="mb-2 block text-msk-coral-500">
                 Notre Philosophie
@@ -58,10 +58,10 @@ export const FondatricePhilosophieSection: React.FC = () => {
                 <p className="text-sm text-msk-night-700">Fondatrice de MSK Montessori</p>
               </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* Right side: Video Placeholder or Team Image */}
-          <div className="flex-1 w-full">
+          <Reveal effect="slide-right" delay={0.1} className="flex-1 w-full">
             <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl group cursor-pointer bg-msk-cream-200">
               <Image 
                 src="/espace montesori.jpeg"
@@ -81,8 +81,8 @@ export const FondatricePhilosophieSection: React.FC = () => {
                 ▶ Présentation de la fondatrice (0:45)
               </div>
             </div>
-          </div>
-          
+          </Reveal>
+
         </div>
       </div>
     </section>

@@ -6,6 +6,7 @@ import { ArrowRight, Plus } from "lucide-react";
 
 
 import { FadeUp } from "@/components/motion/FadeUp";
+import { Reveal } from "@/components/motion/Reveal";
 import { MorphButton } from "@/components/motion/MorphButton";
 import { Eyebrow } from "@/components/common/Eyebrow";
 import { cn } from "@/lib/utils";
@@ -110,11 +111,14 @@ export const FaqSection = ({
     <section id={id} className={cn("w-full py-24 md:py-32", t.background)}>
       <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-          <FadeUp>
-            <div className="lg:sticky lg:top-28">
+          {/* Badge en pop, titre en plongeon, texte en montée, bouton en pop. */}
+          <div className="lg:sticky lg:top-28">
+            <Reveal effect="pop" as="span">
               <Eyebrow className={cn("shadow-sm", t.pillBg, t.pillText)}>
                 {eyebrow}
               </Eyebrow>
+            </Reveal>
+            <Reveal effect="drop" delay={0.08}>
               <h2
                 className={cn(
                   "mt-5 font-display text-[2rem] font-bold uppercase leading-[0.95] sm:text-[2.5rem]",
@@ -123,6 +127,8 @@ export const FaqSection = ({
               >
                 {title} <span className={t.accent}>{titleAccent}</span>
               </h2>
+            </Reveal>
+            <FadeUp delay={0.16}>
               <p
                 className={cn(
                   "mt-5 max-w-sm text-base leading-relaxed md:text-lg",
@@ -131,26 +137,34 @@ export const FaqSection = ({
               >
                 {description}
               </p>
-              <div className="mt-7">
-                <MorphButton
-                  href={ctaHref}
-                  maxDiameter="15rem"
-                  className={cn("font-semibold", b.text)}
-                  fillClassName={cn(b.fill, b.shadow)}
-                >
-                  {ctaLabel}
-                  <ArrowRight className="h-4 w-4" />
-                </MorphButton>
-              </div>
-            </div>
-          </FadeUp>
+            </FadeUp>
+            <Reveal effect="pop" as="span" delay={0.24} className="mt-7">
+              <MorphButton
+                href={ctaHref}
+                maxDiameter="15rem"
+                className={cn("font-semibold", b.text)}
+                fillClassName={cn(b.fill, b.shadow)}
+              >
+                {ctaLabel}
+                <ArrowRight className="h-4 w-4" />
+              </MorphButton>
+            </Reveal>
+          </div>
 
           <div className={cn("border-t", t.rule)}>
             {items.map((item, index) => {
               const isOpen = openIndex === index;
 
               return (
-                <div key={item.question} className={cn("border-b", t.rule)}>
+                // Farandole : chaque question monte à son tour. Le délai est
+                // plafonné — au-delà de six rangées, attendre n'apporte rien.
+                <Reveal
+                  key={item.question}
+                  effect="rise"
+                  y={24}
+                  delay={Math.min(index * 0.07, 0.42)}
+                  className={cn("border-b", t.rule)}
+                >
                   <h3>
                     <button
                       type="button"
@@ -200,7 +214,7 @@ export const FaqSection = ({
                       </motion.div>
                     ) : null}
                   </AnimatePresence>
-                </div>
+                </Reveal>
               );
             })}
           </div>

@@ -11,6 +11,7 @@ import {
 } from "framer-motion";
 
 import { FadeUp } from "@/components/motion/FadeUp";
+import { TitreAnime } from "@/components/motion/TitreAnime";
 
 /**
  * Full-viewport "sky" hero: centred two-tone display headline on a light blue
@@ -197,7 +198,10 @@ export const AccueilHero = () => {
               l&apos;école où chaque enfant
             </span>
             <span className="block font-display text-[3.4rem] font-semibold leading-[1.05] text-msk-sun-500 sm:text-7xl lg:text-[7rem]">
-              s&apos;éveille
+              {/* Le mouvement « star » de la boîte : lettre par lettre, un seul
+                  titre phare par page. `chargement` : au-dessus du pli, aucun
+                  trigger de scroll. Le retard laisse la 1re ligne se poser. */}
+              <TitreAnime as="span" au="chargement" retard={0.35} texte="s'éveille" />
             </span>
           </h1>
         </FadeUp>

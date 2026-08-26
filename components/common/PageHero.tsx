@@ -5,6 +5,7 @@ import { ChevronDown } from "lucide-react";
 
 import { Eyebrow } from "@/components/common/Eyebrow";
 import { FadeUp } from "@/components/motion/FadeUp";
+import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/utils";
 
 /**
@@ -119,13 +120,27 @@ export const PageHero = ({
           c'était le cas de tous les portables 1366×768.
         */}
         <div className="relative z-20 -mb-6 flex h-[clamp(8rem,23svh,16rem)] items-end justify-center">
-          {media}
+          {/* Pop du visuel — `mount`, jamais `view` : au-dessus du pli, un
+              trigger de scroll n'a aucun filet. Le wrapper reprend le flex du
+              parent pour que les visuels en `h-full` gardent leur taille. */}
+          {media ? (
+            <Reveal
+              effect="pop"
+              mode="mount"
+              delay={0.05}
+              className="flex h-full w-full items-end justify-center"
+            >
+              {media}
+            </Reveal>
+          ) : null}
         </div>
 
         {/* `mount` et non `view` : la carte est au-dessus de la ligne de
             flottaison, où un déclencheur au scroll n'a aucun filet — l'élément
-            resterait invisible s'il ne se déclenchait pas. */}
-        <FadeUp mode="mount" delay={0.1}>
+            resterait invisible s'il ne se déclenchait pas. Course et durée
+            augmentées : la séquence part à l'ouverture du rideau, elle doit
+            se lire franchement. */}
+        <FadeUp mode="mount" delay={0.1} y={56} duration={0.6}>
           <div
             className={cn(
               // Hauteur minimale commune : elle égalise les six cartes, dont la
@@ -151,9 +166,12 @@ export const PageHero = ({
             </h1>
 
             {/* Enveloppé : en enfant direct de la colonne flex, la pastille
-                s'étirerait sur toute la largeur et perdrait sa forme. */}
+                s'étirerait sur toute la largeur et perdrait sa forme. Le pop
+                arrive après la montée de la carte (delay 0.1 + ~0.4s). */}
             <div>
-              <Eyebrow className={cn("mt-5", pillClassName)}>{pill}</Eyebrow>
+              <Reveal effect="pop" mode="mount" delay={0.4} as="span" className="mt-5">
+                <Eyebrow className={pillClassName}>{pill}</Eyebrow>
+              </Reveal>
             </div>
 
             <p

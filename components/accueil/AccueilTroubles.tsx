@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 
 
 import { FadeUp } from "@/components/motion/FadeUp";
+import { Reveal } from "@/components/motion/Reveal";
 import { MorphButton } from "@/components/motion/MorphButton";
 import { ICONS, LOOKS } from "@/components/troubles/trouble-look";
 import { TROUBLES } from "@/lib/data/troubles";
@@ -220,12 +221,9 @@ export const AccueilTroubles = () => {
           obligatoire, jamais dans le flux. */}
       {/* Le livre ouvert vient du héros de /la-méthode, où il faisait doublon
           avec le visuel central ; ici il dit l'école, le sujet de la section. */}
-      <img
-        src="/Reading Book.svg"
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute left-[15%] top-[15%] z-10 hidden w-44 -rotate-6 lg:block"
-      />
+      <Reveal effect="pop" className="pointer-events-none absolute left-[15%] top-[15%] z-10 hidden lg:block">
+        <img src="/Reading Book.svg" alt="" aria-hidden="true" className="w-44 -rotate-6" />
+      </Reveal>
       <div className="relative hidden h-[100svh] flex-col px-6 pb-10 pt-[6.5rem] lg:flex lg:px-16">
         <FadeUp className="shrink-0 text-center">
           <Heading />

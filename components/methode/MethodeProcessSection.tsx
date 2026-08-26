@@ -3,6 +3,7 @@
 import { MorphButton } from "@/components/motion/MorphButton";
 
 import { FadeUp } from "@/components/motion/FadeUp";
+import { Reveal } from "@/components/motion/Reveal";
 
 /**
  * The reference's "Get started" beat: a white panel with the invitation and a
@@ -51,39 +52,50 @@ export const MethodeProcessSection = () => {
               ici, un débord plus haut fuirait sur la Statement au-dessus. lg only —
               sous lg le panneau colle aux bords et le débord droit créerait un
               scroll horizontal. */}
-          <img
-            src="/methode/class-board.svg"
-            alt=""
-            aria-hidden="true"
-            className="pointer-events-none absolute -right-6 -top-7 hidden w-36 rotate-3 select-none lg:block xl:w-40"
-          />
-          <FadeUp className="flex h-full flex-col justify-center">
+          <Reveal effect="pop" className="pointer-events-none absolute -right-6 -top-7 hidden select-none lg:block">
+            <img src="/methode/class-board.svg" alt="" aria-hidden="true" className="w-36 rotate-3 xl:w-40" />
+          </Reveal>
+          <div className="flex h-full flex-col justify-center">
             <div>
-              <h2 className="max-w-md font-display text-3xl font-bold leading-[1.1] text-msk-night-900 md:text-4xl">
-                Nous savons que c&apos;est un grand pas. Nous l&apos;avons rendu
-                aussi simple que possible.
-              </h2>
-              <MorphButton
-                href="/contact"
-                size="sm"
-                className="mt-8 px-7 font-display text-sm font-semibold uppercase tracking-[0.14em] text-white"
-                fillClassName="bg-msk-coral-600"
-              >
-                Commencer
-              </MorphButton>
+              {/* Titre en plongeon, bouton en pop. */}
+              <Reveal effect="drop">
+                <h2 className="max-w-md font-display text-3xl font-bold leading-[1.1] text-msk-night-900 md:text-4xl">
+                  Nous savons que c&apos;est un grand pas. Nous l&apos;avons rendu
+                  aussi simple que possible.
+                </h2>
+              </Reveal>
+              <Reveal effect="pop" as="span" delay={0.15} className="mt-8">
+                <MorphButton
+                  href="/contact"
+                  size="sm"
+                  className="px-7 font-display text-sm font-semibold uppercase tracking-[0.14em] text-white"
+                  fillClassName="bg-msk-coral-600"
+                >
+                  Commencer
+                </MorphButton>
+              </Reveal>
             </div>
-          </FadeUp>
+          </div>
 
           <ol className="flex flex-col gap-10">
             {PROCESS.map((step, index) => (
-              <FadeUp key={step.id} delay={0.1 + index * 0.1}>
+              // Farandole : la rangée monte, sa pastille numérotée gonfle en
+              // pop juste après — deux mouvements emboîtés, un temps par étape.
+              <FadeUp key={step.id} delay={0.1 + index * 0.12}>
                 <li className="flex items-start gap-5">
-                  <span
-                    aria-hidden
-                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-msk-sun-300 font-display text-xl font-bold text-msk-coral-700"
+                  <Reveal
+                    effect="pop"
+                    as="span"
+                    delay={0.2 + index * 0.12}
+                    className="shrink-0"
                   >
-                    {step.id}
-                  </span>
+                    <span
+                      aria-hidden
+                      className="flex h-14 w-14 items-center justify-center rounded-full bg-msk-sun-300 font-display text-xl font-bold text-msk-coral-700"
+                    >
+                      {step.id}
+                    </span>
+                  </Reveal>
                   <div>
                     <h3 className="font-display text-xl font-bold text-msk-night-900">
                       {step.title}
