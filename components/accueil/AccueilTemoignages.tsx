@@ -675,7 +675,9 @@ export const AccueilTemoignages = () => {
                       className="absolute inset-0 rounded-full border-2 border-msk-cream-300 bg-white"
                     />
                   )}
-                  <span className="relative">{f.label}</span>
+                  {/* Espace explicite : sans lui le nom accessible du bouton
+                      concatène les deux spans — « Tout21 ». */}
+                  <span className="relative">{f.label}</span>{" "}
                   <span
                     className={cn(
                       "relative rounded-full px-1.5 py-0.5 text-[0.65rem]",
@@ -720,7 +722,7 @@ export const AccueilTemoignages = () => {
                 className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-msk-night-900"
                 fillClassName="border-2 border-msk-cream-200 bg-white shadow-sm"
               >
-                Voir plus de témoignages
+                Voir plus
               </MorphButton>
             )}
             <MorphButton
@@ -728,7 +730,7 @@ export const AccueilTemoignages = () => {
               className="font-display text-sm font-semibold uppercase tracking-[0.14em] text-white"
               fillClassName="bg-msk-coral-600 shadow-lg shadow-msk-coral-600/25"
             >
-              Partager votre histoire
+              Témoigner
             </MorphButton>
           </div>
           <p className="mt-6 text-center text-sm text-msk-night-700">

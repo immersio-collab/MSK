@@ -1,8 +1,7 @@
 "use client";
 
-import Image from "next/image";
-
 import { FadeUp } from "@/components/motion/FadeUp";
+import { LottieMark } from "@/components/motion/LottieMark";
 import { AccueilStepsRibbon } from "@/components/accueil/AccueilStepsRibbon";
 import { METHODE_STEPS } from "@/lib/data/methode-steps";
 
@@ -30,54 +29,82 @@ import { METHODE_STEPS } from "@/lib/data/methode-steps";
  * Step identity (number + verb) comes from METHODE_STEPS; titles, copy and
  * presentation are this surface's own.
  */
+/*
+  LES PASTILLES NE SONT PAS DÉCORATIVES — elles servent de FOND MESURÉ.
+
+  Les marques viennent du paquet de /la-methode (MethodeStepsSection) et sont
+  appariées par index : METHODE_STEPS pilote les deux surfaces, donc l'étape N
+  d'ici porte la Lottie de la carte N là-bas. Même verbe, même dessin.
+
+  Mais un Lottie porte ses couleurs EN DUR : il n'hérite pas de son conteneur
+  (voir l'en-tête de LottieMark). Or /la-methode a choisi le fond de chaque
+  carte contre le dessin qu'elle porte, ratios à l'appui — quatre de ces six
+  marques sont peintes en crème, jaune ou orange clair et DISPARAISSENT sur un
+  fond pâle. Les cartes de l'accueil, elles, sont volontairement claires
+  (coral-50 / blue-50 / sun-50, la grammaire de la page).
+
+  D'où `mark` : une pastille qui reprend, telle quelle, la valeur déjà mesurée
+  sur /la-methode. La carte reste claire, la marque garde son contraste. Ne pas
+  repasser ces pastilles en pastel « pour l'harmonie » sans refaire la mesure —
+  c'est exactement l'erreur que les commentaires de MethodeStepsSection
+  documentent.
+*/
 const DETAILS = [
   {
     title: "L'observation bienveillante",
     description:
       "Observer l'enfant en situation réelle et reprendre son parcours scolaire, sans jugement ni étiquette.",
-    image: "/Cute baby Peek a boo.svg",
-    panel: "bg-msk-coral-100",
     bg: "bg-msk-coral-50",
+    // Rouges et verts sombres : la seule marque du paquet qui exige du CLAIR.
+    lottie: "/methode/lottie/eyes-book.json",
+    mark: "bg-msk-cream-50",
   },
   {
     title: "L'analyse pluridisciplinaire",
     description:
       "Croiser les regards de l'équipe et le vôtre, pour cerner son niveau réel et les contraintes à respecter.",
-    image: "/Parenting.svg",
-    panel: "bg-msk-blue-200",
     bg: "bg-msk-blue-50",
+    // Jaune (68 %) et orange : il faut du sombre.
+    lottie: "/methode/lottie/card2.json",
+    mark: "bg-msk-coral-900",
   },
   {
     title: "Le groupe sur-mesure",
     description:
       "Un groupe de cinq formé par taille et niveau de développement, jamais par âge, qui tourne d'une salle à l'autre.",
-    image: "/Colorful abacus with wooden frame.svg",
-    panel: "bg-msk-sun-200",
     bg: "bg-msk-sun-50",
+    // Le dessin le plus lumineux du paquet : il appelle le fond le plus noir.
+    lottie: "/methode/lottie/card5.json",
+    mark: "bg-msk-night-950",
   },
   {
     title: "La remédiation & la Neuro-Gym",
     description:
       "Reprendre les bases manquantes avec du matériel concret ; la Neuro-Gym soutient l'attention et la régulation.",
-    image: "/kid swing.svg",
-    panel: "bg-msk-coral-200",
     bg: "bg-msk-coral-50",
+    // Le cas difficile : verts moyen + très sombre, maximum 2,86 et c'est sur
+    // BLANC. Aucun fond de la palette ne fait mieux — la limite vient de la
+    // marque, pas du choix.
+    lottie: "/methode/lottie/desc.json",
+    mark: "bg-white",
   },
   {
     title: "Le lien continu avec la famille",
     description:
       "Des bilans réguliers, et selon les cas le suivi des démarches ou la journée organisée autour de sa santé.",
-    image: "/kids playing - kidcare.svg",
-    panel: "bg-msk-blue-100",
     bg: "bg-msk-blue-50",
+    // Crème très clair (68 %) et jaune : n'importe quel fond sombre le sert.
+    lottie: "/methode/lottie/card8.json",
+    mark: "bg-msk-blue-900",
   },
   {
     title: "Reprendre sa place",
     description:
       "Tenir sa place dans sa classe et parmi les autres, jusqu'au jour où son école lui suffit.",
-    image: "/Graduation.svg",
-    panel: "bg-msk-sun-100",
     bg: "bg-msk-sun-50",
+    // Orange (51 %) et jaune : l'orange plafonne, night-800 garde de la marge.
+    lottie: "/methode/lottie/card3.json",
+    mark: "bg-msk-night-800",
   },
 ];
 
@@ -109,7 +136,7 @@ export const AccueilSteps = () => {
         is safe — `clip` never creates one — and is enough, since the Lottie's
         strands run wider than its own comp.
       */}
-      <AccueilStepsRibbon className="pointer-events-none absolute inset-0 z-0 h-full w-full" />
+      <AccueilStepsRibbon className="pointer-events-none absolute inset-0 z-0 hidden h-full w-full lg:block" />
 
       <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
         {/*
@@ -154,17 +181,13 @@ export const AccueilSteps = () => {
                 }}
               >
                 <div className="flex items-center justify-between gap-4">
+                  {/* `overflow-hidden` n'est pas cosmétique : LottieMark
+                      redimensionne son hôte en ligne après mesure et peut aller
+                      jusqu'à 1,6× la largeur du cadre. La pastille le borne. */}
                   <span
-                    className={`flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-[1rem] sm:h-20 sm:w-20 ${step.panel}`}
+                    className={`flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-[1rem] sm:h-20 sm:w-20 ${step.mark}`}
                   >
-                    <Image
-                      src={step.image}
-                      alt=""
-                      aria-hidden
-                      width={80}
-                      height={80}
-                      className="h-full w-full object-contain p-2"
-                    />
+                    <LottieMark src={step.lottie} className="h-12 w-12 sm:h-14 sm:w-14" />
                   </span>
                   <span className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-msk-night-700">
                     Étape {step.number} · {step.verb}

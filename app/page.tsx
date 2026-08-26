@@ -48,7 +48,7 @@ export default function HomePage() {
         titleAccent="demandent"
         description="Une question qui n'est pas là ? Écrivez-nous, nous répondons à chacune."
         items={FAQ_ACCUEIL}
-        ctaLabel="Poser votre question"
+        ctaLabel="Poser la vôtre"
         ctaHref="/contact"
       />
 

@@ -22,7 +22,7 @@ export default function ActualitesPage() {
         titleAccent="articles"
         description="Une question qui n'est pas là ? Écrivez-nous, nous répondons à chacune."
         items={FAQ_ACTUALITES}
-        ctaLabel="Poser votre question"
+        ctaLabel="Poser la vôtre"
         ctaHref="/contact"
       />
 

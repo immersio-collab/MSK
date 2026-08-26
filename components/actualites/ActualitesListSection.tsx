@@ -133,7 +133,9 @@ export const ActualitesListSection = () => {
                 ) : (
                   <span aria-hidden className="absolute inset-0 rounded-full border-2 border-msk-cream-300 bg-white" />
                 )}
-                <span className="relative">{cat.label}</span>
+                {/* Espace explicite : sans lui le nom accessible du bouton
+                    concatène les deux spans — « Tous6 » au lecteur d'écran. */}
+                <span className="relative">{cat.label}</span>{" "}
                 <span
                   className={cn(
                     "relative rounded-full px-1.5 py-0.5 text-[0.65rem]",

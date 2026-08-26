@@ -27,7 +27,7 @@ export const MethodeStatementSection = () => {
       }
       button={{
         href: "/notre-centre/troubles-accompagnes",
-        label: "Troubles accompagnés",
+        label: "Les situations",
         fillClassName: "bg-msk-coral-600",
       }}
       image={{ src: "/accompagnement.jpeg", alt: "Séance d'accompagnement" }}

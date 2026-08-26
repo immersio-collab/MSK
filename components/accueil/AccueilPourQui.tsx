@@ -93,7 +93,7 @@ export const AccueilPourQui = () => {
                     <div className="flex flex-wrap items-center gap-3">
                       <h3 className="font-display text-[1.5rem] font-bold uppercase leading-tight text-msk-night-950">
                         {profile.title}
-                      </h3>
+                      </h3>{" "}
                       <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-msk-night-800">
                         {profile.age}
                       </span>

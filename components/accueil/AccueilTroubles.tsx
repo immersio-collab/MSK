@@ -110,7 +110,7 @@ const Cta = () => (
     fillClassName="bg-msk-night-950 shadow-lg shadow-msk-night-950/25"
     maxDiameter="18rem"
   >
-    Voir toutes les situations accueillies
+    Toutes les situations
   </MorphButton>
 );
 
@@ -294,11 +294,24 @@ export const AccueilTroubles = () => {
         </FadeUp>
 
         <div className="mt-6 flex min-h-0 flex-1 items-center">
+          {/* `overflow-x-auto` ne reste pas horizontal : dès qu'un axe n'est
+              plus `visible`, l'autre passe de `visible` à `auto`. Ce <ul> est
+              donc AUSSI un scrollport vertical, et le moindre débord bas y
+              crée une barre de défilement.
+              D'où `y={0}` sur les cartes : le `y: 40` par défaut de FadeUp les
+              posait 40px sous leur <li>, soit 24px de trop une fois les 16px
+              de `pb-4` déduits — un petit scroll vertical parasite sur mobile.
+              Pire, il ne disparaissait jamais : `whileInView` observe le
+              viewport, or les cartes 3 à 6 sont hors écran HORIZONTALEMENT et
+              ne déclenchent donc pas tant qu'on n'a pas swipé. Elles restaient
+              à y:40 indéfiniment. Le fondu seul suffit ici ; l'élan vertical
+              n'apportait rien dans un carrousel qui glisse latéralement. */}
           <ul className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4 sm:px-10">
             {TROUBLES.map((trouble, index) => (
               <li key={trouble.slug} className="snap-center">
                 <FadeUp
                   delay={0.06 * index}
+                  y={0}
                   className={`flex aspect-[0.72] w-[62vw] max-w-[240px] flex-col justify-between rounded-[1rem] p-5 shadow-lg shadow-msk-night-900/15 ${
                     LOOKS[trouble.tone].card
                   }`}

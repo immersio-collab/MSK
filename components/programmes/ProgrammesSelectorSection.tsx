@@ -157,7 +157,9 @@ export const ProgrammesSelectorSection = () => {
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   />
                 ) : null}
-                <span className="relative">{p.title}</span>
+                {/* Espace explicite : sans lui le nom accessible du bouton
+                    concatène les deux spans — « Maternelle2–5 ans ». */}
+                <span className="relative">{p.title}</span>{" "}
                 <span
                   className={cn(
                     "relative rounded-full px-2 py-0.5 text-xs normal-case tracking-normal",
@@ -188,7 +190,7 @@ export const ProgrammesSelectorSection = () => {
               <div className="flex flex-wrap items-center gap-3">
                 <h3 className="font-display text-3xl font-bold uppercase leading-none text-msk-night-900">
                   {prog.title}
-                </h3>
+                </h3>{" "}
                 <span className={cn("rounded-full px-3 py-1 text-sm font-semibold", teinte.age)}>
                   {prog.age}
                 </span>

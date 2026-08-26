@@ -32,7 +32,7 @@ export default function ContactPage() {
         titleAccent="écrire"
         description="Les questions que l'on nous pose le plus souvent avant un premier contact."
         items={FAQ_CONTACT}
-        ctaLabel="Aller au formulaire"
+        ctaLabel="Le formulaire"
         ctaHref="#formulaire"
       />
     </div>

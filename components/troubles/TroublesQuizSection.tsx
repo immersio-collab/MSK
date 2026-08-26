@@ -291,7 +291,7 @@ export function TroublesQuizSection() {
                         className="font-semibold text-white"
                         fillClassName="bg-msk-coral-600 shadow-lg shadow-msk-coral-600/25"
                       >
-                        Prendre RDV pour un bilan gratuit
+                        Bilan gratuit
                         <ArrowRight className="h-4 w-4" />
                       </MorphButton>
                     </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { AnimationItem } from "lottie-web";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -47,8 +47,30 @@ const DRAW_COMPLETE_FRAME = 162;
 
 export const AccueilStepsRibbon = ({ className }: { className?: string }) => {
   const host = useRef<HTMLDivElement | null>(null);
+  const [desktop, setDesktop] = useState(false);
+
+  /*
+    Le ruban n'est montré qu'à partir de `lg` — AccueilSteps pose `hidden
+    lg:block`. Masquer en CSS ne suffit pas : le composant se monterait quand
+    même et mobile paierait lottie-web (~250KB) plus ribbon.json pour un
+    élément qu'il n'affiche jamais. Ce garde coupe le chargement à la source.
+
+    `matchMedia` plutôt qu'une simple mesure : la valeur DOIT rester alignée
+    sur le breakpoint `lg` de Tailwind (1024px), et l'écouteur rattrape le
+    franchissement — rotation d'iPad, fenêtre de bureau redimensionnée — que
+    la lecture unique manquerait.
+  */
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const sync = () => setDesktop(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
 
   useEffect(() => {
+    if (!desktop) return;
+
     const el = host.current;
     if (!el) return;
 
@@ -104,7 +126,7 @@ export const AccueilStepsRibbon = ({ className }: { className?: string }) => {
       anim?.destroy();
       anim = null;
     };
-  }, []);
+  }, [desktop]);
 
   return <div ref={host} aria-hidden className={className} />;
 };

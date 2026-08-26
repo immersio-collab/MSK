@@ -53,7 +53,7 @@ export default function ProgrammesPage() {
         titleAccent="programme"
         description="Une question qui n'est pas là ? Écrivez-nous, nous répondons à chacune."
         items={FAQ_PROGRAMMES}
-        ctaLabel="Poser votre question"
+        ctaLabel="Poser la vôtre"
         ctaHref="/contact"
       />
 

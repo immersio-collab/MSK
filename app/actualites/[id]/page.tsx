@@ -267,7 +267,7 @@ export default function ArticlePage({ params }: PageProps) {
         titleAccent="lecture"
         description="Une question qui n'est pas là ? Écrivez-nous, nous répondons à chacune."
         items={FAQ_ARTICLE}
-        ctaLabel="Poser votre question"
+        ctaLabel="Poser la vôtre"
         ctaHref="/contact"
       />
 

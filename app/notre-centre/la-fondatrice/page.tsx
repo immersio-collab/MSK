@@ -25,7 +25,7 @@ export default function FondatricePage() {
         titleAccent="fondatrice"
         description="Une question qui n'est pas là ? Écrivez-nous, nous répondons à chacune."
         items={FAQ_FONDATRICE}
-        ctaLabel="Poser votre question"
+        ctaLabel="Poser la vôtre"
         ctaHref="/contact"
       />
 

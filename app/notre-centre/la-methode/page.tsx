@@ -68,7 +68,7 @@ export default function LaMethodePage() {
         titleAccent="méthode"
         description="Une question qui n'est pas là ? Écrivez-nous, nous répondons à chacune."
         items={FAQ_METHODE}
-        ctaLabel="Poser votre question"
+        ctaLabel="Poser la vôtre"
         ctaHref="/contact"
       />
 

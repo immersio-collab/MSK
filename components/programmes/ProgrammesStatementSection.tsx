@@ -22,7 +22,7 @@ export const ProgrammesStatementSection = () => {
       }
       button={{
         href: "/contact",
-        label: "Demander une inscription",
+        label: "S'inscrire",
         fillClassName: "bg-msk-coral-600",
       }}
       image={{ src: "/materrnelle.jpg", alt: "Classe maternelle MSK" }}

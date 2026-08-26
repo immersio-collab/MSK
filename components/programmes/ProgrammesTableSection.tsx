@@ -172,7 +172,7 @@ export const ProgrammesTableSection = () => {
               <header className={cn("flex items-center justify-between px-6 py-4", fiche.teinte.bandeau)}>
                 <h3 className={cn("font-display text-xl font-bold uppercase leading-none", fiche.teinte.bandeauTitre)}>
                   {fiche.titre}
-                </h3>
+                </h3>{" "}
                 <span className={cn("rounded-full px-3 py-1 text-sm font-semibold", fiche.teinte.bandeauAge)}>
                   {fiche.age}
                 </span>
