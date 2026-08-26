@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 
-import { AssetSlot } from "@/components/common/AssetSlot";
+
 import { CloudDrift } from "@/components/motion/CloudDrift";
 import { PageHero } from "@/components/common/PageHero";
 import { useHeroParallax } from "@/hooks/use-hero-parallax";
@@ -68,11 +68,10 @@ export const MethodeHeroSection = () => {
 
           {/* Flanc gauche de la carte-titre, sur le triangle crème — la zone
               calme du héros (les nuages restent dans la bande haute). */}
-          <AssetSlot
-            label="Livre ouvert"
-            hint="SVG animé"
-            tone="bg-white/70 text-msk-coral-800"
-            className="absolute bottom-[16%] left-[4%] hidden w-36 -rotate-3 lg:flex"
+          <img
+            src="/Reading Book.svg"
+            alt=""
+            className="absolute bottom-[16%] left-[4%] hidden w-36 -rotate-3 lg:block"
           />
         </>
       }

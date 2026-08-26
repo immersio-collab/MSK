@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 
-import { AssetSlot } from "@/components/common/AssetSlot";
+
 import { CloudDrift } from "@/components/motion/CloudDrift";
 import { PageHero } from "@/components/common/PageHero";
 import { useHeroParallax } from "@/hooks/use-hero-parallax";
@@ -101,11 +101,9 @@ export const TroublesHeroSection: React.FC = () => {
       }
       media={
         // Contrat des héros : boîte média commune, jusqu'ici vide sur cette page.
-        <AssetSlot
-          label="Oiseau"
-          hint="SVG animé"
-          tone="bg-white/60 text-msk-blue-800"
-          padding="px-4 py-2"
+        <img
+          src="/Cute Bird Flapping Animation.svg"
+          alt=""
           className="h-full w-44 rotate-2"
         />
       }

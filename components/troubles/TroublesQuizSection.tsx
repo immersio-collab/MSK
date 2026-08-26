@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Check, HeartHandshake, RotateCcw, Sprout } from "lucide-react";
-import { AssetSlot } from "@/components/common/AssetSlot";
+
 import { CloudDrift } from "@/components/motion/CloudDrift";
 import { MorphButton } from "@/components/motion/MorphButton";
 import { cn } from "@/lib/utils";
@@ -314,13 +314,12 @@ export function TroublesQuizSection() {
               bas-gauche de la carte. Remplacez le slot par votre <img>, même taille. */}
           <div
             aria-hidden
-            className="pointer-events-none absolute -bottom-8 -left-3 w-28 -rotate-6 sm:-left-8 sm:w-36 md:-bottom-10 md:w-44"
+            className="pointer-events-none absolute -bottom-8 -left-3 w-28 sm:-left-8 sm:w-36 md:-bottom-10 md:w-44"
           >
-            <AssetSlot
-              label="SVG"
-              hint="Parent & enfant"
-              tone="bg-msk-blue-50 text-msk-blue-800"
-              className="aspect-square w-full shadow-lg"
+            <img
+              src="/_unused/Animao Kids - Ptria Escola (1).svg"
+              alt=""
+              className="aspect-square w-full"
             />
           </div>
         </div>

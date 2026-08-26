@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AssetSlot } from "@/components/common/AssetSlot";
+
 import { ProgrammesHeroSection } from "@/components/programmes/ProgrammesHeroSection";
 
 import { ProgrammesSelectorSection } from "@/components/programmes/ProgrammesSelectorSection";
@@ -34,10 +34,9 @@ export default function ProgrammesPage() {
         overlay={
           // Remplace l'ancien games icon.svg : 1,66 Mo pour une icône générique
           // posée nue sur la photo — verdict « remplacer » de l'audit décor.
-          <AssetSlot
-            label="Jeu"
-            hint="SVG animé léger"
-            tone="bg-white/80 text-msk-blue-800"
+          <img
+            src="/duck.svg"
+            alt=""
             className="absolute bottom-4 right-2 w-36 rotate-2 md:bottom-8 md:right-10 md:w-44"
           />
         }

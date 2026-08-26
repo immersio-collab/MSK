@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Calendar } from "lucide-react";
-import { AssetSlot } from "@/components/common/AssetSlot";
+
 
 import {
   ARTICLES,
@@ -102,11 +102,10 @@ export const ActualitesListSection = () => {
     <section id="articles" className="relative overflow-hidden bg-msk-coral-50 pb-24 pt-20 md:pb-28 md:pt-24">
       {/* Bande haute, au-dessus des filtres — la zone la plus sûre de la
           section (tout le reste est cliquable). */}
-      <AssetSlot
-        label="Avion en papier"
-        hint="SVG animé"
-        tone="bg-white/80 text-msk-coral-700"
-        className="pointer-events-none absolute right-[4%] top-6 hidden w-32 rotate-6 sm:flex"
+      <img
+        src="/news error.svg"
+        alt=""
+        className="pointer-events-none absolute right-[4%] top-6 hidden w-32 rotate-6 sm:block"
       />
       <div className="relative mx-auto w-full max-w-6xl px-6 sm:px-10">
         {/* Filtres : la pastille bleu nuit glisse d'une catégorie à l'autre. */}

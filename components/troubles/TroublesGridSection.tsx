@@ -5,7 +5,7 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight } from "lucide-react";
-import { AssetSlot } from "@/components/common/AssetSlot";
+
 import { CloudDrift } from "@/components/motion/CloudDrift";
 import { TROUBLES, type TroubleItem } from "@/lib/data/troubles";
 import { cn } from "@/lib/utils";
@@ -219,10 +219,9 @@ export function TroublesGridSection() {
         />
 
         {/* Marge latérale hors du max-w-5xl — n'existe qu'en très large. */}
-        <AssetSlot
-          label="Ballon"
-          hint="SVG animé"
-          tone="bg-white/80 text-msk-blue-800"
+        <img
+          src="/Ballon.svg"
+          alt=""
           className="absolute right-[2%] top-[40%] hidden w-32 rotate-3 xl:flex"
         />
       </div>

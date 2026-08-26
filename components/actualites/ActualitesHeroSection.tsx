@@ -1,6 +1,6 @@
 "use client";
 
-import { AssetSlot } from "@/components/common/AssetSlot";
+
 import { CloudDrift } from "@/components/motion/CloudDrift";
 import { PageHero } from "@/components/common/PageHero";
 
@@ -63,11 +63,9 @@ export const ActualitesHeroSection = () => {
       media={
         // Contrat des héros : ce héros n'avait AUCUN visuel au-dessus de la
         // carte, seul des six. Slot en attente de l'asset (fourni à la main).
-        <AssetSlot
-          label="Cerf-volant"
-          hint="SVG animé"
-          tone="bg-white/60 text-msk-coral-800"
-          padding="px-4 py-2"
+        <img
+          src="/Loading 40 _ Paperplane.svg"
+          alt=""
           className="h-full w-44 -rotate-2"
         />
       }

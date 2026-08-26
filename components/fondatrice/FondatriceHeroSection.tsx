@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 
-import { AssetSlot } from "@/components/common/AssetSlot";
+import { LottieMark } from "@/components/motion/LottieMark";
 import { CloudDrift } from "@/components/motion/CloudDrift";
 import { PageHero } from "@/components/common/PageHero";
 import { useHeroParallax } from "@/hooks/use-hero-parallax";
@@ -66,11 +66,9 @@ export const FondatriceHeroSection = () => {
 
           {/* Triangle crème bas-droit, sous la diagonale — zone calme, jamais
               traversée par les nuages. */}
-          <AssetSlot
-            label="Papillon"
-            hint="SVG animé"
-            tone="bg-white/70 text-msk-coral-800"
-            className="absolute bottom-[6%] right-[5%] hidden w-32 rotate-3 lg:flex"
+          <LottieMark
+            src="/Butterfly Flying.json"
+            className="absolute bottom-[6%] right-[5%] hidden w-32 rotate-3 lg:block"
           />
         </>
       }

@@ -13,7 +13,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-import { AssetSlot } from "@/components/common/AssetSlot";
+
 import { FadeUp } from "@/components/motion/FadeUp";
 import { cn } from "@/lib/utils";
 import { Eyebrow } from "@/components/common/Eyebrow";
@@ -135,15 +135,15 @@ export const ProgrammesTableSection = () => {
       {/* Marges latérales hors du max-w-4xl — la meilleure zone vide de la
           page, mais elle n'existe qu'en très large : xl only. Fond blue-50 :
           jamais de blanc ici (invisible). */}
-      <AssetSlot
-        label="Crayon"
-        tone="bg-white/80 text-msk-blue-800"
-        className="pointer-events-none absolute left-[2%] top-[42%] hidden w-28 -rotate-6 xl:flex"
+      <img
+        src="/Pencil Smart.svg"
+        alt=""
+        className="pointer-events-none absolute left-[2%] top-[42%] hidden w-28 -rotate-6 xl:block"
       />
-      <AssetSlot
-        label="Règle"
-        tone="bg-white/80 text-msk-blue-800"
-        className="pointer-events-none absolute right-[2%] top-[38%] hidden w-28 rotate-6 xl:flex"
+      <img
+        src="/Strong Pencil.svg"
+        alt=""
+        className="pointer-events-none absolute right-[2%] top-[38%] hidden w-28 rotate-6 xl:block"
       />
       <div className="mx-auto max-w-4xl px-6 sm:px-10">
         <FadeUp>

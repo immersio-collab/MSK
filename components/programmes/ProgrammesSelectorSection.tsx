@@ -5,7 +5,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, MoonStar, Repeat, Sunrise, Users } from "lucide-react";
 
-import { AssetSlot } from "@/components/common/AssetSlot";
+
 import { FadeUp } from "@/components/motion/FadeUp";
 import { cn } from "@/lib/utils";
 import { Eyebrow } from "@/components/common/Eyebrow";
@@ -112,11 +112,10 @@ export const ProgrammesSelectorSection = () => {
       className="relative overflow-hidden bg-msk-cream-200 py-[clamp(1.5rem,3.75svh,4.5rem)] lg:screen-section"
     >
       {/* Flanc du titre centré — section pincée à l'écran : absolu strict. */}
-      <AssetSlot
-        label="Formes géométriques"
-        hint="SVG animé"
-        tone="bg-white/80 text-msk-blue-800"
-        className="pointer-events-none absolute left-[4%] top-[9%] hidden w-36 -rotate-3 lg:flex"
+      <img
+        src="/_unused/Smart Paper with Pencil.svg"
+        alt=""
+        className="pointer-events-none absolute left-[4%] top-[9%] hidden w-36 -rotate-3 lg:block"
       />
       <div className="mx-auto max-w-6xl px-6 sm:px-10">
         <FadeUp>

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { AssetSlot } from "@/components/common/AssetSlot";
+
 
 export const FondatriceGridSection: React.FC = () => {
   return (
@@ -16,10 +16,9 @@ export const FondatriceGridSection: React.FC = () => {
             bleus génériques) + débord viewport mobile de ~24px (la section n'a
             pas d'overflow-hidden). Le principe du sticker débordant du coin est
             gardé ; `right-0` sur mobile pour ne plus créer de scroll horizontal. */}
-        <AssetSlot
-          label="Diplôme"
-          hint="SVG animé"
-          tone="bg-white/80 text-msk-coral-700"
+        <img
+          src="/_unused/Diploma Certificate Animation Icon.svg"
+          alt=""
           className="absolute -top-8 right-2 z-20 w-28 rotate-3 pointer-events-none md:-right-10 md:w-36"
         />
 

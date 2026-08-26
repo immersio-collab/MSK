@@ -8,7 +8,7 @@ import { NextStepSection } from "@/components/common/NextStepSection";
 import { ArticlePartageRow } from "@/components/actualites/ArticlePartageRow";
 import { FaqSection } from "@/components/common/FaqSection";
 import { FAQ_ARTICLE } from "@/lib/data/faq";
-import { AssetSlot } from "@/components/common/AssetSlot";
+
 import { CloudDrift } from "@/components/motion/CloudDrift";
 import { HERO_BAND_CLIP } from "@/components/common/PageHero";
 import {
@@ -84,15 +84,7 @@ export default function ArticlePage({ params }: PageProps) {
             className="absolute left-0 top-[26%] hidden w-32 text-white/90 lg:block"
           />
 
-          {/* Coin droit de la bande — l'asymétrie relevée par l'audit (la liste
-              a son soleil, l'article n'avait rien). La bande change de couleur
-              par catégorie (coral/blue/sun) : l'asset devra être BLANC. */}
-          <AssetSlot
-            label="Nuage blanc"
-            hint="lisible sur les 3 bandes"
-            tone="bg-white/80 text-msk-night-800"
-            className="absolute right-[4%] top-12 hidden w-32 rotate-2 lg:flex"
-          />
+
         </div>
 
         <div className="relative mx-auto w-full max-w-3xl px-6">
