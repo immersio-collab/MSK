@@ -19,7 +19,7 @@ export const FondatriceGridSection: React.FC = () => {
         <img
           src="/diploma.svg"
           alt=""
-          className="absolute -top-8 right-2 z-20 w-28 rotate-3 pointer-events-none md:-right-10 md:w-36"
+          className="absolute -top-8 right-2 z-20 hidden w-28 rotate-3 pointer-events-none md:block md:-right-10 md:w-36"
         />
 
         <div className="bg-white rounded-3xl overflow-hidden shadow-xl border border-msk-cream-200 flex flex-col md:flex-row relative z-10">

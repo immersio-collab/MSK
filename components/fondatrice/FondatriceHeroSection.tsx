@@ -1,21 +1,15 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 
 import { LottieMark } from "@/components/motion/LottieMark";
 import { CloudDrift } from "@/components/motion/CloudDrift";
 import { PageHero } from "@/components/common/PageHero";
-import { useHeroParallax } from "@/hooks/use-hero-parallax";
 
 export const FondatriceHeroSection = () => {
-  const root = useRef<HTMLElement>(null);
-  const image = useRef<HTMLImageElement>(null);
-
-  useHeroParallax(root, [{ ref: image, vars: { yPercent: 120 } }]);
 
   return (
     <PageHero
-      rootRef={root}
       band="bg-msk-coral-300"
       card="bg-white"
       title={
@@ -77,7 +71,6 @@ export const FondatriceHeroSection = () => {
         // L'ancien scale 1.5/1.8 + translate faisait déborder l'illustration de
         // 478px sur un écran de 375px (scroll horizontal mobile mesuré : 24px).
         <img
-          ref={image}
           src="/children playing.svg"
           alt=""
           aria-hidden

@@ -66,7 +66,7 @@ export const StatementSection = ({
               src="/methode/sun-cloud.svg"
               alt=""
               aria-hidden
-              className="pointer-events-none absolute -right-6 -top-16 z-0 w-40 sm:w-52 lg:-right-12 lg:-top-24 lg:w-64"
+              className="pointer-events-none absolute -right-10 -top-20 z-0 w-40 sm:w-52 lg:-right-24 lg:-top-36 lg:w-64"
             />
             {/* Bridé sur mobile : à 26rem le chat (416px) débordait d'un écran
                 de 375px et pouvait glisser sous le paragraphe suivant en
@@ -75,7 +75,7 @@ export const StatementSection = ({
               src="/methode/running-cat.svg"
               alt=""
               aria-hidden
-              className="pointer-events-none absolute -bottom-16 -left-10 z-0 w-64 sm:-bottom-28 sm:-left-24 sm:w-[34rem] lg:-bottom-44 lg:-left-40 lg:w-[44rem]"
+              className="pointer-events-none absolute -bottom-24 -left-16 z-0 w-64 sm:-bottom-36 sm:-left-32 sm:w-[34rem] lg:-bottom-60 lg:-left-56 lg:w-[44rem]"
             />
           </div>
         </FadeUp>

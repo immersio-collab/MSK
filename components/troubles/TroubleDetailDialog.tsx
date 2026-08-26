@@ -4,7 +4,6 @@ import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { ArrowRight, X, type LucideIcon } from "lucide-react";
-import { AssetSlot } from "@/components/common/AssetSlot";
 import { MorphButton } from "@/components/motion/MorphButton";
 import type { TroubleItem } from "@/lib/data/troubles";
 import { cn } from "@/lib/utils";
@@ -25,8 +24,6 @@ export interface TroubleLook {
   icon: string;
   /** Couleur des libellés posés sur blanc (onglet, pill, intertitres). */
   label: string;
-  /** Tonalité de l'emplacement visuel (AssetSlot). */
-  slot: string;
   /** Anneau de focus clavier de la carte. */
   ring: string;
 }
@@ -34,8 +31,6 @@ export interface TroubleLook {
 interface TroubleDetailDialogProps {
   item: TroubleItem | null;
   /** Position 1-based dans la liste, pour « 01 / 08 ». */
-  position: number;
-  total: number;
   look: TroubleLook | null;
   Icon: LucideIcon | null;
   onClose: () => void;
@@ -51,8 +46,6 @@ const REVEAL: Variants = {
 
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-const pad = (n: number) => String(n).padStart(2, "0");
-
 /**
  * Fiche détaillée d'un trouble.
  *
@@ -67,8 +60,6 @@ const pad = (n: number) => String(n).padStart(2, "0");
  */
 export function TroubleDetailDialog({
   item,
-  position,
-  total,
   look,
   Icon,
   onClose,
@@ -151,7 +142,7 @@ export function TroubleDetailDialog({
             style={{ borderRadius: 28 }}
             className="relative z-10 flex max-h-[calc(100dvh-1.5rem)] w-full flex-col overflow-hidden bg-white shadow-2xl sm:max-h-[calc(100dvh-2rem)] sm:w-[min(44rem,calc(100vw-2rem))]"
           >
-            <div className={cn("relative shrink-0 px-6 pb-7 pt-6 md:px-9 md:pb-8 md:pt-8", look.card)}>
+            <div className={cn("relative shrink-0 px-5 pb-5 pt-5 sm:px-6 sm:pb-7 sm:pt-6 md:px-9 md:pb-8 md:pt-8", look.card)}>
               <button
                 ref={closeButton}
                 type="button"
@@ -174,25 +165,17 @@ export function TroubleDetailDialog({
                 <span
                   aria-hidden
                   className={cn(
-                    "flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-white shadow-md",
+                    "flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white shadow-md sm:h-16 sm:w-16",
                     look.icon,
                   )}
                 >
                   <Icon className="h-8 w-8" strokeWidth={2.2} />
                 </span>
                 <div className="min-w-0">
-                  <span
-                    className={cn(
-                      "inline-block rounded-full bg-white px-3 py-1 font-display text-[0.65rem] font-semibold uppercase tracking-[0.18em]",
-                      look.label,
-                    )}
-                  >
-                    Situation accueillie · {pad(position)} / {pad(total)}
-                  </span>
                   <h3
                     id={titleId}
                     className={cn(
-                      "mt-3 font-display text-3xl font-bold uppercase leading-[0.95] md:text-4xl",
+                      "font-display text-2xl font-bold uppercase leading-[0.95] sm:text-3xl md:text-4xl",
                       look.title,
                     )}
                   >
@@ -249,30 +232,20 @@ export function TroubleDetailDialog({
                 </ol>
               </motion.section>
 
-              {/* Dernière ligne : le CTA à gauche, le petit visuel décoratif à
-                  droite — en flux, donc jamais de chevauchement avec le texte. */}
-              <motion.div variants={REVEAL} className="mt-8 flex items-end justify-between gap-4">
+              {/* Le CTA occupe toute la largeur sur mobile : il partageait la
+                  ligne avec une boîte vide de 112px, vestige du placeholder
+                  décoratif retiré, qui le comprimait sur deux lignes. */}
+              <motion.div variants={REVEAL} className="mt-8">
                 <MorphButton
                   href="/contact"
                   size="sm"
-                  className="font-semibold text-white"
+                  className="w-full justify-center font-semibold text-white sm:w-auto"
                   fillClassName="bg-msk-blue-700 shadow-lg shadow-msk-blue-900/20"
                   maxDiameter="12rem"
                 >
                   Prendre rendez-vous
                   <ArrowRight className="h-4 w-4" />
                 </MorphButton>
-
-                {/* Emplacement du SVG décoratif de la fiche. Remplacez le slot
-                    par votre <img> (même taille : w-28 / md:w-32). */}
-                <div aria-hidden className="-mb-1 -mr-1 w-28 shrink-0 rotate-6 md:w-32">
-                  <AssetSlot
-                    label="SVG"
-                    hint={item.visuel}
-                    tone={look.slot}
-                    className="aspect-square w-full"
-                  />
-                </div>
               </motion.div>
             </motion.div>
           </motion.div>

@@ -124,7 +124,7 @@ export function TroublesQuizSection() {
           ref={sun}
           src="/methode/sun-cloud.svg"
           alt=""
-          className="absolute -right-6 top-[22%] w-28 sm:right-[3%] sm:w-44 lg:right-[7%] lg:w-64"
+          className="absolute -right-6 top-[10%] w-28 sm:right-[2%] sm:w-44 lg:right-[3%] lg:w-64"
         />
         <CloudDrift
           motion="float"

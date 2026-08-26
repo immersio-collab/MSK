@@ -43,6 +43,8 @@ export default function HomePage() {
 
       <AccueilTemoignages />
 
+      <AccueilGalerie />
+
       <FaqSection
         title="Ce que les parents nous"
         titleAccent="demandent"
@@ -54,7 +56,6 @@ export default function HomePage() {
 
       {/* La galerie sombre passe AVANT la CTA : NextStepSection est la
           dernière section de chaque page du site, l'accueil compris. */}
-      <AccueilGalerie />
 
       <NextStepSection
         eyebrow="Le centre"

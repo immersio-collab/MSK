@@ -32,14 +32,13 @@ export default function ProgrammesPage() {
         src="/neuro-gym.jpg"
         alt="Séance Neuro-Gym en classe"
         overlay={
-          // Joystick (motif « jeu » prévu par la carte décor, recadré +
-          // recoloré charte) — le canard qui l'avait remplacé reste la mascotte
-          // exclusive de /troubles. Halo clair : lisibilité sur photo.
+          // Le crayon a pris la place du joystick, parti sur la photo de
+          // /la-methode. Halo clair : lisibilité quelle que soit la photo.
           <img
-            src="/Joystick.svg"
+            src="/Walking Pencil.svg"
             alt=""
             aria-hidden="true"
-            className="pointer-events-none absolute bottom-4 right-2 w-36 rotate-2 drop-shadow-[0_0_16px_rgba(253,251,247,0.6)] md:bottom-8 md:right-10 md:w-44"
+            className="pointer-events-none absolute bottom-4 left-2 w-28 -rotate-2 drop-shadow-[0_0_16px_rgba(253,251,247,0.6)] md:bottom-8 md:left-10 md:w-36"
           />
         }
       />

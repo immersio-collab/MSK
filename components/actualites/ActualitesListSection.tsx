@@ -100,13 +100,6 @@ export const ActualitesListSection = () => {
 
   return (
     <section id="articles" className="relative overflow-hidden bg-msk-sun-50 pb-24 pt-20 md:pb-28 md:pt-24">
-      {/* Bande haute, au-dessus des filtres — la zone la plus sûre de la
-          section (tout le reste est cliquable). */}
-      <img
-        src="/news error.svg"
-        alt=""
-        className="pointer-events-none absolute right-[0.5%] top-[22rem] hidden w-36 rotate-6 min-[1440px]:block 2xl:w-48"
-      />
       <div className="relative mx-auto w-full max-w-6xl px-6 sm:px-10">
         {/* Filtres : la pastille bleu nuit glisse d'une catégorie à l'autre. */}
         <div role="group" aria-label="Filtrer les articles" className="flex flex-wrap justify-center gap-2.5">
@@ -206,6 +199,17 @@ export const ActualitesListSection = () => {
                   </span>
                 </div>
               </motion.article>
+
+              {/* Icône journal, posée sur le coin haut-GAUCHE de la carte, en
+                  pendant du sticker « À la une » qui tient le coin droit. Elle
+                  flottait auparavant dans la gouttière de la section, sans rien
+                  à quoi se rattacher. */}
+              <img
+                src="/news error.svg"
+                alt=""
+                aria-hidden="true"
+                className="pointer-events-none absolute -left-6 -top-8 hidden w-28 -rotate-6 sm:block md:-left-10 md:w-36"
+              />
 
               {/* Sticker « À la une », posé sur le coin. */}
               <span

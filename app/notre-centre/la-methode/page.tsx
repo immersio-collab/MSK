@@ -37,13 +37,13 @@ export default function LaMethodePage() {
         priority
         overlay={
           <>
-            {/* w-40 mobile : à w-64 les oiseaux couvraient 2/3 d'un écran de
-                375px. */}
+            {/* Le joystick a pris la place des oiseaux, partis animer « Nos
+                niveaux » sur /programmes. Halo clair : lisibilité sur photo. */}
             <img
-              src="/Bird pair love and flying sky.svg"
+              src="/Joystick.svg"
               alt=""
               aria-hidden="true"
-              className="absolute bottom-6 right-4 h-auto w-40 object-contain sm:w-56 md:bottom-8 md:right-14 md:w-80"
+              className="absolute bottom-6 right-4 h-auto w-36 object-contain drop-shadow-[0_0_16px_rgba(253,251,247,0.6)] sm:w-44 md:bottom-8 md:right-14 md:w-52"
             />
             {/* Le Sunny en pendant a été retiré (retour client : doublon de
                 décor sur une même photo, et 4e occurrence du soleil sur le

@@ -224,7 +224,7 @@ export const AccueilTroubles = () => {
         src="/Reading Book.svg"
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute left-[5%] top-[18%] z-10 hidden w-28 -rotate-6 lg:block"
+        className="pointer-events-none absolute left-[15%] top-[15%] z-10 hidden w-44 -rotate-6 lg:block"
       />
       <div className="relative hidden h-[100svh] flex-col px-6 pb-10 pt-[6.5rem] lg:flex lg:px-16">
         <FadeUp className="shrink-0 text-center">

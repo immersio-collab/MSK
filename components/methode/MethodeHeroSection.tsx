@@ -1,25 +1,18 @@
 "use client";
 
-import React, { useRef } from "react";
-
+import React from "react";
 
 import { CloudDrift } from "@/components/motion/CloudDrift";
 import { PageHero } from "@/components/common/PageHero";
-import { useHeroParallax } from "@/hooks/use-hero-parallax";
 
 /**
  * Le héros de référence du site : c'est sur celui-ci que les autres pages ont
  * été alignées.
  */
 export const MethodeHeroSection = () => {
-  const root = useRef<HTMLElement>(null);
-  const kid = useRef<HTMLImageElement>(null);
-
-  useHeroParallax(root, [{ ref: kid, vars: { yPercent: 120 } }]);
 
   return (
     <PageHero
-      rootRef={root}
       band="bg-msk-coral-500"
       card="bg-white"
       title="Une méthode en 6 étapes, pensée pour votre enfant"
@@ -73,7 +66,6 @@ export const MethodeHeroSection = () => {
         // PageHero (h-full), sans scale/translate — le fichier est recadré à son
         // dessin (viewBox croppé), c'est lui qui a été corrigé, pas la mise en page.
         <img
-          ref={kid}
           src="/kid swing.svg"
           alt=""
           aria-hidden

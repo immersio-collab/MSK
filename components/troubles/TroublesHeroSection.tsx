@@ -1,11 +1,9 @@
 "use client";
 
-import React, { useRef } from "react";
-
+import React from "react";
 
 import { CloudDrift } from "@/components/motion/CloudDrift";
 import { PageHero } from "@/components/common/PageHero";
-import { useHeroParallax } from "@/hooks/use-hero-parallax";
 
 /**
  * Hero à ciel ouvert : bandeau bleu coupé en diagonale, nuages qui dérivent.
@@ -16,14 +14,9 @@ import { useHeroParallax } from "@/hooks/use-hero-parallax";
  * ne porte que des motifs de CIEL ou liés au contenu de la page.
  */
 export const TroublesHeroSection: React.FC = () => {
-  const root = useRef<HTMLElement>(null);
-  const media = useRef<HTMLImageElement>(null);
-
-  useHeroParallax(root, [{ ref: media, vars: { yPercent: 120 } }]);
 
   return (
     <PageHero
-      rootRef={root}
       band="bg-msk-blue-300"
       card="bg-white"
       title={
@@ -79,7 +72,6 @@ export const TroublesHeroSection: React.FC = () => {
         // et le bébé qui flottaient dans le ciel ont été retirés — un canard de
         // bain n'a de rapport ni avec le ciel ni avec le contenu de la page.
         <img
-          ref={media}
           src="/fun-time.svg"
           alt=""
           aria-hidden

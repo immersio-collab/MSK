@@ -171,7 +171,7 @@ export const AccueilHero = () => {
       </motion.div>
       <motion.div
         style={reduce ? undefined : { y: puffBY }}
-        className="absolute right-[4%] top-[36%] z-0 w-20 sm:w-24"
+        className="absolute right-[4%] top-[44%] z-0 w-20 sm:top-[36%] sm:w-24"
       >
         <WhiteCloud />
       </motion.div>
@@ -225,7 +225,7 @@ export const AccueilHero = () => {
 
       <motion.div
         style={reduce ? undefined : { y: cloudAY }}
-        className="absolute left-[8%] top-[32%] z-20 w-24 lg:w-32"
+        className="absolute left-[2%] top-[26%] z-20 w-16 sm:left-[8%] sm:top-[32%] sm:w-24 lg:w-32"
       >
         <motion.div
           animate={reduce ? undefined : { x: [0, 10, 0], y: [0, -6, 0] }}
@@ -236,7 +236,7 @@ export const AccueilHero = () => {
       </motion.div>
       <motion.div
         style={reduce ? undefined : { y: cloudBY }}
-        className="absolute right-[10%] top-[20%] z-20 w-20 lg:w-28"
+        className="absolute right-[2%] top-[15%] z-20 w-16 sm:right-[10%] sm:top-[20%] sm:w-20 lg:w-28"
       >
         <motion.div
           animate={reduce ? undefined : { x: [0, -12, 0], y: [0, 8, 0] }}

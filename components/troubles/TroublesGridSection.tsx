@@ -262,8 +262,6 @@ export function TroublesGridSection() {
 
       <TroubleDetailDialog
         item={activeItem}
-        position={activeIndex + 1}
-        total={TROUBLES.length}
         look={activeItem ? LOOKS[activeItem.tone] : null}
         Icon={activeItem ? ICONS[activeItem.icon] : null}
         onClose={close}

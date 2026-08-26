@@ -112,14 +112,13 @@ export const ProgrammesSelectorSection = () => {
       className="relative overflow-hidden bg-msk-cream-200 py-[clamp(1.5rem,3.75svh,4.5rem)] lg:screen-section"
     >
       {/* Flanc du titre centré — section pincée à l'écran : absolu strict.
-          Le crayon vient de la FAQ, qui reste désormais sans décor (choix
-          client) ; il remplace Geometry.svg, dont le dessin réel ne faisait que
-          208x158 dans un cadre de 1080 — d'où sa petitesse irrécupérable. */}
+          Les oiseaux viennent de la photo de /la-methode ; ils remplacent le
+          crayon, parti à leur place sur la photo neuro-gym juste en dessous. */}
       <img
-        src="/Walking Pencil.svg"
+        src="/Bird pair love and flying sky.svg"
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute left-[4%] top-[22%] hidden w-36 -rotate-3 lg:block"
+        className="pointer-events-none absolute left-[4%] top-[22%] z-10 hidden w-44 -rotate-3 lg:block"
       />
       <div className="mx-auto max-w-6xl px-6 sm:px-10">
         <FadeUp>

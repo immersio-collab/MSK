@@ -55,7 +55,6 @@ export const LOOKS: Record<TroubleTone, TroubleLook> = {
     body: "text-msk-coral-50",
     icon: "text-msk-coral-600",
     label: "text-msk-coral-700",
-    slot: "bg-msk-coral-50 text-msk-coral-800",
     ring: "has-[:focus-visible]:ring-msk-coral-400",
   },
   sun: {
@@ -64,7 +63,6 @@ export const LOOKS: Record<TroubleTone, TroubleLook> = {
     body: "text-msk-night-800",
     icon: "text-msk-sun-600",
     label: "text-msk-sun-800",
-    slot: "bg-msk-sun-50 text-msk-sun-800",
     ring: "has-[:focus-visible]:ring-msk-sun-500",
   },
   blue: {
@@ -73,7 +71,6 @@ export const LOOKS: Record<TroubleTone, TroubleLook> = {
     body: "text-msk-night-800",
     icon: "text-msk-blue-600",
     label: "text-msk-blue-700",
-    slot: "bg-msk-blue-50 text-msk-blue-800",
     ring: "has-[:focus-visible]:ring-msk-blue-500",
   },
   night: {
@@ -82,7 +79,6 @@ export const LOOKS: Record<TroubleTone, TroubleLook> = {
     body: "text-msk-cream-200",
     icon: "text-msk-night-800",
     label: "text-msk-night-800",
-    slot: "bg-msk-cream-200 text-msk-night-700",
     ring: "has-[:focus-visible]:ring-msk-night-700",
   },
   coralLight: {
@@ -91,7 +87,6 @@ export const LOOKS: Record<TroubleTone, TroubleLook> = {
     body: "text-msk-night-800",
     icon: "text-msk-coral-600",
     label: "text-msk-coral-700",
-    slot: "bg-msk-coral-50 text-msk-coral-800",
     ring: "has-[:focus-visible]:ring-msk-coral-700",
   },
   sunDeep: {
@@ -100,7 +95,6 @@ export const LOOKS: Record<TroubleTone, TroubleLook> = {
     body: "text-msk-night-800",
     icon: "text-msk-sun-700",
     label: "text-msk-sun-800",
-    slot: "bg-msk-sun-50 text-msk-sun-900",
     ring: "has-[:focus-visible]:ring-msk-sun-700",
   },
 };

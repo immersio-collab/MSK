@@ -1,21 +1,15 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 
 import { CloudDrift } from "@/components/motion/CloudDrift";
 import { PageHero } from "@/components/common/PageHero";
-import { useHeroParallax } from "@/hooks/use-hero-parallax";
 
 /** Signature blue de la page : bande blue-400, carte blue-800 par-dessus. */
 export const ProgrammesHeroSection = () => {
-  const root = useRef<HTMLElement>(null);
-  const kid = useRef<HTMLImageElement>(null);
-
-  useHeroParallax(root, [{ ref: kid, vars: { yPercent: 120 } }]);
 
   return (
     <PageHero
-      rootRef={root}
       band="bg-msk-blue-400"
       card="bg-white"
       title="Un programme pour chaque âge"
@@ -58,7 +52,6 @@ export const ProgrammesHeroSection = () => {
       media={
         // Contrat des héros : h-full dans la boîte média commune, zéro hack.
         <img
-          ref={kid}
           src="/kids playing - kidcare.svg"
           alt=""
           aria-hidden
