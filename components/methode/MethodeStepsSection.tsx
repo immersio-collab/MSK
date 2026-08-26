@@ -42,10 +42,13 @@ const CARDS = [
   {
     description:
       "Notre équipe pluridisciplinaire croise ses observations avec votre témoignage de parent et ce que vous rapportez de son école. Deux choses en sortent : son niveau réel, et les contraintes à respecter — fatigue, santé, angoisse du matin, démarches en cours.",
-    // Jaune (68 %) et orange (28 %) : il faut du sombre. coral-900 (3,7) plutôt
+    // Jaune (68 %) et orange (28 %) : il faut du sombre. coral-800 plutôt que
+    // coral-900, qui lisait brun et non corail (retour client) — un seul cran
+    // plus clair, le jaune y tient 5,8 et l'orange 3,4, tous deux au-dessus de 3.
+    // Corail
     // qu'un bleu nuit — c'est la seule carte qui porte la signature corail de
     // la page, et le jaune y est franc.
-    card: "bg-msk-coral-900",
+    card: "bg-msk-coral-800",
     titleTone: "text-msk-sun-300",
     bodyTone: "text-msk-cream-100",
     lottie: "/methode/lottie/card2.json",
@@ -54,8 +57,9 @@ const CARDS = [
     description:
       "Votre enfant rejoint un groupe de cinq, constitué par taille et par niveau de développement — jamais par âge ni par classe d'origine. Le groupe tourne d'une salle à l'autre dans la journée, et le matériel Montessori est choisi pour ce qu'il a réellement à reprendre.",
     // Crème très clair (52 %) et jaune (47 %) : le dessin le plus lumineux du
-    // paquet, il appelle le fond le plus noir. night-950 (11,8).
-    card: "bg-msk-night-950",
+    // paquet, il appelle un fond très sombre. night-900 plutôt que night-950,
+    // qui lisait noir et non bleu nuit (retour client) : crème 14,7, jaune 10,8.
+    card: "bg-msk-night-900",
     titleTone: "text-msk-sun-300",
     bodyTone: "text-msk-cream-100",
     lottie: "/methode/lottie/card5.json",

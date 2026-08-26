@@ -20,23 +20,24 @@ export const MethodeHeroSection = () => {
   return (
     <PageHero
       rootRef={root}
-      band="bg-msk-coral-400"
-      card="bg-msk-coral-600"
+      band="bg-msk-coral-500"
+      card="bg-white"
       title="Une méthode en 6 étapes, pensée pour votre enfant"
-      titleClassName="text-msk-sun-200"
+      titleClassName="text-msk-night-900"
       pill="Notre Approche"
-      pillClassName="bg-white text-msk-coral-700"
+      pillClassName="bg-msk-coral-100 text-msk-coral-700"
       subtitle={
         <>
           De la première observation au jour où son école lui suffit :
           un chemin structuré, humain et concret.
         </>
       }
-      subtitleClassName="text-white"
+      subtitleClassName="text-msk-night-800"
       anchor={{
         href: "#etapes",
         label: "Aller aux six étapes",
-        className: "border-white/70 text-white hover:bg-white hover:text-msk-coral-700",
+        className:
+          "border-msk-night-900/20 text-msk-night-700 hover:bg-msk-night-900 hover:text-white",
       }}
       decor={
         // Clouds drift sideways forever, independent of scroll. Each is pinned
@@ -64,14 +65,6 @@ export const MethodeHeroSection = () => {
             speed={64}
             phase={0.8}
             className="absolute left-0 top-[8%] hidden w-32 text-msk-cream-50 lg:block"
-          />
-
-          {/* Flanc gauche de la carte-titre, sur le triangle crème — la zone
-              calme du héros (les nuages restent dans la bande haute). */}
-          <img
-            src="/Reading Book.svg"
-            alt=""
-            className="absolute bottom-[16%] left-[4%] hidden w-36 -rotate-3 lg:block"
           />
         </>
       }

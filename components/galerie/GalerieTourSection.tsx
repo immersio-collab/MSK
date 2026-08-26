@@ -46,13 +46,6 @@ export const GalerieTourSection = () => {
       id="tour-virtuel"
       className="relative w-full overflow-hidden bg-white px-4 py-10 sm:px-8 md:py-12"
     >
-      {/* Flanc de l'en-tête centré. Règle du fichier : le cadre du tour reste
-          NU — le décor vit hors du cadre, jamais dessus. */}
-      <img
-        src="/_unused/Swipe left.svg"
-        alt=""
-        className="pointer-events-none absolute right-[4%] top-10 hidden w-28 rotate-3 lg:block"
-      />
       {/* En-tête compact : une pill, un titre, une phrase. */}
       <div className="mx-auto mb-6 max-w-4xl text-center md:mb-7">
         <Eyebrow className="bg-msk-blue-50 text-msk-blue-700 shadow-sm">
@@ -74,7 +67,7 @@ export const GalerieTourSection = () => {
       <motion.div
         ref={cadre}
         initial={false}
-        animate={{ rotate: lance || reduceMotion ? 0 : -0.8 }}
+        animate={{ rotate: 0 }}
         transition={{ type: "spring", stiffness: 220, damping: 26 }}
         style={{ width: "min(100%, 72rem, calc((100dvh - 19rem) * 16 / 9))", borderRadius: 28 }}
         className="mx-auto bg-white p-2.5 shadow-2xl shadow-msk-night-900/20 md:p-3"

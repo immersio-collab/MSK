@@ -124,7 +124,7 @@ export function TroublesQuizSection() {
           ref={sun}
           src="/methode/sun-cloud.svg"
           alt=""
-          className="absolute -right-6 top-[10%] w-28 sm:right-[3%] sm:w-44 lg:right-[7%] lg:w-64"
+          className="absolute -right-6 top-[22%] w-28 sm:right-[3%] sm:w-44 lg:right-[7%] lg:w-64"
         />
         <CloudDrift
           motion="float"
@@ -317,7 +317,7 @@ export function TroublesQuizSection() {
             className="pointer-events-none absolute -bottom-8 -left-3 w-28 sm:-left-8 sm:w-36 md:-bottom-10 md:w-44"
           >
             <img
-              src="/_unused/Animao Kids - Ptria Escola (1).svg"
+              src="/parent-enfant.svg"
               alt=""
               className="aspect-square w-full"
             />

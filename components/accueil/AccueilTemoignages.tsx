@@ -624,7 +624,7 @@ export const AccueilTemoignages = () => {
           haut : la hauteur de la section varie avec « Voir plus ». */}
       <LottieMark
         src="/Topictalk_icon.json"
-        className="pointer-events-none absolute right-[6%] top-28 hidden w-40 rotate-3 lg:block"
+        className="pointer-events-none absolute right-[6%] top-44 hidden w-40 rotate-3 lg:block"
       />
       <div className="relative mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
         <FadeUp>

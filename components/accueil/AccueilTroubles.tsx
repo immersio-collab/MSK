@@ -218,11 +218,13 @@ export const AccueilTroubles = () => {
     <section className="relative w-full overflow-hidden bg-msk-cream-100">
       {/* Coin haut-gauche, à côté de l'en-tête centré — h-100svh dur : absolu
           obligatoire, jamais dans le flux. */}
+      {/* Le livre ouvert vient du héros de /la-méthode, où il faisait doublon
+          avec le visuel central ; ici il dit l'école, le sujet de la section. */}
       <img
-        src="/Burn calories.svg"
+        src="/Reading Book.svg"
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute left-[5%] top-[7%] z-10 hidden w-32 -rotate-6 lg:block"
+        className="pointer-events-none absolute left-[5%] top-[18%] z-10 hidden w-28 -rotate-6 lg:block"
       />
       <div className="relative hidden h-[100svh] flex-col px-6 pb-10 pt-[6.5rem] lg:flex lg:px-16">
         <FadeUp className="shrink-0 text-center">

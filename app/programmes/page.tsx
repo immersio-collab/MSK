@@ -32,12 +32,14 @@ export default function ProgrammesPage() {
         src="/neuro-gym.jpg"
         alt="Séance Neuro-Gym en classe"
         overlay={
-          // Remplace l'ancien games icon.svg : 1,66 Mo pour une icône générique
-          // posée nue sur la photo — verdict « remplacer » de l'audit décor.
+          // Joystick (motif « jeu » prévu par la carte décor, recadré +
+          // recoloré charte) — le canard qui l'avait remplacé reste la mascotte
+          // exclusive de /troubles. Halo clair : lisibilité sur photo.
           <img
-            src="/duck.svg"
+            src="/Joystick.svg"
             alt=""
-            className="absolute bottom-4 right-2 w-36 rotate-2 md:bottom-8 md:right-10 md:w-44"
+            aria-hidden="true"
+            className="pointer-events-none absolute bottom-4 right-2 w-36 rotate-2 drop-shadow-[0_0_16px_rgba(253,251,247,0.6)] md:bottom-8 md:right-10 md:w-44"
           />
         }
       />

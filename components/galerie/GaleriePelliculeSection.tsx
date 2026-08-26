@@ -9,7 +9,6 @@ import {
 import Image from "next/image";
 import { useReducedMotion } from "framer-motion";
 import gsap from "gsap";
-import { AssetSlot } from "@/components/common/AssetSlot";
 import Lightbox from "yet-another-react-lightbox";
 import Captions from "yet-another-react-lightbox/plugins/captions";
 import Counter from "yet-another-react-lightbox/plugins/counter";
@@ -205,7 +204,7 @@ export const GaleriePelliculeSection = ({ variant = "page", header }: GaleriePel
         <img
           src="/Weather-night.svg"
           alt=""
-          className="pointer-events-none absolute right-[5%] top-[7%] hidden w-32 rotate-2 lg:flex"
+          className="pointer-events-none absolute right-[5%] top-[16%] hidden w-32 rotate-2 lg:block"
         />
       ) : null}
       <div className="mx-auto mb-10 sm:mb-12 md:mb-16 flex w-full max-w-[1400px] items-center justify-between gap-8 px-6 sm:px-10 lg:px-16">
@@ -245,13 +244,6 @@ export const GaleriePelliculeSection = ({ variant = "page", header }: GaleriePel
               loading="lazy"
               decoding="async"
               className="hidden w-72 shrink-0 rotate-6 md:block lg:w-96"
-            />
-            {/* Sous md la Camera disparaît et l'en-tête mobile était nu — le
-                seul emplacement mobile-first du chantier décor. */}
-            <AssetSlot
-              label="Appareil photo"
-              tone="bg-white/80 text-msk-blue-800"
-              className="w-28 shrink-0 rotate-6 md:hidden"
             />
           </>
         )}

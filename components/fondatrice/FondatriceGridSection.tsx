@@ -17,7 +17,7 @@ export const FondatriceGridSection: React.FC = () => {
             pas d'overflow-hidden). Le principe du sticker débordant du coin est
             gardé ; `right-0` sur mobile pour ne plus créer de scroll horizontal. */}
         <img
-          src="/_unused/Diploma Certificate Animation Icon.svg"
+          src="/diploma.svg"
           alt=""
           className="absolute -top-8 right-2 z-20 w-28 rotate-3 pointer-events-none md:-right-10 md:w-36"
         />

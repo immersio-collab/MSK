@@ -149,7 +149,7 @@ export function GalerieAlbumSection({ variant = "page", header }: GalerieAlbumSe
           <img
             src="/Sunny.svg"
             alt=""
-            className="absolute right-[1%] top-[3%] w-24 sm:w-32 lg:right-[4%] lg:w-44"
+            className="absolute right-[1%] top-[15%] w-24 sm:w-32 lg:right-[4%] lg:w-44"
           />
           <CloudDrift
             motion="float"

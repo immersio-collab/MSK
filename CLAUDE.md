@@ -64,7 +64,24 @@ Section backgrounds follow a fixed grammar. Content-level colour (stickers,
 `LOOKS`, category badges, programme cards, deck cards) keeps the full trio —
 the system governs the fields, not the toys.
 
-- **Signatures**: coral = `/la-methode`, `/la-fondatrice`, `/actualites` ·
+- **La bande du héros et la signature de page sont deux choses** (2026-08-26).
+  La signature gouverne les accents du CORPS de page (eyebrows, tints, cartes) ;
+  la bande du héros suit une rotation à trois couleurs pour que les six pages
+  intérieures n'alternent pas seulement bleu/rose : coral = `/la-methode`,
+  `/la-fondatrice` · blue = `/programmes`, `/troubles-accompagnes`, `/galerie` ·
+  **sun = `/actualites`**, seule page jaune, dont les accents restent coral.
+  Sur une bande `sun-400`, les nuages blancs exigent une `drop-shadow` : blanc
+  sur sun-400 plafonne à 1,45:1. Les éventails de `PageTransition` suivent la
+  BANDE, pas la signature.
+- **Contrat des héros intérieurs** (2026-08-26) : 3 nuages aux mêmes hauteurs,
+  UN seul visuel dans la boîte média commune (`h-[clamp(6.5rem,18svh,13rem)]`,
+  `h-full w-auto object-contain` — aucun `scale`/`translate`), carte blanche,
+  zéro marque flottante. Deux exceptions assumées : `/galerie` garde son
+  éventail de polaroïds et sa carte `night-900` ; `/la-fondatrice` garde son
+  papillon (desktop seulement). Le fichier de chaque visuel doit être RECADRÉ
+  sur son dessin — la boîte fixe la hauteur, donc un canevas à moitié vide rend
+  un visuel deux fois trop petit.
+- **Signatures de contenu**: coral = `/la-methode`, `/la-fondatrice`, `/actualites` ·
   blue = `/programmes`, `/galerie`, `/troubles-accompagnes`. The home page is
   the OVERTURE and carries all three (blue sky → sun statement → sun
   testimonials → coral accents); `/contact` is `blue-100` end to end — hero,

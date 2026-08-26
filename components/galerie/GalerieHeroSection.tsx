@@ -1,13 +1,12 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 import Image from "next/image";
 
 import { CloudDrift } from "@/components/motion/CloudDrift";
 import { GalerieTitreAnime } from "@/components/galerie/GalerieTitreAnime";
 import { PageHero } from "@/components/common/PageHero";
 import { HERO_POLAROIDS } from "@/lib/data/galerie";
-import { useHeroParallax } from "@/hooks/use-hero-parallax";
 
 /**
  * À la place de l'illustration vectorielle des autres pages, un éventail de
@@ -25,18 +24,12 @@ const POLAROID_POSE = [
 ];
 
 export const GalerieHeroSection = () => {
-  const root = useRef<HTMLElement>(null);
-  const octopus1 = useRef<HTMLImageElement>(null);
-  const octopus2 = useRef<HTMLImageElement>(null);
-
-  useHeroParallax(root, [
-    { ref: octopus1, vars: { yPercent: 150 } },
-    { ref: octopus2, vars: { yPercent: -150 } },
-  ]);
-
+  // Les deux pieuvres en parallaxe ont été retirées (audit décor 2026-08-26) :
+  // thème marin en plein ciel — l'océan du site vit au footer — et le héros
+  // était saturé (2 pieuvres + 3 polaroids + 3 nuages). Avec elles est parti
+  // le scrub useHeroParallax, qui n'animait qu'elles.
   return (
     <PageHero
-      rootRef={root}
       band="bg-msk-blue-400"
       card="bg-msk-night-900"
       // Le `h1` et sa typographie viennent de PageHero ; ce composant n'anime
@@ -81,29 +74,13 @@ export const GalerieHeroSection = () => {
             className="absolute left-0 top-[8%] hidden w-32 text-msk-cream-50 lg:block"
           />
 
-          {/* w-36 mobile : à w-48 les deux pieuvres se disputaient un écran de
-              375px avec la carte-titre quasi pleine largeur. */}
-          <img
-            ref={octopus1}
-            src="/My Octopus Teacher.svg"
-            alt=""
-            aria-hidden
-            className="absolute right-[2%] top-[10%] w-36 sm:w-64 md:w-80 lg:w-[28rem] opacity-90"
-          />
-          <img
-            ref={octopus2}
-            src="/My theacher octopus 2.svg"
-            alt=""
-            aria-hidden
-            className="absolute left-[2%] bottom-[12%] w-36 sm:w-64 sm:bottom-[15%] md:w-80 lg:w-[28rem] opacity-90"
-          />
         </>
       }
       media={
         // Éventail de polaroids. Chaque photo est décorative : le titre lui
         // sert de légende visible, donc l'alt reste vide pour ne pas la
         // répéter aux lecteurs d'écran.
-        <div className="relative mb-[-3.5rem] flex h-56 items-end justify-center sm:h-72 md:h-80">
+        <div className="relative mb-[-2rem] flex h-56 items-end justify-center sm:h-72 md:h-80">
           {HERO_POLAROIDS.map((photo, index) => (
             <figure
               key={photo.src}

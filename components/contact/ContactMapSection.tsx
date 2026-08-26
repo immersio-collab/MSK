@@ -13,9 +13,9 @@ export const ContactMapSection: React.FC = () => {
       {/* « Posé » sur le coin haut du cadre blanc — dans la section, pas dans
           le cadre (son overflow-hidden le couperait). */}
       <img
-        src="/_unused/location.svg"
+        src="/location-pin.svg"
         alt=""
-        className="pointer-events-none absolute right-[8%] top-0 z-10 hidden w-32 -translate-y-1/2 rotate-3 sm:block"
+        className="pointer-events-none absolute -top-10 right-6 z-10 hidden w-32 rotate-6 sm:block lg:w-36"
       />
       {/* Framed card wrapper matching website design system */}
       <div className="mx-auto w-full max-w-[1400px] overflow-hidden rounded-[1.5rem] border border-msk-cream-300 bg-white p-3 shadow-xl md:p-4">

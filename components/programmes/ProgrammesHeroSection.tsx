@@ -17,17 +17,18 @@ export const ProgrammesHeroSection = () => {
     <PageHero
       rootRef={root}
       band="bg-msk-blue-400"
-      card="bg-msk-blue-800"
+      card="bg-white"
       title="Un programme pour chaque âge"
-      titleClassName="text-white"
+      titleClassName="text-msk-night-900"
       pill="Programmes & Classes"
-      pillClassName="bg-white/15 text-msk-sun-300"
+      pillClassName="bg-msk-blue-100 text-msk-blue-700"
       subtitle={<>De 2 à 11 ans, un apprentissage sur-mesure en groupes de cinq.</>}
-      subtitleClassName="text-msk-blue-100"
+      subtitleClassName="text-msk-night-800"
       anchor={{
         href: "#programmes",
         label: "Aller aux programmes",
-        className: "border-white/70 text-white hover:bg-white hover:text-msk-blue-800",
+        className:
+          "border-msk-night-900/20 text-msk-night-700 hover:bg-msk-night-900 hover:text-white",
       }}
       decor={
         <>

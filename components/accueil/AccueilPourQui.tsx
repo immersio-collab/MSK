@@ -54,7 +54,7 @@ export const AccueilPourQui = () => {
         src="/ABC Blocks.svg"
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute right-[6%] top-[9%] hidden w-36 rotate-2 lg:block"
+        className="pointer-events-none absolute right-[6%] top-[17%] hidden w-36 rotate-2 lg:block"
       />
       <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
         <FadeUp>

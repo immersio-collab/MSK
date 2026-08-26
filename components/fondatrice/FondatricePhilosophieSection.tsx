@@ -23,7 +23,7 @@ export const FondatricePhilosophieSection: React.FC = () => {
       <img
         src="/Sunny.svg"
         alt=""
-        className="pointer-events-none absolute right-[4%] top-8 z-0 hidden w-28 rotate-3 sm:block"
+        className="pointer-events-none absolute right-[6%] top-[16%] z-0 hidden w-44 rotate-3 sm:block lg:w-52"
       />
 
       <div className="container mx-auto px-4 relative z-10 max-w-5xl">

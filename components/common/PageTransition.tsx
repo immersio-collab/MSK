@@ -117,10 +117,12 @@ const p = (fanFamily: string, near: number, mid: number, square: string): Palett
 });
 
 /*
- * Les familles d'éventails suivent la SIGNATURE de chaque page (système de
- * couleurs 2026-08-25) : coral = méthode, fondatrice, actualités ·
- * blue = troubles, galerie, programmes · sun = accueil. Le balayage annonce
- * ainsi réellement la couleur de la page d'arrivée.
+ * Les familles d'éventails suivent la BANDE DU HÉROS de chaque page, pas sa
+ * signature de contenu — les deux ont divergé le 2026-08-26 sur /actualites,
+ * dont la bande est passée en sun-400 alors que ses accents restent coral.
+ * C'est la bande qui compte ici : c'est elle que le visiteur voit à l'arrivée.
+ * coral = méthode, fondatrice · blue = troubles, galerie, programmes ·
+ * sun = actualités.
  */
 const ROUTE_PALETTES: ReadonlyArray<readonly [string, Palette]> = [
   ["/notre-centre/la-methode", p("coral", 100, 300, "blue-500")],
@@ -128,7 +130,9 @@ const ROUTE_PALETTES: ReadonlyArray<readonly [string, Palette]> = [
   ["/notre-centre/la-fondatrice", p("coral", 200, 400, "sun-300")],
   ["/notre-centre/galerie", p("blue", 100, 300, "coral-600")],
   ["/programmes", p("blue", 200, 400, "coral-400")],
-  ["/actualites", p("coral", 100, 400, "blue-400")],
+  // Bande du héros en sun-400 depuis 2026-08-26 : l'éventail doit suivre,
+  // sinon la transition s'ouvre en corail et atterrit sur du jaune.
+  ["/actualites", p("sun", 100, 400, "coral-600")],
   // /contact et l'accueil ont le même ciel bleu-100 en tête de page : leurs
   // éventails sont bleus, seuls leurs carrés les distinguent.
   ["/contact", p("blue", 100, 400, "coral-700")],

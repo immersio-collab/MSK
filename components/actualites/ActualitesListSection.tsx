@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * Le tableau d'affichage : filtres par catégorie, article « À la une » en
- * grande carte inclinée, puis grille de cartes polaroid, sur coral-50 — la
+ * grande carte inclinée, puis grille de cartes polaroid, sur sun-50 — la
  * teinte signature de la page (bande du hero, sticker « À la une »,
  * « Lire l'article »). Les badges de catégorie gardent leurs quatre couleurs.
  *
@@ -69,7 +69,7 @@ function CarteArticle({ article, index }: { article: Article; index: number }) {
           <Calendar className="h-4 w-4" aria-hidden />
           {article.date}
         </span>
-        <h3 className="mt-2 font-display text-lg font-semibold leading-snug text-msk-night-900 transition-colors group-hover:text-msk-coral-600">
+        <h3 className="mt-2 font-display text-lg font-semibold leading-snug text-msk-night-900 transition-colors group-hover:text-msk-sun-800">
           <Link href={`/actualites/${article.id}`} className="focus-visible:outline-hidden">
             {article.titre}
             {/* Lien étiré : toute la carte est cliquable. */}
@@ -77,7 +77,7 @@ function CarteArticle({ article, index }: { article: Article; index: number }) {
           </Link>
         </h3>
         <p className="mt-2 grow text-sm leading-relaxed text-msk-night-700">{article.extrait}</p>
-        <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-msk-coral-700">
+        <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-msk-sun-800">
           Lire l&apos;article
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
         </span>
@@ -99,13 +99,13 @@ export const ActualitesListSection = () => {
     cle === "tous" ? ARTICLES.length : ARTICLES.filter((a) => a.categorie === cle).length;
 
   return (
-    <section id="articles" className="relative overflow-hidden bg-msk-coral-50 pb-24 pt-20 md:pb-28 md:pt-24">
+    <section id="articles" className="relative overflow-hidden bg-msk-sun-50 pb-24 pt-20 md:pb-28 md:pt-24">
       {/* Bande haute, au-dessus des filtres — la zone la plus sûre de la
           section (tout le reste est cliquable). */}
       <img
         src="/news error.svg"
         alt=""
-        className="pointer-events-none absolute right-[4%] top-6 hidden w-32 rotate-6 sm:block"
+        className="pointer-events-none absolute right-[0.5%] top-[22rem] hidden w-36 rotate-6 min-[1440px]:block 2xl:w-48"
       />
       <div className="relative mx-auto w-full max-w-6xl px-6 sm:px-10">
         {/* Filtres : la pastille bleu nuit glisse d'une catégorie à l'autre. */}
@@ -119,8 +119,8 @@ export const ActualitesListSection = () => {
                 aria-pressed={actif}
                 onClick={() => setFiltre(cat.cle)}
                 className={cn(
-                  "relative inline-flex h-10 items-center gap-2 rounded-full px-4 font-display text-[0.7rem] font-semibold uppercase tracking-[0.13em] transition-colors focus-visible:outline-hidden focus-visible:ring-4 focus-visible:ring-msk-coral-300",
-                  actif ? "text-white" : "text-msk-night-900 hover:text-msk-coral-700",
+                  "relative inline-flex h-10 items-center gap-2 rounded-full px-4 font-display text-[0.7rem] font-semibold uppercase tracking-[0.13em] transition-colors focus-visible:outline-hidden focus-visible:ring-4 focus-visible:ring-msk-sun-300",
+                  actif ? "text-white" : "text-msk-night-900 hover:text-msk-sun-800",
                 )}
               >
                 {actif ? (
@@ -193,14 +193,14 @@ export const ActualitesListSection = () => {
                       {aLaUne.date}
                     </span>
                   </div>
-                  <h2 className="mt-4 font-display text-2xl font-semibold leading-[1.12] text-msk-night-900 transition-colors group-hover:text-msk-coral-600 md:text-3xl">
+                  <h2 className="mt-4 font-display text-2xl font-semibold leading-[1.12] text-msk-night-900 transition-colors group-hover:text-msk-sun-800 md:text-3xl">
                     <Link href={`/actualites/${aLaUne.id}`} className="focus-visible:outline-hidden">
                       {aLaUne.titre}
                       <span aria-hidden className="absolute inset-0" />
                     </Link>
                   </h2>
                   <p className="mt-3 text-[15px] leading-relaxed text-msk-night-700">{aLaUne.extrait}</p>
-                  <span className="mt-5 inline-flex items-center gap-2 font-bold text-msk-coral-700">
+                  <span className="mt-5 inline-flex items-center gap-2 font-bold text-msk-sun-800">
                     Lire l&apos;article
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
                   </span>

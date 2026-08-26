@@ -142,15 +142,6 @@ export const FaqSection = ({
                   <ArrowRight className="h-4 w-4" />
                 </MorphButton>
               </div>
-
-              {/* Décor « école » du système ciel→océan, une décision pour les
-                  6 pages. DANS le rail sticky, sous le bouton : il défile avec
-                  lui et ne peut donc jamais être recouvert au scroll. */}
-              <img
-                src="/Walking Pencil.svg"
-                alt=""
-                className="mt-10 hidden w-44 -rotate-2 lg:flex"
-              />
             </div>
           </FadeUp>
 

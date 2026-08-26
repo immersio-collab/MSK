@@ -89,12 +89,6 @@ export const ContactMainSection: React.FC = () => {
     // wider. Mobile keeps its own padding.
     <div className="relative z-20 -mt-8 w-full bg-transparent px-5 pb-[4.1875rem] lg:-mt-12 lg:px-[2rem]">
       <div className="relative grid grid-cols-12 gap-5 rounded-[0.625rem] bg-white px-5 py-[1.5625rem] lg:px-0 lg:py-20">
-        {/* Colonne 1 du grid, vide sur desktop (le contenu démarre col-start-2). */}
-        <img
-          src="/_unused/Smart Paper with Pencil.svg"
-          alt=""
-          className="pointer-events-none absolute left-4 top-1/2 hidden w-20 -translate-y-1/2 -rotate-3 lg:block"
-        />
         <div className="col-span-12 flex flex-col justify-between max-lg:mb-12 lg:col-start-2 lg:col-span-4 lg:pr-6">
           <div className="space-y-8">
             <div className="space-y-3">

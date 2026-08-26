@@ -132,20 +132,23 @@ export const ProgrammesTableSection = () => {
       // en-tête et interlignes du tableau suivent maintenant la fenêtre.
       className="relative overflow-hidden bg-msk-blue-50 py-[clamp(2rem,5svh,4rem)] lg:screen-section"
     >
-      {/* Marges latérales hors du max-w-4xl — la meilleure zone vide de la
-          page, mais elle n'existe qu'en très large : xl only. Fond blue-50 :
-          jamais de blanc ici (invisible). */}
-      <img
-        src="/Pencil Smart.svg"
-        alt=""
-        className="pointer-events-none absolute left-[2%] top-[42%] hidden w-28 -rotate-6 xl:block"
-      />
-      <img
-        src="/Strong Pencil.svg"
-        alt=""
-        className="pointer-events-none absolute right-[2%] top-[38%] hidden w-28 rotate-6 xl:block"
-      />
-      <div className="mx-auto max-w-4xl px-6 sm:px-10">
+      <div className="relative mx-auto max-w-4xl px-6 sm:px-10">
+        {/* Ancrés sur le CONTENEUR, pas sur la section : c'est ce qui garantit
+            que l'écart au tableau soit identique des deux côtés — en % de
+            section, il variait avec la largeur d'écran. Les deux fichiers
+            partagent désormais le même viewBox, donc le même cadrage. */}
+        <img
+          src="/Pencil Smart.svg"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute -left-44 top-1/2 hidden w-40 -translate-y-1/2 -rotate-6 xl:block"
+        />
+        <img
+          src="/Strong Pencil.svg"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-44 top-1/2 hidden w-40 -translate-y-1/2 rotate-6 xl:block"
+        />
         <FadeUp>
           <div className="mb-[clamp(1.5rem,4svh,3rem)] text-center">
             <Eyebrow className="bg-white text-msk-blue-700 shadow-sm">

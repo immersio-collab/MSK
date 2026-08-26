@@ -111,11 +111,15 @@ export const ProgrammesSelectorSection = () => {
       // portait le dépassement (voir plus bas).
       className="relative overflow-hidden bg-msk-cream-200 py-[clamp(1.5rem,3.75svh,4.5rem)] lg:screen-section"
     >
-      {/* Flanc du titre centré — section pincée à l'écran : absolu strict. */}
+      {/* Flanc du titre centré — section pincée à l'écran : absolu strict.
+          Le crayon vient de la FAQ, qui reste désormais sans décor (choix
+          client) ; il remplace Geometry.svg, dont le dessin réel ne faisait que
+          208x158 dans un cadre de 1080 — d'où sa petitesse irrécupérable. */}
       <img
-        src="/_unused/Smart Paper with Pencil.svg"
+        src="/Walking Pencil.svg"
         alt=""
-        className="pointer-events-none absolute left-[4%] top-[9%] hidden w-36 -rotate-3 lg:block"
+        aria-hidden="true"
+        className="pointer-events-none absolute left-[4%] top-[22%] hidden w-36 -rotate-3 lg:block"
       />
       <div className="mx-auto max-w-6xl px-6 sm:px-10">
         <FadeUp>

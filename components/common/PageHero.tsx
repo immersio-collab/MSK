@@ -118,7 +118,9 @@ export const PageHero = ({
           le héros totalisait 752 px et débordait de tout écran plus court —
           c'était le cas de tous les portables 1366×768.
         */}
-        <div className="flex h-[clamp(6rem,17svh,12rem)] items-end justify-center">{media}</div>
+        <div className="relative z-20 -mb-6 flex h-[clamp(8rem,23svh,16rem)] items-end justify-center">
+          {media}
+        </div>
 
         {/* `mount` et non `view` : la carte est au-dessus de la ligne de
             flottaison, où un déclencheur au scroll n'a aucun filet — l'élément
@@ -135,7 +137,7 @@ export const PageHero = ({
               // sur grand écran, le plancher garde les six cartes alignées.
               // `justify-center` ici répartit le contenu plus court au lieu de
               // le laisser coller en haut.
-              "mx-auto mt-4 flex min-h-[clamp(17rem,44svh,25rem)] max-w-2xl flex-col justify-center rounded-[1.75rem] px-8 py-8 text-center shadow-2xl md:px-12",
+              "mx-auto flex min-h-[clamp(17rem,44svh,25rem)] max-w-2xl flex-col justify-center rounded-[1.75rem] px-8 py-8 text-center shadow-2xl md:px-12",
               card,
             )}
           >
