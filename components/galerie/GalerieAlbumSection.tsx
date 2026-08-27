@@ -148,7 +148,7 @@ export function GalerieAlbumSection({ variant = "page", header }: GalerieAlbumSe
               propre animation SMIL (les rayons tournent), que l'optimiseur
               d'images aplatirait. */}
           <Reveal effect="pop" className="absolute right-[1%] top-[15%] lg:right-[4%]">
-            <img src="/Sunny.svg" alt="" className="w-24 sm:w-32 lg:w-44" />
+            <img src="/Sunny.svg" alt="" loading="lazy" className="w-24 sm:w-32 lg:w-44" />
           </Reveal>
           <CloudDrift
             motion="float"

@@ -203,7 +203,7 @@ export const GaleriePelliculeSection = ({ variant = "page", header }: GaleriePel
         // Première bande nocturne du site — la transition jour→nuit du système
         // ciel→océan : la lune apparaît ici, les étoiles sur la CTA en dessous.
         <Reveal effect="pop" className="pointer-events-none absolute right-[5%] top-[16%] hidden lg:block">
-          <img src="/Weather-night.svg" alt="" className="w-32 rotate-2" />
+          <img src="/Weather-night.svg" alt="" loading="lazy" className="w-32 rotate-2" />
         </Reveal>
       ) : null}
       <div className="mx-auto mb-10 sm:mb-12 md:mb-16 flex w-full max-w-[1400px] items-center justify-between gap-8 px-6 sm:px-10 lg:px-16">

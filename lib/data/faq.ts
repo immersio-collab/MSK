@@ -81,7 +81,7 @@ export const FAQ_PROGRAMMES: FaqItem[] = [
   },
 ];
 
-/** /notre-centre/troubles-accompagnes — the six situations and the quiz. */
+/** /notre-centre/enfants-accueillis — the six situations and the quiz. */
 export const FAQ_TROUBLES: FaqItem[] = [
   {
     question: "Faut-il un dossier scolaire ou un diagnostic avant de venir vous voir ?",
@@ -110,7 +110,7 @@ export const FAQ_TROUBLES: FaqItem[] = [
   },
 ];
 
-/** /notre-centre/la-methode — the six steps. */
+/** /notre-centre/notre-methode — the six steps. */
 export const FAQ_METHODE: FaqItem[] = [
   {
     question: "Les six étapes se suivent-elles toujours dans cet ordre ?",
@@ -139,7 +139,7 @@ export const FAQ_METHODE: FaqItem[] = [
   },
 ];
 
-/** /notre-centre/la-fondatrice — Khadija Elabaya. */
+/** /notre-centre/notre-fondatrice — Khadija Elabaya. */
 export const FAQ_FONDATRICE: FaqItem[] = [
   {
     question: "Peut-on rencontrer la fondatrice avant d'inscrire son enfant ?",
@@ -168,7 +168,7 @@ export const FAQ_FONDATRICE: FaqItem[] = [
   },
 ];
 
-/** /notre-centre/galerie — the spaces. */
+/** /notre-centre/nos-espaces — the spaces. */
 export const FAQ_GALERIE: FaqItem[] = [
   {
     question: "Que montrent les photos de cette page ?",

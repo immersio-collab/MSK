@@ -36,6 +36,7 @@ export const AccueilStatement = ({
         <img
           src="/Birds.svg"
           alt=""
+          loading="lazy"
           className="h-full w-full object-cover opacity-80"
         />
       </div>

@@ -3,7 +3,8 @@ import Link from "next/link";
 
 interface BrandLogoProps {
   className?: string;
-  variant?: "default" | "white";
+  /** `plain` retire le nuage ; les trois lettres gardent leurs couleurs. */
+  variant?: "default" | "plain";
 }
 
 /**
@@ -52,12 +53,18 @@ const NUAGE = (
  * entre ses bosses. Il plafonne à 3.5rem (56px) dans une navbar de 74px — la
  * marge restante est mince, mesurer après toute modification de taille.
  *
- * La variante `white` (pied de page, fond night-900) n'a PAS de nuage : un
- * aplat blanc sur le bleu nuit serait une tache, et les lettres blanches y ont
- * déjà tout le contraste voulu.
+ * La variante `plain` (pied de page) n'a PAS de nuage : un aplat blanc sur le
+ * bleu nuit serait une tache, et le camouflage que le nuage corrige n'existe
+ * pas là-bas — le fond y est uniforme, jamais une bande corail ou jaune.
+ *
+ * Elle garde en revanche les TROIS COULEURS (2026-08-27). Elle passait tout en
+ * blanc, et le pied de page affichait donc une marque différente de celle de
+ * l'en-tête. Sur `night-950` les trois teintes 500 sont plus lisibles que sur
+ * blanc — mesuré : corail 5,1:1, jaune 10,0:1, bleu 7,5:1, là où corail tombe à
+ * 3,5:1 sur fond clair. Aucune raison de contraste ne justifiait le blanc.
  */
 export const BrandLogo: React.FC<BrandLogoProps> = ({ className = "", variant = "default" }) => {
-  const isWhite = variant === "white";
+  const avecNuage = variant === "default";
 
   return (
     <Link
@@ -66,20 +73,16 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({ className = "", variant = 
       aria-label="MSK Montessori School"
     >
       <span className="relative inline-flex items-center">
-        {!isWhite ? (
+        {avecNuage ? (
           <span className="pointer-events-none absolute left-1/2 top-1/2 -mt-[5px] h-[2.7rem] w-[6.75rem] -translate-x-1/2 -translate-y-1/2 sm:h-[3.2rem] sm:w-[8rem] md:h-[3.5rem] md:w-[8.75rem]">
             {NUAGE}
           </span>
         ) : null}
 
-        <span
-          className={`relative px-1 text-3xl font-black tracking-tight sm:text-4xl md:text-[38px] ${
-            isWhite ? "text-white" : ""
-          }`}
-        >
-          <span className={isWhite ? "" : "text-msk-coral-500"}>M</span>
-          <span className={isWhite ? "" : "text-msk-sun-500"}>S</span>
-          <span className={isWhite ? "" : "text-msk-blue-500"}>K</span>
+        <span className="relative px-1 text-3xl font-black tracking-tight sm:text-4xl md:text-[38px]">
+          <span className="text-msk-coral-500">M</span>
+          <span className="text-msk-sun-500">S</span>
+          <span className="text-msk-blue-500">K</span>
         </span>
       </span>
     </Link>

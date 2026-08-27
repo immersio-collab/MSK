@@ -6,10 +6,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const routes = [
     "",
-    "/notre-centre/la-methode",
-    "/notre-centre/troubles-accompagnes",
-    "/notre-centre/la-fondatrice",
-    "/notre-centre/galerie",
+    "/notre-centre/notre-methode",
+    "/notre-centre/enfants-accueillis",
+    "/notre-centre/notre-fondatrice",
+    "/notre-centre/nos-espaces",
     "/programmes",
     "/actualites",
     "/contact",

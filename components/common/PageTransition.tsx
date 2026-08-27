@@ -127,10 +127,10 @@ const p = (fanFamily: string, near: number, mid: number, square: string): Palett
  * sun = actualités.
  */
 const ROUTE_PALETTES: ReadonlyArray<readonly [string, Palette]> = [
-  ["/notre-centre/la-methode", p("coral", 100, 300, "blue-500")],
-  ["/notre-centre/troubles-accompagnes", p("blue", 50, 300, "sun-400")],
-  ["/notre-centre/la-fondatrice", p("coral", 200, 400, "sun-300")],
-  ["/notre-centre/galerie", p("blue", 100, 300, "coral-600")],
+  ["/notre-centre/notre-methode", p("coral", 100, 300, "blue-500")],
+  ["/notre-centre/enfants-accueillis", p("blue", 50, 300, "sun-400")],
+  ["/notre-centre/notre-fondatrice", p("coral", 200, 400, "sun-300")],
+  ["/notre-centre/nos-espaces", p("blue", 100, 300, "coral-600")],
   ["/programmes", p("blue", 200, 400, "coral-400")],
   // Bande du héros en sun-400 depuis 2026-08-26 : l'éventail doit suivre,
   // sinon la transition s'ouvre en corail et atterrit sur du jaune.

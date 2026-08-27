@@ -24,7 +24,7 @@ export const AccueilGalerie = () => {
 
       <Reveal effect="pop" as="span" delay={0.18}>
         <MorphButton
-          href="/notre-centre/galerie"
+          href="/notre-centre/nos-espaces"
           size="sm"
           className="text-sm font-semibold text-white"
           fillClassName="border-2 border-white/70 bg-transparent"

@@ -22,7 +22,7 @@ export const FondatricePhilosophieSection: React.FC = () => {
 
       {/* Coin haut-droit — le guillemet occupe déjà le haut-gauche. */}
       <Reveal effect="pop" className="pointer-events-none absolute right-[6%] top-[16%] z-0 hidden sm:block">
-        <img src="/Sunny.svg" alt="" className="w-44 rotate-3 lg:w-52" />
+        <img src="/Sunny.svg" alt="" loading="lazy" className="w-44 rotate-3 lg:w-52" />
       </Reveal>
 
       <div className="container mx-auto px-4 relative z-10 max-w-5xl">

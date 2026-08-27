@@ -1,6 +1,6 @@
 /**
  * Contenu de la section « Les situations que nous accueillons »
- * (/notre-centre/troubles-accompagnes).
+ * (/notre-centre/enfants-accueillis).
  *
  * Seul endroit à modifier pour changer les textes des cartes et des fiches
  * détaillées. Les couleurs et icônes sont des CLÉS : la grille les traduit en

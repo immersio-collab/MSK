@@ -24,7 +24,7 @@ import { Eyebrow } from "@/components/common/Eyebrow";
  * « ne jamais garer l'état de repos hors de vue »).
  *
  * Les textes et les icônes viennent de `lib/data/troubles.ts`, la même source
- * que `/notre-centre/troubles-accompagnes`, pour que les deux ne divergent pas.
+ * que `/notre-centre/enfants-accueillis`, pour que les deux ne divergent pas.
  */
 
 /** Degrés entre deux cartes voisines de l'éventail. */
@@ -40,7 +40,7 @@ const offsetAt = (i: number) => i - midIndex;
  */
 const stackRotAt = (i: number) => (((i * 37) % 7) - 3) * 0.9;
 
-const TROUBLES_HREF = "/notre-centre/troubles-accompagnes#troubles";
+const TROUBLES_HREF = "/notre-centre/enfants-accueillis#troubles";
 
 const Heading = () => (
   <>
@@ -222,7 +222,7 @@ export const AccueilTroubles = () => {
       {/* Le livre ouvert vient du héros de /la-méthode, où il faisait doublon
           avec le visuel central ; ici il dit l'école, le sujet de la section. */}
       <Reveal effect="pop" className="pointer-events-none absolute left-[15%] top-[15%] z-10 hidden lg:block">
-        <img src="/Reading Book.svg" alt="" aria-hidden="true" className="w-44 -rotate-6" />
+        <img src="/Reading Book.svg" alt="" aria-hidden="true" loading="lazy" className="w-44 -rotate-6" />
       </Reveal>
       <div className="relative hidden h-[100svh] flex-col px-6 pb-10 pt-[6.5rem] lg:flex lg:px-16">
         <FadeUp className="shrink-0 text-center">

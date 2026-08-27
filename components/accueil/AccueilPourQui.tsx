@@ -52,7 +52,7 @@ export const AccueilPourQui = () => {
           l'écran : absolu strict, et à distance des cartes inclinées (~12px de
           débord de transform). */}
       <Reveal effect="pop" className="pointer-events-none absolute right-[6%] top-[17%] hidden lg:block">
-        <img src="/ABC Blocks.svg" alt="" aria-hidden="true" className="w-36 rotate-2" />
+        <img src="/abc-blocks.webp" alt="" aria-hidden="true" width={288} height={288} loading="lazy" className="w-36 rotate-2" />
       </Reveal>
       <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-16">
         {/* La grammaire de la boîte : badge en pop, titre en plongeon, texte

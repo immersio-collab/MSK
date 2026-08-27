@@ -40,6 +40,7 @@ export default function ProgrammesPage() {
               src="/Walking Pencil.svg"
               alt=""
               aria-hidden="true"
+              loading="lazy"
               className="w-28 -rotate-2 drop-shadow-[0_0_16px_rgba(253,251,247,0.6)] md:w-36"
             />
           </Reveal>

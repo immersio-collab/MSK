@@ -3,9 +3,24 @@ import Link from "next/link";
 import { Instagram, Facebook, Mail, Phone, MapPin } from "lucide-react";
 import { WhatsAppIcon } from "@/components/common/WhatsAppIcon";
 import { BrandLogo } from "@/components/common/BrandLogo";
-import { SCHOOL_INFO } from "@/lib/data/site-content";
+import { NAV_LINKS, SCHOOL_INFO } from "@/lib/data/site-content";
 import { FooterOceanBackground } from "./FooterOceanBackground";
 import { FooterWaveTransition } from "./FooterWaveTransition";
+
+/**
+ * Les deux colonnes de navigation SORTENT de `NAV_LINKS` — elles ne sont plus
+ * recopiées à la main (2026-08-27). Recopiées, elles avaient dérivé : le pied
+ * de page disait encore « La méthode » quand le menu disait « Notre méthode »,
+ * oubliait « Notre fondatrice » et « Actualités », et affichait un
+ * « Admissions » qui menait à /contact — le lien juste en dessous.
+ */
+const NOTRE_CENTRE = NAV_LINKS.find((lien) => lien.children)?.children ?? [];
+
+/**
+ * Les entrées de premier niveau, sauf Contact : la troisième colonne EST le
+ * contact, l'y répéter ferait le doublon qu'on vient de retirer.
+ */
+const PAGES = NAV_LINKS.filter((lien) => !lien.children && lien.href !== "/contact");
 
 export const Footer: React.FC = () => {
   return (
@@ -22,7 +37,7 @@ export const Footer: React.FC = () => {
           
           {/* Brand & Location & Socials */}
           <div className="space-y-4 max-w-sm">
-            <BrandLogo variant="white" />
+            <BrandLogo variant="plain" />
             <p className="text-base text-slate-300 leading-relaxed pt-1">
               École inclusive & réadaptation comportementale à Casablanca.
             </p>
@@ -74,47 +89,35 @@ export const Footer: React.FC = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-10 md:gap-16">
             <div className="space-y-3">
               <span className="text-xs font-bold uppercase tracking-wider text-msk-coral-400 block">
-                L&apos;École
+                Notre centre
               </span>
               <ul className="space-y-2.5">
-                <li>
-                  <Link href="/notre-centre/la-methode" className="text-base font-medium text-slate-200 hover:text-msk-coral-300 transition-colors">
-                    La méthode
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/notre-centre/troubles-accompagnes" className="text-base font-medium text-slate-200 hover:text-msk-coral-300 transition-colors">
-                    Situations accueillies
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/notre-centre/galerie" className="text-base font-medium text-slate-200 hover:text-msk-coral-300 transition-colors">
-                    Nos espaces
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" className="text-base font-medium text-slate-200 hover:text-msk-coral-300 transition-colors">
-                    Admissions
-                  </Link>
-                </li>
+                {NOTRE_CENTRE.map((page) => (
+                  <li key={page.href}>
+                    <Link href={page.href} className="text-base font-medium text-slate-200 hover:text-msk-coral-300 transition-colors">
+                      {page.title}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
+            {/* Remplace l'ancienne colonne « Cycles » : ses deux entrées,
+                Maternelle et Primaire, menaient à la MÊME adresse (/programmes)
+                — deux liens pour une seule page. Les onglets du sélecteur n'ont
+                pas d'ancre propre, il n'y avait donc rien à distinguer. */}
             <div className="space-y-3">
               <span className="text-xs font-bold uppercase tracking-wider text-msk-sun-400 block">
-                Cycles
+                Le site
               </span>
               <ul className="space-y-2.5">
-                <li>
-                  <Link href="/programmes" className="text-base font-medium text-slate-200 hover:text-msk-sun-300 transition-colors">
-                    Maternelle
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/programmes" className="text-base font-medium text-slate-200 hover:text-msk-sun-300 transition-colors">
-                    Primaire
-                  </Link>
-                </li>
+                {PAGES.map((page) => (
+                  <li key={page.href}>
+                    <Link href={page.href} className="text-base font-medium text-slate-200 hover:text-msk-sun-300 transition-colors">
+                      {page.label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -138,11 +141,9 @@ export const Footer: React.FC = () => {
                     {SCHOOL_INFO.email}
                   </a>
                 </li>
-                <li>
-                  <span className="text-sm text-slate-400 block pt-1">
-                    {SCHOOL_INFO.district}, {SCHOOL_INFO.city}
-                  </span>
-                </li>
+                {/* Pas de ligne d'adresse ici : « Gauthier, Casablanca »
+                    répétait, en plus court et moins utile, l'adresse complète
+                    déjà affichée avec son repère dans la colonne de gauche. */}
               </ul>
             </div>
           </div>

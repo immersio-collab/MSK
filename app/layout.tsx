@@ -30,7 +30,7 @@ const jakarta = Plus_Jakarta_Sans({
   weight: ["500", "600", "700", "800"],
 });
 
-// Rounded display face for the oversized all-caps titles on /notre-centre/la-methode.
+// Rounded display face for the oversized all-caps titles on /notre-centre/notre-methode.
 // Exposed to Tailwind as `font-display` via --font-display in globals.css.
 const fredoka = Fredoka({
   subsets: ["latin"],

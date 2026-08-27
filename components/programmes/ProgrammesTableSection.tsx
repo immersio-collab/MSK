@@ -113,14 +113,14 @@ export const ProgrammesTableSection = () => {
           delay={0.2}
           className="pointer-events-none absolute -left-44 top-1/2 hidden -translate-y-1/2 xl:block"
         >
-          <img src="/Pencil Smart.svg" alt="" aria-hidden="true" className="w-40 -rotate-6" />
+          <img src="/Pencil Smart.svg" alt="" aria-hidden="true" loading="lazy" className="w-40 -rotate-6" />
         </Reveal>
         <Reveal
           effect="pop"
           delay={0.3}
           className="pointer-events-none absolute -right-44 top-1/2 hidden -translate-y-1/2 xl:block"
         >
-          <img src="/Strong Pencil.svg" alt="" aria-hidden="true" className="w-40 rotate-6" />
+          <img src="/Strong Pencil.svg" alt="" aria-hidden="true" loading="lazy" className="w-40 rotate-6" />
         </Reveal>
         <FadeUp>
           <div className="mb-[clamp(1.5rem,4svh,3rem)] text-center">

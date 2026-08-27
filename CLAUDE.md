@@ -67,8 +67,8 @@ the system governs the fields, not the toys.
 - **La bande du héros et la signature de page sont deux choses** (2026-08-26).
   La signature gouverne les accents du CORPS de page (eyebrows, tints, cartes) ;
   la bande du héros suit une rotation à trois couleurs pour que les six pages
-  intérieures n'alternent pas seulement bleu/rose : coral = `/la-methode`,
-  `/la-fondatrice` · blue = `/programmes`, `/troubles-accompagnes`, `/galerie` ·
+  intérieures n'alternent pas seulement bleu/rose : coral = `/notre-methode`,
+  `/notre-fondatrice` · blue = `/programmes`, `/enfants-accueillis`, `/nos-espaces` ·
   **sun = `/actualites`**, seule page jaune, dont les accents restent coral.
   Sur une bande `sun-400`, les nuages blancs exigent une `drop-shadow` : blanc
   sur sun-400 plafonne à 1,45:1. Les éventails de `PageTransition` suivent la
@@ -76,13 +76,13 @@ the system governs the fields, not the toys.
 - **Contrat des héros intérieurs** (2026-08-26) : 3 nuages aux mêmes hauteurs,
   UN seul visuel dans la boîte média commune (`h-[clamp(6.5rem,18svh,13rem)]`,
   `h-full w-auto object-contain` — aucun `scale`/`translate`), carte blanche,
-  zéro marque flottante. Deux exceptions assumées : `/galerie` garde son
-  éventail de polaroïds et sa carte `night-900` ; `/la-fondatrice` garde son
+  zéro marque flottante. Deux exceptions assumées : `/nos-espaces` garde son
+  éventail de polaroïds et sa carte `night-900` ; `/notre-fondatrice` garde son
   papillon (desktop seulement). Le fichier de chaque visuel doit être RECADRÉ
   sur son dessin — la boîte fixe la hauteur, donc un canevas à moitié vide rend
   un visuel deux fois trop petit.
-- **Signatures de contenu**: coral = `/la-methode`, `/la-fondatrice`, `/actualites` ·
-  blue = `/programmes`, `/galerie`, `/troubles-accompagnes`. The home page is
+- **Signatures de contenu**: coral = `/notre-methode`, `/notre-fondatrice`, `/actualites` ·
+  blue = `/programmes`, `/nos-espaces`, `/enfants-accueillis`. The home page is
   the OVERTURE and carries all three (blue sky → sun statement → sun
   testimonials → coral accents); `/contact` is `blue-100` end to end — hero,
   body behind the form and the map, all one field (the old mint `#cff2f1`
@@ -282,13 +282,27 @@ scolaire, refus scolaire, sans code Massar, diabète, épilepsie, retard
 scolaire (`lib/data/troubles.ts`, six entries). Never reintroduce the old
 list, anywhere. Diabetes and epilepsy get an adapted SCHOOLING, never care:
 the centre applies the protocol the child's doctor wrote and decides nothing
-medical — keep that limit in any rewrite. The route stays
-`/notre-centre/troubles-accompagnes` (links already shared) while its visible
-label is "Situations accueillies".
+medical — keep that limit in any rewrite.
 
-All images are local (`public/`); no hotlinked remote images —
-`next.config.mjs` has no remotePatterns. Testimonial "videos" are deliberate
-placeholders (`src: null` + a poster photo) until real footage exists.
+**La route s'appelle `/notre-centre/enfants-accueillis` et son libellé
+« Enfants accueillis » (2026-08-27).** Elle a longtemps gardé le chemin
+`troubles-accompagnes` « parce que des liens étaient déjà partagés » — mais
+l'URL affichait donc, dans la barre d'adresse et dans Google, le mot même que
+la cliente avait fait retirer. Une 301 depuis l'ancien chemin
+(`next.config.mjs`) tient les deux bouts : les liens partagés continuent de
+fonctionner et le référencement acquis passe à la nouvelle URL. **Ne pas
+supprimer cette redirection.** Le dossier de composants reste
+`components/troubles/` — un nom de dossier ne s'affiche nulle part.
+
+Les images décoratives et les photos du centre sont locales (`public/`).
+**Une exception, et elle contredit ce que ce fichier affirmait jusqu'au
+2026-08-27** : `AccueilTemoignages` hotlinke ses sept photos depuis l'ancien
+site WordPress (`mskschoolmaroc.com`) et ses posters vidéo depuis Wistia —
+`next.config.mjs` déclare bien trois `remotePatterns` pour les autoriser. Rien
+n'est cassé, mais la home dépend d'un domaine tiers : à rapatrier dans
+`public/` dès que les fichiers sont récupérables. Testimonial "videos" are
+deliberate placeholders (`src: null` + a poster photo) until real footage
+exists.
 
 ## Routing
 
@@ -299,6 +313,17 @@ Adding a route means updating **three** places, or the page is orphaned:
 3. `app/sitemap.ts`
 
 Plus: give the route its palette in `PageTransition`'s `ROUTE_PALETTES`.
+
+**`/notre-centre` est un segment de regroupement, pas une page** : les quatre
+pages du centre vivent dessous, aucune n'occupe le préfixe. L'entrée « Notre
+centre » de `NAV_LINKS` est un bouton de menu, jamais un lien — son `href`
+(`/notre-centre`) ne sert qu'au test d'état actif de la Navbar, qui allume le
+menu sur les quatre enfants via `pathname.startsWith`. Le préfixe nu redirige
+en 307 vers le premier enfant (`next.config.mjs`), sinon il répondait 404 à qui
+tronque l'URL. Ne PAS renommer ces quatre routes pour supprimer le préfixe :
+les liens sont déjà partagés (c'est aussi pourquoi une 301 remplace `troubles-accompagnes`
+garde son nom sous le libellé « Situations accueillies »).
+
 There is deliberately no `/admissions` route — admissions links point to
 `/contact`. If the page is ever built, its FAQ (`FAQ_ADMISSIONS`) is waiting.
 The Lotties once earmarked for it are no longer all free: `dialog` and `star`

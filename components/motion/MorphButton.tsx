@@ -122,8 +122,17 @@ export function MorphButton({
   );
 
   if (href) {
+    // `onClick` remonte aussi sur la branche lien. Il ne le faisait pas, et le
+    // prop était accepté sans rien faire : le tiroir mobile restait ouvert
+    // quand on tapait son CTA depuis la page déjà affichée.
     return (
-      <Link href={href} aria-label={ariaLabel} className={classes} style={style}>
+      <Link
+        href={href}
+        onClick={onClick}
+        aria-label={ariaLabel}
+        className={classes}
+        style={style}
+      >
         {content}
       </Link>
     );

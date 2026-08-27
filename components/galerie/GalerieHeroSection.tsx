@@ -7,6 +7,7 @@ import { CloudDrift } from "@/components/motion/CloudDrift";
 import { TitreAnime } from "@/components/motion/TitreAnime";
 import { PageHero } from "@/components/common/PageHero";
 import { HERO_POLAROIDS } from "@/lib/data/galerie";
+import { VISITE_VIRTUELLE_EN_LIGNE } from "@/lib/data/site-content";
 
 /**
  * À la place de l'illustration vectorielle des autres pages, un éventail de
@@ -34,9 +35,11 @@ export const GalerieHeroSection = () => {
       card="bg-msk-night-900"
       // Le `h1` et sa typographie viennent de PageHero ; ce composant n'anime
       // que les lettres, en `span`, pour ne pas imbriquer deux titres.
-      title={<TitreAnime as="span" au="chargement" retard={0.25} texte="Nos Espaces" />}
+      title={<TitreAnime as="span" au="chargement" retard={0.25} texte="Nos espaces" />}
       titleClassName="text-white"
-      pill="Visite Virtuelle"
+      // La pastille annonce la visite dès que son lien existe ; tant qu'il est
+      // vide, elle dit ce que la page montre vraiment — des photographies.
+      pill={VISITE_VIRTUELLE_EN_LIGNE ? "Visite virtuelle" : "En images"}
       pillClassName="bg-white text-msk-night-900"
       subtitle={
         <>

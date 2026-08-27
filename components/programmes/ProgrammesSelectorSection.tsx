@@ -115,7 +115,7 @@ export const ProgrammesSelectorSection = () => {
           Les oiseaux viennent de la photo de /la-methode ; ils remplacent le
           crayon, parti à leur place sur la photo neuro-gym juste en dessous. */}
       <Reveal effect="pop" className="pointer-events-none absolute left-[4%] top-[22%] z-10 hidden lg:block">
-        <img src="/Bird pair love and flying sky.svg" alt="" aria-hidden="true" className="w-44 -rotate-3" />
+        <img src="/Bird pair love and flying sky.svg" alt="" aria-hidden="true" loading="lazy" className="w-44 -rotate-3" />
       </Reveal>
       <div className="mx-auto max-w-6xl px-6 sm:px-10">
         {/* Badge en pop, titre en plongeon. */}

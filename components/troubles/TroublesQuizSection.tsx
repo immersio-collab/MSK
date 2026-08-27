@@ -103,6 +103,7 @@ export function TroublesQuizSection() {
           ref={sun}
           src="/methode/sun-cloud.svg"
           alt=""
+          loading="lazy"
           className="absolute -right-6 top-[10%] w-28 sm:right-[2%] sm:w-44 lg:right-[3%] lg:w-64"
         />
         <CloudDrift
@@ -296,15 +297,19 @@ export function TroublesQuizSection() {
             </div>
           </div>
 
-          {/* Emplacement du SVG décoratif (parent & enfant), collé sur le coin
-              bas-gauche de la carte. Remplacez le slot par votre <img>, même taille. */}
+          {/* Vignette décorative (enfant au livre), collée sur le coin
+              bas-gauche de la carte. WebP animé (boucle 2,6s) — remplace
+              l'ancien parent-enfant.svg (740 Ko de bitmaps base64). */}
           <div
             aria-hidden
             className="pointer-events-none absolute -bottom-8 -left-3 w-28 sm:-left-8 sm:w-36 md:-bottom-10 md:w-44"
           >
             <img
-              src="/parent-enfant.svg"
+              src="/parent-enfant.webp"
               alt=""
+              width={264}
+              height={264}
+              loading="lazy"
               className="aspect-square w-full"
             />
           </div>

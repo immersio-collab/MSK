@@ -53,7 +53,7 @@ export const MethodeProcessSection = () => {
               sous lg le panneau colle aux bords et le débord droit créerait un
               scroll horizontal. */}
           <Reveal effect="pop" className="pointer-events-none absolute -right-6 -top-7 hidden select-none lg:block">
-            <img src="/methode/class-board.svg" alt="" aria-hidden="true" className="w-36 rotate-3 xl:w-40" />
+            <img src="/methode/class-board.svg" alt="" aria-hidden="true" loading="lazy" className="w-36 rotate-3 xl:w-40" />
           </Reveal>
           <div className="flex h-full flex-col justify-center">
             <div>

@@ -26,7 +26,7 @@ export const TroublesHeroSection: React.FC = () => {
         </>
       }
       titleClassName="text-msk-night-900"
-      pill="Situations accueillies"
+      pill="Enfants accueillis"
       pillClassName="bg-msk-night-900/10 text-msk-night-700"
       subtitle={
         <>

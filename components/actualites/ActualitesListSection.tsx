@@ -222,7 +222,7 @@ export const ActualitesListSection = () => {
                 delay={0.2}
                 className="pointer-events-none absolute -left-6 -top-8 hidden sm:block md:-left-10"
               >
-                <img src="/news error.svg" alt="" aria-hidden="true" className="w-28 -rotate-6 md:w-36" />
+                <img src="/news error.svg" alt="" aria-hidden="true" loading="lazy" className="w-28 -rotate-6 md:w-36" />
               </Reveal>
 
               {/* Sticker « À la une », posé sur le coin. */}

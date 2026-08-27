@@ -11,26 +11,44 @@ interface NavItem {
 export const NAV_LINKS: NavItem[] = [
   { label: "Accueil", href: "/" },
   {
+    // Segment de regroupement, pas une page : l'entrée parente est un bouton de
+    // menu, jamais un lien. Ce href ne sert qu'au test d'état actif de la
+    // Navbar — pointé sur un enfant, le menu ne s'allumait que sur cet
+    // enfant-là et restait éteint sur les trois autres. `/notre-centre`
+    // redirige vers le premier enfant (next.config.mjs).
     label: "Notre centre",
-    href: "/notre-centre/troubles-accompagnes",
+    href: "/notre-centre",
     children: [
+      // Les quatre libellés suivent une seule grammaire (2026-08-27) : casse
+      // française — majuscule au premier mot seulement — et formes parallèles.
+      // Ils portaient trois conventions à la fois, un « MSK » redondant dans le
+      // menu du site MSK, et une visite virtuelle qui n'existe pas.
       {
-        // L'URL reste `troubles-accompagnes` : la renommer casserait les liens
-        // déjà partagés. Seul le libellé suit la liste corrigée par la cliente.
-        title: "Situations accueillies",
-        href: "/notre-centre/troubles-accompagnes",
+        // L'URL disait encore `troubles-accompagnes` (2026-08-27) — le mot que
+        // la cliente a précisément fait retirer, le centre ne prenant pas de
+        // troubles neuro-développementaux. Elle s'affichait dans la barre
+        // d'adresse et partait dans Google. Renommée, avec une 301 de l'ancien
+        // chemin dans next.config.mjs : les liens déjà partagés continuent de
+        // fonctionner, ce qui était la seule raison de la garder.
+        title: "Enfants accueillis",
+        href: "/notre-centre/enfants-accueillis",
       },
       {
-        title: "La Méthode MSK",
-        href: "/notre-centre/la-methode",
+        title: "Notre méthode",
+        href: "/notre-centre/notre-methode",
       },
       {
-        title: "La Fondatrice",
-        href: "/notre-centre/la-fondatrice",
+        title: "Notre fondatrice",
+        href: "/notre-centre/notre-fondatrice",
       },
       {
-        title: "Nos Espaces (Visite Virtuelle)",
-        href: "/notre-centre/galerie",
+        // Le menu reste « Nos espaces » même une fois la visite 360° en ligne
+        // (elle est prévue — voir `VISITE_VIRTUELLE_EN_LIGNE`) : l'ancien
+        // « Nos Espaces (Visite Virtuelle) » était le seul libellé du menu à
+        // porter une parenthèse, et il nommait un outil là où les trois autres
+        // nomment un sujet. C'est la page qui annonce la visite, pas le menu.
+        title: "Nos espaces",
+        href: "/notre-centre/nos-espaces",
       },
     ],
   },
@@ -93,6 +111,19 @@ export const VIRTUAL_TOUR = {
   /** Photo affichée avant le clic. L'iframe n'est montée qu'ensuite. */
   poster: "/espace montesori.jpeg",
 };
+
+/**
+ * La visite 360° EST prévue (cliente, 2026-08-27) — elle n'est simplement pas
+ * encore en ligne. Le site ne l'annonce donc que lorsque son lien existe, au
+ * lieu de choisir une fois pour toutes entre la taire et la promettre.
+ *
+ * Collez l'URL dans `VIRTUAL_TOUR.embedUrl` et le mot revient de lui-même :
+ * pastille du héros galerie, méta-description indexée par Google, bouton de fin
+ * de page fondatrice, et la section de visite elle-même. Rien d'autre à
+ * rouvrir — c'est tout l'intérêt de passer par cette constante plutôt que
+ * d'écrire le mot en dur dans quatre fichiers.
+ */
+export const VISITE_VIRTUELLE_EN_LIGNE = VIRTUAL_TOUR.embedUrl.trim().length > 0;
 
 export const SCHOOL_INFO = {
   name: "MSK Montessori School",

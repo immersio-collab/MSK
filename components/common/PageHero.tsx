@@ -57,7 +57,7 @@ interface PageHeroProps {
  * La carte est VOLONTAIREMENT fermée : titre, pastille, sous-titre et bouton de
  * défilement, dans cet ordre, aux mêmes tailles et aux mêmes espacements
  * partout. Chaque page n'apporte que ses couleurs et ses visuels. Le modèle est
- * /notre-centre/la-methode. Auparavant chaque héros avait sa hauteur, l'ordre de
+ * /notre-centre/notre-methode. Auparavant chaque héros avait sa hauteur, l'ordre de
  * ses éléments et ses tailles de titre, et le site paraissait dépareillé de page
  * en page.
  *

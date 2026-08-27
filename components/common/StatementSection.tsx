@@ -77,6 +77,7 @@ export const StatementSection = ({
                 src="/methode/sun-cloud.svg"
                 alt=""
                 aria-hidden
+                loading="lazy"
                 className="w-40 sm:w-52 lg:w-64"
               />
             </Reveal>
@@ -92,6 +93,7 @@ export const StatementSection = ({
                 src="/methode/running-cat.svg"
                 alt=""
                 aria-hidden
+                loading="lazy"
                 className="w-64 sm:w-[34rem] lg:w-[44rem]"
               />
             </Reveal>

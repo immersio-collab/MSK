@@ -19,7 +19,7 @@ export const FondatriceHeroSection = () => {
         </>
       }
       titleClassName="text-msk-night-900"
-      pill="La Fondatrice"
+      pill="Notre fondatrice"
       pillClassName="bg-msk-coral-100 text-msk-coral-700"
       subtitle={
         <>

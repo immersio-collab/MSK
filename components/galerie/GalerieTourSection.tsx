@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { AlertTriangle, Maximize2, Play } from "lucide-react";
 
-import { VIRTUAL_TOUR } from "@/lib/data/site-content";
+import { VIRTUAL_TOUR, VISITE_VIRTUELLE_EN_LIGNE } from "@/lib/data/site-content";
 import { TitreAnime } from "@/components/motion/TitreAnime";
 
 import { MorphButton } from "@/components/motion/MorphButton";
@@ -33,7 +33,10 @@ export const GalerieTourSection = () => {
   const reduceMotion = useReducedMotion();
   const cadre = useRef<HTMLDivElement>(null);
   const [lance, setLance] = useState(false);
-  const configure = VIRTUAL_TOUR.embedUrl.trim().length > 0;
+  // Même test que le reste du site, importé plutôt que refait : la pastille du
+  // héros, la méta-description et le bouton de la page fondatrice basculent
+  // avec cette section, jamais à contretemps.
+  const configure = VISITE_VIRTUELLE_EN_LIGNE;
 
   const pleinEcran = () => {
     const el = cadre.current;

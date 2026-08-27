@@ -164,7 +164,7 @@
   which is the whole point, and what every consumer is tuned for. They diverge
   only when content outgrows the screen, and there `height` clips (the sections
   below are `overflow-hidden`) while `min-height` lets the section grow. That
-  case is real, not hypothetical: the quiz on /troubles-accompagnes swells 155px
+  case is real, not hypothetical: the quiz on /enfants-accueillis swells 155px
   when it swaps its question for its result, more than any padding could absorb.
   A rogné CTA is a worse failure than a section 55px too tall.
 
@@ -335,6 +335,16 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Le bouton WhatsApp flottant (z-50) passe AU-DESSUS du tiroir mobile (z-40) et
+   recouvrait le raccourci WhatsApp de son pied de page : deux fois la même
+   action, l'une masquant l'autre. On ne peut pas le régler par les z-index —
+   le header est lui aussi en z-50 et doit rester devant le tiroir. La présence
+   du tiroir dans le DOM suffit comme signal, sans classe posée à la main. */
+body.menu-mobile-ouvert [data-whatsapp-flottant],
+body:has(#menu-mobile) [data-whatsapp-flottant] {
+  display: none;
 }
 
 /* Reduced motion preference */

@@ -19,7 +19,7 @@ export const FondatriceGridSection: React.FC = () => {
             pas d'overflow-hidden). Le principe du sticker débordant du coin est
             gardé ; `right-0` sur mobile pour ne plus créer de scroll horizontal. */}
         <Reveal effect="pop" delay={0.2} className="pointer-events-none absolute -top-8 right-2 z-20 hidden md:block md:-right-10">
-          <img src="/diploma.svg" alt="" className="w-28 rotate-3 md:w-36" />
+          <img src="/diploma.svg" alt="" loading="lazy" className="w-28 rotate-3 md:w-36" />
         </Reveal>
 
         {/* La fiche entière se colle en tampon — c'est le grand polaroid de la

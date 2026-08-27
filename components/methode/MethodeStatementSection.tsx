@@ -26,7 +26,7 @@ export const MethodeStatementSection = () => {
         </>
       }
       button={{
-        href: "/notre-centre/troubles-accompagnes",
+        href: "/notre-centre/enfants-accueillis",
         label: "Les situations",
         fillClassName: "bg-msk-coral-600",
       }}

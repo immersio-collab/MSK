@@ -7,7 +7,10 @@ import { SCHOOL_INFO } from "@/lib/data/site-content";
 
 export default function WhatsAppFloatingButton() {
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    // Valeur explicite : un attribut `data-*` nu vaut le booléen `true`, que le
+    // rendu serveur omet et que le client pose — React signalait la divergence
+    // d'hydratation. Le sélecteur de globals.css s'en moque, pas React.
+    <div data-whatsapp-flottant="true" className="fixed bottom-6 right-6 z-50">
       <Link
         href={SCHOOL_INFO.whatsapp}
         target="_blank"

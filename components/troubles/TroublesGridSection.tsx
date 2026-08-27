@@ -185,7 +185,7 @@ export function TroublesGridSection() {
 
         {/* Marge latérale hors du max-w-5xl — n'existe qu'en très large. */}
         <Reveal effect="pop" className="absolute right-[2%] top-[40%] hidden xl:block">
-          <img src="/Ballon.svg" alt="" className="w-32 rotate-3" />
+          <img src="/Ballon.svg" alt="" loading="lazy" className="w-32 rotate-3" />
         </Reveal>
       </div>
 
