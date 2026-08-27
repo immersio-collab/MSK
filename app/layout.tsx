@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, Fredoka, Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { SITE_URL } from "@/lib/site-url";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import WhatsAppFloatingButton from "@/components/common/WhatsAppFloatingButton";
@@ -47,7 +48,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mskmontessori.ma"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "MSK Montessori School | École Inclusive & Réadaptation à Casablanca",
     template: "%s | MSK Montessori School Casablanca",
@@ -65,7 +66,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "MSK Montessori School | École Inclusive à Casablanca",
     description: SCHOOL_INFO.coreQuote,
-    url: "https://mskmontessori.ma",
+    url: SITE_URL,
     siteName: "MSK Montessori School",
     locale: "fr_MA",
     type: "website",
@@ -83,7 +84,7 @@ export default function RootLayout({
     name: SCHOOL_INFO.name,
     description:
       "Centre scolaire inclusif à Casablanca spécialisé dans la pédagogie Montessori, la réadaptation comportementale, la neuro-gym et l'insertion scolaire.",
-    url: "https://mskmontessori.ma",
+    url: SITE_URL,
     telephone: SCHOOL_INFO.phone,
     email: SCHOOL_INFO.email,
     address: {

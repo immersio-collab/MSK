@@ -3,11 +3,12 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     formats: ['image/avif', 'image/webp'],
+    // `mskschoolmaroc.com` (l'ancien site WordPress) a été retiré le
+    // 2026-08-27 : ses 7 captures et 4 audios de témoignages sont maintenant
+    // dans `public/temoignages/`. La page d'accueil ne dépend donc plus d'un
+    // domaine tiers qui peut expirer. Wistia reste, le temps que les vidéos
+    // soient rapatriées à leur tour.
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'mskschoolmaroc.com',
-      },
       {
         protocol: 'https',
         hostname: 'embed-ssl.wistia.com',

@@ -1,8 +1,9 @@
 import { MetadataRoute } from "next";
 import { ARTICLES } from "@/lib/data/actualites";
+import { SITE_URL } from "@/lib/site-url";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://mskmontessori.ma";
+  const baseUrl = SITE_URL;
 
   const routes = [
     "",
