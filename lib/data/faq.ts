@@ -21,10 +21,9 @@ import type { FaqItem } from "@/components/common/FaqSection";
  * that asserted things the site cannot back. The constraints below are the
  * result; break one and the site promises a parent something it does not have.
  *
- * - No phone number and no WhatsApp link. `SCHOOL_INFO.phone` and
- *   `SCHOOL_INFO.whatsapp` (lib/data/site-content.ts — the single place every
- *   wa.me link now comes from) are both placeholders. Sending a worried parent
- *   to dial one is worse than not answering.
+ * - `SCHOOL_INFO.phone` and `SCHOOL_INFO.whatsapp` (lib/data/site-content.ts —
+ *   the single place every wa.me link comes from) are the real number
+ *   (confirmed 2026-08-27), not placeholders. FAQ answers may reference them.
  * - Nothing about the contact form being received or answered. Its `onSubmit`
  *   in components/contact/ContactMainSection.tsx only flips local state; there
  *   is no backend, no API call, no mailto. Until one exists, no answer may
